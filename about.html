@@ -4,6 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="About NextPhases — A software development team based in Lusaka, Zambia. Meet the team behind the code." />
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="About - NextPhases">
+    <meta property="og:description" content="Web, app, and system development for your next phase of growth.">
+    <meta property="og:url" content="https://nextphases.dev/about.html">
+    <meta property="og:image" content="https://nextphases.dev/og-banner.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About - NextPhases">
+    <meta name="twitter:description" content="Web, app, and system development for your next phase of growth.">
+    <meta name="twitter:image" content="https://nextphases.dev/og-banner.png">
     <title>About Us — NextPhases</title>
     <link rel="icon" type="image/png" href="favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -91,7 +102,7 @@
             <!-- Founders Tier -->
             <div class="team-tier-founders">
                 <!-- Thuma - Lead Developer & Cofounder -->
-                <div class="team-card founder-card" data-aos="fade-up">
+                <div class="team-card founder-card clickable-team" data-member="thuma" data-aos="fade-up">
                     <div class="team-avatar">
                         <i class="fas fa-user-tie"></i>
                     </div>
@@ -104,11 +115,10 @@
                         <span>Full-Stack</span>
                         <span>Architecture</span>
                     </div>
-                    <!-- TODO: Add Thuma's personal links (LinkedIn, GitHub, etc.) once confirmed -->
                 </div>
 
                 <!-- Simon - Full-Stack & PM & Cofounder -->
-                <div class="team-card founder-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="team-card founder-card clickable-team" data-member="simon" data-aos="fade-up" data-aos-delay="100">
                     <div class="team-avatar">
                         <i class="fas fa-user-tie"></i>
                     </div>
@@ -122,11 +132,10 @@
                         <span>Business</span>
                         <a href="portfolio.html#examguard" class="tag-link">ExamGuard</a>
                     </div>
-                    <!-- TODO: Add Simon's personal links once confirmed -->
                 </div>
 
                 <!-- Shaun - Junior Dev & Cofounder -->
-                <div class="team-card founder-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="team-card founder-card clickable-team" data-member="shaun" data-aos="fade-up" data-aos-delay="200">
                     <div class="team-avatar">
                         <i class="fas fa-user-tie"></i>
                     </div>
@@ -138,14 +147,13 @@
                         <span>Full-Stack</span>
                         <span>Versatile</span>
                     </div>
-                    <!-- TODO: Add Shaun's personal links once confirmed -->
                 </div>
             </div>
 
             <!-- Team Members Tier -->
             <div class="team-tier-members">
                 <!-- Chris - Early Joiner -->
-                <div class="team-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="team-card clickable-team" data-member="chris" data-aos="fade-up" data-aos-delay="300">
                     <div class="team-avatar">
                         <i class="fas fa-user-tie"></i>
                     </div>
@@ -156,11 +164,10 @@
                         <span>Client Relations</span>
                         <span>Communication</span>
                     </div>
-                    <!-- TODO: Add Chris's personal links once confirmed -->
                 </div>
 
                 <!-- Lans - Pending Onboarding -->
-                <div class="team-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="team-card coming-soon-member" data-member="lans" data-aos="fade-up" data-aos-delay="400">
                     <div class="team-avatar">
                         <i class="fas fa-user-tie"></i>
                     </div>
@@ -170,7 +177,31 @@
                     <div class="team-tags">
                         <span>Development</span>
                     </div>
-                    <!-- TODO: Update bio and links once Lans officially joins -->
+                </div>
+            </div>
+
+            <!-- Team Member Detail Modal Overlay -->
+            <div class="team-detail-overlay" id="teamDetailOverlay"></div>
+
+            <!-- Team Member Detail Panel -->
+            <div class="team-detail-panel" id="teamDetailPanel">
+                <button class="detail-close" id="detailClose" aria-label="Close team member details" type="button">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="detail-layout">
+                    <div class="detail-member-card">
+                        <div class="detail-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <h2 id="detailName">Team Member</h2>
+                        <p class="detail-role" id="detailRole">Role</p>
+                    </div>
+                    <div class="detail-bio-card">
+                        <h3>Profile Snapshot</h3>
+                        <div class="detail-text" id="detailText">
+                            <!-- Full bio will be typed here -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

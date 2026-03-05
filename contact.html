@@ -4,6 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Contact NextPhases - Get in touch to start your next project. Web development, app development, and consulting." />
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Contact - NextPhases">
+    <meta property="og:description" content="Web, app, and system development for your next phase of growth.">
+    <meta property="og:url" content="https://nextphases.dev/contact.html">
+    <meta property="og:image" content="https://nextphases.dev/og-banner.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contact - NextPhases">
+    <meta name="twitter:description" content="Web, app, and system development for your next phase of growth.">
+    <meta name="twitter:image" content="https://nextphases.dev/og-banner.png">
     <title>Contact - NextPhases</title>
     <link rel="icon" type="image/png" href="favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -103,7 +114,7 @@
                             <a href="https://x.com/NextPhases" class="social-link" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                             <a href="https://www.tiktok.com/@nextphases.dev?lang=en" class="social-link" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                             <a href="https://www.instagram.com/nextphases.dev/" class="social-link" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="https://www.linkedin.com/in/next-phases-2626163a3/" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.linkedin.com/company/nextphases" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                             <a href="#" class="social-link" target="_blank" rel="noopener" aria-label="Reddit">
                                 <i class="fab fa-reddit"></i>
                             </a>
@@ -154,8 +165,22 @@
                             <option value="website">Website Development</option>
                             <option value="webapp">Web Application</option>
                             <option value="mobile">Mobile App</option>
+                            <option value="system">System Development</option>
                             <option value="consulting">Technical Consulting</option>
                             <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="currency">
+                            <i class="fas fa-globe"></i> Currency
+                        </label>
+                        <select id="currency" name="currency">
+                            <option value="USD">USD - US Dollar</option>
+                            <option value="ZMW">ZMW - Zambian Kwacha</option>
+                            <option value="ZAR">ZAR - South African Rand</option>
+                            <option value="GBP">GBP - British Pound</option>
+                            <option value="EUR">EUR - Euro</option>
                         </select>
                     </div>
 
@@ -164,13 +189,9 @@
                             <i class="fas fa-dollar-sign"></i> Budget Range (Optional)
                         </label>
                         <select id="budget" name="budget">
-                            <option value="">Select budget range</option>
-                            <option value="small">Under $1,000</option>
-                            <option value="medium">$1,000 – $5,000</option>
-                            <option value="large">$5,000 – $10,000</option>
-                            <option value="enterprise">$10,000+</option>
-                            <option value="flexible">Flexible</option>
+                            <option value="">Detecting your region...</option>
                         </select>
+                        <small class="form-hint" id="budgetHint">Budget will adjust to your currency</small>
                     </div>
 
                     <div class="form-group">
@@ -206,7 +227,7 @@
 
                 <div id="formError" class="form-message error" style="display: none;">
                     <i class="fas fa-exclamation-circle"></i>
-                    <p>Oops! Something went wrong. Please email us directly at <a href="mailto:team@nextphases.dev">team@nextphases.dev</a></p>
+                    <p>Oops! Something went wrong. Please email us directly at <a href="mailto:info@nextphases.dev">info@nextphases.dev</a></p>
                 </div>
             </div>
         </div>

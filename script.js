@@ -11,19 +11,153 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollToTop();
     initSmoothScrollLinks();
     initHeroEntrance();
+    initWelcomeGuide();
 
-    // Only init contact form if it exists on the page
     if (document.getElementById('contactForm')) {
         initContactForm();
         prefillFromURL();
     }
 
-    // Update the copyright year dynamically
     updateCopyrightYear();
-
-    // Load the footer
     loadFooter();
+
+    // Globe section removed for now; can be re-enabled later.
+    initTeamDetails();
 });
+
+// =============================================
+// TEAM MEMBER DETAILS MODAL
+// =============================================
+
+function initTeamDetails() {
+    const teamCards = document.querySelectorAll('.clickable-team');
+    const detailPanel = document.getElementById('teamDetailPanel');
+    const overlay = document.getElementById('teamDetailOverlay');
+    const closeBtn = document.getElementById('detailClose');
+    const detailName = document.getElementById('detailName');
+    const detailRole = document.getElementById('detailRole');
+    const detailText = document.getElementById('detailText');
+    const detailAvatar = document.querySelector('.detail-avatar');
+
+    if (!teamCards.length || !detailPanel || !overlay || !closeBtn || !detailName || !detailRole || !detailText || !detailAvatar) return;
+
+    let typingTimeout = null;
+    let typingRunId = 0;
+
+    const teamData = {
+        thuma: {
+            name: 'Thuma',
+            role: 'Lead Developer & Cofounder',
+            bio: 'Thuma is the technical backbone of NextPhases. As lead developer, he architects scalable solutions and ensures code quality across all projects. Beyond development, Thuma serves as Secretary for ICTAZ, contributing to Zambia\'s tech ecosystem growth. He believes in building real products that solve real problems, not just showcasing portfolios. When not coding, Thuma is exploring new technologies and mentoring the team on best practices.',
+            icon: '<i class="fas fa-laptop-code"></i>'
+        },
+        simon: {
+            name: 'Simon',
+            role: 'Full-Stack Developer & Project Manager',
+            bio: 'Simon bridges the gap between code and commerce. With full-stack development expertise, he handles both frontend and backend challenges with equal proficiency. As project manager, Simon ensures timelines are met, clients are satisfied, and the team stays focused. He led the development of ExamGuard and drives NextPhases\' business strategy. Simon\'s strength lies in seeing the big picture while managing the technical details.',
+            icon: '<i class="fas fa-cogs"></i>'
+        },
+        shaun: {
+            name: 'Shaun',
+            role: 'Junior Developer & Cofounder',
+            bio: 'Shaun is a full-stack generalist who tackles any development task with enthusiasm. From frontend polish to backend logic, he brings versatility to the team. What sets Shaun apart is his keen eye for detail and commitment to clean, maintainable code. He\'s constantly learning new technologies and is not afraid to dive into unfamiliar territories. As a cofounder, Shaun is invested in NextPhases\' long-term success.',
+            icon: '<i class="fas fa-code"></i>'
+        },
+        chris: {
+            name: 'Chris',
+            role: 'Client Relations Lead',
+            bio: 'Chris is the human face of NextPhases. As Client Relations Lead, he ensures every client interaction is smooth, professional, and productive. Chris listens carefully to client needs, translates requirements into technical specifications, and manages expectations throughout the project lifecycle. His communication skills have been crucial in building long-term client relationships and repeat business. Chris believes that happy clients are the foundation of a successful business.',
+            icon: '<i class="fas fa-handshake"></i>'
+        },
+        lans: {
+            name: 'Lans',
+            role: 'Intern Developer',
+            bio: 'Lans is joining NextPhases as an intern developer, bringing fresh perspectives and enthusiasm to the team. While still early in their development journey, Lans is eager to contribute to real projects and gain practical experience. The team is committed to mentoring Lans and watching them grow as a developer. Lans represents the future of NextPhases and the tech community in Zambia.',
+            icon: '<i class="fas fa-star"></i>'
+        }
+    };
+
+    function clearTyping() {
+        typingRunId += 1;
+        if (typingTimeout) {
+            clearTimeout(typingTimeout);
+            typingTimeout = null;
+        }
+        detailText.classList.remove('typing');
+    }
+
+    function setActiveCard(activeCard) {
+        teamCards.forEach(card => card.classList.remove('active-member'));
+        if (activeCard) activeCard.classList.add('active-member');
+    }
+
+    function typeBioText(text) {
+        const runId = typingRunId;
+        let index = 0;
+        detailText.textContent = '';
+        detailText.classList.add('typing');
+
+        function typeNext() {
+            if (runId !== typingRunId) return;
+            if (index < text.length) {
+                detailText.textContent += text[index];
+                index += 1;
+                typingTimeout = setTimeout(typeNext, 18);
+                return;
+            }
+            detailText.classList.remove('typing');
+            typingTimeout = null;
+        }
+
+        typeNext();
+    }
+
+    function openDetail(member, sourceCard) {
+        const data = teamData[member];
+        if (!data) return;
+
+        clearTyping();
+        setActiveCard(sourceCard);
+
+        detailName.textContent = data.name;
+        detailRole.textContent = data.role;
+        detailAvatar.innerHTML = data.icon;
+
+        overlay.classList.add('active');
+        detailPanel.classList.add('active');
+        typeBioText(data.bio);
+    }
+
+    function closeDetail() {
+        clearTyping();
+        setActiveCard(null);
+        overlay.classList.remove('active');
+        detailPanel.classList.remove('active');
+        detailText.textContent = '';
+    }
+
+    teamCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const member = card.getAttribute('data-member');
+            openDetail(member, card);
+        });
+    });
+
+    closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        closeDetail();
+    });
+
+    overlay.addEventListener('click', closeDetail);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && detailPanel.classList.contains('active')) {
+            closeDetail();
+        }
+    });
+}
+
 
 // =============================================
 // THEME TOGGLE
@@ -883,30 +1017,108 @@ function initContactForm() {
     if (!form) return;
 
     const submitBtn = form.querySelector('.submit-button');
+    const currencySelect = form.querySelector('#currency');
+    const budgetSelect = form.querySelector('#budget');
+    const budgetHint = form.querySelector('#budgetHint');
 
-    // Track form fill time for anti-spam (bots fill instantly)
+    const budgetMap = {
+        USD: [
+            { value: '', label: 'Select budget range' },
+            { value: 'usd-300-1000', label: 'From USD 300 - 1,000' },
+            { value: 'usd-1000-3000', label: 'USD 1,000 - 3,000' },
+            { value: 'usd-3000-10000', label: 'USD 3,000 - 10,000' },
+            { value: 'usd-10000+', label: 'USD 10,000+' },
+            { value: 'flexible', label: 'Flexible' }
+        ],
+        ZMW: [
+            { value: '', label: 'Select budget range' },
+            { value: 'zmw-2000-8000', label: 'From ZMW 2,000 - 8,000' },
+            { value: 'zmw-8000-25000', label: 'ZMW 8,000 - 25,000' },
+            { value: 'zmw-25000-80000', label: 'ZMW 25,000 - 80,000' },
+            { value: 'zmw-80000+', label: 'ZMW 80,000+' },
+            { value: 'flexible', label: 'Flexible' }
+        ],
+        ZAR: [
+            { value: '', label: 'Select budget range' },
+            { value: 'zar-2500-10000', label: 'From ZAR 2,500 - 10,000' },
+            { value: 'zar-10000-35000', label: 'ZAR 10,000 - 35,000' },
+            { value: 'zar-35000-100000', label: 'ZAR 35,000 - 100,000' },
+            { value: 'zar-100000+', label: 'ZAR 100,000+' },
+            { value: 'flexible', label: 'Flexible' }
+        ],
+        GBP: [
+            { value: '', label: 'Select budget range' },
+            { value: 'gbp-500-2000', label: 'From GBP 500 - 2,000' },
+            { value: 'gbp-2000-7000', label: 'GBP 2,000 - 7,000' },
+            { value: 'gbp-7000-18000', label: 'GBP 7,000 - 18,000' },
+            { value: 'gbp-18000+', label: 'GBP 18,000+' },
+            { value: 'flexible', label: 'Flexible' }
+        ],
+        EUR: [
+            { value: '', label: 'Select budget range' },
+            { value: 'eur-450-1800', label: 'From EUR 450 - 1,800' },
+            { value: 'eur-1800-6000', label: 'EUR 1,800 - 6,000' },
+            { value: 'eur-6000-15000', label: 'EUR 6,000 - 15,000' },
+            { value: 'eur-15000+', label: 'EUR 15,000+' },
+            { value: 'flexible', label: 'Flexible' }
+        ]
+    };
+
+    function detectCurrencyByRegion() {
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        const locale = (navigator.language || '').toUpperCase();
+        const region = locale.includes('-') ? locale.split('-')[1] : '';
+
+        if (tz.includes('Africa/Lusaka') || region === 'ZM') return 'ZMW';
+        if (tz.includes('Africa/Johannesburg') || region === 'ZA') return 'ZAR';
+        if (tz.includes('Europe/London') || region === 'GB') return 'GBP';
+        if (tz.startsWith('Europe/') && region !== 'GB') return 'EUR';
+        if (region === 'US' || region === 'CA') return 'USD';
+        return 'USD';
+    }
+
+    function renderBudgetOptions(currencyCode) {
+        if (!budgetSelect) return;
+        const options = budgetMap[currencyCode] || budgetMap.USD;
+        budgetSelect.innerHTML = options
+            .map(option => `<option value="${option.value}">${option.label}</option>`)
+            .join('');
+
+        if (budgetHint) {
+            budgetHint.textContent = `Budget adjusted for ${currencyCode}. You can change currency manually.`;
+        }
+    }
+
+    if (currencySelect) {
+        const detectedCurrency = detectCurrencyByRegion();
+        currencySelect.value = detectedCurrency;
+        renderBudgetOptions(detectedCurrency);
+
+        currencySelect.addEventListener('change', () => {
+            renderBudgetOptions(currencySelect.value);
+        });
+    } else {
+        renderBudgetOptions('USD');
+    }
+
     let formLoadTime = Date.now();
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Anti-spam: Honeypot check
         const honeypot = form.querySelector('#website');
         if (honeypot && honeypot.value) {
-            // Bot detected — silently pretend success
             if (successMsg) successMsg.style.display = 'flex';
             form.reset();
             return;
         }
 
-        // Anti-spam: Time check (if filled in under 3 seconds, likely a bot)
         if (Date.now() - formLoadTime < 3000) {
             if (successMsg) successMsg.style.display = 'flex';
             form.reset();
             return;
         }
 
-        // Hide previous messages
         if (successMsg) successMsg.style.display = 'none';
         if (errorMsg) errorMsg.style.display = 'none';
 
@@ -915,6 +1127,7 @@ function initContactForm() {
             email: form.querySelector('#email')?.value || '',
             company: form.querySelector('#company')?.value || '',
             projectType: form.querySelector('#projectType')?.value || '',
+            currency: form.querySelector('#currency')?.value || 'USD',
             budget: form.querySelector('#budget')?.value || '',
             timeline: form.querySelector('#timeline')?.value || '',
             message: form.querySelector('#message')?.value || '',
@@ -936,8 +1149,8 @@ function initContactForm() {
         submitBtn.disabled = true;
 
         try {
-            // Replace the hardcoded Formspree endpoint with a dynamic value sourced from an environment variable or configuration file.
-            const formspreeEndpoint = process.env.FORMSPREE_ENDPOINT || 'YOUR_DEFAULT_ENDPOINT';
+            // Keep current behavior; configure endpoint before launch.
+            const formspreeEndpoint = window.FORMSPREE_ENDPOINT || 'YOUR_DEFAULT_ENDPOINT';
 
             const response = await fetch(formspreeEndpoint, {
                 method: 'POST',
@@ -954,9 +1167,12 @@ function initContactForm() {
                 successMsg.style.display = 'flex';
                 successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
-            form.reset();
-            formLoadTime = Date.now(); // Reset timer
 
+            const detectedCurrency = currencySelect ? detectCurrencyByRegion() : 'USD';
+            form.reset();
+            if (currencySelect) currencySelect.value = detectedCurrency;
+            renderBudgetOptions(currencySelect ? currencySelect.value : 'USD');
+            formLoadTime = Date.now();
         } catch (error) {
             console.error('Form error:', error);
             if (errorMsg) {
@@ -1062,4 +1278,49 @@ function loadFooter() {
             }
         })
         .catch(error => console.warn('Footer loading warning:', error));
+}
+
+// =============================================
+// INTERACTIVE GLOBE PRICING
+// =============================================
+
+function initInteractiveGlobe() {
+    // Globe experience is intentionally disabled for launch; keeping stub for post-launch rework.
+}
+
+// =============================================
+// WELCOME GUIDE / HELP MODAL
+// =============================================
+
+function initWelcomeGuide() {
+    const helpButton = document.getElementById('helpGuideButton');
+    const modal = document.getElementById('helpGuideModal');
+    const closeButton = document.getElementById('helpGuideClose');
+
+    if (!helpButton || !modal || !closeButton) return;
+
+    function openGuide() {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeGuide() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    helpButton.addEventListener('click', openGuide);
+    closeButton.addEventListener('click', closeGuide);
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeGuide();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeGuide();
+        }
+    });
 }
