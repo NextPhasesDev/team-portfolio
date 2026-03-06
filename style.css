@@ -1581,7 +1581,14 @@ main {
 }
 
 .help-guide-cta .cta-button {
-    display: inline-flex;
+    display: inline-flex !important;
+    background: var(--primary-teal) !important;
+    color: #ffffff !important;
+    border: 2px solid var(--primary-teal) !important;
+    padding: 0.95rem 2.4rem !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    gap: 0.5rem !important;
 }
 
 /* =============================================
