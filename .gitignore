@@ -1,0 +1,58 @@
+# ========================
+# NextPhases Team Portfolio
+# .gitignore
+# ========================
+
+# --- OS Files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# --- IDE / Editor ---
+.idea/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.swp
+*.swo
+*~
+
+# --- Node / npm (if ever used) ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# --- Environment & Secrets ---
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets.*
+
+# --- Build / Output ---
+dist/
+build/
+out/
+.cache/
+*.min.js.map
+
+# --- Logs ---
+logs/
+*.log
+
+# --- Temporary Files ---
+*.tmp
+
+# --- NextPhases Internal Planning (Not for public repo) ---
+NextPhases_Master_Plan_*.docx
+NextPhases_Master_Plan_*.pdf
+NextPhases_Claude_Memory_Update.md
+*.bak
+*.orig
+

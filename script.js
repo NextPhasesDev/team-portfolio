@@ -1,573 +1,720 @@
-// ===================================
-// THEME TOGGLE FUNCTIONALITY
-// ===================================
+// NextPhases -- Master Script (stabilized)
 
-function initThemeToggle() {
-    const themeToggle = document.getElementById('themeToggle');
-    const htmlElement = document.documentElement;
+(function () {
+    'use strict';
 
-    // Check for saved theme preference or default to 'light'
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    htmlElement.setAttribute('data-theme', currentTheme);
+    document.addEventListener('DOMContentLoaded', () => {
+        initThemeToggle();
+        initMoonAnimation();
+        initScrollAnimations();
+        initMobileNav();
+        initSmartNavbar();
+        initScrollToTop();
+        initSmoothScrollLinks();
+        initHeroEntrance();
+        initWelcomeGuide();
+        initTeamDetails();
 
-    // Theme toggle click handler
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = htmlElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        if (document.getElementById('contactForm')) {
+            initContactForm();
+            prefillFromURL();
+        }
 
-        // Add transition class for smooth theme switching
-        document.body.style.transition = 'background-color 0.4s ease, color 0.4s ease';
-
-        // Update theme
-        htmlElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-
-        // Update canvas colors
-        updateCanvasTheme(newTheme);
-
-        // Add a small animation to the button
-        themeToggle.style.transform = 'rotate(360deg)';
-        setTimeout(() => {
-            themeToggle.style.transform = 'rotate(0deg)';
-        }, 300);
+        updateCopyrightYear();
+        loadFooter();
     });
-}
 
-// Update canvas colors based on theme
-function updateCanvasTheme(theme) {
-    // This will be called when theme changes
-    // The canvas will pick up the new CSS variables on next render
-    if (window.moonAnimationContext) {
-        window.moonAnimationContext.needsUpdate = true;
-    }
-}
+    // =============================================
+    // TEAM MEMBER DETAILS MODAL
+    // =============================================
+    function initTeamDetails() {
+        const teamCards = document.querySelectorAll('.clickable-team');
+        const detailPanel = document.getElementById('teamDetailPanel');
+        const overlay = document.getElementById('teamDetailOverlay');
+        const closeBtn = document.getElementById('detailClose');
+        const detailName = document.getElementById('detailName');
+        const detailRole = document.getElementById('detailRole');
+        const detailText = document.getElementById('detailText');
+        const detailAvatar = document.querySelector('.detail-avatar');
 
-// ===================================
-// MOON PHASE ANIMATION
-// ===================================
+        if (!teamCards.length || !detailPanel || !overlay || !closeBtn || !detailName || !detailRole || !detailText || !detailAvatar) return;
 
-function initMoonAnimation() {
-    const canvas = document.getElementById('moonCanvas');
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    window.moonAnimationContext = ctx;
-
-    // Set canvas size
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    // Moon phases data
-    const moons = [];
-    const moonCount = 25; // Increased from 8 to 25 for more visual interest
-
-    // Stars for extra detail
-    const stars = [];
-    const starCount = 50;
-
-    // Get current theme colors
-    function getThemeColors() {
-        const theme = document.documentElement.getAttribute('data-theme') || 'light';
-        if (theme === 'dark') {
-            return {
-                moonColor1: '#60a5fa',
-                moonColor2: '#3b82f6',
-                starColor: '#2dd4bf'
-            };
-        } else {
-            return {
-                moonColor1: '#3b82f6',
-                moonColor2: '#1e3a8a',
-                starColor: '#14b8a6'
-            };
-        }
-    }
-
-    // Initialize star objects
-    for (let i = 0; i < starCount; i++) {
-        stars.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            size: 0.5 + Math.random() * 1.5,
-            opacity: 0.1 + Math.random() * 0.2,
-            twinkleSpeed: 0.01 + Math.random() * 0.02,
-            twinklePhase: Math.random() * Math.PI * 2
-        });
-    }
-
-    // Initialize moon objects with more variety
-    for (let i = 0; i < moonCount; i++) {
-        moons.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            phase: Math.random(), // Random phase for variety
-            size: 25 + Math.random() * 50, // More size variety (25-75px)
-            speedX: (Math.random() - 0.5) * 0.4,
-            speedY: (Math.random() - 0.5) * 0.4,
-            opacity: 0.08 + Math.random() * 0.18, // Varying opacity
-            rotation: Math.random() * Math.PI * 2,
-            rotationSpeed: (Math.random() - 0.5) * 0.001
-        });
-    }
-
-    // Draw a star
-    function drawStar(star) {
-        const colors = getThemeColors();
-        ctx.save();
-        const twinkle = Math.sin(star.twinklePhase) * 0.5 + 0.5;
-        ctx.globalAlpha = star.opacity * twinkle;
-        ctx.fillStyle = colors.starColor;
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-    }
-
-    // Draw a moon with specific phase
-    function drawMoon(moon) {
-        const colors = getThemeColors();
-        ctx.save();
-        ctx.globalAlpha = moon.opacity;
-        ctx.translate(moon.x, moon.y);
-        ctx.rotate(moon.rotation);
-        ctx.translate(-moon.x, -moon.y);
-
-        // Draw moon circle with subtle gradient using theme colors
-        const gradient = ctx.createRadialGradient(
-            moon.x - moon.size * 0.3,
-            moon.y - moon.size * 0.3,
-            0,
-            moon.x,
-            moon.y,
-            moon.size
-        );
-        gradient.addColorStop(0, colors.moonColor1);
-        gradient.addColorStop(1, colors.moonColor2);
-
-        ctx.beginPath();
-        ctx.arc(moon.x, moon.y, moon.size, 0, Math.PI * 2);
-        ctx.fillStyle = gradient;
-        ctx.fill();
-
-        // Draw phase shadow
-        ctx.globalCompositeOperation = 'destination-out';
-        const shadowOffset = (moon.phase - 0.5) * moon.size * 2;
-        ctx.beginPath();
-        ctx.ellipse(
-            moon.x + shadowOffset,
-            moon.y,
-            moon.size,
-            moon.size,
-            0,
-            0,
-            Math.PI * 2
-        );
-        ctx.fill();
-
-        // Add some crater details for larger moons
-        if (moon.size > 50) {
-            ctx.globalCompositeOperation = 'source-over';
-            ctx.globalAlpha = moon.opacity * 0.3;
-            ctx.fillStyle = colors.moonColor2;
-
-            // Draw a few craters
-            ctx.beginPath();
-            ctx.arc(moon.x + moon.size * 0.2, moon.y - moon.size * 0.3, moon.size * 0.15, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.beginPath();
-            ctx.arc(moon.x - moon.size * 0.3, moon.y + moon.size * 0.2, moon.size * 0.1, 0, Math.PI * 2);
-            ctx.fill();
-        }
-
-        ctx.restore();
-    }
-
-    // Animation loop
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Draw stars first (background layer)
-        stars.forEach(star => {
-            // Update twinkle
-            star.twinklePhase += star.twinkleSpeed;
-
-            // Slowly drift
-            star.x += 0.05;
-            star.y += 0.02;
-
-            // Wrap around
-            if (star.x > canvas.width) star.x = 0;
-            if (star.y > canvas.height) star.y = 0;
-
-            drawStar(star);
-        });
-
-        // Draw moons
-        moons.forEach(moon => {
-            // Update position
-            moon.x += moon.speedX;
-            moon.y += moon.speedY;
-
-            // Wrap around edges
-            if (moon.x < -moon.size) moon.x = canvas.width + moon.size;
-            if (moon.x > canvas.width + moon.size) moon.x = -moon.size;
-            if (moon.y < -moon.size) moon.y = canvas.height + moon.size;
-            if (moon.y > canvas.height + moon.size) moon.y = -moon.size;
-
-            // Slowly evolve phase
-            moon.phase += 0.0001;
-            if (moon.phase > 1) moon.phase = 0;
-
-            // Rotate
-            moon.rotation += moon.rotationSpeed;
-
-            drawMoon(moon);
-        });
-
-        requestAnimationFrame(animate);
-    }
-
-    animate();
-}
-
-// ===================================
-// SCROLL ANIMATIONS (AOS-like)
-// ===================================
-
-function initScrollAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('aos-animate');
+        const teamData = {
+            thuma: {
+                name: 'Thuma',
+                role: 'Lead Developer & Cofounder',
+                bio: 'Thuma is the technical backbone of NextPhases. As lead developer, he architects scalable solutions and ensures code quality across projects. He focuses on scalable architecture, practical execution, and long-term maintainability.',
+                icon: '<i class="fas fa-laptop-code"></i>'
+            },
+            simon: {
+                name: 'Simon',
+                role: 'Full-Stack Developer & Project Manager',
+                bio: 'Simon bridges code and operations. He drives execution timelines, keeps communication clear, and ensures projects land with quality and business impact.',
+                icon: '<i class="fas fa-cogs"></i>'
+            },
+            shaun: {
+                name: 'Shaun',
+                role: 'Junior Developer & Cofounder',
+                bio: 'Shaun is a full-stack generalist with strong momentum. He contributes across frontend and backend tasks while helping ship polished user-facing experiences.',
+                icon: '<i class="fas fa-code"></i>'
+            },
+            chris: {
+                name: 'Chris',
+                role: 'Client Relations Lead',
+                bio: 'Chris supports client communication, requirement clarity, and delivery alignment. He keeps projects smooth from first message to final handoff.',
+                icon: '<i class="fas fa-handshake"></i>'
             }
-        });
-    }, observerOptions);
-
-    // Observe all elements with data-aos attribute
-    document.querySelectorAll('[data-aos]').forEach(el => {
-        observer.observe(el);
-    });
-}
-
-// ===================================
-// SMOOTH SCROLL TO CONTACT
-// ===================================
-
-function scrollToContact() {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-        contactSection.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-    }
-}
-
-// ===================================
-// CONTACT FORM HANDLING
-// ===================================
-
-function initContactForm() {
-    const form = document.getElementById('contactForm');
-    const successMessage = document.getElementById('formSuccess');
-    const errorMessage = document.getElementById('formError');
-    const submitButton = form.querySelector('.submit-button');
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        // Hide previous messages
-        successMessage.style.display = 'none';
-        errorMessage.style.display = 'none';
-
-        // Get form data
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            company: document.getElementById('company').value,
-            projectType: document.getElementById('projectType').value,
-            budget: document.getElementById('budget').value,
-            timeline: document.getElementById('timeline').value,
-            message: document.getElementById('message').value,
-            timestamp: new Date().toISOString()
         };
 
-        // Add loading state
-        submitButton.classList.add('loading');
-        submitButton.disabled = true;
+        let typingTimer = null;
+        let typingRun = 0;
 
-        try {
-            // TODO: Replace this with your actual form submission endpoint
-            // For now, we'll simulate a successful submission
-
-            // Simulated API call
-            await simulateFormSubmission(formData);
-
-            // Show success message
-            successMessage.style.display = 'flex';
-            form.reset();
-
-            // Scroll to success message
-            successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
-        } catch (error) {
-            console.error('Form submission error:', error);
-            errorMessage.style.display = 'flex';
-            errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        } finally {
-            // Remove loading state
-            submitButton.classList.remove('loading');
-            submitButton.disabled = false;
+        function clearTyping() {
+            typingRun += 1;
+            if (typingTimer) {
+                clearTimeout(typingTimer);
+                typingTimer = null;
+            }
+            detailText.classList.remove('typing');
         }
-    });
-}
 
-// Simulated form submission (replace with real API call)
-function simulateFormSubmission(formData) {
-    return new Promise((resolve, reject) => {
-        // Simulate network delay
-        setTimeout(() => {
-            // Log form data to console (for testing)
-            console.log('Form submitted:', formData);
+        function setActiveCard(activeCard) {
+            teamCards.forEach(card => card.classList.remove('active-member'));
+            if (activeCard) activeCard.classList.add('active-member');
+        }
 
-            // TODO: Replace with actual API endpoint
-            // Example using fetch:
-            /*
-            fetch('YOUR_API_ENDPOINT', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(formData)
-            })
-            .then(response => response.json())
-            .then(data => resolve(data))
-            .catch(error => reject(error));
-            */
+        function typeText(text) {
+            const run = typingRun;
+            let i = 0;
+            detailText.textContent = '';
+            detailText.classList.add('typing');
 
-            // For now, always resolve successfully
-            resolve({ success: true });
+            function next() {
+                if (run !== typingRun) return;
+                if (i < text.length) {
+                    detailText.textContent += text.charAt(i);
+                    i += 1;
+                    typingTimer = setTimeout(next, 14);
+                } else {
+                    detailText.classList.remove('typing');
+                    typingTimer = null;
+                }
+            }
 
-            // Uncomment to test error handling:
-            // reject(new Error('Submission failed'));
-        }, 1500);
-    });
-}
+            next();
+        }
 
-// ===================================
-// FORM INTEGRATION OPTIONS
-// ===================================
+        function open(member, sourceCard) {
+            const data = teamData[member];
+            if (!data) return;
 
-/* 
-  BACKEND INTEGRATION OPTIONS:
-  
-  1. FORMSPREE (Easiest - No backend needed)
-     - Sign up at formspree.io
-     - Get your form endpoint
-     - Replace form action or fetch URL with Formspree endpoint
-     - Example: https://formspree.io/f/YOUR_FORM_ID
-  
-  2. EMAILJS (Email directly from frontend)
-     - Sign up at emailjs.com
-     - Configure email service and template
-     - Use EmailJS SDK to send emails
-     - No backend server required
-  
-  3. NETLIFY FORMS (If hosted on Netlify)
-     - Add netlify attribute to form tag: <form netlify>
-     - Netlify automatically handles form submissions
-  
-  4. CUSTOM BACKEND API
-     - Create your own API endpoint
-     - Handle form data and send emails
-     - More control but requires backend setup
-  
-  5. GOOGLE FORMS (Quick solution)
-     - Create Google Form
-     - Use form action URL
-     - Data goes to Google Sheets
-     - Less customizable but works instantly
-  
-  RECOMMENDED FOR NEXTPHASES:
-  Start with FormSpree (free tier: 50 submissions/month) or EmailJS.
-  Later migrate to custom backend if needed.
-*/
+            clearTyping();
+            setActiveCard(sourceCard);
 
-// Example EmailJS integration (uncomment when ready):
-/*
-function sendEmailViaEmailJS(formData) {
-  // Initialize EmailJS with your User ID
-  emailjs.init("YOUR_EMAILJS_USER_ID");
-  
-  // Send email using template
-  return emailjs.send(
-    "YOUR_SERVICE_ID",
-    "YOUR_TEMPLATE_ID",
-    {
-      from_name: formData.name,
-      from_email: formData.email,
-      company: formData.company,
-      project_type: formData.projectType,
-      budget: formData.budget,
-      timeline: formData.timeline,
-      message: formData.message
-    }
-  );
-}
-*/
+            detailName.textContent = data.name;
+            detailRole.textContent = data.role;
+            detailAvatar.innerHTML = data.icon;
 
-// Example Formspree integration:
-/*
-async function sendToFormspree(formData) {
-  const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(formData)
-  });
-  
-  if (!response.ok) {
-    throw new Error('Form submission failed');
-  }
-  
-  return response.json();
-}
-*/
+            overlay.classList.add('active');
+            detailPanel.classList.add('active');
+            typeText(data.bio);
+        }
 
-// ===================================
-// INITIALIZE EVERYTHING
-// ===================================
+        function close() {
+            clearTyping();
+            setActiveCard(null);
+            overlay.classList.remove('active');
+            detailPanel.classList.remove('active');
+            detailText.textContent = '';
+        }
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize theme toggle
-    initThemeToggle();
+        teamCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const member = card.getAttribute('data-member');
+                open(member, card);
+            });
+        });
 
-    // Initialize moon animation
-    initMoonAnimation();
-
-    // Initialize scroll animations
-    initScrollAnimations();
-
-    // Initialize contact form
-    initContactForm();
-
-    // Initialize mobile navigation toggle
-    initMobileNav();
-
-    // Add smooth scrolling to internal links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+        closeBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                // Close mobile menu if open
-                const navMenu = document.getElementById('navMenu');
-                if (navMenu && navMenu.classList.contains('active')) {
-                    navMenu.classList.remove('active');
+            e.stopPropagation();
+            close();
+        });
+
+        overlay.addEventListener('click', close);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && detailPanel.classList.contains('active')) close();
+        });
+    }
+
+    // =============================================
+    // THEME TOGGLE
+    // =============================================
+    function initThemeToggle() {
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        const saved = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', saved);
+
+        if (!themeToggle) return;
+
+        themeToggle.addEventListener('click', () => {
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+
+            themeToggle.classList.remove('spinning');
+            void themeToggle.offsetWidth;
+            themeToggle.classList.add('spinning');
+            setTimeout(() => themeToggle.classList.remove('spinning'), 500);
+        });
+    }
+
+    // =============================================
+    // SMART NAVBAR
+    // =============================================
+    function initSmartNavbar() {
+        const nav = document.getElementById('mainNav');
+        if (!nav) return;
+
+        let lastScroll = 0;
+        let ticking = false;
+        const threshold = 80;
+
+        window.addEventListener('scroll', () => {
+            if (ticking) return;
+
+            window.requestAnimationFrame(() => {
+                const currentScroll = window.scrollY;
+                const menu = document.getElementById('navMenu');
+                const menuOpen = !!(menu && menu.classList.contains('active'));
+
+                if (menuOpen) {
+                    nav.classList.remove('hidden');
+                    lastScroll = currentScroll;
+                    ticking = false;
+                    return;
                 }
 
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+                if (currentScroll <= threshold) {
+                    nav.classList.remove('hidden');
+                } else if (currentScroll > lastScroll + 5) {
+                    nav.classList.add('hidden');
+                } else if (currentScroll < lastScroll - 5) {
+                    nav.classList.remove('hidden');
+                }
+
+                lastScroll = currentScroll;
+                ticking = false;
+            });
+
+            ticking = true;
         });
-    });
+    }
 
-    // Add entrance animations to hero elements
-    const heroElements = document.querySelectorAll('.hero > *');
-    heroElements.forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        setTimeout(() => {
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-        }, 300 + (index * 150));
-    });
-});
+    // =============================================
+    // MOBILE NAVIGATION
+    // =============================================
+    function initMobileNav() {
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navContainer = document.querySelector('.nav-container');
 
-// ===================================
-// MOBILE NAVIGATION TOGGLE
-// ===================================
+        if (!navToggle || !navMenu) return;
 
-function initMobileNav() {
-    const navToggle = document.getElementById('navToggle');
-    const navMenu = document.getElementById('navMenu');
+        function setMenuOpen(isOpen) {
+            navMenu.classList.toggle('active', isOpen);
+            navToggle.classList.toggle('active', isOpen);
+            navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            document.body.classList.toggle('nav-open', isOpen);
 
-    if (navToggle && navMenu) {
-        navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-
-            // Animate hamburger icon
             const spans = navToggle.querySelectorAll('span');
-            if (navMenu.classList.contains('active')) {
-                spans[0].style.transform = 'rotate(45deg) translateY(8px)';
-                spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(-45deg) translateY(-8px)';
-            } else {
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
+            if (spans.length >= 3) {
+                if (isOpen) {
+                    spans[0].style.transform = 'rotate(45deg) translate(5px, 6px)';
+                    spans[1].style.opacity = '0';
+                    spans[2].style.transform = 'rotate(-45deg) translate(5px, -6px)';
+                } else {
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
+                }
             }
+        }
+
+        navToggle.setAttribute('aria-expanded', 'false');
+
+        navToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            setMenuOpen(!navMenu.classList.contains('active'));
         });
 
-        // Close menu when clicking outside
         document.addEventListener('click', (e) => {
-            if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
-                navMenu.classList.remove('active');
-                const spans = navToggle.querySelectorAll('span');
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
+            if (!navToggle.contains(e.target) && !navMenu.contains(e.target) && (!navContainer || !navContainer.contains(e.target))) {
+                setMenuOpen(false);
             }
+        });
+
+        navMenu.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => setMenuOpen(false));
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navMenu.classList.contains('active')) setMenuOpen(false);
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && navMenu.classList.contains('active')) setMenuOpen(false);
         });
     }
-}
 
-// ===================================
-// UTILITY: EMAIL VALIDATION
-// ===================================
+    // =============================================
+    // SCROLL TO TOP
+    // =============================================
+    function initScrollToTop() {
+        const btn = document.getElementById('scrollToTop');
+        if (!btn) return;
 
-function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
-
-// Add real-time email validation
-document.addEventListener('DOMContentLoaded', () => {
-    const emailInput = document.getElementById('email');
-    if (emailInput) {
-        emailInput.addEventListener('blur', () => {
-            if (emailInput.value && !validateEmail(emailInput.value)) {
-                emailInput.style.borderColor = '#dc3545';
-            } else {
-                emailInput.style.borderColor = '#e0e0e0';
-            }
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) btn.classList.add('visible');
+            else btn.classList.remove('visible');
         });
 
-        emailInput.addEventListener('input', () => {
-            if (emailInput.style.borderColor === 'rgb(220, 53, 69)') {
-                emailInput.style.borderColor = '#e0e0e0';
-            }
+        btn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
-});
 
-// ===================================
-// EXPORT FOR USE IN HTML
-// ===================================
+    // =============================================
+    // SMOOTH SCROLL LINKS
+    // =============================================
+    function initSmoothScrollLinks() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (!href || href === '#') return;
 
-// Make scrollToContact available globally for onclick
-window.scrollToContact = scrollToContact;
+                const target = document.querySelector(href);
+                if (!target) return;
+
+                e.preventDefault();
+                const navHeight = document.querySelector('.main-nav') ? document.querySelector('.main-nav').offsetHeight : 70;
+                const targetPos = target.getBoundingClientRect().top + window.scrollY - navHeight - 20;
+                window.scrollTo({ top: targetPos, behavior: 'smooth' });
+            });
+        });
+    }
+
+    // =============================================
+    // HERO ENTRANCE
+    // =============================================
+    function initHeroEntrance() {
+        const heroElements = document.querySelectorAll('.hero > *');
+        heroElements.forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }, 220 + index * 120);
+        });
+    }
+
+    // =============================================
+    // SIMPLE SCROLL ANIMATIONS (AOS-like)
+    // =============================================
+    function initScrollAnimations() {
+        const targets = document.querySelectorAll('[data-aos]');
+        if (!targets.length || !('IntersectionObserver' in window)) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const delay = parseInt(entry.target.getAttribute('data-aos-delay') || '0', 10);
+                setTimeout(() => entry.target.classList.add('aos-animate'), delay);
+                observer.unobserve(entry.target);
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        targets.forEach(el => observer.observe(el));
+    }
+
+    // =============================================
+    // LIGHTWEIGHT BACKGROUND ANIMATION
+    // =============================================
+    function initMoonAnimation() {
+        const canvas = document.getElementById('moonCanvas');
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        resize();
+        window.addEventListener('resize', resize);
+
+        const particles = Array.from({ length: 38 }).map(() => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: 1 + Math.random() * 2.4,
+            vx: (Math.random() - 0.5) * 0.25,
+            vy: (Math.random() - 0.5) * 0.25,
+            a: 0.08 + Math.random() * 0.18
+        }));
+
+        function getColor() {
+            const theme = document.documentElement.getAttribute('data-theme') || 'light';
+            return theme === 'dark' ? '96,165,250' : '20,184,166';
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const rgb = getColor();
+
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < -8) p.x = canvas.width + 8;
+                if (p.x > canvas.width + 8) p.x = -8;
+                if (p.y < -8) p.y = canvas.height + 8;
+                if (p.y > canvas.height + 8) p.y = -8;
+
+                ctx.beginPath();
+                ctx.fillStyle = 'rgba(' + rgb + ',' + p.a + ')';
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            requestAnimationFrame(draw);
+        }
+
+        draw();
+    }
+
+    // =============================================
+    // CONTACT FORM
+    // =============================================
+    function initContactForm() {
+        const form = document.getElementById('contactForm');
+        const successMsg = document.getElementById('formSuccess');
+        const errorMsg = document.getElementById('formError');
+        if (!form) return;
+
+        const submitBtn = form.querySelector('.submit-button');
+        const currencySelect = form.querySelector('#currency');
+        const budgetSelect = form.querySelector('#budget');
+        const budgetHint = form.querySelector('#budgetHint');
+
+        const budgetMap = {
+            USD: [
+                { value: '', label: 'Select budget range' },
+                { value: 'usd-300-1000', label: 'From USD 300 - 1,000' },
+                { value: 'usd-1000-3000', label: 'USD 1,000 - 3,000' },
+                { value: 'usd-3000-10000', label: 'USD 3,000 - 10,000' },
+                { value: 'usd-10000+', label: 'USD 10,000+' },
+                { value: 'flexible', label: 'Flexible' }
+            ],
+            ZMW: [
+                { value: '', label: 'Select budget range' },
+                { value: 'zmw-2000-8000', label: 'From ZMW 2,000 - 8,000' },
+                { value: 'zmw-8000-25000', label: 'ZMW 8,000 - 25,000' },
+                { value: 'zmw-25000-80000', label: 'ZMW 25,000 - 80,000' },
+                { value: 'zmw-80000+', label: 'ZMW 80,000+' },
+                { value: 'flexible', label: 'Flexible' }
+            ],
+            ZAR: [
+                { value: '', label: 'Select budget range' },
+                { value: 'zar-2500-10000', label: 'From ZAR 2,500 - 10,000' },
+                { value: 'zar-10000-35000', label: 'ZAR 10,000 - 35,000' },
+                { value: 'zar-35000-100000', label: 'ZAR 35,000 - 100,000' },
+                { value: 'zar-100000+', label: 'ZAR 100,000+' },
+                { value: 'flexible', label: 'Flexible' }
+            ],
+            GBP: [
+                { value: '', label: 'Select budget range' },
+                { value: 'gbp-500-2000', label: 'From GBP 500 - 2,000' },
+                { value: 'gbp-2000-7000', label: 'GBP 2,000 - 7,000' },
+                { value: 'gbp-7000-18000', label: 'GBP 7,000 - 18,000' },
+                { value: 'gbp-18000+', label: 'GBP 18,000+' },
+                { value: 'flexible', label: 'Flexible' }
+            ],
+            EUR: [
+                { value: '', label: 'Select budget range' },
+                { value: 'eur-450-1800', label: 'From EUR 450 - 1,800' },
+                { value: 'eur-1800-6000', label: 'EUR 1,800 - 6,000' },
+                { value: 'eur-6000-15000', label: 'EUR 6,000 - 15,000' },
+                { value: 'eur-15000+', label: 'EUR 15,000+' },
+                { value: 'flexible', label: 'Flexible' }
+            ]
+        };
+
+        function detectCurrencyByRegion() {
+            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+            const locale = (navigator.language || '').toUpperCase();
+            const region = locale.includes('-') ? locale.split('-')[1] : '';
+
+            if (tz.indexOf('Africa/Lusaka') === 0 || region === 'ZM') return 'ZMW';
+            if (tz.indexOf('Africa/Johannesburg') === 0 || region === 'ZA') return 'ZAR';
+            if (tz.indexOf('Europe/London') === 0 || region === 'GB') return 'GBP';
+            if (tz.indexOf('Europe/') === 0 && region !== 'GB') return 'EUR';
+            if (region === 'US' || region === 'CA') return 'USD';
+            return 'USD';
+        }
+
+        function renderBudgetOptions(currencyCode) {
+            if (!budgetSelect) return;
+            const options = budgetMap[currencyCode] || budgetMap.USD;
+            budgetSelect.innerHTML = options.map(option => '<option value="' + option.value + '">' + option.label + '</option>').join('');
+
+            if (budgetHint) {
+                budgetHint.textContent = 'Budget adjusted for ' + currencyCode + '. You can change currency manually.';
+            }
+        }
+
+        if (currencySelect) {
+            const detectedCurrency = detectCurrencyByRegion();
+            currencySelect.value = detectedCurrency;
+            renderBudgetOptions(detectedCurrency);
+            currencySelect.addEventListener('change', () => renderBudgetOptions(currencySelect.value));
+        } else {
+            renderBudgetOptions('USD');
+        }
+
+        let formLoadTime = Date.now();
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const honeypot = form.querySelector('#website');
+            if (honeypot && honeypot.value) {
+                if (successMsg) successMsg.style.display = 'flex';
+                form.reset();
+                return;
+            }
+
+            if (Date.now() - formLoadTime < 3000) {
+                if (successMsg) successMsg.style.display = 'flex';
+                form.reset();
+                return;
+            }
+
+            if (successMsg) successMsg.style.display = 'none';
+            if (errorMsg) errorMsg.style.display = 'none';
+
+            const formData = {
+                name: form.querySelector('#name') ? form.querySelector('#name').value : '',
+                email: form.querySelector('#email') ? form.querySelector('#email').value : '',
+                company: form.querySelector('#company') ? form.querySelector('#company').value : '',
+                projectType: form.querySelector('#projectType') ? form.querySelector('#projectType').value : '',
+                currency: form.querySelector('#currency') ? form.querySelector('#currency').value : 'USD',
+                budget: form.querySelector('#budget') ? form.querySelector('#budget').value : '',
+                timeline: form.querySelector('#timeline') ? form.querySelector('#timeline').value : '',
+                message: form.querySelector('#message') ? form.querySelector('#message').value : '',
+                timestamp: new Date().toISOString()
+            };
+
+            if (!validateEmail(formData.email)) {
+                const emailInput = form.querySelector('#email');
+                if (emailInput) {
+                    emailInput.style.borderColor = '#dc2626';
+                    emailInput.focus();
+                }
+                return;
+            }
+
+            if (submitBtn) {
+                submitBtn.classList.add('loading');
+                submitBtn.disabled = true;
+            }
+
+            try {
+                const endpoint = 'https://formspree.io/f/xgoldrwl';
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) throw new Error('Submission failed');
+
+                if (successMsg) {
+                    successMsg.style.display = 'flex';
+                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+
+                form.reset();
+                if (currencySelect) {
+                    const detectedCurrency = detectCurrencyByRegion();
+                    currencySelect.value = detectedCurrency;
+                    renderBudgetOptions(detectedCurrency);
+                }
+
+                formLoadTime = Date.now();
+            } catch (error) {
+                if (errorMsg) {
+                    errorMsg.style.display = 'flex';
+                    errorMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            } finally {
+                if (submitBtn) {
+                    submitBtn.classList.remove('loading');
+                    submitBtn.disabled = false;
+                }
+            }
+        });
+
+        const emailInput = form.querySelector('#email');
+        if (emailInput) {
+            emailInput.addEventListener('blur', () => {
+                if (emailInput.value && !validateEmail(emailInput.value)) emailInput.style.borderColor = '#dc2626';
+                else emailInput.style.borderColor = '';
+            });
+            emailInput.addEventListener('input', () => {
+                emailInput.style.borderColor = '';
+            });
+        }
+    }
+
+    // =============================================
+    // URL PARAMS
+    // =============================================
+    function prefillFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        const serviceParam = params.get('service');
+        if (!serviceParam) return;
+
+        const projectType = document.getElementById('projectType');
+        if (!projectType) return;
+
+        const optionMap = {
+            website: 'website',
+            webapp: 'webapp',
+            mobile: 'mobile',
+            system: 'system',
+            consulting: 'consulting'
+        };
+
+        const value = optionMap[serviceParam];
+        if (value) projectType.value = value;
+    }
+
+    // =============================================
+    // UTILITIES
+    // =============================================
+    function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function scrollToContact() {
+        const contact = document.getElementById('contact');
+        if (!contact) return;
+
+        const nav = document.querySelector('.main-nav');
+        const navHeight = nav ? nav.offsetHeight : 70;
+        const pos = contact.getBoundingClientRect().top + window.scrollY - navHeight - 20;
+        window.scrollTo({ top: pos, behavior: 'smooth' });
+    }
+
+    window.scrollToContact = scrollToContact;
+
+    function updateCopyrightYear() {
+        const yearSpan = document.getElementById('year');
+        if (yearSpan) yearSpan.textContent = String(new Date().getFullYear());
+    }
+
+    // =============================================
+    // FOOTER INJECTION
+    // =============================================
+    function loadFooter() {
+        if (document.querySelector('body > footer') || document.querySelector('main + footer')) {
+            updateCopyrightYear();
+            return;
+        }
+
+        const fallbackFooter = [
+            '<footer>',
+            '  <div class="footer-content">',
+            '    <div class="footer-grid">',
+            '      <div class="footer-brand">',
+            '        <div class="footer-logo"><img src="favicon.png" alt="NextPhases" class="footer-icon" /><span>NextPhases</span></div>',
+            '        <p class="footer-tagline">Engineering your next phase of success.</p>',
+            '        <div class="footer-socials">',
+            '          <a href="https://github.com/NextPhasesDev" class="social-link" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>',
+            '          <a href="https://x.com/NextPhases" class="social-link" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a>',
+            '          <a href="https://www.tiktok.com/@nextphases.dev?lang=en" class="social-link" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>',
+            '          <a href="https://www.instagram.com/nextphases.dev/" class="social-link" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>',
+            '          <a href="https://www.linkedin.com/company/nextphases" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>',
+            '          <a href="https://discord.gg/DkybgpuRwp" class="social-link" target="_blank" rel="noopener" aria-label="Discord"><i class="fab fa-discord"></i></a>',
+            '        </div>',
+            '      </div>',
+            '      <div class="footer-column"><h4>Services</h4><ul><li><a href="services.html#web-dev">Web Development</a></li><li><a href="services.html#app-dev">App Development</a></li><li><a href="services.html#consulting">Consulting</a></li></ul></div>',
+            '      <div class="footer-column"><h4>Projects</h4><ul><li><a href="portfolio.html#examguard">ExamGuard</a></li><li><a href="portfolio.html#nsolo">Nsolo</a></li><li><a href="portfolio.html">View All</a></li></ul></div>',
+            '      <div class="footer-column"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="testimonials.html">Testimonials</a></li><li><a href="contact.html">Contact</a></li><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li></ul></div>',
+            '      <div class="footer-column"><h4>Get in Touch</h4><ul class="footer-contact-list"><li><i class="fas fa-envelope"></i><a href="mailto:info@nextphases.dev">info@nextphases.dev</a></li><li><i class="fas fa-map-marker-alt"></i><span>Lusaka, Zambia</span></li></ul></div>',
+            '    </div>',
+            '    <div class="footer-bottom"><p>&copy; <span id="year"></span> NextPhases. All Rights Reserved.</p></div>',
+            '  </div>',
+            '</footer>'
+        ].join('');
+
+        function injectFooter(html) {
+            const scrollBtn = document.querySelector('.scroll-to-top');
+            if (scrollBtn) scrollBtn.insertAdjacentHTML('beforebegin', html);
+            else document.body.insertAdjacentHTML('beforeend', html);
+            updateCopyrightYear();
+        }
+
+        fetch('footer.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Footer not found');
+                return response.text();
+            })
+            .then(injectFooter)
+            .catch(() => {
+                injectFooter(fallbackFooter);
+            });
+    }
+
+    // =============================================
+    // WELCOME GUIDE
+    // =============================================
+    function initWelcomeGuide() {
+        const helpButton = document.getElementById('helpGuideButton');
+        const modal = document.getElementById('helpGuideModal');
+        const closeButton = document.getElementById('helpGuideClose');
+
+        if (!helpButton || !modal || !closeButton) return;
+
+        function openGuide() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGuide() {
+            modal.classList.remove('active');
+            document.body.style.overflow = document.body.classList.contains('nav-open') ? 'hidden' : '';
+        }
+
+        helpButton.addEventListener('click', openGuide);
+        closeButton.addEventListener('click', closeGuide);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeGuide();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) closeGuide();
+        });
+    }
+})();
+

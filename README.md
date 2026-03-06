@@ -153,7 +153,7 @@ This is proprietary software. Unauthorized copying, modification, or distributio
 
 ## 📞 Contact
 
-- **Email**: team@nextphases.dev
+- **Email**: info@nextphases.dev
 - **Website**: [nextphases.dev](https://nextphases.dev)
 - **Location**: Lusaka, Zambia
 
