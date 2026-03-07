@@ -220,8 +220,10 @@
     // MOBILE NAVIGATION
     // =============================================
     function initMobileNav() {
+        const nav = document.getElementById('mainNav');
         const navToggle = document.getElementById('navToggle');
         const navMenu = document.getElementById('navMenu');
+        const navMenuClose = document.getElementById('navMenuClose');
         const navContainer = document.querySelector('.nav-container');
 
         if (!navToggle || !navMenu) return;
@@ -231,6 +233,10 @@
             navToggle.classList.toggle('active', isOpen);
             navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
             document.body.classList.toggle('nav-open', isOpen);
+
+            if (isOpen && nav) {
+                nav.classList.remove('hidden');
+            }
 
             const spans = navToggle.querySelectorAll('span');
             if (spans.length >= 3) {
@@ -252,6 +258,14 @@
             e.stopPropagation();
             setMenuOpen(!navMenu.classList.contains('active'));
         });
+
+        // Close button handler
+        if (navMenuClose) {
+            navMenuClose.addEventListener('click', (e) => {
+                e.stopPropagation();
+                setMenuOpen(false);
+            });
+        }
 
         document.addEventListener('click', (e) => {
             if (!navToggle.contains(e.target) && !navMenu.contains(e.target) && (!navContainer || !navContainer.contains(e.target))) {
@@ -412,48 +426,94 @@
 
         const submitBtn = form.querySelector('.submit-button');
         const currencySelect = form.querySelector('#currency');
+        const projectTypeSelect = form.querySelector('#projectType');
         const budgetSelect = form.querySelector('#budget');
         const budgetHint = form.querySelector('#budgetHint');
 
-        const budgetMap = {
+        // Default budget tiers for all project types except System Development
+        const budgetMapDefault = {
             USD: [
                 { value: '', label: 'Select budget range' },
-                { value: 'usd-300-1000', label: 'From USD 300 - 1,000' },
-                { value: 'usd-1000-3000', label: 'USD 1,000 - 3,000' },
-                { value: 'usd-3000-10000', label: 'USD 3,000 - 10,000' },
-                { value: 'usd-10000+', label: 'USD 10,000+' },
+                { value: 'usd-300-700', label: 'Starter: USD 300 - 700' },
+                { value: 'usd-700-1500', label: 'Standard: USD 700 - 1,500' },
+                { value: 'usd-1500-3000', label: 'Professional: USD 1,500 - 3,000' },
+                { value: 'usd-3000+', label: 'Enterprise: USD 3,000+' },
                 { value: 'flexible', label: 'Flexible' }
             ],
             ZMW: [
                 { value: '', label: 'Select budget range' },
-                { value: 'zmw-2000-8000', label: 'From ZMW 2,000 - 8,000' },
-                { value: 'zmw-8000-25000', label: 'ZMW 8,000 - 25,000' },
-                { value: 'zmw-25000-80000', label: 'ZMW 25,000 - 80,000' },
-                { value: 'zmw-80000+', label: 'ZMW 80,000+' },
+                { value: 'zmw-2000-3500', label: 'Starter: ZMW 2,000 - 3,500' },
+                { value: 'zmw-3500-5500', label: 'Standard: ZMW 3,500 - 5,500' },
+                { value: 'zmw-5500-8000', label: 'Professional: ZMW 5,500 - 8,000' },
+                { value: 'zmw-8000+', label: 'Enterprise: ZMW 8,000+' },
                 { value: 'flexible', label: 'Flexible' }
             ],
             ZAR: [
                 { value: '', label: 'Select budget range' },
-                { value: 'zar-2500-10000', label: 'From ZAR 2,500 - 10,000' },
-                { value: 'zar-10000-35000', label: 'ZAR 10,000 - 35,000' },
-                { value: 'zar-35000-100000', label: 'ZAR 35,000 - 100,000' },
-                { value: 'zar-100000+', label: 'ZAR 100,000+' },
+                { value: 'zar-2500-4500', label: 'Starter: ZAR 2,500 - 4,500' },
+                { value: 'zar-4500-7000', label: 'Standard: ZAR 4,500 - 7,000' },
+                { value: 'zar-7000-10000', label: 'Professional: ZAR 7,000 - 10,000' },
+                { value: 'zar-10000+', label: 'Enterprise: ZAR 10,000+' },
                 { value: 'flexible', label: 'Flexible' }
             ],
             GBP: [
                 { value: '', label: 'Select budget range' },
-                { value: 'gbp-500-2000', label: 'From GBP 500 - 2,000' },
-                { value: 'gbp-2000-7000', label: 'GBP 2,000 - 7,000' },
-                { value: 'gbp-7000-18000', label: 'GBP 7,000 - 18,000' },
-                { value: 'gbp-18000+', label: 'GBP 18,000+' },
+                { value: 'gbp-500-900', label: 'Starter: GBP 500 - 900' },
+                { value: 'gbp-900-1400', label: 'Standard: GBP 900 - 1,400' },
+                { value: 'gbp-1400-2000', label: 'Professional: GBP 1,400 - 2,000' },
+                { value: 'gbp-2000+', label: 'Enterprise: GBP 2,000+' },
                 { value: 'flexible', label: 'Flexible' }
             ],
             EUR: [
                 { value: '', label: 'Select budget range' },
-                { value: 'eur-450-1800', label: 'From EUR 450 - 1,800' },
-                { value: 'eur-1800-6000', label: 'EUR 1,800 - 6,000' },
-                { value: 'eur-6000-15000', label: 'EUR 6,000 - 15,000' },
-                { value: 'eur-15000+', label: 'EUR 15,000+' },
+                { value: 'eur-550-1000', label: 'Starter: EUR 550 - 1,000' },
+                { value: 'eur-1000-1600', label: 'Standard: EUR 1,000 - 1,600' },
+                { value: 'eur-1600-2300', label: 'Professional: EUR 1,600 - 2,300' },
+                { value: 'eur-2300+', label: 'Enterprise: EUR 2,300+' },
+                { value: 'flexible', label: 'Flexible' }
+            ]
+        };
+
+        // Budget tiers specifically for System Development
+        const budgetMapSystems = {
+            USD: [
+                { value: '', label: 'Select budget range' },
+                { value: 'usd-700-1200', label: 'Starter: USD 700 - 1,200' },
+                { value: 'usd-1200-2000', label: 'Standard: USD 1,200 - 2,000' },
+                { value: 'usd-2000-3500', label: 'Professional: USD 2,000 - 3,500' },
+                { value: 'usd-3500+', label: 'Enterprise: USD 3,500+' },
+                { value: 'flexible', label: 'Flexible' }
+            ],
+            ZMW: [
+                { value: '', label: 'Select budget range' },
+                { value: 'zmw-5000-8000', label: 'Starter: ZMW 5,000 - 8,000' },
+                { value: 'zmw-8000-12000', label: 'Standard: ZMW 8,000 - 12,000' },
+                { value: 'zmw-12000-18000', label: 'Professional: ZMW 12,000 - 18,000' },
+                { value: 'zmw-18000+', label: 'Enterprise: ZMW 18,000+' },
+                { value: 'flexible', label: 'Flexible' }
+            ],
+            ZAR: [
+                { value: '', label: 'Select budget range' },
+                { value: 'zar-6500-10000', label: 'Starter: ZAR 6,500 - 10,000' },
+                { value: 'zar-10000-15000', label: 'Standard: ZAR 10,000 - 15,000' },
+                { value: 'zar-15000-22000', label: 'Professional: ZAR 15,000 - 22,000' },
+                { value: 'zar-22000+', label: 'Enterprise: ZAR 22,000+' },
+                { value: 'flexible', label: 'Flexible' }
+            ],
+            GBP: [
+                { value: '', label: 'Select budget range' },
+                { value: 'gbp-1200-2000', label: 'Starter: GBP 1,200 - 2,000' },
+                { value: 'gbp-2000-3200', label: 'Standard: GBP 2,000 - 3,200' },
+                { value: 'gbp-3200-5000', label: 'Professional: GBP 3,200 - 5,000' },
+                { value: 'gbp-5000+', label: 'Enterprise: GBP 5,000+' },
+                { value: 'flexible', label: 'Flexible' }
+            ],
+            EUR: [
+                { value: '', label: 'Select budget range' },
+                { value: 'eur-1400-2200', label: 'Starter: EUR 1,400 - 2,200' },
+                { value: 'eur-2200-3500', label: 'Standard: EUR 2,200 - 3,500' },
+                { value: 'eur-3500-5500', label: 'Professional: EUR 3,500 - 5,500' },
+                { value: 'eur-5500+', label: 'Enterprise: EUR 5,500+' },
                 { value: 'flexible', label: 'Flexible' }
             ]
         };
@@ -473,11 +533,18 @@
 
         function renderBudgetOptions(currencyCode) {
             if (!budgetSelect) return;
+
+            // Check if project type is "system" to use different pricing
+            const projectType = projectTypeSelect ? projectTypeSelect.value : '';
+            const isSystems = projectType === 'system';
+            const budgetMap = isSystems ? budgetMapSystems : budgetMapDefault;
+
             const options = budgetMap[currencyCode] || budgetMap.USD;
             budgetSelect.innerHTML = options.map(option => '<option value="' + option.value + '">' + option.label + '</option>').join('');
 
             if (budgetHint) {
-                budgetHint.textContent = 'Budget adjusted for ' + currencyCode + '. You can change currency manually.';
+                const tierType = isSystems ? ' (System Development pricing)' : '';
+                budgetHint.textContent = 'Budget adjusted for ' + currencyCode + tierType + '. You can change currency or project type manually.';
             }
         }
 
@@ -488,6 +555,14 @@
             currencySelect.addEventListener('change', () => renderBudgetOptions(currencySelect.value));
         } else {
             renderBudgetOptions('USD');
+        }
+
+        // Update budget options when project type changes
+        if (projectTypeSelect) {
+            projectTypeSelect.addEventListener('change', () => {
+                const currentCurrency = currencySelect ? currencySelect.value : 'USD';
+                renderBudgetOptions(currentCurrency);
+            });
         }
 
         let formLoadTime = Date.now();
@@ -717,4 +792,6 @@
         });
     }
 })();
+
+
 
