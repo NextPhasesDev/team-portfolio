@@ -207,6 +207,11 @@ a {
     align-items: center;
 }
 
+/* Hidden everywhere by default; shown only in mobile drawer. */
+.nav-menu .nav-menu-close {
+    display: none;
+}
+
 .nav-link {
     text-decoration: none;
     color: var(--text-secondary);
@@ -2955,6 +2960,26 @@ footer {
         right: 0;
     }
 
+    /* Show close button only in mobile drawer. */
+    .nav-menu .nav-menu-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 40px;
+        height: 40px;
+        background: rgba(20, 184, 166, 0.08);
+        border: 2px solid var(--primary-teal);
+        border-radius: 50%;
+        color: var(--primary-teal);
+        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        z-index: 10;
+    }
+
     .nav-menu li {
         width: 100%;
         list-style: none;
@@ -3013,25 +3038,6 @@ footer {
     }
 
     /* Mobile menu close button */
-    .nav-menu-close {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        width: 40px;
-        height: 40px;
-        background: rgba(20, 184, 166, 0.08);
-        border: 2px solid var(--primary-teal);
-        border-radius: 50%;
-        color: var(--primary-teal);
-        font-size: 1.25rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        z-index: 10;
-    }
-
     .nav-menu-close:hover,
     .nav-menu-close:active {
         background: var(--primary-teal);
@@ -3039,8 +3045,6 @@ footer {
         transform: rotate(90deg);
     }
 
-    /* Mobile menu overlay backdrop */
-    /* Mobile menu overlay backdrop - removed, not needed */
 
     header {
         padding: 3.25rem 1rem;
