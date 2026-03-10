@@ -612,6 +612,27 @@
                 submitBtn.disabled = true;
             }
 
+            const handleSuccess = () => {
+                if (successMsg) {
+                    successMsg.style.display = 'flex';
+                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+                form.reset();
+                if (currencySelect) {
+                    const detectedCurrency = detectCurrencyByRegion();
+                    currencySelect.value = detectedCurrency;
+                    renderBudgetOptions(detectedCurrency);
+                }
+                formLoadTime = Date.now();
+            };
+
+            const handleError = () => {
+                if (errorMsg) {
+                    errorMsg.style.display = 'flex';
+                    errorMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            };
+
             try {
                 const endpoint = 'https://formspree.io/f/xgoldrwl';
                 const response = await fetch(endpoint, {
@@ -622,28 +643,34 @@
 
                 if (!response.ok) throw new Error('Submission failed');
 
-                if (successMsg) {
-                    successMsg.style.display = 'flex';
-                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }
-
-                form.reset();
-                if (currencySelect) {
-                    const detectedCurrency = detectCurrencyByRegion();
-                    currencySelect.value = detectedCurrency;
-                    renderBudgetOptions(detectedCurrency);
-                }
-
-                formLoadTime = Date.now();
-            } catch (error) {
-                if (errorMsg) {
-                    errorMsg.style.display = 'flex';
-                    errorMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }
-            } finally {
+                // Trigger plane-fly animation on success
                 if (submitBtn) {
                     submitBtn.classList.remove('loading');
-                    submitBtn.disabled = false;
+                    submitBtn.classList.add('sending');
+
+                    // Wait for animation to finish before showing success message
+                    setTimeout(() => {
+                        submitBtn.classList.remove('sending');
+                        submitBtn.disabled = false;
+                        handleSuccess();
+                    }, 700); // Match the plane-fly animation duration
+                } else {
+                    handleSuccess();
+                }
+            } catch (error) {
+                // Trigger plane-crash animation on error
+                if (submitBtn) {
+                    submitBtn.classList.remove('loading');
+                    submitBtn.classList.add('crash');
+
+                    // Wait for animation to finish before showing error message
+                    setTimeout(() => {
+                        submitBtn.classList.remove('crash');
+                        submitBtn.disabled = false;
+                        handleError();
+                    }, 600); // Match the plane-crash animation duration
+                } else {
+                    handleError();
                 }
             }
         });
