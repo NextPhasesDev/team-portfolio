@@ -50,9 +50,8 @@ logs/
 *.tmp
 
 # --- NextPhases Internal Planning (Not for public repo) ---
-NextPhases_Master_Plan_*.docx
-NextPhases_Master_Plan_*.pdf
-NextPhases_Claude_Memory_Update.md
+CHANGELOG.md
+PROJECT_STATUS.md
 *.bak
 *.orig
 
