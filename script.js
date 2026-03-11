@@ -9,11 +9,15 @@
         initScrollAnimations();
         initMobileNav();
         initSmartNavbar();
+        initAnnouncementMarquee();
+        initFloatingCodeSymbols();
+        initYouthKeywordToggle();
         initScrollToTop();
         initSmoothScrollLinks();
         initHeroEntrance();
         initWelcomeGuide();
         initTeamDetails();
+        initYouthDayLogoEasterEgg();
 
         if (document.getElementById('contactForm')) {
             initContactForm();
@@ -193,6 +197,8 @@
                 const menu = document.getElementById('navMenu');
                 const menuOpen = !!(menu && menu.classList.contains('active'));
 
+                nav.classList.toggle('scrolled', currentScroll > 10);
+
                 if (menuOpen) {
                     nav.classList.remove('hidden');
                     lastScroll = currentScroll;
@@ -359,6 +365,36 @@
     }
 
     // =============================================
+    // ANNOUNCEMENT MARQUEE
+    // =============================================
+    function initAnnouncementMarquee() {
+        const bar = document.querySelector('.nav-announcement');
+        const nav = document.getElementById('mainNav');
+        if (!bar || !nav) return;
+
+        // Keep announcement attached to nav so hide/show behavior is unified.
+        if (bar.parentElement !== nav) nav.appendChild(bar);
+
+        const items = [
+            'Happy Youth Day 2026',
+            'Built by the youth',
+            'For the future',
+            'Build your site today with NextPhases',
+            'Ideas from Lusaka to the world',
+            'Youth Mode is live - type youth'
+        ];
+
+        const baseLine = items.join('   ✦   ');
+        const repeated = Array.from({ length: 8 }).map(() => baseLine).join('   ✦   ');
+
+        bar.setAttribute('aria-label', items.join('. '));
+        bar.innerHTML = '<div class="announcement-track" aria-hidden="true">'
+            + '<span class="announcement-line">' + repeated + '</span>'
+            + '<span class="announcement-line">' + repeated + '</span>'
+            + '</div>';
+    }
+
+    // =============================================
     // LIGHTWEIGHT BACKGROUND ANIMATION
     // =============================================
     function initMoonAnimation() {
@@ -376,43 +412,130 @@
         resize();
         window.addEventListener('resize', resize);
 
-        const particles = Array.from({ length: 38 }).map(() => ({
+        const page = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+        const symbolMap = {
+            'index.html': ['<>', '{}', '[]', '=>', '//'],
+            'services.html': ['{}', '<>', 'API', 'DB', '()'],
+            'portfolio.html': ['<UI/>', '{app}', 'git', 'v2', 'ship'],
+            'about.html': ['team', 'grow', 'learn', 'build', 'code'],
+            'contact.html': ['mail', 'msg', 'idea', 'plan', 'ping'],
+            'testimonials.html': ['quote', 'trust', 'wow', 'stars', 'ship'],
+            'privacy.html': ['data', 'safe', 'lock', 'policy', 'sec'],
+            'terms.html': ['terms', 'rights', 'scope', 'legal', 'trust']
+        };
+
+        const symbols = symbolMap[page] || symbolMap['index.html'];
+        const palette = ['255,215,0', '239,68,68', '34,197,94', '59,130,246', '168,85,247'];
+
+        const particles = Array.from({ length: 34 }).map(() => ({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
-            r: 1 + Math.random() * 2.4,
+            r: 1 + Math.random() * 2.6,
             vx: (Math.random() - 0.5) * 0.25,
             vy: (Math.random() - 0.5) * 0.25,
             a: 0.08 + Math.random() * 0.18
         }));
 
-        function getColor() {
+        const symbolParticles = Array.from({ length: 18 }).map(() => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            text: symbols[Math.floor(Math.random() * symbols.length)],
+            color: palette[Math.floor(Math.random() * palette.length)],
+            size: 10 + Math.random() * 10,
+            vx: (Math.random() - 0.5) * 0.2,
+            vy: -0.15 - Math.random() * 0.22,
+            a: 0.16 + Math.random() * 0.22
+        }));
+
+        function getDotColor() {
             const theme = document.documentElement.getAttribute('data-theme') || 'light';
             return theme === 'dark' ? '96,165,250' : '20,184,166';
         }
 
+        function wrap(item, pad) {
+            if (item.x < -pad) item.x = canvas.width + pad;
+            if (item.x > canvas.width + pad) item.x = -pad;
+            if (item.y < -pad) item.y = canvas.height + pad;
+            if (item.y > canvas.height + pad) item.y = -pad;
+        }
+
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            const rgb = getColor();
+            const dotRgb = getDotColor();
+            const footer = document.querySelector('footer');
+            const footerTop = footer ? footer.getBoundingClientRect().top : Number.POSITIVE_INFINITY;
 
             particles.forEach(p => {
                 p.x += p.vx;
                 p.y += p.vy;
-
-                if (p.x < -8) p.x = canvas.width + 8;
-                if (p.x > canvas.width + 8) p.x = -8;
-                if (p.y < -8) p.y = canvas.height + 8;
-                if (p.y > canvas.height + 8) p.y = -8;
+                wrap(p, 8);
 
                 ctx.beginPath();
-                ctx.fillStyle = 'rgba(' + rgb + ',' + p.a + ')';
+                ctx.fillStyle = 'rgba(' + dotRgb + ',' + p.a + ')';
                 ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
                 ctx.fill();
+            });
+
+            symbolParticles.forEach(s => {
+                s.x += s.vx;
+                s.y += s.vy;
+                wrap(s, 24);
+
+                // Keep symbols out of the visible footer zone.
+                if (s.y > footerTop - 14) return;
+
+                ctx.font = '700 ' + s.size + 'px Consolas, "Courier New", monospace';
+                ctx.fillStyle = 'rgba(' + s.color + ',' + s.a + ')';
+                ctx.fillText(s.text, s.x, s.y);
             });
 
             requestAnimationFrame(draw);
         }
 
         draw();
+    }
+
+    // =============================================
+    // MULTI-COLOR FLOATING SYMBOLS
+    // =============================================
+    function initFloatingCodeSymbols() {
+        const existing = document.querySelector('.bg-symbol-layer');
+        if (existing) existing.remove();
+        if (!document.body.classList.contains('youth-day-2026')) return;
+
+        const page = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+        const symbolMap = {
+            'index.html': ['<>', '{}', '[]', '=>', '//'],
+            'services.html': ['{}', '<>', 'API', 'DB', '()'],
+            'portfolio.html': ['<UI/>', '{app}', 'git', 'v2', 'ship'],
+            'about.html': ['team', 'grow', 'learn', 'build', 'code'],
+            'contact.html': ['mail', 'msg', 'idea', 'plan', 'ping'],
+            'testimonials.html': ['quote', 'trust', 'wow', 'stars', 'ship'],
+            'privacy.html': ['data', 'safe', 'lock', 'policy', 'sec'],
+            'terms.html': ['terms', 'rights', 'scope', 'legal', 'trust']
+        };
+        const palette = ['#facc15', '#ef4444', '#22c55e', '#3b82f6', '#a855f7'];
+
+        const layer = document.createElement('div');
+        layer.className = 'bg-symbol-layer';
+
+        const symbols = symbolMap[page] || symbolMap['index.html'];
+        const count = window.innerWidth < 768 ? 10 : 18;
+
+        for (let i = 0; i < count; i += 1) {
+            const node = document.createElement('span');
+            node.className = 'bg-symbol';
+            node.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            node.style.left = Math.round(Math.random() * 96) + '%';
+            node.style.top = Math.round(Math.random() * 105) + '%';
+            node.style.fontSize = (0.8 + Math.random() * 0.65).toFixed(2) + 'rem';
+            node.style.color = palette[Math.floor(Math.random() * palette.length)];
+            node.style.animationDuration = (16 + Math.random() * 18).toFixed(2) + 's';
+            node.style.animationDelay = (-Math.random() * 18).toFixed(2) + 's';
+            layer.appendChild(node);
+        }
+
+        document.body.appendChild(layer);
     }
 
     // =============================================
@@ -759,8 +882,8 @@
             '  <div class="footer-content">',
             '    <div class="footer-grid">',
             '      <div class="footer-brand">',
-            '        <div class="footer-logo"><img src="favicon.png" alt="NextPhases" class="footer-icon" /><span>NextPhases</span></div>',
-            '        <p class="footer-tagline">Engineering your next phase of success.</p>',
+            '        <div class="footer-logo"><img src="NextPhases_Swirl_YouthDay2026_Transparent.png" alt="NextPhases" class="footer-icon" /><span>NextPhases</span></div>',
+            '        <p class="footer-tagline">Built by the youth. For the world.</p>',
             '        <div class="footer-socials">',
             '          <a href="https://github.com/NextPhasesDev" class="social-link" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>',
             '          <a href="https://x.com/NextPhases" class="social-link" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a>',
@@ -829,7 +952,141 @@
             if (e.key === 'Escape' && modal.classList.contains('active')) closeGuide();
         });
     }
-})();
 
+    // =============================================
+    // YOUTH DAY LOGO EASTER EGG - CLICK ANYTIME
+    // =============================================
+    function initYouthDayLogoEasterEgg() {
+        const homeLogo = document.querySelector('.logo-wrapper');
+        if (!homeLogo) return;
+
+        homeLogo.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                homeLogo.click();
+            }
+        });
+
+        homeLogo.addEventListener('click', (e) => {
+            launchYouthBurst({ x: e.clientX, y: e.clientY }, {
+                palette: ['#facc15', '#ef4444', '#22c55e', '#3b82f6', '#a855f7'],
+                words: ['Youth', 'Build', 'Create', 'Shine', 'Lusaka'],
+                confettiCount: 30,
+                wordCount: 5
+            });
+        });
+    }
+
+    function showYouthToast(message, variant, duration) {
+        const existing = document.querySelector('.youth-toast');
+        if (existing) existing.remove();
+
+        const toast = document.createElement('div');
+        toast.className = 'youth-toast ' + (variant || 'activate');
+        toast.setAttribute('role', 'status');
+        toast.setAttribute('aria-live', 'polite');
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        requestAnimationFrame(() => toast.classList.add('visible'));
+
+        setTimeout(() => {
+            toast.classList.remove('visible');
+            setTimeout(() => {
+                if (toast.parentNode) toast.remove();
+            }, 260);
+        }, duration || 2800);
+    }
+
+    function launchYouthBurst(origin, options) {
+        const settings = options || {};
+        const palette = settings.palette || ['#facc15', '#ef4444', '#22c55e', '#3b82f6', '#a855f7'];
+        const words = settings.words || ['Youth', 'Build', 'Create', 'Shine'];
+        const confettiCount = settings.confettiCount || 24;
+        const wordCount = settings.wordCount || Math.min(words.length, 5);
+
+        const layer = document.createElement('div');
+        layer.className = 'youth-burst-layer';
+        document.body.appendChild(layer);
+
+        const hasPoint = origin && typeof origin.x === 'number' && typeof origin.y === 'number';
+        const rect = !hasPoint && origin && origin.getBoundingClientRect ? origin.getBoundingClientRect() : null;
+        const centerX = hasPoint ? origin.x : (rect ? rect.left + (rect.width / 2) : window.innerWidth / 2);
+        const centerY = hasPoint ? origin.y : (rect ? rect.top + (rect.height / 2) : window.innerHeight / 2);
+
+        for (let i = 0; i < confettiCount; i += 1) {
+            const piece = document.createElement('span');
+            const angle = (Math.PI * 2 * i) / confettiCount + (Math.random() * 0.45);
+            const distance = 80 + Math.random() * 140;
+            piece.className = 'youth-confetti';
+            piece.style.left = centerX + 'px';
+            piece.style.top = centerY + 'px';
+            piece.style.background = palette[i % palette.length];
+            piece.style.setProperty('--burst-x', (Math.cos(angle) * distance).toFixed(2) + 'px');
+            piece.style.setProperty('--burst-y', (Math.sin(angle) * distance - 90).toFixed(2) + 'px');
+            piece.style.setProperty('--burst-rotate', (200 + Math.random() * 260).toFixed(0) + 'deg');
+            piece.style.animationDelay = (Math.random() * 0.08).toFixed(2) + 's';
+            layer.appendChild(piece);
+        }
+
+        for (let i = 0; i < wordCount; i += 1) {
+            const word = document.createElement('span');
+            const angle = (Math.PI * 2 * i) / wordCount + (Math.random() * 0.35);
+            const distance = 48 + Math.random() * 84;
+            word.className = 'youth-word-burst';
+            word.textContent = words[i % words.length];
+            word.style.left = centerX + 'px';
+            word.style.top = centerY + 'px';
+            word.style.color = palette[i % palette.length];
+            word.style.setProperty('--word-x', (Math.cos(angle) * distance).toFixed(2) + 'px');
+            word.style.setProperty('--word-y', (Math.sin(angle) * distance - 72).toFixed(2) + 'px');
+            word.style.animationDelay = (0.04 + Math.random() * 0.1).toFixed(2) + 's';
+            layer.appendChild(word);
+        }
+
+        setTimeout(() => {
+            if (layer.parentNode) layer.remove();
+        }, 2200);
+    }
+
+    function initYouthKeywordToggle() {
+        let buffer = '';
+        const target = 'youth';
+
+        document.addEventListener('keydown', (e) => {
+            const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+            if (tag === 'input' || tag === 'textarea' || (e.target && e.target.isContentEditable)) return;
+            if (!e.key || e.key.length !== 1) return;
+
+            buffer = (buffer + e.key.toLowerCase()).slice(-target.length);
+            if (buffer !== target) return;
+            buffer = '';
+
+            document.body.classList.toggle('youth-day-2026');
+            initFloatingCodeSymbols();
+
+            const enabled = document.body.classList.contains('youth-day-2026');
+            const centerPoint = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+
+            if (enabled) {
+                showYouthToast('Youth Mode activated - welcome back to the celebration.', 'activate', 2800);
+                launchYouthBurst(centerPoint, {
+                    palette: ['#facc15', '#ef4444', '#22c55e', '#3b82f6', '#a855f7'],
+                    words: ['Youth Mode', 'On', 'Celebrate', 'Build', 'Create'],
+                    confettiCount: 22,
+                    wordCount: 5
+                });
+            } else {
+                showYouthToast('Goodbye for now - Youth Mode has been tucked away.', 'goodbye', 2600);
+                launchYouthBurst(centerPoint, {
+                    palette: ['#94a3b8', '#64748b', '#60a5fa'],
+                    words: ['Goodbye', 'Later', 'See you'],
+                    confettiCount: 12,
+                    wordCount: 3
+                });
+            }
+        });
+    }
+})();
 
 

@@ -59,6 +59,12 @@
     --input-border: #d1d5db;
     --logo-filter: brightness(0) saturate(100%) invert(18%) sepia(90%) saturate(2000%) hue-rotate(215deg) brightness(95%) contrast(95%);
     --logo-filter-header: brightness(0) invert(1);
+
+    /* Youth Day colors */
+    --youth-gold: #d4af37;
+    --youth-gold-soft: rgba(212, 175, 55, 0.28);
+    --youth-gold-border: rgba(212, 175, 55, 0.45);
+    --youth-gold-glow: rgba(212, 175, 55, 0.18);
 }
 
 /* Dark Mode */
@@ -106,6 +112,12 @@
     --input-border: #334155;
     --logo-filter: brightness(0) invert(1);
     --logo-filter-header: brightness(0) invert(1);
+
+    /* Youth Day colors */
+    --youth-gold: #e6c766;
+    --youth-gold-soft: rgba(230, 199, 102, 0.24);
+    --youth-gold-border: rgba(230, 199, 102, 0.5);
+    --youth-gold-glow: rgba(230, 199, 102, 0.2);
 }
 
 html {
@@ -121,6 +133,10 @@ body {
     overflow-x: hidden;
     transition: background-color 0.4s ease, color 0.4s ease;
     padding-top: 70px;
+}
+
+body.youth-day-2026 {
+    padding-top: 106px;
 }
 
 /* Lock body scroll when mobile nav or modal-driven overlays are open */
@@ -225,6 +241,7 @@ a {
 .nav-link:hover,
 .nav-link.active {
     color: var(--primary-teal);
+    text-shadow: 0 0 10px var(--youth-gold-glow);
 }
 
 .nav-link::after {
@@ -445,19 +462,29 @@ header::after {
 .logo-wrapper {
     display: inline-block;
     position: relative;
+    cursor: pointer;
+    border-radius: 18px;
+}
+
+.logo-wrapper:focus-visible {
+    outline: 3px solid rgba(254, 240, 138, 0.85);
+    outline-offset: 8px;
 }
 
 .logo-main {
-    width: 550px;
-    max-width: 90%;
+    width: 600px;
+    max-width: 92%;
     height: auto;
     margin-bottom: 1.5rem;
-    filter: var(--logo-filter-header);
-    transition: transform 0.4s ease;
+    filter: none;
+    transition: transform 0.4s ease, filter 0.4s ease;
+    pointer-events: none;
 }
 
-.logo-main:hover {
-    transform: scale(1.02);
+.logo-main:hover,
+.logo-wrapper:hover .logo-main {
+    transform: scale(1.04);
+    filter: drop-shadow(0 0 18px rgba(254, 240, 138, 0.38));
 }
 
 /*
@@ -902,6 +929,8 @@ main {
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: 600;
+    background: linear-gradient(90deg, rgba(20, 184, 166, 0.12), var(--youth-gold-soft));
+    border: 1px solid var(--youth-gold-border);
 }
 
 .portfolio-card h3 {
@@ -1593,7 +1622,6 @@ main {
     padding: 0.95rem 2.4rem !important;
     font-size: 1.1rem !important;
     font-weight: 600 !important;
-    gap: 0.5rem !important;
 }
 
 /* =============================================
@@ -1640,7 +1668,7 @@ footer {
 .footer-icon {
     width: 32px;
     height: 32px;
-    filter: brightness(0) invert(1);
+    filter: none;
     border-radius: 4px;
 }
 
@@ -2826,6 +2854,14 @@ footer {
         width: 44px;
         height: 44px;
     }
+
+    body.youth-day-2026 .nav-toggle span {
+        background: #f8fafc;
+    }
+
+    .logo-main {
+        width: min(480px, 96vw);
+    }
 }
 
 @media (max-width: 992px) {
@@ -2891,6 +2927,10 @@ footer {
 @media (max-width: 768px) {
     body {
         padding-top: 64px;
+    }
+
+    body.youth-day-2026 {
+        padding-top: 96px;
     }
 
     .main-nav {
@@ -3051,7 +3091,7 @@ footer {
     }
 
     .logo-main {
-        width: min(440px, 94vw);
+        width: min(480px, 96vw);
     }
 
     .tagline {
@@ -3370,3 +3410,301 @@ input, textarea, select {
     animation: plane-crash 0.6s ease-out forwards;
 }
 
+/* Youth Day full-site recolor (temporary campaign layer) */
+body.youth-day-2026 {
+    --bg-primary: #f3f8fb;
+    --bg-secondary: #ffffff;
+    --bg-gradient-start: #dff5f2;
+    --bg-gradient-end: #f8f2de;
+    --text-primary: #1f2937;
+    --text-secondary: #4b5563;
+    --text-heading: #0f356f;
+    --card-bg: #ffffff;
+    --card-border: rgba(212, 175, 55, 0.24);
+    --nav-bg: #0f3f83;
+    --nav-border: rgba(212, 175, 55, 0.28);
+    --header-gradient-1: #0f3f83;
+    --header-gradient-2: #0f6f9f;
+    --header-gradient-3: #12a19a;
+    --header-gradient-4: #d4af37;
+    --shadow-medium: rgba(15, 63, 131, 0.2);
+}
+
+[data-theme="dark"] body.youth-day-2026 {
+    --bg-primary: #071227;
+    --bg-secondary: #0d1d34;
+    --bg-gradient-start: #0a1730;
+    --bg-gradient-end: #182947;
+    --text-primary: #dce6f7;
+    --text-secondary: #9cb3d1;
+    --text-heading: #8fc9ff;
+    --card-bg: #10233e;
+    --card-border: rgba(230, 199, 102, 0.26);
+    --nav-bg: #09162a;
+    --nav-border: rgba(230, 199, 102, 0.26);
+}
+
+body.youth-day-2026 .main-nav {
+    background: linear-gradient(90deg, #0f3f83, #0f6f9f, #12a19a);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 6px 24px var(--shadow-soft);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body.youth-day-2026 .nav-logo,
+body.youth-day-2026 .nav-link,
+body.youth-day-2026 .theme-toggle,
+body.youth-day-2026 .nav-toggle span {
+    color: #f8fafc;
+}
+
+body.youth-day-2026 .nav-link {
+    color: rgba(248, 250, 252, 0.88);
+}
+
+body.youth-day-2026 .nav-link:hover,
+body.youth-day-2026 .nav-link.active {
+    color: #fef08a;
+    text-shadow: 0 0 10px rgba(254, 240, 138, 0.45);
+}
+
+body.youth-day-2026 .nav-link::after {
+    background: linear-gradient(90deg, #5eead4, #fef08a);
+}
+
+body.youth-day-2026 .theme-toggle {
+    border-color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+body.youth-day-2026 .theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.14);
+}
+
+body.youth-day-2026 .nav-announcement {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    background: linear-gradient(90deg, rgba(20, 184, 166, 0.12), rgba(212, 175, 55, 0.16), rgba(20, 184, 166, 0.12));
+    color: var(--text-heading);
+    text-align: center;
+    font-size: 0.86rem;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    padding: 0.42rem 0;
+    border-top: 1px solid var(--card-border);
+    border-bottom: 1px solid var(--card-border);
+}
+
+.nav-announcement .announcement-track {
+    display: inline-flex;
+    width: max-content;
+    min-width: 100%;
+    animation: announcementMarquee 72s linear infinite;
+}
+
+.nav-announcement .announcement-line {
+    display: inline-block;
+    padding-right: 2.5rem;
+}
+
+@keyframes announcementMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Restore the animated multi-color card layer in Youth mode */
+body.youth-day-2026 .service-card,
+body.youth-day-2026 .portfolio-card,
+body.youth-day-2026 .testimonial-card,
+body.youth-day-2026 .mission-item,
+body.youth-day-2026 .pricing-region-card,
+body.youth-day-2026 .value-card,
+body.youth-day-2026 .contact-form-wrapper,
+body.youth-day-2026 .contact-info-card,
+body.youth-day-2026 .showcase-card,
+body.youth-day-2026 .testimonials-cta-content {
+    background: linear-gradient(135deg, #fff9e6 0%, #ffe6f0 25%, #e6f3ff 50%, #e6ffe6 75%, #fff9e6 100%);
+    background-size: 220% 220%;
+    animation: youthCardFlow 14s ease-in-out infinite;
+    border-color: var(--card-border);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+[data-theme="dark"] body.youth-day-2026 .service-card,
+[data-theme="dark"] body.youth-day-2026 .portfolio-card,
+[data-theme="dark"] body.youth-day-2026 .testimonial-card,
+[data-theme="dark"] body.youth-day-2026 .mission-item,
+[data-theme="dark"] body.youth-day-2026 .pricing-region-card,
+[data-theme="dark"] body.youth-day-2026 .value-card,
+[data-theme="dark"] body.youth-day-2026 .contact-form-wrapper,
+[data-theme="dark"] body.youth-day-2026 .contact-info-card,
+[data-theme="dark"] body.youth-day-2026 .showcase-card,
+[data-theme="dark"] body.youth-day-2026 .testimonials-cta-content {
+    background: linear-gradient(135deg, #1a1a2e 0%, #2e1a2e 25%, #1a2e3e 50%, #1a3e1a 75%, #1a1a2e 100%);
+    background-size: 220% 220%;
+    animation: youthCardFlow 16s ease-in-out infinite;
+    border: 1px solid rgba(230, 199, 102, 0.3);
+    box-shadow: 0 4px 12px rgba(230, 199, 102, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+@keyframes youthCardFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Keep floating symbols away from the footer-visible strip */
+.bg-symbol-layer {
+    position: fixed;
+    inset: 0 0 120px 0;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.bg-symbol {
+    position: absolute;
+    font-family: "Consolas", "Courier New", monospace;
+    font-weight: 700;
+    user-select: none;
+    white-space: nowrap;
+    opacity: 0;
+    animation-name: floatSymbol;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes floatSymbol {
+    0% { transform: translate3d(0, 6vh, 0) rotate(0deg); opacity: 0; }
+    12% { opacity: 0.42; }
+    88% { opacity: 0.42; }
+    100% { transform: translate3d(0, -112vh, 0) rotate(10deg); opacity: 0; }
+}
+
+/* Youth mode confirmation toast */
+.youth-toast {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    max-width: min(430px, calc(100vw - 32px));
+    padding: 0.95rem 1.15rem;
+    border-radius: 14px;
+    color: #081326;
+    font-weight: 800;
+    font-size: 0.92rem;
+    line-height: 1.35;
+    z-index: 1700;
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+    transition: opacity 0.24s ease, transform 0.24s ease;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.24);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: linear-gradient(135deg, rgba(250, 204, 21, 0.98), rgba(59, 130, 246, 0.95), rgba(34, 197, 94, 0.96));
+}
+
+.youth-toast.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.youth-toast.goodbye {
+    color: #e5eefc;
+    background: linear-gradient(135deg, rgba(71, 85, 105, 0.98), rgba(37, 99, 235, 0.92), rgba(15, 23, 42, 0.96));
+}
+
+/* Confetti/word burst visuals */
+.youth-burst-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1650;
+}
+
+.youth-confetti,
+.youth-word-burst {
+    position: absolute;
+    will-change: transform, opacity;
+}
+
+.youth-confetti {
+    --burst-x: 0px;
+    --burst-y: -140px;
+    --burst-rotate: 280deg;
+    width: 10px;
+    height: 16px;
+    border-radius: 3px;
+    opacity: 0;
+    animation: youthConfettiFly 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.youth-word-burst {
+    --word-x: 0px;
+    --word-y: -86px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 0.2px;
+    opacity: 0;
+    text-shadow: 0 2px 10px rgba(8, 15, 30, 0.22);
+    animation: youthWordRise 1.9s ease-out forwards;
+}
+
+@keyframes youthConfettiFly {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 0, 0) rotate(0deg) scale(0.8);
+    }
+    12% { opacity: 1; }
+    100% {
+        opacity: 0;
+        transform: translate3d(var(--burst-x, 0px), var(--burst-y, -140px), 0) rotate(var(--burst-rotate, 280deg)) scale(1.05);
+    }
+}
+
+@keyframes youthWordRise {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 8px, 0) scale(0.95);
+    }
+    15% { opacity: 1; }
+    100% {
+        opacity: 0;
+        transform: translate3d(var(--word-x, 0px), var(--word-y, -86px), 0) scale(1.03);
+    }
+}
+
+@media (max-width: 768px) {
+    .youth-toast {
+        right: 12px;
+        left: 12px;
+        bottom: 12px;
+        max-width: none;
+        font-size: 0.88rem;
+    }
+
+    .bg-symbol {
+        font-size: 0.72rem !important;
+    }
+
+    html[data-theme="light"] body.youth-day-2026 .nav-menu {
+        background: rgba(248, 250, 252, 0.98);
+    }
+
+    html[data-theme="light"] body.youth-day-2026 .nav-menu .nav-link,
+    html[data-theme="light"] body.youth-day-2026 .nav-menu li .nav-link,
+    html[data-theme="light"] body.youth-day-2026 .nav-menu a.nav-link {
+        color: #0f172a !important;
+        opacity: 1 !important;
+        text-shadow: none !important;
+        -webkit-text-fill-color: #0f172a;
+    }
+
+    html[data-theme="light"] body.youth-day-2026 .nav-menu .nav-link:hover,
+    html[data-theme="light"] body.youth-day-2026 .nav-menu .nav-link:active,
+    html[data-theme="light"] body.youth-day-2026 .nav-menu .nav-link.active {
+        color: #0d9488 !important;
+        -webkit-text-fill-color: #0d9488;
+    }
+}
