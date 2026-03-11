@@ -1299,7 +1299,7 @@ main {
 }
 
 .form-group textarea {
-    resize: none;
+    resize: vertical;
     min-height: 120px;
 }
 
@@ -3312,20 +3312,8 @@ footer {
    ICON FALLBACK - For CDN failures in regions like Zimbabwe
    ============================================= */
 /* If Font Awesome fails to load, show text labels instead of broken icons */
-i.fa, i.fas, i.fab {
+i.fa, i.fas, i.far, i.fab {
     display: inline-block;
-}
-
-/* Button and link text remains visible even if icons fail */
-button, a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.nav-link {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
 }
 
 /* Ensure text content is always readable */

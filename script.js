@@ -735,6 +735,27 @@
                 submitBtn.disabled = true;
             }
 
+            const handleSuccess = () => {
+                if (successMsg) {
+                    successMsg.style.display = 'flex';
+                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+                form.reset();
+                if (currencySelect) {
+                    const detectedCurrency = detectCurrencyByRegion();
+                    currencySelect.value = detectedCurrency;
+                    renderBudgetOptions(detectedCurrency);
+                }
+                formLoadTime = Date.now();
+            };
+
+            const handleError = () => {
+                if (errorMsg) {
+                    errorMsg.style.display = 'flex';
+                    errorMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            };
+
             try {
                 const endpoint = 'https://formspree.io/f/xgoldrwl';
                 const response = await fetch(endpoint, {
@@ -754,35 +775,10 @@
                     setTimeout(() => {
                         submitBtn.classList.remove('sending');
                         submitBtn.disabled = false;
-
-                        if (successMsg) {
-                            successMsg.style.display = 'flex';
-                            successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                        }
-
-                        form.reset();
-                        if (currencySelect) {
-                            const detectedCurrency = detectCurrencyByRegion();
-                            currencySelect.value = detectedCurrency;
-                            renderBudgetOptions(detectedCurrency);
-                        }
-
-                        formLoadTime = Date.now();
+                        handleSuccess();
                     }, 700); // Match the plane-fly animation duration
                 } else {
-                    if (successMsg) {
-                        successMsg.style.display = 'flex';
-                        successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    }
-
-                    form.reset();
-                    if (currencySelect) {
-                        const detectedCurrency = detectCurrencyByRegion();
-                        currencySelect.value = detectedCurrency;
-                        renderBudgetOptions(detectedCurrency);
-                    }
-
-                    formLoadTime = Date.now();
+                    handleSuccess();
                 }
             } catch (error) {
                 // Trigger plane-crash animation on error
@@ -794,17 +790,10 @@
                     setTimeout(() => {
                         submitBtn.classList.remove('crash');
                         submitBtn.disabled = false;
-
-                        if (errorMsg) {
-                            errorMsg.style.display = 'flex';
-                            errorMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                        }
+                        handleError();
                     }, 600); // Match the plane-crash animation duration
                 } else {
-                    if (errorMsg) {
-                        errorMsg.style.display = 'flex';
-                        errorMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    }
+                    handleError();
                 }
             }
         });
