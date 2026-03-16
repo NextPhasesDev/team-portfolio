@@ -36,7 +36,7 @@ This is the source code for the NextPhases website. The site is built with clean
 - 🌓 Dark and light theme support
 - 🌍 Multi-region pricing (auto-detects currency)
 - ♿ Accessible design (WCAG compliant)
-- ⚡ Fast load times with no external dependencies
+- ⚡ Fast load times with no JavaScript framework dependencies
 - 🔒 Privacy-focused, secure form handling
 - 🌐 SEO optimized with sitemap & structured data
 

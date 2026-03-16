@@ -301,6 +301,8 @@
                 const menu = document.getElementById('navMenu');
                 const menuOpen = !!(menu && menu.classList.contains('active'));
 
+                nav.classList.toggle('scrolled', currentScroll > 10);
+
                 if (menuOpen) {
                     nav.classList.remove('hidden');
                     lastScroll = currentScroll;
@@ -1204,6 +1206,49 @@
     }
 
     // =============================================
+    // MULTI-COLOR FLOATING SYMBOLS
+    // =============================================
+    function initFloatingCodeSymbols() {
+        const existing = document.querySelector('.bg-symbol-layer');
+        if (existing) existing.remove();
+        if (!document.body.classList.contains('youth-day-2026')) return;
+
+        const page = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+        const symbolMap = {
+            'index.html': ['<>', '{}', '[]', '=>', '//'],
+            'services.html': ['{}', '<>', 'API', 'DB', '()'],
+            'portfolio.html': ['<UI/>', '{app}', 'git', 'v2', 'ship'],
+            'about.html': ['team', 'grow', 'learn', 'build', 'code'],
+            'contact.html': ['mail', 'msg', 'idea', 'plan', 'ping'],
+            'testimonials.html': ['quote', 'trust', 'wow', 'stars', 'ship'],
+            'privacy.html': ['data', 'safe', 'lock', 'policy', 'sec'],
+            'terms.html': ['terms', 'rights', 'scope', 'legal', 'trust']
+        };
+        const palette = ['#facc15', '#ef4444', '#22c55e', '#3b82f6', '#a855f7'];
+
+        const layer = document.createElement('div');
+        layer.className = 'bg-symbol-layer';
+
+        const symbols = symbolMap[page] || symbolMap['index.html'];
+        const count = window.innerWidth < 768 ? 10 : 18;
+
+        for (let i = 0; i < count; i += 1) {
+            const node = document.createElement('span');
+            node.className = 'bg-symbol';
+            node.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            node.style.left = Math.round(Math.random() * 96) + '%';
+            node.style.top = Math.round(Math.random() * 105) + '%';
+            node.style.fontSize = (0.8 + Math.random() * 0.65).toFixed(2) + 'rem';
+            node.style.color = palette[Math.floor(Math.random() * palette.length)];
+            node.style.animationDuration = (16 + Math.random() * 18).toFixed(2) + 's';
+            node.style.animationDelay = (-Math.random() * 18).toFixed(2) + 's';
+            layer.appendChild(node);
+        }
+
+        document.body.appendChild(layer);
+    }
+
+    // =============================================
     // CONTACT FORM
     // =============================================
     function initContactForm() {
@@ -1539,6 +1584,27 @@
                 submitBtn.disabled = true;
             }
 
+            const handleSuccess = () => {
+                if (successMsg) {
+                    successMsg.style.display = 'flex';
+                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+                form.reset();
+                if (currencySelect) {
+                    const detectedCurrency = detectCurrencyByRegion();
+                    currencySelect.value = detectedCurrency;
+                    renderBudgetOptions(detectedCurrency);
+                }
+                formLoadTime = Date.now();
+            };
+
+            const handleError = () => {
+                if (errorMsg) {
+                    errorMsg.style.display = 'flex';
+                    errorMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            };
+
             try {
                 const endpoint = 'https://formspree.io/f/xgoldrwl';
                 const response = await fetch(endpoint, {
@@ -1608,17 +1674,10 @@
                     setTimeout(() => {
                         submitBtn.classList.remove('crash');
                         submitBtn.disabled = false;
-
-                        if (errorMsg) {
-                            errorMsg.style.display = 'flex';
-                            errorMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                        }
+                        handleError();
                     }, 600); // Match the plane-crash animation duration
                 } else {
-                    if (errorMsg) {
-                        errorMsg.style.display = 'flex';
-                        errorMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    }
+                    handleError();
                 }
             }
         });
@@ -1766,8 +1825,142 @@
             if (e.key === 'Escape' && modal.classList.contains('active')) closeGuide();
         });
     }
-})();
 
+    // =============================================
+    // YOUTH DAY LOGO EASTER EGG - CLICK ANYTIME
+    // =============================================
+    function initYouthDayLogoEasterEgg() {
+        const homeLogo = document.querySelector('.logo-wrapper');
+        if (!homeLogo) return;
+
+        homeLogo.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                homeLogo.click();
+            }
+        });
+
+        homeLogo.addEventListener('click', (e) => {
+            launchYouthBurst({ x: e.clientX, y: e.clientY }, {
+                palette: ['#facc15', '#ef4444', '#22c55e', '#3b82f6', '#a855f7'],
+                words: ['Youth', 'Build', 'Create', 'Shine', 'Lusaka'],
+                confettiCount: 30,
+                wordCount: 5
+            });
+        });
+    }
+
+    function showYouthToast(message, variant, duration) {
+        const existing = document.querySelector('.youth-toast');
+        if (existing) existing.remove();
+
+        const toast = document.createElement('div');
+        toast.className = 'youth-toast ' + (variant || 'activate');
+        toast.setAttribute('role', 'status');
+        toast.setAttribute('aria-live', 'polite');
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        requestAnimationFrame(() => toast.classList.add('visible'));
+
+        setTimeout(() => {
+            toast.classList.remove('visible');
+            setTimeout(() => {
+                if (toast.parentNode) toast.remove();
+            }, 260);
+        }, duration || 2800);
+    }
+
+    function launchYouthBurst(origin, options) {
+        const settings = options || {};
+        const palette = settings.palette || ['#facc15', '#ef4444', '#22c55e', '#3b82f6', '#a855f7'];
+        const words = settings.words || ['Youth', 'Build', 'Create', 'Shine'];
+        const confettiCount = settings.confettiCount || 24;
+        const wordCount = settings.wordCount || Math.min(words.length, 5);
+
+        const layer = document.createElement('div');
+        layer.className = 'youth-burst-layer';
+        document.body.appendChild(layer);
+
+        const hasPoint = origin && typeof origin.x === 'number' && typeof origin.y === 'number';
+        const rect = !hasPoint && origin && origin.getBoundingClientRect ? origin.getBoundingClientRect() : null;
+        const centerX = hasPoint ? origin.x : (rect ? rect.left + (rect.width / 2) : window.innerWidth / 2);
+        const centerY = hasPoint ? origin.y : (rect ? rect.top + (rect.height / 2) : window.innerHeight / 2);
+
+        for (let i = 0; i < confettiCount; i += 1) {
+            const piece = document.createElement('span');
+            const angle = (Math.PI * 2 * i) / confettiCount + (Math.random() * 0.45);
+            const distance = 80 + Math.random() * 140;
+            piece.className = 'youth-confetti';
+            piece.style.left = centerX + 'px';
+            piece.style.top = centerY + 'px';
+            piece.style.background = palette[i % palette.length];
+            piece.style.setProperty('--burst-x', (Math.cos(angle) * distance).toFixed(2) + 'px');
+            piece.style.setProperty('--burst-y', (Math.sin(angle) * distance - 90).toFixed(2) + 'px');
+            piece.style.setProperty('--burst-rotate', (200 + Math.random() * 260).toFixed(0) + 'deg');
+            piece.style.animationDelay = (Math.random() * 0.08).toFixed(2) + 's';
+            layer.appendChild(piece);
+        }
+
+        for (let i = 0; i < wordCount; i += 1) {
+            const word = document.createElement('span');
+            const angle = (Math.PI * 2 * i) / wordCount + (Math.random() * 0.35);
+            const distance = 48 + Math.random() * 84;
+            word.className = 'youth-word-burst';
+            word.textContent = words[i % words.length];
+            word.style.left = centerX + 'px';
+            word.style.top = centerY + 'px';
+            word.style.color = palette[i % palette.length];
+            word.style.setProperty('--word-x', (Math.cos(angle) * distance).toFixed(2) + 'px');
+            word.style.setProperty('--word-y', (Math.sin(angle) * distance - 72).toFixed(2) + 'px');
+            word.style.animationDelay = (0.04 + Math.random() * 0.1).toFixed(2) + 's';
+            layer.appendChild(word);
+        }
+
+        setTimeout(() => {
+            if (layer.parentNode) layer.remove();
+        }, 2200);
+    }
+
+    function initYouthKeywordToggle() {
+        let buffer = '';
+        const target = 'youth';
+
+        document.addEventListener('keydown', (e) => {
+            const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+            if (tag === 'input' || tag === 'textarea' || (e.target && e.target.isContentEditable)) return;
+            if (!e.key || e.key.length !== 1) return;
+
+            buffer = (buffer + e.key.toLowerCase()).slice(-target.length);
+            if (buffer !== target) return;
+            buffer = '';
+
+            document.body.classList.toggle('youth-day-2026');
+            initFloatingCodeSymbols();
+
+            const enabled = document.body.classList.contains('youth-day-2026');
+            const centerPoint = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+
+            if (enabled) {
+                showYouthToast('Youth Mode activated - welcome back to the celebration.', 'activate', 2800);
+                launchYouthBurst(centerPoint, {
+                    palette: ['#facc15', '#ef4444', '#22c55e', '#3b82f6', '#a855f7'],
+                    words: ['Youth Mode', 'On', 'Celebrate', 'Build', 'Create'],
+                    confettiCount: 22,
+                    wordCount: 5
+                });
+            } else {
+                showYouthToast('Goodbye for now - Youth Mode has been tucked away.', 'goodbye', 2600);
+                launchYouthBurst(centerPoint, {
+                    palette: ['#94a3b8', '#64748b', '#60a5fa'],
+                    words: ['Goodbye', 'Later', 'See you'],
+                    confettiCount: 12,
+                    wordCount: 3
+                });
+            }
+        });
+    }
+})();
 
 
 
