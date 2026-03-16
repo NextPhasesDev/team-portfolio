@@ -16,7 +16,10 @@
     <meta name="twitter:description" content="Web, app, and system development for your next phase of growth.">
     <meta name="twitter:image" content="https://nextphases.dev/og-banner.png">
     <title>Contact - NextPhases</title>
-    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="favicon-192.png" />
     <!-- Google Fonts - Open Sans with fallback strategy -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -172,40 +175,50 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label for="currency">
-                            <i class="fas fa-globe"></i> Currency
+                    <div class="form-group full-width">
+                        <label for="region">
+                            <i class="fas fa-globe"></i> Region
                         </label>
-                        <select id="currency" name="currency">
-                            <option value="USD">USD - US Dollar</option>
-                            <option value="ZMW">ZMW - Zambian Kwacha</option>
-                            <option value="ZAR">ZAR - South African Rand</option>
-                            <option value="GBP">GBP - British Pound</option>
-                            <option value="EUR">EUR - Euro</option>
+                        <select id="region" name="region">
+                            <option value="">Select your region</option>
+                            <option value="zambia">Zambia</option>
+                            <option value="zimbabwe-usd">Zimbabwe</option>
+                            <option value="southern-africa-usd">Southern Africa (Mozambique, Malawi, Botswana)</option>
+                            <option value="west-east-africa">West &amp; East Africa (Nigeria, Kenya, Ghana, Tanzania, Ethiopia)</option>
+                            <option value="north-africa-me">North Africa &amp; Middle East (Egypt, UAE, Saudi Arabia, Morocco, Qatar)</option>
+                            <option value="south-africa">South Africa</option>
+                            <option value="uk">United Kingdom</option>
+                            <option value="europe">Europe</option>
+                            <option value="us-canada">US &amp; Canada</option>
+                            <option value="other-international">Other / International</option>
                         </select>
+                        <small class="form-hint">Currency: <strong id="currencyLabel">USD</strong></small>
+                        <input type="hidden" id="currency" name="currency" value="USD" />
                     </div>
 
-                    <div class="form-group">
-                        <label for="budget">
-                            <i class="fas fa-dollar-sign"></i> Budget Range (Optional)
-                        </label>
-                        <select id="budget" name="budget">
-                            <option value="">Detecting your region...</option>
-                        </select>
-                        <small class="form-hint" id="budgetHint">Budget will adjust to your currency</small>
-                    </div>
+                    <div class="form-row budget-timeline-row full-width">
+                        <div class="form-group">
+                            <label for="budget">
+                                <i class="fas fa-dollar-sign"></i> Budget Range (Optional)
+                            </label>
+                            <select id="budget" name="budget">
+                                <option value="">Detecting your region...</option>
+                            </select>
+                            <small class="form-hint" id="budgetHint">Budget will adjust to your currency</small>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="timeline">
-                            <i class="fas fa-clock"></i> Timeline
-                        </label>
-                        <select id="timeline" name="timeline" required>
-                            <option value="">Select timeline</option>
-                            <option value="urgent">ASAP (Within 2 weeks)</option>
-                            <option value="soon">1–2 months</option>
-                            <option value="flexible">2–4 months</option>
-                            <option value="planning">Just planning / exploring</option>
-                        </select>
+                        <div class="form-group">
+                            <label for="timeline">
+                                <i class="fas fa-clock"></i> Timeline
+                            </label>
+                            <select id="timeline" name="timeline" required>
+                                <option value="">Select timeline</option>
+                                <option value="urgent">ASAP (Within 2 weeks)</option>
+                                <option value="soon">1–2 months</option>
+                                <option value="flexible">2–4 months</option>
+                                <option value="planning">Just planning / exploring</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-group full-width">

@@ -16,7 +16,10 @@
     <meta name="twitter:description" content="Web, app, and system development for your next phase of growth.">
     <meta name="twitter:image" content="https://nextphases.dev/og-banner.png">
     <title>About Us — NextPhases</title>
-    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="favicon-192.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -184,31 +187,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Team Member Detail Modal Overlay -->
-            <div class="team-detail-overlay" id="teamDetailOverlay"></div>
-
-            <!-- Team Member Detail Panel -->
-            <div class="team-detail-panel" id="teamDetailPanel">
-                <button class="detail-close" id="detailClose" aria-label="Close team member details" type="button">
-                    <i class="fas fa-times"></i>
-                </button>
-                <div class="detail-layout">
-                    <div class="detail-member-card">
-                        <div class="detail-avatar">
-                            <i class="fas fa-user-circle"></i>
-                        </div>
-                        <h2 id="detailName">Team Member</h2>
-                        <p class="detail-role" id="detailRole">Role</p>
-                    </div>
-                    <div class="detail-bio-card">
-                        <h3>Profile Snapshot</h3>
-                        <div class="detail-text" id="detailText">
-                            <!-- Full bio will be typed here -->
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -256,6 +234,18 @@
 </main>
 
 <!-- Footer will be injected here via JavaScript from footer.html -->
+
+<!-- Team Detail Panel (opened by clicking a team card) -->
+<div class="team-detail-overlay" id="teamDetailOverlay"></div>
+<div class="team-detail-panel" id="teamDetailPanel">
+    <button class="detail-close" id="detailClose" aria-label="Close">
+        <i class="fas fa-times"></i>
+    </button>
+    <div class="detail-avatar"></div>
+    <h3 id="detailName"></h3>
+    <p class="detail-role" id="detailRole"></p>
+    <p class="detail-text" id="detailText"></p>
+</div>
 
 <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top"><i class="fas fa-chevron-up"></i></button>
 <script src="script.js"></script>
