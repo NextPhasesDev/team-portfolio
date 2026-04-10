@@ -2968,6 +2968,7 @@ footer {
 
     .page-hero,
     .service-detail,
+    .contact-page,
     .project-showcase,
     .about-team,
     .about-mission,
@@ -3705,19 +3706,25 @@ input, textarea, select {
     width: 180%;
     transform: rotate(-14deg);
     text-align: center;
-    white-space: nowrap;
+    overflow: hidden;
     background: rgba(20, 184, 166, 0.9);
     color: #ffffff;
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.06em;
     padding: 0.25rem 0;
-    animation: nsoloMarqueeScroll 40s linear infinite;
+}
+
+.nsolo-marquee-text {
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 100%;
+    animation: nsoloMarqueeScroll 24s linear infinite;
 }
 
 @keyframes nsoloMarqueeScroll {
-    0% { transform: translateX(0) rotate(-14deg); }
-    100% { transform: translateX(-45%) rotate(-14deg); }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
 }
 
 .sr-only {

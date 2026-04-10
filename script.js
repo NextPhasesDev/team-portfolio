@@ -485,7 +485,18 @@
         window.addEventListener('resize', resize);
 
         const path = (window.location.pathname || '').toLowerCase();
-        const page = path.split('/').pop() || 'index.html';
+        const normalizedPath = path.replace(/\/+$/, '');
+        const page = normalizedPath.split('/').pop() || 'index.html';
+
+        // Nested routes like /games/ and /games/nsolo/ need pathname checks.
+        if (normalizedPath.indexOf('/games/nsolo') >= 0) {
+            initNsoloSeedsAnimation(canvas, ctx);
+            return;
+        }
+        if (normalizedPath.indexOf('/games') >= 0) {
+            initGameSymbolsAnimation(canvas, ctx);
+            return;
+        }
 
         if (page.indexOf('services') >= 0) {
             initCodeAnimation(canvas, ctx);
@@ -1108,28 +1119,31 @@
         const particles = [];
         const count = 55;
 
-        function getCol() {
+        function getPalette() {
             const t = document.documentElement.getAttribute('data-theme') || 'light';
-            return t === 'dark' ? '#2dd4bf' : '#14b8a6';
+            return t === 'dark'
+                ? ['#2dd4bf', '#2dd4bf', '#60a5fa', '#a78bfa', '#fbbf24']
+                : ['#14b8a6', '#14b8a6', '#2563eb', '#7c3aed', '#f59e0b'];
         }
 
         for (let i = 0; i < count; i++) {
+            const palette = getPalette();
             particles.push({
                 x: Math.random() * canvas.width,
                 y: canvas.height + Math.random() * 200,
                 symbol: symbols[Math.floor(Math.random() * symbols.length)],
-                size: 8 + Math.random() * 16,
+                size: 9 + Math.random() * 18,
                 speed: 0.3 + Math.random() * 0.6,
-                opacity: 0.04 + Math.random() * 0.1,
+                opacity: 0.07 + Math.random() * 0.13,
                 drift: (Math.random() - 0.5) * 0.4,
                 rotation: Math.random() * Math.PI * 2,
-                rotSpeed: (Math.random() - 0.5) * 0.01
+                rotSpeed: (Math.random() - 0.5) * 0.01,
+                color: palette[Math.floor(Math.random() * palette.length)]
             });
         }
 
         function frame() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            const col = getCol();
             particles.forEach(p => {
                 p.y -= p.speed;
                 p.x += p.drift;
@@ -1140,7 +1154,7 @@
                 }
                 ctx.save();
                 ctx.globalAlpha = p.opacity;
-                ctx.fillStyle = col;
+                ctx.fillStyle = p.color;
                 ctx.font = p.size + 'px sans-serif';
                 ctx.translate(p.x, p.y);
                 ctx.rotate(p.rotation);
@@ -1154,9 +1168,11 @@
 
     function initNsoloSeedsAnimation(canvas, ctx) {
         /* Mancala seed drift — small circles drifting in gentle arcs */
-        function getCol() {
+        function getPalette() {
             const t = document.documentElement.getAttribute('data-theme') || 'light';
-            return t === 'dark' ? '#2dd4bf' : '#14b8a6';
+            return t === 'dark'
+                ? ['#2dd4bf', '#2dd4bf', '#60a5fa', '#a78bfa']
+                : ['#14b8a6', '#14b8a6', '#2563eb', '#7c3aed'];
         }
 
         const seeds = [];
@@ -1164,22 +1180,23 @@
 
         for (let i = 0; i < count; i++) {
             const angle = Math.random() * Math.PI * 2;
+            const palette = getPalette();
             seeds.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                r: 2 + Math.random() * 4,
+                r: 2.2 + Math.random() * 4.2,
                 speed: 0.25 + Math.random() * 0.45,
                 angle: angle,
                 angleSpeed: (Math.random() - 0.5) * 0.008,
-                opacity: 0.05 + Math.random() * 0.12,
+                opacity: 0.07 + Math.random() * 0.12,
                 arcRadius: 40 + Math.random() * 120,
-                phase: Math.random() * Math.PI * 2
+                phase: Math.random() * Math.PI * 2,
+                color: palette[Math.floor(Math.random() * palette.length)]
             });
         }
 
         function frame() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            const col = getCol();
             seeds.forEach(s => {
                 s.phase += s.speed * 0.012;
                 s.angle += s.angleSpeed;
@@ -1192,7 +1209,7 @@
 
                 ctx.save();
                 ctx.globalAlpha = s.opacity;
-                ctx.fillStyle = col;
+                ctx.fillStyle = s.color;
                 ctx.beginPath();
                 ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
                 ctx.fill();
