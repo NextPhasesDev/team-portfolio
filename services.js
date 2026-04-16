@@ -17,7 +17,6 @@
     const CYCLE_INTERVAL_MS = 2600;
     const HIDE_DELAY_MS = 260;
     const CARD_GAP_PX = 30;
-    const MOBILE_TAP_HOLD_MS = 2600;
 
     function renderCard(data) {
         if (!data) return;
@@ -32,6 +31,11 @@
     }
 
     function positionCard(dot) {
+        // Mobile devices use static positioning; only position on desktop
+        if (window.matchMedia && window.matchMedia('(max-width: 640px)').matches) {
+            return;
+        }
+
         const mapRect = map.getBoundingClientRect();
         const dotRect = dot.getBoundingClientRect();
         const cardRect = card.getBoundingClientRect();
@@ -127,17 +131,10 @@
     let pointerOnDot = false;
     let focusedOnDot = false;
     let touchPinned = false;
-    let touchReleaseTimer = null;
     let floatAnimation = null;
 
     function isCoarsePointer() {
         return window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
-    }
-
-    function clearTouchReleaseTimer() {
-        if (!touchReleaseTimer) return;
-        clearTimeout(touchReleaseTimer);
-        touchReleaseTimer = null;
     }
 
     function cancelFloatAnimation() {
@@ -187,16 +184,18 @@
         };
     }
 
-    function armTouchRelease() {
-        clearTouchReleaseTimer();
-        touchReleaseTimer = setTimeout(() => {
-            touchPinned = false;
-            focusedOnDot = false;
-            pointerOnDot = false;
-            hideCard();
-            scheduleIdleCycle();
-            touchReleaseTimer = null;
-        }, MOBILE_TAP_HOLD_MS);
+    function pinDotForTouch(dot, event) {
+        if (!dot) return;
+        if (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        pointerOnDot = false;
+        focusedOnDot = true;
+        touchPinned = true;
+        showFor(dot);
+        userActivity();
     }
 
     function setActiveDot(dot) {
@@ -214,7 +213,6 @@
     function showFor(dot) {
         if (!dot) return;
         clearHideTimer();
-        clearTouchReleaseTimer();
         card.classList.remove('is-hiding');
         renderCard(getDataFromDot(dot));
         setActiveDot(dot);
@@ -230,7 +228,6 @@
 
     function hideCard(immediate) {
         clearHideTimer();
-        clearTouchReleaseTimer();
         cancelFloatAnimation();
         touchPinned = false;
         setActiveDot(null);
@@ -308,16 +305,14 @@
         dot.addEventListener('pointerdown', e => {
             const isTap = e.pointerType === 'touch' || e.pointerType === 'pen' || isCoarsePointer();
             if (!isTap) return;
-
-            e.preventDefault();
-            e.stopPropagation();
-            pointerOnDot = false;
-            focusedOnDot = true;
-            touchPinned = true;
-            showFor(dot);
-            userActivity();
-            armTouchRelease();
+            pinDotForTouch(dot, e);
         });
+
+        // Safari/iOS fallback where pointer events can be inconsistent.
+        dot.addEventListener('touchstart', e => {
+            if (!isCoarsePointer()) return;
+            pinDotForTouch(dot, e);
+        }, { passive: false });
 
         dot.addEventListener('click', e => {
             e.preventDefault();
