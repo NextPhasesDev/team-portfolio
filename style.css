@@ -3329,6 +3329,16 @@ footer {
         line-height: 1.2;
     }
 
+    .page-hero.contact-hero {
+        margin: -64px -1.25rem 2rem -1.25rem;
+        padding-top: calc(64px + 2.4rem);
+        padding-bottom: 2.25rem;
+    }
+
+    .page-hero.contact-hero p {
+        max-width: 34ch;
+    }
+
     h2,
     .services h2,
     .why-us h2,
@@ -3410,6 +3420,21 @@ footer {
         grid-template-columns: 1fr;
     }
 
+    .contact-page-grid > *,
+    .contact-form-wrapper,
+    .contact-form,
+    .form-group,
+    .form-row {
+        min-width: 0;
+    }
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+        width: 100%;
+        max-width: 100%;
+    }
+
     .form-row {
         grid-template-columns: 1fr;
     }
@@ -3465,6 +3490,18 @@ footer {
     .footer-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
+    }
+
+    footer {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .footer-content {
+        max-width: none;
     }
 
     .footer-column,

@@ -1117,7 +1117,7 @@
         /* Floating retro game symbols: ▲ ● ■ ◆ ★ */
         const symbols = ['▲', '●', '■', '◆', '★', '▷', '○', '□'];
         const particles = [];
-        const count = 55;
+        const count = 68;
 
         function getPalette() {
             const t = document.documentElement.getAttribute('data-theme') || 'light';
@@ -1132,9 +1132,9 @@
                 x: Math.random() * canvas.width,
                 y: canvas.height + Math.random() * 200,
                 symbol: symbols[Math.floor(Math.random() * symbols.length)],
-                size: 9 + Math.random() * 18,
-                speed: 0.3 + Math.random() * 0.6,
-                opacity: 0.07 + Math.random() * 0.13,
+                size: 12 + Math.random() * 22,
+                speed: 0.32 + Math.random() * 0.65,
+                opacity: 0.11 + Math.random() * 0.15,
                 drift: (Math.random() - 0.5) * 0.4,
                 rotation: Math.random() * Math.PI * 2,
                 rotSpeed: (Math.random() - 0.5) * 0.01,
@@ -1176,7 +1176,7 @@
         }
 
         const seeds = [];
-        const count = 45;
+        const count = 58;
 
         for (let i = 0; i < count; i++) {
             const angle = Math.random() * Math.PI * 2;
@@ -1184,11 +1184,11 @@
             seeds.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                r: 2.2 + Math.random() * 4.2,
-                speed: 0.25 + Math.random() * 0.45,
+                r: 3 + Math.random() * 5,
+                speed: 0.26 + Math.random() * 0.48,
                 angle: angle,
                 angleSpeed: (Math.random() - 0.5) * 0.008,
-                opacity: 0.07 + Math.random() * 0.12,
+                opacity: 0.1 + Math.random() * 0.14,
                 arcRadius: 40 + Math.random() * 120,
                 phase: Math.random() * Math.PI * 2,
                 color: palette[Math.floor(Math.random() * palette.length)]
