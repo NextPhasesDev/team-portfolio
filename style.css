@@ -260,7 +260,7 @@ a {
 
 /* Keep Contact in the nav list, but style it as a compact CTA. */
 .nav-menu .cta-button {
-    padding: 0.5rem 0.8rem;
+    padding: 5.5rem 0.8rem;
     font-size: 0.95rem;
     font-weight: 600;
     border-width: 1px;
