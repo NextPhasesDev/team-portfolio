@@ -33,25 +33,8 @@
             });
     });
 
-    function resolveSitePath(relativePath) {
-        const clean = String(relativePath || '').replace(/^\/+/, '');
-        const siteRelative = clean.replace(/^team-portfolio\//i, '');
-        const path = window.location.pathname || '/';
-        const localMarker = '/team-portfolio/';
-        const markerIndex = path.indexOf(localMarker);
-
-        if (markerIndex >= 0) {
-            return path.slice(0, markerIndex + localMarker.length) + siteRelative;
-        }
-
-        // Support JetBrains previews that expose pages from /games/* without the project folder segment.
-        const gamesMarker = '/games/';
-        const gamesIndex = path.indexOf(gamesMarker);
-        if (gamesIndex === 0) {
-            return '/' + siteRelative;
-        }
-
-        return '/' + siteRelative;
+    function resolveSitePath(path) {
+        return path.startsWith('/') ? path : '/' + path;
     }
 
     function ensureGamesNavLink() {
@@ -381,7 +364,7 @@
             navMenu.querySelectorAll('.is-pressing').forEach(link => link.classList.remove('is-pressing'));
         };
 
-        const contactLink = navMenu.querySelector('a[href$="contact.html"]');
+        const contactLink = navMenu.querySelector('a[href*="contact"]');
         if (contactLink && contactLink.parentElement) {
             const tagline = document.createElement('li');
             tagline.className = 'nav-menu-tagline';
