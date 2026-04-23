@@ -3,60 +3,54 @@
 
     const teamMembers = [
         {
-            id: 'thuma',
-            initials: 'TH',
-            badge: 'Cofounder',
-            name: 'Thuma',
-            role: 'Lead Developer',
-            bio: 'Full-stack development, architecture, and keeping the ship on course. Also serves as ICTAZ Secretary.',
-            skills: ['Lead Dev', 'Full-Stack', 'Architecture'],
+            id: 'thuma', badge: 'Cofounder',
+            name: 'Thuma', role: 'CTO & CMO',
+            bio: 'Sets the technical direction and shapes the NextPhases brand. Leads architecture, development strategy, and how the team communicates what it builds.',
+            skills: ['Architecture', 'Brand', 'Strategy'],
             quote: '"Build it right the first time."',
-            focus: 'Systems architecture & dev leadership',
-            email: 'thuma@nextphases.dev',
-            github: '#',
+            focus: 'Architecture & brand leadership',
+            contact: { label: 'Media & press', email: 'media@nextphases.dev' },
             particles: ['{}', '</>', '=>', '===', '//', 'fn()', '&&', 'const', ';', '!=', '[]', '||']
         },
         {
-            id: 'simon',
-            initials: 'SI',
-            badge: 'Cofounder',
-            name: 'Simon',
-            role: 'Full-Stack Developer & Project Manager',
-            bio: 'Code and commerce. Simon handles full-stack development, manages projects, and drives the business side of NextPhases.',
-            skills: ['Full-Stack', 'PM', 'Business', 'ExamGuard'],
+            id: 'simon', badge: 'Cofounder',
+            name: 'Simon', role: 'COO',
+            bio: 'Keeps delivery, operations, and client communication in order so projects move from kickoff to launch without losing momentum.',
+            skills: ['Operations', 'PM', 'Delivery', 'ExamGuard'],
             quote: '"Good software solves real problems."',
-            focus: 'Project management & business development',
-            email: 'simon@nextphases.dev',
-            github: '#',
-            particles: ['✓', 'PR', 'v2.0', 'SHIP', 'TODO', '→', 'DONE', '#1', 'merge', 'fix', 'push', 'done']
+            focus: 'Operations & project delivery',
+            contact: { label: 'Partnerships', email: 'team@nextphases.dev' },
+            particles: ['OK', 'PR', 'v2.0', 'SHIP', 'TODO', 'GO', 'DONE', 'merge', 'fix', 'push', 'sync', 'done']
         },
         {
-            id: 'shaun',
-            initials: 'SH',
-            badge: 'Cofounder',
-            name: 'Shaun',
-            role: 'Junior Developer',
-            bio: 'Full-stack generalist tackling any development task assigned. Brings versatility and a keen eye for polish.',
-            skills: ['Full-Stack', 'Versatile', 'UI Polish'],
-            quote: '"Details make the difference."',
-            focus: 'Frontend polish & UI/UX',
-            email: 'shaun@nextphases.dev',
-            github: '#',
-            particles: ['[]', 'px', 'rem', '#fff', '◆', 'flex', 'grid', 'rgb()', '▲', 'gap', 'em', 'var()']
-        },
-        {
-            id: 'chris',
-            initials: 'CH',
-            badge: null,
-            name: 'Chris',
-            role: 'Client Relations Lead',
-            bio: 'The bridge between our team and our clients. Chris ensures smooth communication and manages relationships.',
-            skills: ['Client Relations', 'Communication', 'Onboarding'],
+            id: 'chris', badge: 'Cofounder',
+            name: 'Chris', role: 'CEO & CCO',
+            bio: 'Leads the company voice and manages client relationships. Drives commercial direction and keeps the team focused on growth.',
+            skills: ['Leadership', 'Clients', 'Growth'],
             quote: '"Every client relationship matters."',
-            focus: 'Client success & business relationships',
-            email: 'chris@nextphases.dev',
-            github: null,
-            particles: ['@', 'hi!', 'deal', 'ok!', ':)', '→', '✉', '$', 'thanks', 'yes!', 'onit', 'note']
+            focus: 'Client success & business leadership',
+            contact: { label: 'Client enquiries', email: 'info@nextphases.dev' },
+            particles: ['@', 'hi!', 'deal', 'ok!', ':)', 'mail', '$', 'thanks', 'yes!', 'onit', 'note', 'sync']
+        },
+        {
+            id: 'shaun', badge: 'Cofounder',
+            name: 'Shaun', role: 'VP Engineering',
+            bio: 'Tackles development work across the stack with an eye for quality and a steady hand on the engineering side of every project.',
+            skills: ['Engineering', 'Full-Stack', 'Quality'],
+            quote: '"Details make the difference."',
+            focus: 'Engineering quality & delivery standards',
+            contact: null,
+            particles: ['[]', 'px', 'rem', '#fff', 'UI', 'flex', 'grid', 'rgb()', 'UX', 'gap', 'em', 'var()']
+        },
+        {
+            id: 'lans', badge: null,
+            name: 'Lans', role: 'Developer Contributor',
+            bio: 'Supports active development work while building hands-on experience across real projects.',
+            skills: ['Development'],
+            quote: '"Learn fast, build fast."',
+            focus: 'Hands-on development support',
+            contact: null,
+            particles: ['dev', 'learn', 'ship', 'test', 'build', 'code', 'fix', 'task']
         }
     ];
 
@@ -72,12 +66,9 @@
         return skills.map(skill => '<span class="' + cls + '">' + skill + '</span>').join('');
     }
 
-    function buildActions(member) {
-        const email = '<a href="mailto:' + member.email + '" class="card-back-email"><i class="fas fa-envelope"></i> Contact ' + member.name + '</a>';
-        const github = member.github
-            ? '<a href="' + member.github + '" class="card-back-github" target="_blank" rel="noopener" aria-label="' + member.name + ' GitHub profile"><i class="fab fa-github"></i></a>'
-            : '';
-        return '<div class="card-back-actions">' + email + github + '</div>';
+    function buildContact(member) {
+        if (!member.contact) return '';
+        return '<p class="card-back-contact"><i class="fas fa-envelope"></i><span>' + member.contact.label + ':</span> ' + member.contact.email + '</p>';
     }
 
     function buildCard(member) {
@@ -89,11 +80,8 @@
         card.setAttribute('role', 'button');
         card.setAttribute('aria-label', member.name + ' team card. Press Enter or Space to flip.');
 
-        const badge = member.badge
-            ? '<p class="tier-badge">' + member.badge + '</p>'
-            : '<p class="tier-badge neutral">Team</p>';
+        const badge = member.badge ? '<p class="tier-badge">' + member.badge + '</p>' : '';
 
-        // TODO: Replace placeholder GitHub href values with real profiles.
         card.innerHTML =
             '<div class="card-inner">' +
                 '<div class="card-front">' +
@@ -110,44 +98,46 @@
                     '<p class="card-back-quote"><em>' + member.quote + '</em></p>' +
                     '<p class="card-back-focus">' + member.focus + '</p>' +
                     '<div class="team-tags card-back-tags">' + buildSkills(member.skills, true) + '</div>' +
-                    buildActions(member) +
+                    buildContact(member) +
                     '<p class="card-back-hint">Click to close</p>' +
                 '</div>' +
             '</div>';
     }
 
     function createParticles(card, symbols) {
+        const front = card.querySelector('.card-front');
+        if (!front) return [];
+
         const particles = [];
         const count = Math.min(symbols.length, 12);
         for (let i = 0; i < count; i += 1) {
             const span = document.createElement('span');
             span.className = 'card-particle';
             span.textContent = symbols[i % symbols.length];
-            span.style.color = i % 2 === 0 ? 'var(--primary-teal)' : '#ffffff';
-            card.appendChild(span);
+            span.style.top = (Math.random() * 80 + 10) + '%';
+            span.style.left = (Math.random() * 80 + 10) + '%';
+            span.style.setProperty('--particle-dx', (Math.random() * 40 - 20).toFixed(2) + 'px');
+            span.style.setProperty('--particle-dy', (Math.random() * 30 - 15).toFixed(2) + 'px');
+            span.style.animationDuration = (Math.random() * 20 + 15).toFixed(2) + 's';
+            span.style.animationDelay = (-Math.random() * 20).toFixed(2) + 's';
+            front.appendChild(span);
             particles.push(span);
         }
         return particles;
     }
 
-    function burstParticles(particles) {
-        particles.forEach(function (p, i) {
-            const angle = (i / particles.length) * Math.PI * 2 + Math.random() * 0.4;
-            const dist = 65 + Math.random() * 70;
-            const tx = Math.cos(angle) * dist;
-            const ty = Math.sin(angle) * dist;
-            p.style.transition = 'transform 0.5s cubic-bezier(0.2,0,0,1) ' + (i * 25) + 'ms, opacity 0.4s ease ' + (i * 25) + 'ms';
-            p.style.transform = 'translate(calc(-50% + ' + tx + 'px), calc(-50% + ' + ty + 'px)) scale(1)';
-            p.style.opacity = '1';
-        });
-    }
+    function pulseParticles(card) {
+        const front = card.querySelector('.card-front');
+        if (!front) return;
 
-    function retractParticles(particles) {
-        particles.forEach(function (p, i) {
-            p.style.transition = 'transform 0.4s cubic-bezier(0.4,0,1,1) ' + (i * 15) + 'ms, opacity 0.3s ease';
-            p.style.transform = 'translate(-50%, -50%) scale(0)';
-            p.style.opacity = '0';
-        });
+        front.classList.add('particles-boost');
+        if (card._particleBoostTimer) {
+            clearTimeout(card._particleBoostTimer);
+        }
+        card._particleBoostTimer = setTimeout(() => {
+            front.classList.remove('particles-boost');
+            card._particleBoostTimer = null;
+        }, 600);
     }
 
     function toggleFlip(card) {
@@ -157,10 +147,7 @@
         const flippingToBack = !inner.classList.contains('flipped');
         inner.classList.toggle('flipped');
 
-        if (Array.isArray(card._particles)) {
-            if (flippingToBack) burstParticles(card._particles);
-            else retractParticles(card._particles);
-        }
+        if (flippingToBack) pulseParticles(card);
     }
 
     teamMembers.forEach(buildCard);
@@ -173,7 +160,6 @@
         }
 
         card.addEventListener('click', (e) => {
-            if (e.target.closest('.card-back-email, .card-back-github')) return;
             toggleFlip(card);
         });
 

@@ -38,16 +38,17 @@
             <span>NextPhases</span>
         </a>
         <ul class="nav-menu" id="navMenu">
-            <button class="nav-menu-close" id="navMenuClose" aria-label="Close menu">
-                <i class="fas fa-times"></i>
-            </button>
+            <li class="nav-menu-header">
+                <button class="nav-menu-close" id="navMenuClose" aria-label="Close menu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </li>
             <li><a href="index.html" class="nav-link">Home</a></li>
             <li><a href="services.html" class="nav-link">Services</a></li>
             <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
-            <li><a href="games/" class="nav-link active">Games</a></li>
             <li><a href="testimonials.html" class="nav-link">Testimonials</a></li>
             <li><a href="about.html" class="nav-link">About</a></li>
-            <li><a href="contact.html" class="nav-link">Contact</a></li>
+            <li><a href="contact.html" class="cta-button">Contact</a></li>
         </ul>
         <div class="nav-actions">
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
@@ -76,7 +77,7 @@
             <h2>Download Or Play Soon</h2>
             <p>Desktop builds are available now. Web play is planned for v2.0 and shown below as coming soon.</p>
             <div class="nsolo-meta">
-                <span class="status-badge released">Current Stable: v1.1.0</span>
+                <span class="status-badge released" id="nsoloStableBadge">Current Stable: v1.1.0</span>
                 <span class="project-owner">Lead: Thuma</span>
             </div>
             <p class="nsolo-note" id="latestDeviceLabel">Best match for your device will be highlighted.</p>
@@ -136,9 +137,26 @@
 
     <section class="nsolo-webplay">
         <h2>Play On The Website</h2>
-        <div class="nsolo-coming-wrap">
-            <div class="nsolo-marquee"><span class="nsolo-marquee-text">COMING SOON - WEB PLAY IN DEVELOPMENT</span></div>
-            <div class="nsolo-coming-content">
+        <div class="nsolo-coming-wrap nsolo-web-section">
+            <div class="nsolo-web-marquee-wrapper" aria-hidden="true">
+                <div class="nsolo-web-marquee-track">
+                    <div class="nsolo-web-marquee-row">
+                        <span>COMING SOON - WEB PLAY IN DEVELOPMENT</span>
+                        <span>ONLINE MATCHES</span>
+                        <span>OFFLINE WEB MODE</span>
+                        <span>LEADERBOARDS</span>
+                        <span>ZAMBIAN HERITAGE GAMING</span>
+                    </div>
+                    <div class="nsolo-web-marquee-row" aria-hidden="true">
+                        <span>COMING SOON - WEB PLAY IN DEVELOPMENT</span>
+                        <span>ONLINE MATCHES</span>
+                        <span>OFFLINE WEB MODE</span>
+                        <span>LEADERBOARDS</span>
+                        <span>ZAMBIAN HERITAGE GAMING</span>
+                    </div>
+                </div>
+            </div>
+            <div class="nsolo-coming-content nsolo-web-buttons">
                 <a class="cta-button is-disabled" href="#" aria-disabled="true">
                     <span>Play Online</span>
                     <i class="fas fa-wifi"></i>
@@ -162,7 +180,7 @@
                 </div>
                 <p class="footer-tagline">Engineering your next phase of success.</p>
                 <div class="footer-socials">
-                    <a href="https://github.com/NextPhasesDev" class="social-link" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.youtube.com/@nextphases" class="social-link" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                     <a href="https://x.com/NextPhases" class="social-link" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                     <a href="https://www.tiktok.com/@nextphases.dev?lang=en" class="social-link" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                     <a href="https://www.instagram.com/nextphases.dev/" class="social-link" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -216,6 +234,7 @@
     (function () {
         const latestBtn = document.getElementById('downloadLatestBtn');
         const label = document.getElementById('latestDeviceLabel');
+        const stableBadge = document.getElementById('nsoloStableBadge');
 
         const fallback = {
             version: 'v1.1.0',
@@ -251,22 +270,30 @@
                 anchor.href = url;
                 anchor.classList.remove('is-disabled');
                 anchor.removeAttribute('aria-disabled');
+                anchor.onclick = null;
             } else {
                 anchor.href = '#';
                 anchor.classList.add('is-disabled');
                 anchor.setAttribute('aria-disabled', 'true');
                 if (disabledText) anchor.querySelector('span').textContent = disabledText;
-                anchor.addEventListener('click', e => e.preventDefault());
+                anchor.onclick = function (e) { e.preventDefault(); };
             }
         }
 
-        function applyConfig(config) {
+        function detectDeviceProfile() {
+            const ua = (navigator.userAgent || '').toLowerCase();
             const platform = (navigator.platform || '').toLowerCase();
-            let preferred = config.windows;
-            if (platform.indexOf('mac') >= 0) preferred = config.mac;
-            if (platform.indexOf('linux') >= 0) preferred = config.linux;
+            if (ua.indexOf('mac') >= 0 || platform.indexOf('mac') >= 0) return 'mac';
+            if (ua.indexOf('linux') >= 0 || platform.indexOf('linux') >= 0) return 'linux';
+            return 'windows';
+        }
+
+        function applyConfig(config) {
+            const device = detectDeviceProfile();
+            const preferred = config[device] || config.windows;
 
             if (label) label.textContent = preferred.label + ' - latest ' + config.version;
+            if (stableBadge) stableBadge.textContent = 'Current Stable: ' + config.version;
             if (latestBtn) latestBtn.href = preferred.url || config.jar.url || config.latestPage;
 
             setLink(links.windows, config.windows.url);
@@ -277,12 +304,20 @@
 
         applyConfig(fallback);
 
-        fetch('https://api.github.com/repos/NextPhasesDev/Nsolo/releases/latest')
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+        fetch('https://api.github.com/repos/NextPhasesDev/Nsolo/releases/latest', {
+            headers: { 'Accept': 'application/vnd.github+json' },
+            signal: controller.signal
+        })
             .then(r => r.ok ? r.json() : Promise.reject(new Error('release fetch failed')))
             .then(release => {
                 const assets = Array.isArray(release.assets) ? release.assets : [];
                 const jarAsset = assets.find(a => /\.jar$/i.test(a.name || ''));
                 const exeAsset = assets.find(a => /\.exe$/i.test(a.name || ''));
+                const macAsset = assets.find(a => /\.(dmg|pkg|zip)$/i.test(a.name || '') && /mac|osx|darwin/i.test(a.name || ''));
+                const linuxAsset = assets.find(a => /\.(appimage|deb|rpm|tar\.gz|tar\.xz)$/i.test(a.name || '') && /linux|ubuntu|debian|fedora|appimage/i.test(a.name || ''));
 
                 const dynamic = {
                     version: (release.tag_name || fallback.version).replace(/^v/i, 'v'),
@@ -291,8 +326,14 @@
                         label: exeAsset ? 'Windows (.exe)' : fallback.windows.label,
                         url: exeAsset ? exeAsset.browser_download_url : fallback.windows.url
                     },
-                    mac: fallback.mac,
-                    linux: fallback.linux,
+                    mac: {
+                        label: macAsset ? 'macOS build' : fallback.mac.label,
+                        url: macAsset ? macAsset.browser_download_url : fallback.mac.url
+                    },
+                    linux: {
+                        label: linuxAsset ? 'Linux build' : fallback.linux.label,
+                        url: linuxAsset ? linuxAsset.browser_download_url : fallback.linux.url
+                    },
                     jar: {
                         label: jarAsset ? 'Universal Java JAR' : fallback.jar.label,
                         url: jarAsset ? jarAsset.browser_download_url : fallback.jar.url
@@ -303,6 +344,9 @@
             })
             .catch(() => {
                 // Keep fallback links when API is unavailable.
+            })
+            .finally(() => {
+                clearTimeout(timeoutId);
             });
     })();
 </script>

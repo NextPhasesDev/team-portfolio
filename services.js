@@ -18,6 +18,76 @@
     const HIDE_DELAY_MS = 260;
     const CARD_GAP_PX = 30;
 
+    function initPhaseOneGlobeMotion() {
+        if (!canvas.classList.contains('pricing-map-canvas--globe')) return;
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        let pointerX = 0;
+        let pointerY = 0;
+        let idleTick = 0;
+        let rafId = null;
+        let isPointerActive = false;
+
+        function render() {
+            if (!canvas.isConnected) return;
+
+            let targetX = pointerX;
+            let targetY = pointerY;
+
+            if (!isPointerActive) {
+                idleTick += 0.012;
+                targetX = Math.sin(idleTick) * 0.45;
+                targetY = Math.cos(idleTick * 0.82) * 0.35;
+            }
+
+            const tiltX = (targetY * -1.2).toFixed(2);
+            const tiltY = (targetX * 1.6).toFixed(2);
+            const shiftX = (targetX * 5.2).toFixed(2);
+            const shiftY = (targetY * 4.2).toFixed(2);
+
+            canvas.style.setProperty('--globe-tilt-x', tiltX + 'deg');
+            canvas.style.setProperty('--globe-tilt-y', tiltY + 'deg');
+            canvas.style.setProperty('--globe-shift-x', shiftX + 'px');
+            canvas.style.setProperty('--globe-shift-y', shiftY + 'px');
+
+            rafId = requestAnimationFrame(render);
+        }
+
+        function setPointerFromEvent(event) {
+            const rect = canvas.getBoundingClientRect();
+            if (!rect.width || !rect.height) return;
+            const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+            const y = ((event.clientY - rect.top) / rect.height) * 2 - 1;
+            pointerX = clamp(x, -1, 1);
+            pointerY = clamp(y, -1, 1);
+        }
+
+        canvas.addEventListener('pointermove', event => {
+            isPointerActive = true;
+            setPointerFromEvent(event);
+        });
+
+        canvas.addEventListener('pointerenter', event => {
+            isPointerActive = true;
+            setPointerFromEvent(event);
+        });
+
+        canvas.addEventListener('pointerleave', () => {
+            isPointerActive = false;
+        });
+
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) return;
+            isPointerActive = false;
+        });
+
+        rafId = requestAnimationFrame(render);
+
+        window.addEventListener('beforeunload', () => {
+            if (rafId) cancelAnimationFrame(rafId);
+        });
+    }
+
     function renderCard(data) {
         if (!data) return;
         title.textContent = data.title;
@@ -387,54 +457,7 @@
         if (active && !card.hidden) positionCard(active);
     });
 
+    initPhaseOneGlobeMotion();
     scheduleIdleCycle();
 })();
 
-/*
-MAP AUTO-CYCLE — uncomment this when the map section
-is uncommented and dot positions are calibrated.
-
-(function initMapAutoCycle() {
-  const dots = document.querySelectorAll('.map-dot');
-  if (!dots.length) return;
-
-  let cycleIndex = 0;
-  let cycleTimer = null;
-  let userHovering = false;
-
-  function simulateHover(dot) {
-    dots.forEach(d => d.classList.remove('is-hovered'));
-    dot.classList.add('is-hovered');
-    dot.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
-  }
-
-  function clearSimulation(dot) {
-    if (dot) {
-      dot.classList.remove('is-hovered');
-      dot.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
-    }
-  }
-
-  function runCycle() {
-    if (userHovering) return;
-    clearSimulation(dots[cycleIndex === 0 ? dots.length - 1 : cycleIndex - 1]);
-    simulateHover(dots[cycleIndex]);
-    cycleIndex = (cycleIndex + 1) % dots.length;
-    cycleTimer = setTimeout(runCycle, 1800);
-  }
-
-  dots.forEach(function(dot) {
-    dot.addEventListener('mouseenter', function() {
-      userHovering = true;
-      clearTimeout(cycleTimer);
-      dots.forEach(d => d.classList.remove('is-hovered'));
-    });
-    dot.addEventListener('mouseleave', function() {
-      userHovering = false;
-      cycleTimer = setTimeout(runCycle, 2500);
-    });
-  });
-
-  runCycle();
-}());
-END AUTO-CYCLE */
