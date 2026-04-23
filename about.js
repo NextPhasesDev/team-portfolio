@@ -2,7 +2,7 @@
    about.js — NextPhases Team Carousel + Parallax Background
    Replaces the previous about.js entirely.
    ============================================================ */
-
+ 
 (function () {
     'use strict';
 

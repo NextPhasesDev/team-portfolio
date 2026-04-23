@@ -2,7 +2,7 @@
    NextPhases -- Master Stylesheet
    Brand: Navy #1e3a8a | Teal #14b8a6 | Charcoal #555354
    ============================================= */
-
+ 
 * {
     margin: 0;
     padding: 0;
@@ -4848,12 +4848,4 @@ input, textarea, select {
     .np-nav-next { width: 36px; height: 36px; }
     .np-nav-prev svg,
     .np-nav-next svg { width: 15px; height: 15px; }
-}
-
-@media (max-width: 768px) {
-    .nav-menu .cta-button {
-        width: 100%;
-        display: block;
-        padding: 1rem; /* match nav-link */
-    }
 }
