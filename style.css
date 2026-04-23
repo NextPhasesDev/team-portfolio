@@ -260,16 +260,21 @@ a {
 
 /* Keep Contact in the nav list, but style it as a compact CTA. */
 .nav-menu .cta-button {
-    padding: 5.5rem 0.8rem;
-    font-size: 0.95rem;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    width: calc(100% - 1.7rem);
+    margin: 0.4rem 0.85rem;
+    padding: 0.82rem 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--primary-teal);
+    background: var(--primary-teal);
+    color: #ffffff;
+    font-size: 0.97rem;
     font-weight: 600;
-    border-width: 1px;
-    border-radius: 8px;
+    line-height: 1.25;
     box-shadow: none;
-    line-height: 1;
-    background: rgba(20, 184, 166, 0.12);
-    color: var(--primary-teal);
-    border-color: var(--primary-teal);
+    text-decoration: none;
 }
 
 .nav-menu .cta-button:hover {
