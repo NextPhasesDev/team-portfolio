@@ -3,6 +3,360 @@
 (function () {
     'use strict';
 
+    // ============================================================================
+    // GLOBAL PRICING DATA - Single Source of Truth
+    // ============================================================================
+    // Budget tiers for default project types (Web, App, etc.)
+    const budgetMapDefault = {
+        USD_ZW: [
+            { value: '', label: 'Select budget range' },
+            { value: 'usd-300-600', label: 'Starter: USD 300 - 600' },
+            { value: 'usd-600-1000', label: 'Standard: USD 600 - 1,000' },
+            { value: 'usd-1000-1800', label: 'Professional: USD 1,000 - 1,800' },
+            { value: 'usd-1800+', label: 'Enterprise: USD 1,800+' },
+            { value: 'flexible', label: 'Flexible' }
+        ],
+        USD_USCA: [
+            { value: '', label: 'Select budget range' },
+            { value: 'usd-700-1500', label: 'Starter: USD 700 - 1,500' },
+            { value: 'usd-1500-2500', label: 'Standard: USD 1,500 - 2,500' },
+            { value: 'usd-2500-4000', label: 'Professional: USD 2,500 - 4,000' },
+            { value: 'usd-4000+', label: 'Enterprise: USD 4,000+' },
+            { value: 'flexible', label: 'Flexible' }
+        ],
+        USD_WE: [
+            { value: '', label: 'Select budget range' },
+            { value: 'usd-500-900', label: 'Starter: USD 500 - 900' },
+            { value: 'usd-900-1500', label: 'Standard: USD 900 - 1,500' },
+            { value: 'usd-1500-2500', label: 'Professional: USD 1,500 - 2,500' },
+            { value: 'usd-2500+', label: 'Enterprise: USD 2,500+' }
+        ],
+        USD_NAM: [
+            { value: '', label: 'Select budget range' },
+            { value: 'usd-800-1500', label: 'Starter: USD 800 - 1,500' },
+            { value: 'usd-1500-2800', label: 'Standard: USD 1,500 - 2,800' },
+            { value: 'usd-2800-5000', label: 'Professional: USD 2,800 - 5,000' },
+            { value: 'usd-5000+', label: 'Enterprise: USD 5,000+' }
+        ],
+        USD: [
+            { value: '', label: 'Select budget range' },
+            { value: 'usd-300-700', label: 'Starter: USD 300 - 700' },
+            { value: 'usd-700-1500', label: 'Standard: USD 700 - 1,500' },
+            { value: 'usd-1500-3000', label: 'Professional: USD 1,500 - 3,000' },
+            { value: 'usd-3000+', label: 'Enterprise: USD 3,000+' },
+            { value: 'flexible', label: 'Flexible' }
+        ],
+        ZMW: [
+            { value: '', label: 'Select budget range' },
+            { value: 'zmw-2000-3500', label: 'Starter: ZMW 2,000 - 3,500' },
+            { value: 'zmw-3500-5500', label: 'Standard: ZMW 3,500 - 5,500' },
+            { value: 'zmw-5500-8000', label: 'Professional: ZMW 5,500 - 8,000' },
+            { value: 'zmw-8000+', label: 'Enterprise: ZMW 8,000+' },
+            { value: 'flexible', label: 'Flexible' }
+        ],
+        ZAR: [
+            { value: '', label: 'Select budget range' },
+            { value: 'zar-2500-4500', label: 'Starter: ZAR 2,500 - 4,500' },
+            { value: 'zar-4500-7000', label: 'Standard: ZAR 4,500 - 7,000' },
+            { value: 'zar-7000-10000', label: 'Professional: ZAR 7,000 - 10,000' },
+            { value: 'zar-10000+', label: 'Enterprise: ZAR 10,000+' },
+            { value: 'flexible', label: 'Flexible' }
+        ],
+        GBP: [
+            { value: '', label: 'Select budget range' },
+            { value: 'gbp-500-900', label: 'Starter: GBP 500 - 900' },
+            { value: 'gbp-900-1400', label: 'Standard: GBP 900 - 1,400' },
+            { value: 'gbp-1400-2000', label: 'Professional: GBP 1,400 - 2,000' },
+            { value: 'gbp-2000+', label: 'Enterprise: GBP 2,000+' },
+            { value: 'flexible', label: 'Flexible' }
+        ],
+        EUR: [
+            { value: '', label: 'Select budget range' },
+            { value: 'eur-550-1000', label: 'Starter: EUR 550 - 1,000' },
+            { value: 'eur-1000-1600', label: 'Standard: EUR 1,000 - 1,600' },
+            { value: 'eur-1600-2300', label: 'Professional: EUR 1,600 - 2,300' },
+            { value: 'eur-2300+', label: 'Enterprise: EUR 2,300+' },
+            { value: 'flexible', label: 'Flexible' }
+        ]
+    };
+
+    // Budget tiers specifically for System Development projects
+    const budgetMapSystems = {
+        USD_ZW: [
+            { value: '', label: 'Select budget range' },
+            { value: 'usd-700-1200', label: 'Starter: USD 700 - 1,200' },
+            { value: 'usd-1200-2000', label: 'Standard: USD 1,200 - 2,000' },
+            { value: 'usd-2000-3500', label: 'Professional: USD 2,000 - 3,500' },
+            { value: 'usd-3500+', label: 'Enterprise: USD 3,500+' },
+            { value: 'flexible', label: 'Flexible' }
+        ],
+        USD_USCA: [
+            { value: '', label: 'Select budget range' },
+            { value: 'usd-2000-3500', label: 'Starter: USD 2,000 - 3,500' },
+            { value: 'usd-3500-6000', label: 'Standard: USD 3,500 - 6,000' },
+            { value: 'usd-6000-10000', label: 'Professional: USD 6,000 - 10,000' },
+            { value: 'usd-10000+', label: 'Enterprise: USD 10,000+' },
+            { value: 'flexible', label: 'Flexible' }
+        ],
+        USD_WE: [
+            { value: '', label: 'Select budget range' },
+            { value: 'usd-1000-2000', label: 'Starter: USD 1,000 - 2,000' },
+            { value: 'usd-2000-3500', label: 'Standard: USD 2,000 - 3,500' },
+            { value: 'usd-3500-6000', label: 'Professional: USD 3,500 - 6,000' },
+            { value: 'usd-6000+', label: 'Enterprise: USD 6,000+' }
+        ],
+        USD_NAM: [
+            { value: '', label: 'Select budget range' },
+            { value: 'usd-2000-3500', label: 'Starter: USD 2,000 - 3,500' },
+            { value: 'usd-3500-6000', label: 'Standard: USD 3,500 - 6,000' },
+            { value: 'usd-6000-10000', label: 'Professional: USD 6,000 - 10,000' },
+            { value: 'usd-10000+', label: 'Enterprise: USD 10,000+' }
+        ],
+        USD: [
+            { value: '', label: 'Select budget range' },
+            { value: 'usd-700-1200', label: 'Starter: USD 700 - 1,200' },
+            { value: 'usd-1200-2000', label: 'Standard: USD 1,200 - 2,000' },
+            { value: 'usd-2000-3500', label: 'Professional: USD 2,000 - 3,500' },
+            { value: 'usd-3500+', label: 'Enterprise: USD 3,500+' },
+            { value: 'flexible', label: 'Flexible' }
+        ],
+        ZMW: [
+            { value: '', label: 'Select budget range' },
+            { value: 'zmw-5000-8000', label: 'Starter: ZMW 5,000 - 8,000' },
+            { value: 'zmw-8000-12000', label: 'Standard: ZMW 8,000 - 12,000' },
+            { value: 'zmw-12000-18000', label: 'Professional: ZMW 12,000 - 18,000' },
+            { value: 'zmw-18000+', label: 'Enterprise: ZMW 18,000+' },
+            { value: 'flexible', label: 'Flexible' }
+        ],
+        ZAR: [
+            { value: '', label: 'Select budget range' },
+            { value: 'zar-6500-10000', label: 'Starter: ZAR 6,500 - 10,000' },
+            { value: 'zar-10000-15000', label: 'Standard: ZAR 10,000 - 15,000' },
+            { value: 'zar-15000-22000', label: 'Professional: ZAR 15,000 - 22,000' },
+            { value: 'zar-22000+', label: 'Enterprise: ZAR 22,000+' },
+            { value: 'flexible', label: 'Flexible' }
+        ],
+        GBP: [
+            { value: '', label: 'Select budget range' },
+            { value: 'gbp-1200-2000', label: 'Starter: GBP 1,200 - 2,000' },
+            { value: 'gbp-2000-3200', label: 'Standard: GBP 2,000 - 3,200' },
+            { value: 'gbp-3200-5000', label: 'Professional: GBP 3,200 - 5,000' },
+            { value: 'gbp-5000+', label: 'Enterprise: GBP 5,000+' },
+            { value: 'flexible', label: 'Flexible' }
+        ],
+        EUR: [
+            { value: '', label: 'Select budget range' },
+            { value: 'eur-1400-2200', label: 'Starter: EUR 1,400 - 2,200' },
+            { value: 'eur-2200-3500', label: 'Standard: EUR 2,200 - 3,500' },
+            { value: 'eur-3500-5500', label: 'Professional: EUR 3,500 - 5,500' },
+            { value: 'eur-5500+', label: 'Enterprise: EUR 5,500+' },
+            { value: 'flexible', label: 'Flexible' }
+        ]
+    };
+
+    // Pricing display values mapped to tiers and currencies (Default Projects)
+    // Extracted from budgetMapDefault - single source of truth
+    const pricingDisplayData = {
+        starter: {
+            ZMW: 'ZMW 2,000 - 3,500',
+            ZAR: 'ZAR 2,500 - 4,500',
+            USD_ZW: 'USD 300 - 600',         // Zimbabwe/Southern Africa
+            USD_USCA: 'USD 700 - 1,500',     // US & Canada
+            USD_WE: 'USD 500 - 900',         // West & East Africa
+            USD_NAM: 'USD 800 - 1,500',      // North Africa & Middle East
+            USD: 'USD 300 - 700',            // Generic/International fallback
+            GBP: 'GBP 500 - 900',
+            EUR: 'EUR 550 - 1,000'
+        },
+        standard: {
+            ZMW: 'ZMW 3,500 - 5,500',
+            ZAR: 'ZAR 4,500 - 7,000',
+            USD_ZW: 'USD 600 - 1,000',
+            USD_USCA: 'USD 1,500 - 2,500',
+            USD_WE: 'USD 900 - 1,500',
+            USD_NAM: 'USD 1,500 - 2,800',
+            USD: 'USD 700 - 1,500',
+            GBP: 'GBP 900 - 1,400',
+            EUR: 'EUR 1,000 - 1,600'
+        },
+        professional: {
+            ZMW: 'ZMW 5,500 - 8,000',
+            ZAR: 'ZAR 7,000 - 10,000',
+            USD_ZW: 'USD 1,000 - 1,800',
+            USD_USCA: 'USD 2,500 - 4,000',
+            USD_WE: 'USD 1,500 - 2,500',
+            USD_NAM: 'USD 2,800 - 5,000',
+            USD: 'USD 1,500 - 3,000',
+            GBP: 'GBP 1,400 - 2,000',
+            EUR: 'EUR 1,600 - 2,300'
+        },
+        enterprise: {
+            ZMW: 'ZMW 8,000+',
+            ZAR: 'ZAR 10,000+',
+            USD_ZW: 'USD 1,800+',
+            USD_USCA: 'USD 4,000+',
+            USD_WE: 'USD 2,500+',
+            USD_NAM: 'USD 5,000+',
+            USD: 'USD 3,000+',
+            GBP: 'GBP 2,000+',
+            EUR: 'EUR 2,300+'
+        }
+    };
+
+    // Pricing display values for System Development projects
+    // Extracted from budgetMapSystems - single source of truth
+    const pricingDisplayDataSystems = {
+        starter: {
+            ZMW: 'ZMW 5,000 - 8,000',
+            ZAR: 'ZAR 6,500 - 10,000',
+            USD_ZW: 'USD 700 - 1,200',       // Zimbabwe/Southern Africa
+            USD_USCA: 'USD 2,000 - 3,500',   // US & Canada
+            USD_WE: 'USD 1,000 - 2,000',     // West & East Africa
+            USD_NAM: 'USD 2,000 - 3,500',    // North Africa & Middle East
+            USD: 'USD 700 - 1,200',          // Generic/International fallback
+            GBP: 'GBP 1,200 - 2,000',
+            EUR: 'EUR 1,400 - 2,200'
+        },
+        standard: {
+            ZMW: 'ZMW 8,000 - 12,000',
+            ZAR: 'ZAR 10,000 - 15,000',
+            USD_ZW: 'USD 1,200 - 2,000',
+            USD_USCA: 'USD 3,500 - 6,000',
+            USD_WE: 'USD 2,000 - 3,500',
+            USD_NAM: 'USD 3,500 - 6,000',
+            USD: 'USD 1,200 - 2,000',
+            GBP: 'GBP 2,000 - 3,200',
+            EUR: 'EUR 2,200 - 3,500'
+        },
+        professional: {
+            ZMW: 'ZMW 12,000 - 18,000',
+            ZAR: 'ZAR 15,000 - 22,000',
+            USD_ZW: 'USD 2,000 - 3,500',
+            USD_USCA: 'USD 6,000 - 10,000',
+            USD_WE: 'USD 3,500 - 6,000',
+            USD_NAM: 'USD 6,000 - 10,000',
+            USD: 'USD 2,000 - 3,500',
+            GBP: 'GBP 3,200 - 5,000',
+            EUR: 'EUR 3,500 - 5,500'
+        },
+        enterprise: {
+            ZMW: 'ZMW 18,000+',
+            ZAR: 'ZAR 22,000+',
+            USD_ZW: 'USD 3,500+',
+            USD_USCA: 'USD 10,000+',
+            USD_WE: 'USD 6,000+',
+            USD_NAM: 'USD 10,000+',
+            USD: 'USD 3,500+',
+            GBP: 'GBP 5,000+',
+            EUR: 'EUR 5,500+'
+        }
+    };
+
+    // ============================================================================
+    // PRICING HELPER FUNCTIONS
+    // ============================================================================
+    function getRegionConfig(regionCode) {
+        const map = {
+            'zambia': {
+                label: 'Zambia', currency: 'ZMW', budgetKey: 'ZMW'
+            },
+            'zimbabwe-usd': {
+                label: 'Zimbabwe', currency: 'USD', budgetKey: 'USD_ZW'
+            },
+            'southern-africa-usd': {
+                label: 'Southern Africa', currency: 'USD', budgetKey: 'USD_ZW'
+            },
+            'west-east-africa': {
+                label: 'West & East Africa', currency: 'USD', budgetKey: 'USD_WE'
+            },
+            'north-africa-me': {
+                label: 'North Africa & Middle East', currency: 'USD', budgetKey: 'USD_NAM'
+            },
+            'south-africa': {
+                label: 'South Africa', currency: 'ZAR', budgetKey: 'ZAR'
+            },
+            'uk': {
+                label: 'UK', currency: 'GBP', budgetKey: 'GBP'
+            },
+            'europe': {
+                label: 'Europe', currency: 'EUR', budgetKey: 'EUR'
+            },
+            'us-canada': {
+                label: 'US & Canada', currency: 'USD', budgetKey: 'USD_USCA'
+            },
+            'other-international': {
+                label: 'Other / International', currency: 'USD', budgetKey: 'USD'
+            }
+        };
+        return map[regionCode] || map['other-international'];
+    }
+
+    function detectRegionByLocale() {
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        const locale = (navigator.language || '').toUpperCase();
+        const region = locale.includes('-') ? locale.split('-')[1] : '';
+
+        if (tz.indexOf('Africa/Lusaka') === 0 || region === 'ZM') return 'zambia';
+        if (region === 'ZW') return 'zimbabwe-usd';
+        if (tz.indexOf('Africa/Johannesburg') === 0 || region === 'ZA') return 'south-africa';
+        if (tz.indexOf('Europe/London') === 0 || region === 'GB') return 'uk';
+        if (tz.indexOf('Europe/') === 0 && region !== 'GB') return 'europe';
+        if (region === 'US' || region === 'CA') return 'us-canada';
+        if (tz.indexOf('Africa/') === 0) return 'zambia';
+        return 'other-international';
+    }
+
+    function detectCurrencyByRegion() {
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        const locale = (navigator.language || '').toUpperCase();
+        const region = locale.includes('-') ? locale.split('-')[1] : '';
+
+        if (tz.indexOf('Africa/Lusaka') === 0 || region === 'ZM') return 'ZMW';
+        if (tz.indexOf('Africa/Johannesburg') === 0 || region === 'ZA') return 'ZAR';
+        if (tz.indexOf('Europe/London') === 0 || region === 'GB') return 'GBP';
+        if (tz.indexOf('Europe/') === 0 && region !== 'GB') return 'EUR';
+        if (region === 'US' || region === 'CA') return 'USD';
+        return 'USD';
+    }
+
+    // Get pricing tier display values for pricing page
+    // @param {string} currencyCode - Currency code (ZMW, USD, etc.)
+    // @param {boolean} isSystemProject - If true, returns system pricing; otherwise default pricing
+    // @returns {object} Pricing tiers keyed by tier name
+    function getPricingTierValues(currencyCode, isSystemProject = false) {
+        const dataMap = isSystemProject ? pricingDisplayDataSystems : pricingDisplayData;
+        if (!dataMap.starter[currencyCode]) {
+            currencyCode = 'USD';
+        }
+        return {
+            starter: dataMap.starter[currencyCode],
+            standard: dataMap.standard[currencyCode],
+            professional: dataMap.professional[currencyCode],
+            enterprise: dataMap.enterprise[currencyCode]
+        };
+    }
+
+    // Update pricing display on pricing.html page
+    // @param {string} currencyCode - Currency code (ZMW, USD, etc.)
+    // @param {boolean} isSystemProject - If true, uses system pricing; otherwise default pricing
+    function updatePricingDisplay(currencyCode, isSystemProject = false) {
+        const priceElements = document.querySelectorAll('.price-amount');
+        if (!priceElements.length) return;
+
+        const tierValues = getPricingTierValues(currencyCode, isSystemProject);
+
+        priceElements.forEach(function (el) {
+            const tier = el.closest('[data-tier]')?.getAttribute('data-tier');
+            if (tier && tierValues[tier]) {
+                const displayValue = tierValues[tier];
+                el.textContent = displayValue;
+                el.classList.remove('priceShuffleIn');
+                void el.offsetWidth; // trigger reflow
+                el.classList.add('priceShuffleIn');
+            }
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         loadNavbar()
             .catch(() => {
@@ -12,6 +366,8 @@
                 ensureGamesNavLink();
                 normalizeNavbarPaths();
                 setActiveNavLink();
+                injectStructuredData();
+                promoteWhatsAppLinks();
                 initThemeToggle();
                 initMoonAnimation();
                 initScrollAnimations();
@@ -21,7 +377,12 @@
                 initSmoothScrollLinks();
                 initHeroEntrance();
                 initWelcomeGuide();
+                initGlobalParallax();
                 initTeamDetails();
+                initMagneticButtons();
+                initTierFeatures();
+                initPricingCurrency();
+                initShowcaseCarousel();
 
                 if (document.getElementById('contactForm')) {
                     initContactForm();
@@ -35,6 +396,101 @@
 
     function resolveSitePath(path) {
         return path.startsWith('/') ? path : '/' + path;
+    }
+
+    function injectStructuredData() {
+        if (!document.head || document.head.querySelector('script[data-nextphases-schema]')) return;
+
+        const schemas = [
+            {
+                '@context': 'https://schema.org',
+                '@type': 'Organization',
+                name: 'NextPhases.dev',
+                url: 'https://nextphases.dev',
+                logo: 'https://nextphases.dev/Logo_transparent.png',
+                sameAs: [
+                    'https://www.youtube.com/@nextphases',
+                    'https://x.com/NextPhases',
+                    'https://www.tiktok.com/@nextphases.dev?lang=en',
+                    'https://www.instagram.com/nextphases.dev/',
+                    'https://www.linkedin.com/company/nextphases',
+                    'https://discord.gg/DkybgpuRwp'
+                ],
+                description: 'Software development company building websites, SaaS platforms, applications, and digital products for businesses globally.',
+                address: {
+                    '@type': 'PostalAddress',
+                    addressLocality: 'Lusaka',
+                    addressCountry: 'Zambia'
+                }
+            },
+            {
+                '@context': 'https://schema.org',
+                '@type': 'LocalBusiness',
+                name: 'NextPhases.dev',
+                image: 'https://nextphases.dev/Logo_transparent.png',
+                url: 'https://nextphases.dev',
+                telephone: '+260978131906',
+                address: {
+                    '@type': 'PostalAddress',
+                    addressLocality: 'Lusaka',
+                    addressCountry: 'ZM'
+                },
+                priceRange: '$$'
+            }
+        ];
+
+        schemas.forEach((schema, index) => {
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.dataset.nextphasesSchema = index === 0 ? 'organization' : 'localbusiness';
+            script.textContent = JSON.stringify(schema, null, 2);
+            document.head.appendChild(script);
+        });
+    }
+
+    function promoteWhatsAppLinks() {
+        const waUrl = 'https://wa.me/260978131906?text=Hi%20NextPhases%2C%20I%27d%20like%20to%20discuss%20a%20project.';
+
+        document.querySelectorAll('.main-nav .cta-button').forEach(link => {
+            const href = (link.getAttribute('href') || '').trim();
+            if (href && !/contact\.html$/i.test(href)) return;
+            link.setAttribute('href', waUrl);
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener');
+            link.textContent = 'WhatsApp';
+        });
+
+        const contactMethods = document.querySelector('.contact-methods');
+        if (contactMethods && !contactMethods.querySelector('[data-whatsapp-contact]')) {
+            const whatsappMethod = document.createElement('div');
+            whatsappMethod.className = 'contact-method';
+            whatsappMethod.setAttribute('data-whatsapp-contact', 'true');
+            whatsappMethod.innerHTML = '<div class="contact-method-icon"><i class="fab fa-whatsapp"></i></div><div><h4>WhatsApp Us</h4><a href="' + waUrl + '" target="_blank" rel="noopener">+260 978 131 906</a></div>';
+            const firstMethod = contactMethods.querySelector('.contact-method');
+            if (firstMethod) firstMethod.insertAdjacentElement('afterend', whatsappMethod);
+            else contactMethods.insertBefore(whatsappMethod, contactMethods.firstElementChild);
+        }
+
+        document.querySelectorAll('.footer-socials').forEach(container => {
+            if (container.querySelector('a[aria-label="WhatsApp"]')) return;
+            const discordLink = container.querySelector('a[aria-label="Discord"]');
+            const whatsappLink = document.createElement('a');
+            whatsappLink.href = waUrl;
+            whatsappLink.className = 'social-link';
+            whatsappLink.target = '_blank';
+            whatsappLink.rel = 'noopener';
+            whatsappLink.setAttribute('aria-label', 'WhatsApp');
+            whatsappLink.innerHTML = '<i class="fab fa-whatsapp"></i>';
+            if (discordLink) container.insertBefore(whatsappLink, discordLink);
+            else container.appendChild(whatsappLink);
+        });
+
+        document.querySelectorAll('.footer-contact-list').forEach(list => {
+            if (list.querySelector('a[href^="https://wa.me/"]')) return;
+            const whatsappItem = document.createElement('li');
+            whatsappItem.innerHTML = '<i class="fab fa-whatsapp"></i><a href="' + waUrl + '" target="_blank" rel="noopener">WhatsApp: +260 978 131 906</a>';
+            list.insertBefore(whatsappItem, list.firstElementChild);
+        });
     }
 
     function ensureGamesNavLink() {
@@ -1590,6 +2046,45 @@
                     budgetHint.textContent = 'Budget adjusted for ' + currencyCode + tierType + '. You can change currency or project type manually.';
                 }
             }
+            
+            // Apply pre-selected plan from URL if available
+            if (form.dataset.preselectedPlan && budgetSelect) {
+                const planKey = form.dataset.preselectedPlan;
+                const options = budgetSelect.querySelectorAll('option');
+                for (let option of options) {
+                    if (option.value.includes(planKey)) {
+                        budgetSelect.value = option.value;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Read URL parameters and pre-fill form
+        const urlParams = new URLSearchParams(window.location.search);
+        const planParam = urlParams.get('plan');
+        
+        if (planParam) {
+            // Map plan names to budget value patterns
+            const planToBudgetPattern = {
+                'starter': 'starter',
+                'standard': 'standard',
+                'professional': 'professional',
+                'enterprise': 'enterprise'
+            };
+            
+            const planKey = planToBudgetPattern[planParam.toLowerCase()];
+            
+            if (planKey) {
+                // Set project type if needed (will be reset by budget rendering)
+                // Scroll to form after a small delay to ensure everything is rendered
+                setTimeout(() => {
+                    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+                
+                // Store the plan to be selected after budget options are rendered
+                form.dataset.preselectedPlan = planKey;
+            }
         }
 
         if (regionSelect) {
@@ -1847,6 +2342,7 @@
             if (scrollBtn) scrollBtn.insertAdjacentHTML('beforebegin', html);
             else document.body.insertAdjacentHTML('beforeend', html);
             updateCopyrightYear();
+            promoteWhatsAppLinks();
         }
 
         fetch(resolveSitePath('footer.html'))
@@ -1867,21 +2363,127 @@
         const helpButton = document.getElementById('helpGuideButton');
         const modal = document.getElementById('helpGuideModal');
         const closeButton = document.getElementById('helpGuideClose');
+        const hint = document.getElementById('helpGuideHint');
+        const stepText = document.getElementById('helpGuideStepText');
 
-        if (!helpButton || !modal || !closeButton) return;
+        if (!helpButton || !modal || !closeButton || !stepText) return;
 
-        function openGuide() {
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+        const steps = [
+            {
+                text: 'Explore services here',
+                target: document.getElementById('mainNav'),
+                className: 'help-tour-target--nav',
+                scroll: false
+            },
+            {
+                text: 'See our work here',
+                target: document.getElementById('services'),
+                className: 'help-tour-target--service',
+                scroll: true
+            },
+            {
+                text: 'WhatsApp us here',
+                target: document.querySelector('main .hero .cta-button[href*="wa.me"]') || document.querySelector('.cta-button[href*="wa.me"]') || document.querySelector('.main-nav .cta-button'),
+                className: 'help-tour-target--contact',
+                scroll: true
+            }
+        ];
+
+        let hintShowTimer = null;
+        let hintHideTimer = null;
+        let stepTimer = null;
+        let activeTarget = null;
+
+        function hideHint() {
+            if (!hint) return;
+            hint.classList.remove('is-visible');
+            hint.setAttribute('aria-hidden', 'true');
+            if (hintHideTimer) {
+                clearTimeout(hintHideTimer);
+                hintHideTimer = null;
+            }
+        }
+
+        function showHint() {
+            if (!hint || modal.classList.contains('active')) return;
+            hint.classList.add('is-visible');
+            hint.setAttribute('aria-hidden', 'false');
+            hintHideTimer = setTimeout(hideHint, 6000);
+        }
+
+        function scheduleHint() {
+            if (!hint) return;
+            hintShowTimer = setTimeout(showHint, 3000);
+        }
+
+        function clearTarget() {
+            if (!activeTarget) return;
+            activeTarget.classList.remove('help-tour-target', 'help-tour-target--nav', 'help-tour-target--service', 'help-tour-target--contact');
+            activeTarget = null;
         }
 
         function closeGuide() {
             modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = document.body.classList.contains('nav-open') ? 'hidden' : '';
+
+            if (stepTimer) {
+                clearTimeout(stepTimer);
+                stepTimer = null;
+            }
+
+            clearTarget();
+            hideHint();
+        }
+
+        function runStep(index) {
+            clearTarget();
+
+            const step = steps[index];
+            if (!step) {
+                closeGuide();
+                return;
+            }
+
+            stepText.textContent = step.text;
+
+            if (step.target) {
+                activeTarget = step.target;
+                activeTarget.classList.add('help-tour-target', step.className);
+
+                if (step.scroll && typeof activeTarget.scrollIntoView === 'function') {
+                    activeTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+
+            stepTimer = setTimeout(() => runStep(index + 1), index === 0 ? 2200 : 1800);
+        }
+
+        function openGuide() {
+            if (hintShowTimer) {
+                clearTimeout(hintShowTimer);
+                hintShowTimer = null;
+            }
+
+            hideHint();
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+
+            if (stepTimer) {
+                clearTimeout(stepTimer);
+                stepTimer = null;
+            }
+
+            runStep(0);
         }
 
         helpButton.addEventListener('click', openGuide);
         closeButton.addEventListener('click', closeGuide);
+
+        if (hint) {
+            hint.addEventListener('click', hideHint);
+        }
 
         modal.addEventListener('click', (e) => {
             if (e.target === modal) closeGuide();
@@ -1890,6 +2492,239 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modal.classList.contains('active')) closeGuide();
         });
+
+        scheduleHint();
+    }
+    function initGlobalParallax() {
+        // Skip on touch devices and when user prefers reduced motion
+        if ('ontouchstart' in window) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if (!window.matchMedia('(pointer: fine)').matches) return;
+
+        var moonCanvas = document.getElementById('moonCanvas');
+        if (!moonCanvas) return;
+
+        // Ensure the canvas scales up slightly so parallax shift never reveals edges
+        moonCanvas.style.transformOrigin = 'center center';
+        moonCanvas.style.willChange = 'transform';
+
+        var px = 0.5, py = 0.5, tx = 0.5, ty = 0.5;
+        var active = false, rafId = null;
+
+        document.addEventListener('mousemove', function (e) {
+            tx = e.clientX / window.innerWidth;
+            ty = e.clientY / window.innerHeight;
+            if (!active) { active = true; rafId = requestAnimationFrame(tick); }
+        }, { passive: true });
+
+        function tick() {
+            px += (tx - px) * 0.055;
+            py += (ty - py) * 0.055;
+            var mx = (px - 0.5) * -18;
+            var my = (py - 0.5) * -12;
+            moonCanvas.style.transform = 'translate(' + mx.toFixed(2) + 'px,' + my.toFixed(2) + 'px) scale(1.06)';
+            var d = Math.abs(tx - px) + Math.abs(ty - py);
+            if (d < 0.001) { active = false; cancelAnimationFrame(rafId); }
+            else { rafId = requestAnimationFrame(tick); }
+        }
+    }
+    function initMagneticButtons() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if ('ontouchstart' in window) return;
+
+        document.querySelectorAll('.cta-button:not([data-magnetic])').forEach(function (btn) {
+            btn.dataset.magnetic = '1';
+            btn.addEventListener('mousemove', function (e) {
+                var r = btn.getBoundingClientRect();
+                var dx = (e.clientX - r.left - r.width  / 2) * 0.15;
+                var dy = (e.clientY - r.top  - r.height / 2) * 0.15;
+                btn.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px)';
+            });
+            btn.addEventListener('mouseleave', function () {
+                btn.style.transform = '';
+            });
+        });
+    }
+
+    // =============================================
+    // TIER FEATURES EXPANSION
+    // =============================================
+    function initTierFeatures() {
+        const features = document.querySelectorAll('.tier-features .feature');
+        
+        features.forEach(feature => {
+            // Make feature clickable
+            feature.style.cursor = 'pointer';
+            
+            feature.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                // Check if already expanded
+                const isExpanded = this.classList.contains('feature-expanded');
+                
+                // Close all other expanded features in this list
+                const siblings = this.parentElement.querySelectorAll('.feature');
+                siblings.forEach(sibling => {
+                    if (sibling !== this && sibling.classList.contains('feature-expanded')) {
+                        sibling.classList.remove('feature-expanded');
+                        const explanation = sibling.nextElementSibling;
+                        if (explanation && explanation.classList.contains('feature-explanation')) {
+                            explanation.remove();
+                        }
+                    }
+                });
+                
+                if (isExpanded) {
+                    // Collapse
+                    this.classList.remove('feature-expanded');
+                    const explanation = this.nextElementSibling;
+                    if (explanation && explanation.classList.contains('feature-explanation')) {
+                        explanation.style.maxHeight = '0';
+                        explanation.style.opacity = '0';
+                        setTimeout(() => explanation.remove(), 300);
+                    }
+                } else {
+                    // Expand
+                    this.classList.add('feature-expanded');
+                    const explanationText = this.getAttribute('data-explanation');
+                    const explanationDiv = document.createElement('li');
+                    explanationDiv.className = 'feature-explanation';
+                    explanationDiv.style.cssText = 'list-style:none;padding:12px 0 0 32px;color:var(--text-muted);font-size:0.9rem;line-height:1.5;margin-bottom:8px;max-height:0;opacity:0;overflow:hidden;transition:max-height 0.3s ease, opacity 0.3s ease;';
+                    explanationDiv.textContent = explanationText;
+                    
+                    this.insertAdjacentElement('afterend', explanationDiv);
+                    
+                    // Trigger animation
+                    requestAnimationFrame(() => {
+                        explanationDiv.style.maxHeight = '100px';
+                        explanationDiv.style.opacity = '1';
+                    });
+                }
+            });
+        });
+    }
+
+    // =============================================
+    // PRICING PAGE REGION & CURRENCY CONVERTER
+    // =============================================
+    function initPricingCurrency() {
+        const regionSelect = document.getElementById('pricingRegion');
+        const projectTypeToggle = document.getElementById('projectTypeToggle');
+        
+        if (!regionSelect) return;
+
+        // Map regions to pricing currency codes
+        const regionToCurrency = {
+            'detected': null,           // Will auto-detect
+            'zambia': 'ZMW',
+            'south-africa': 'ZAR',
+            'zimbabwe-usd': 'USD_ZW',
+            'west-east-africa': 'USD_WE',
+            'north-africa-me': 'USD_NAM',
+            'us-canada': 'USD_USCA',
+            'uk': 'GBP',
+            'europe': 'EUR',
+            'other-international': 'USD'
+        };
+
+        function updatePrices() {
+            let selectedRegion = regionSelect.value;
+            let currencyCode = regionToCurrency[selectedRegion];
+            
+            // Auto-detect if "detected" selected
+            if (selectedRegion === 'detected' || !currencyCode) {
+                const userRegion = detectRegionByLocale();
+                const regionConfig = getRegionConfig(userRegion);
+                currencyCode = regionConfig.budgetKey;
+            }
+            
+            const isSystemProject = projectTypeToggle?.checked || false;
+            updatePricingDisplay(currencyCode, isSystemProject);
+        }
+
+        regionSelect.addEventListener('change', updatePrices);
+        
+        if (projectTypeToggle) {
+            projectTypeToggle.addEventListener('change', updatePrices);
+        }
+
+        // Auto-detect on first visit
+        if (!sessionStorage.getItem('pricingRegionSet')) {
+            const userRegion = detectRegionByLocale();
+            const regionConfig = getRegionConfig(userRegion);
+            
+            // Find matching region value
+            let selectedRegionValue = 'other-international';
+            for (let [region, currency] of Object.entries(regionToCurrency)) {
+                if (currency === regionConfig.budgetKey) {
+                    selectedRegionValue = region;
+                    break;
+                }
+            }
+            
+            regionSelect.value = selectedRegionValue;
+            updatePrices();
+            sessionStorage.setItem('pricingRegionSet', 'true');
+        } else {
+            updatePrices();
+        }
+    }
+
+    // =============================================
+    // SHOWCASE CAROUSEL
+    // =============================================
+    function initShowcaseCarousel() {
+        const carousel = document.getElementById('showcaseCarousel');
+        if (!carousel) return;
+
+        const slidesWrap = carousel.querySelector('.slides');
+        const slides = carousel.querySelectorAll('.slide');
+        let index = 0;
+        let intervalId = null;
+        const pricingTiers = document.querySelectorAll('.pricing-tier[data-showcase]');
+
+        function goTo(i) {
+            index = (i + slides.length) % slides.length;
+            slidesWrap.style.transform = 'translateX(' + (-index * 100) + '%)';
+            slides.forEach((s, si) => s.classList.toggle('active', si === index));
+            // update pricing-tier pseudo backgrounds: find tiers mapped to this slide and show subtle background
+            pricingTiers.forEach(tier => {
+                const showIdx = Number(tier.getAttribute('data-showcase'));
+                if (showIdx === index) {
+                    const slide = slides[index];
+                    const img = slide.querySelector('img');
+                    if (img) {
+                        tier.classList.add('has-showcase');
+                        tier.style.setProperty('--showcase-image', 'url("' + img.src + '")');
+                    }
+                } else {
+                    tier.classList.remove('has-showcase');
+                    tier.style.removeProperty('--showcase-image');
+                }
+            });
+        }
+
+        function next() { goTo(index + 1); }
+
+        function start() {
+            stop();
+            intervalId = setInterval(next, 4000);
+        }
+
+        function stop() {
+            if (intervalId) clearInterval(intervalId);
+            intervalId = null;
+        }
+
+        carousel.addEventListener('mouseenter', stop);
+        carousel.addEventListener('mouseleave', start);
+
+        // touch: pause on touchstart, resume on touchend
+        carousel.addEventListener('touchstart', stop, { passive: true });
+        carousel.addEventListener('touchend', start, { passive: true });
+
+        // start autoplay
+        start();
     }
 })();
 

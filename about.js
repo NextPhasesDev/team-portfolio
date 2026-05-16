@@ -25,7 +25,7 @@
             links: [
                 { label: 'Media & press', href: 'mailto:media@nextphases.dev', icon: 'fas fa-envelope' }
             ],
-            linkedin: 'https://www.linkedin.com/company/nextphases'
+            linkedin: 'https://www.linkedin.com/in/thuma-hamukang-andu-3a78583b4/'
         },
         {
             id:        'simon',
@@ -238,12 +238,25 @@
     nextBtn.addEventListener('click', advance);
 
     /* Touch/swipe */
-    carousel.addEventListener('touchstart', function (e) {
-        touchX = e.touches[0].clientX;
+    let startX = 0;
+    let startTime = 0;
+
+    carousel.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        startTime = Date.now();
     }, { passive: true });
-    carousel.addEventListener('touchend', function (e) {
-        var dx = touchX - e.changedTouches[0].clientX;
-        if (Math.abs(dx) > 46) { dx > 0 ? advance() : retreat(); }
+
+    carousel.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - startX;
+        const dt = Date.now() - startTime;
+
+        const velocity = dx / dt;
+
+        if (Math.abs(velocity) > 0.5) {
+            velocity > 0 ? retreat() : advance();
+        } else if (Math.abs(dx) > 50) {
+            dx > 0 ? retreat() : advance();
+        }
     }, { passive: true });
 
     /* Keyboard */

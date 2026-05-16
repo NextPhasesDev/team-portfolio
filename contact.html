@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
+    <script>(function(){var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,7 +33,58 @@
     <!-- Font Awesome for icons with fallback strategy -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "NextPhases.dev",
+      "url": "https://nextphases.dev",
+      "logo": "https://nextphases.dev/Logo_transparent.png",
+      "sameAs": [
+        "https://www.youtube.com/@nextphases",
+        "https://x.com/NextPhases",
+        "https://www.tiktok.com/@nextphases.dev?lang=en",
+        "https://www.instagram.com/nextphases.dev/",
+        "https://www.linkedin.com/company/nextphases",
+        "https://discord.gg/DkybgpuRwp"
+      ],
+      "description": "Software development company building websites, SaaS platforms, applications, and digital products for businesses globally.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lusaka",
+        "addressCountry": "Zambia"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "NextPhases.dev",
+      "image": "https://nextphases.dev/Logo_transparent.png",
+      "url": "https://nextphases.dev",
+      "telephone": "+260978131906",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lusaka",
+        "addressCountry": "ZM"
+      },
+      "priceRange": "$$"
+    }
+    </script>
 </head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5T40D6EZG4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5T40D6EZG4');
+</script>
 <body>
 
 <nav class="main-nav" id="mainNav">
@@ -61,7 +113,7 @@
             <li><a href="/portfolio.html" class="nav-link">Portfolio</a></li>
             <li><a href="/testimonials.html" class="nav-link">Testimonials</a></li>
             <li><a href="/about.html" class="nav-link">About</a></li>
-            <li><a href="/contact.html" class="cta-button">Contact</a></li>
+            <li><a href="" class="cta-button" target="_blank" rel="noopener">WhatsApp</a></li>
         </ul>
         <div class="nav-actions">
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
@@ -106,6 +158,16 @@
 
                         <div class="contact-method">
                             <div class="contact-method-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h4>WhatsApp Us</h4>
+                                <a href="https://wa.me/260978131906?text=Hi%20NextPhases%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener">+260 978 131 906</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <div class="contact-method-icon">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <div>
@@ -133,6 +195,7 @@
                             <a href="https://www.tiktok.com/@nextphases.dev?lang=en" class="social-link" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                             <a href="https://www.instagram.com/nextphases.dev/" class="social-link" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                             <a href="https://www.linkedin.com/company/nextphases" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://wa.me/260978131906?text=Hi%20NextPhases%2C%20I%27d%20like%20to%20discuss%20a%20project." class="social-link" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                             <a href="https://discord.gg/DkybgpuRwp" class="social-link" target="_blank" rel="noopener" aria-label="Discord"><i class="fab fa-discord"></i></a>
                         </div>
                     </div>
@@ -222,9 +285,9 @@
                             </label>
                             <select id="timeline" name="timeline" required>
                                 <option value="">Select timeline</option>
-                                <option value="urgent">ASAP (Within 2 weeks)</option>
-                                <option value="soon">1–2 months</option>
-                                <option value="flexible">2–4 months</option>
+                                <option value="URGENT - within 2 weeks">ASAP (Within 2 weeks)</option>
+                                <option value="1-2 months">1–2 months</option>
+                                <option value="2-4 months">2–4 months</option>
                                 <option value="planning">Just planning / exploring</option>
                             </select>
                         </div>
@@ -263,3 +326,5 @@
 <script src="/script.js"></script>
 </body>
 </html>
+
+
