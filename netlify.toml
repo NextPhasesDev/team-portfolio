@@ -1,0 +1,90 @@
+# Netlify Configuration for NextPhases
+# This file controls redirects, headers, and deployment rules
+
+[build]
+  command = "echo 'Static site - no build needed'"
+  publish = "."
+
+# Redirect attempts to access code files to homepage
+[[redirects]]
+  from = "/script.js"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/scripts/*"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/style.css"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/styles/*"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/*.js"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/*.css"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/about.js"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/services.js"
+  to = "/"
+  status = 301
+
+# Add security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+# Cache policy for assets
+[[headers]]
+  for = "/favicon.ico"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/Logo_transparent.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# HTML files get shorter cache
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+

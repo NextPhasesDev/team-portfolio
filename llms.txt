@@ -1,0 +1,48 @@
+# NextPhases
+
+> Software development company based in Lusaka, Zambia. We build websites, mobile apps, custom software systems, and technical consulting for businesses in Zambia, Africa, the UK, and internationally.
+
+## Company
+
+NextPhases is founded by a team of software engineers and digital strategists committed to delivering high-quality, scalable solutions for businesses at every stage of growth. We specialize in transforming business challenges into elegant technical solutions, combining strategic thinking with solid engineering practices. Our team has experience across Africa and internationally, helping startups and enterprises launch products that matter.
+
+## Team
+
+NextPhases is founded and led by experienced software engineers and digital strategists:
+
+- **Founding Lead, Full-Stack Development & Architecture** – Expert in modern web technologies (React, Node.js, Python) with years of real-world experience building scalable systems
+-  **Technical Strategy & System Design** – Specialist in infrastructure, database optimization, and long-term technical planning for growing products
+- **Mobile Development** – iOS and Android expert with experience shipping cross-platform apps to production
+- **UX/UI Design & Product** – Creates intuitive interfaces and leads the user experience vision for all projects
+- **DevOps & Infrastructure** – Ensures reliability, performance, and security across all deployments
+- **Client Leadership & Project Management** – Keeps clients informed, teams aligned, and projects moving
+
+Each team member brings real-world experience from working on diverse projects across industries, with a shared commitment to clean code, continuous learning, and client success.
+
+## Services
+
+- Web Development: business websites, landing pages, web applications, e-commerce, performance optimization
+- App Development: Android, iOS, cross-platform mobile apps, web apps, internal tools
+- Technical Consulting: tech stack selection, digital transformation, architecture planning, security
+- Custom Software: dashboards, automation systems, business management tools, SaaS products
+
+## Products
+
+- Nsolo: a digital adaptation of a traditional Zambian mancala-style board game
+- ExamGuard: exam management and invigilation platform for schools and universities
+
+## Pricing
+
+Regional pricing model. ZMW for Zambia. ZAR for South Africa. GBP/EUR for UK/Europe. USD for US, Canada, and international. Contact for a quote.
+
+## Contact
+
+Email: info@nextphases.dev
+Website: https://nextphases.dev
+Location: Lusaka, Zambia
+
+## Resources
+
+[services.html](https://nextphases.dev/services.html): Full services listing with pricing regions
+[portfolio.html](https://nextphases.dev/portfolio.html): Our products and past work
+[contact.html](https://nextphases.dev/contact.html): Get a quote or book a discovery call

@@ -1,0 +1,11 @@
+# Prevent direct access to static files - redirect to homepage
+# This protects source code and configuration from being viewed directly
+/script.js                    /index.html  200
+/*.js                         /index.html  200
+/*.css                        /index.html  200
+/.env*                        /index.html  200
+/config.*                     /index.html  200
+
+# Allow normal page navigation
+/*                            /index.html  200
+

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
+    <script>(function(){var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="NextPhases Services - Web development, app development, and technical consulting for businesses ready to grow." />
+    <meta name="description" content="NextPhases offers professional web development, mobile app development, and technical consulting for startups and businesses in Zambia, Africa, and internationally. Based in Lusaka. Work with us remotely from anywhere." />
     <meta property="og:type" content="website">
     <meta property="og:title" content="Services - NextPhases">
     <meta property="og:description" content="Web, app, and system development for your next phase of growth.">
@@ -16,11 +17,14 @@
     <meta name="twitter:title" content="Services - NextPhases">
     <meta name="twitter:description" content="Web, app, and system development for your next phase of growth.">
     <meta name="twitter:image" content="https://nextphases.dev/og-banner.png">
-    <title>Services - NextPhases</title>
-    <link rel="icon" href-"/favicon.ico" sizes="any" />
-    <link rel="icon" type="image/png" sizes="32x32" href-"/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href-"/favicon-16x16.png" />
-    <link rel="apple-touch-icon" sizes="192x192" href-"/favicon-192.png" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="keywords" content="web development Zambia, software development Lusaka, app development Africa, technical consulting Zambia, custom software Zambia, website design Lusaka, mobile app development Zambia, NextPhases" />
+    <link rel="canonical" href="https://nextphases.dev/services.html" />
+    <title>Web Development, App Development & Consulting Services | NextPhases</title>
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/favicon-192.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -28,7 +32,58 @@
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "NextPhases.dev",
+      "url": "https://nextphases.dev",
+      "logo": "https://nextphases.dev/Logo_transparent.png",
+      "sameAs": [
+        "https://www.youtube.com/@nextphases",
+        "https://x.com/NextPhases",
+        "https://www.tiktok.com/@nextphases.dev?lang=en",
+        "https://www.instagram.com/nextphases.dev/",
+        "https://www.linkedin.com/company/nextphases",
+        "https://discord.gg/DkybgpuRwp"
+      ],
+      "description": "Software development company building websites, SaaS platforms, applications, and digital products for businesses globally.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lusaka",
+        "addressCountry": "Zambia"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "NextPhases.dev",
+      "image": "https://nextphases.dev/Logo_transparent.png",
+      "url": "https://nextphases.dev",
+      "telephone": "+260978131906",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lusaka",
+        "addressCountry": "ZM"
+      },
+      "priceRange": "$$"
+    }
+    </script>
 </head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5T40D6EZG4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5T40D6EZG4');
+</script>
 <body>
 
 <nav class="main-nav" id="mainNav">
@@ -57,13 +112,20 @@
             <li><a href="/portfolio.html" class="nav-link">Portfolio</a></li>
             <li><a href="/testimonials.html" class="nav-link">Testimonials</a></li>
             <li><a href="/about.html" class="nav-link">About</a></li>
-            <li><a href="/contact.html" class="cta-button">Contact</a></li>
+            <li><a href="" class="cta-button" target="_blank" rel="noopener">WhatsApp</a></li>
         </ul>
         <div class="nav-actions">
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
-                <i class="fas fa-sun toggle-icon sun"></i>
-                <i class="fas fa-moon toggle-icon moon"></i>
-            </button>
+            <div class="theme-toggle-group">
+    <button data-theme-mode="light" aria-label="Light theme">
+        <i class="fas fa-sun"></i>
+    </button>
+    <button data-theme-mode="system" class="active" aria-label="System theme">
+        <i class="fas fa-laptop"></i>
+    </button>
+    <button data-theme-mode="dark" aria-label="Dark theme">
+        <i class="fas fa-moon"></i>
+    </button>
+</div>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                 <span></span><span></span><span></span>
             </button>
@@ -71,7 +133,7 @@
     </div>
 </nav>
 
-<div class="background-animation">
+<div class="background-animation" data-parallax="0.12">
     <canvas id="moonCanvas"></canvas>
 </div>
 
@@ -81,6 +143,45 @@
         <p>Building solutions for startups, businesses, and organizations ready to grow.</p>
     </section>
 
+    <section class="service-detail" id="how-we-work">
+        <div class="pricing-content" data-aos="fade-up" style="text-align: center;">
+            <h2>How We Work</h2>
+            <p class="section-intro">A consistent process that protects both sides and keeps projects on track.</p>
+        </div>
+        <div class="pricing-regions-grid" style="margin-top: 2rem;" data-aos="fade-up">
+            <div class="pricing-region-card">
+                <div class="region-icon"><i class="fas fa-comments"></i></div>
+                <h3>01. Discovery</h3>
+                <p class="region-note">We learn your goals, constraints, and context. You get honest answers about what's realistic and what it will cost.</p>
+            </div>
+            <div class="pricing-region-card">
+                <div class="region-icon"><i class="fas fa-file-signature"></i></div>
+                <h3>02. Agreement</h3>
+                <p class="region-note">Scope, timeline, and price are agreed in writing before any work starts. No surprises mid-project.</p>
+            </div>
+            <div class="pricing-region-card">
+                <div class="region-icon"><i class="fas fa-code"></i></div>
+                <h3>03. Build</h3>
+                <p class="region-note">We build in milestones with regular check-ins. You see progress before it's finished, not after.</p>
+            </div>
+            <div class="pricing-region-card">
+                <div class="region-icon"><i class="fas fa-vials"></i></div>
+                <h3>04. Review</h3>
+                <p class="region-note">You review the work, give feedback, and we refine. Up to two revision rounds are included as standard.</p>
+            </div>
+            <div class="pricing-region-card">
+                <div class="region-icon"><i class="fas fa-rocket"></i></div>
+                <h3>05. Launch</h3>
+                <p class="region-note">We deploy, hand over files, and collect final payment. You leave with something that works and documentation to match.</p>
+            </div>
+            <div class="pricing-region-card">
+                <div class="region-icon"><i class="fas fa-wrench"></i></div>
+                <h3>06. Support</h3>
+                <p class="region-note">Post-launch support window included. Ongoing maintenance available separately if you need it.</p>
+            </div>
+        </div>
+    </section>
+
     <section class="service-detail" id="web-dev">
         <div class="service-detail-grid">
             <div class="service-detail-content" data-aos="fade-right">
@@ -88,7 +189,8 @@
                     <i class="fas fa-code"></i>
                 </div>
                 <h2>Web Development</h2>
-                <p>We design and build modern, responsive websites that look great on every device. Whether you need a landing page, a business website, or a full web platform - we've got you covered.</p>
+                <p>We design and build modern, responsive websites that work on every device and load fast from every connection. Whether you need a professional landing page to convert visitors, a full business website that represents your brand correctly, or a scalable web platform with complex functionality — we build it with the performance and architecture to grow with you.</p>
+                <p>Every website we deliver is built with SEO-friendly structure from the ground up, because a website that can't be found isn't doing its job. We've built sites for businesses in Zambia, South Africa, Zimbabwe, and internationally, and we understand how to design for real users in real markets — not just portfolio screenshots.</p>
                 <ul class="service-features">
                     <li><i class="fas fa-check"></i> Responsive design for all screen sizes</li>
                     <li><i class="fas fa-check"></i> SEO-optimised structure and content</li>
@@ -128,7 +230,8 @@
                     <i class="fas fa-mobile-alt"></i>
                 </div>
                 <h2>App Development</h2>
-                <p>Custom web and mobile applications built to solve real problems. We turn your ideas into working software - from internal tools to customer-facing products.</p>
+                <p>Custom applications built to solve real problems, not to demonstrate technology for its own sake. We build web apps, cross-platform mobile applications, and internal tools that handle the specific workflows your business actually runs on.</p>
+                <p>Our internal product ExamGuard — a digital exam management and invigilation platform built for schools and universities — is a working example of how we approach app development: identify a real problem, design an appropriate solution, build it to be reliable and maintainable, then keep improving it based on how people actually use it. We apply the same thinking to every client project.</p>
                 <ul class="service-features">
                     <li><i class="fas fa-check"></i> Cross-platform web applications</li>
                     <li><i class="fas fa-check"></i> Mobile-first design approach</li>
@@ -167,7 +270,8 @@
                     <i class="fas fa-lightbulb"></i>
                 </div>
                 <h2>Technical Consulting</h2>
-                <p>Not sure where to start? We help businesses make smart technology decisions. From choosing the right tech stack to planning your digital strategy - we guide you through every step.</p>
+                <p>Most technology decisions feel harder than they need to be because there are too many options and too little context. We help businesses cut through that — whether you're starting from scratch, scaling something that's already working, or trying to understand why something isn't.</p>
+                <p>A consulting engagement with us might mean a single call to talk through your architecture options, a structured discovery process that results in a full technical roadmap, or ongoing advisory as you implement. We don't push complexity for its own sake. If the right answer is simple, we'll tell you.</p>
                 <ul class="service-features">
                     <li><i class="fas fa-check"></i> Technology stack recommendations</li>
                     <li><i class="fas fa-check"></i> Digital transformation planning</li>
@@ -209,9 +313,10 @@
             <h2>Pricing by Region</h2>
             <p>Hover each region point to see a quick pricing snapshot. We keep pricing fair by local market conditions.</p>
 
-            <div class="pricing-map" id="pricingMap" aria-label="Interactive regional pricing map">
-                <div class="pricing-map-canvas pricing-map-canvas--globe" id="pricingMapCanvas">
+            <div class="pricing-map services-map-wrap" id="pricingMap" aria-label="Interactive regional pricing map">
+                    <div class="pricing-map-canvas pricing-map-canvas--globe services-map" id="pricingMapCanvas">
                     <img src="world-map.svg" alt="World map with highlighted pricing regions" class="pricing-map-image" />
+                    <canvas id="npConnectionArcs" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;" aria-hidden="true"></canvas>
 
                     <div class="map-dot pricing-dot" data-region="zambia" style="left: 53.82%; top: 72.09%;" data-name="Zambia" data-currency="ZMW" data-from="From ZMW 2,000" data-note="Built with local context and long-term partnership in mind" data-card-pos="left" tabindex="0" role="button" aria-label="Zambia - From ZMW 2,000">
                         <span class="dot-core"></span>
@@ -324,18 +429,24 @@
                 </div>
             </div>
 
-            <a href="/contact.html" class="cta-button" style="margin-top: 2rem;">
+            <a href="https://wa.me/260978131906?text=Hi%20NextPhases%2C%20I%27d%20like%20to%20discuss%20a%20project." class="cta-button" target="_blank" rel="noopener" style="margin-top: 2rem;">
                 <span>Get a Quote</span>
                 <i class="fas fa-arrow-right"></i>
             </a>
         </div>
     </section>
-</main>
+
+    </main>
 
 <!-- Footer will be injected here via JavaScript from footer.html -->
 
 <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top"><i class="fas fa-chevron-up"></i></button>
+
 <script src="/script.js"></script>
 <script src="services.js"></script>
 </body>
 </html>
+
+
+
+

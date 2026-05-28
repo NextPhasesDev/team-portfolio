@@ -76,6 +76,14 @@ terms.html          Terms of service
 
 ---
 
+## Recent updates
+
+- 2026-05-16: `services.html` head updated for improved Google + AI SEO — new title, expanded meta description, added `robots`, `keywords`, and canonical tag. No layout or CSS changes.
+ - 2026-05-16: `services.html` content expanded — updated service descriptions (Web Development, App Development, Technical Consulting) and added a new "How We Work" section describing the 6-step project process. Existing features lists retained.
+	 - 2026-05-16: `services.html` FAQ section added with 8 frequently asked questions and answers; content edited for clarity and regional accuracy. No changes to nav/footer/scripts.
+					 - 2026-05-16: `services.html` globe enhancement — added overlay canvas and connection-arc renderer in `services.js` to animate subtle arcs originating from Zambia to other pricing regions. No changes to existing globe interactions.
+
+
 ## Contact
 
 For inquiries, visit [nextphases.dev/contact](https://nextphases.dev/contact) or email **info@nextphases.dev**

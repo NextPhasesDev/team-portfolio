@@ -2,7 +2,7 @@
    about.js — NextPhases Team Carousel + Parallax Background
    Replaces the previous about.js entirely.
    ============================================================ */
- 
+
 (function () {
     'use strict';
 
@@ -25,7 +25,7 @@
             links: [
                 { label: 'Media & press', href: 'mailto:media@nextphases.dev', icon: 'fas fa-envelope' }
             ],
-            linkedin: 'https://www.linkedin.com/company/nextphases'
+            linkedin: 'https://www.linkedin.com/in/thuma-hamukang-andu-3a78583b4/'
         },
         {
             id:        'simon',
@@ -238,12 +238,25 @@
     nextBtn.addEventListener('click', advance);
 
     /* Touch/swipe */
-    carousel.addEventListener('touchstart', function (e) {
-        touchX = e.touches[0].clientX;
+    let startX = 0;
+    let startTime = 0;
+
+    carousel.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        startTime = Date.now();
     }, { passive: true });
-    carousel.addEventListener('touchend', function (e) {
-        var dx = touchX - e.changedTouches[0].clientX;
-        if (Math.abs(dx) > 46) { dx > 0 ? advance() : retreat(); }
+
+    carousel.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - startX;
+        const dt = Date.now() - startTime;
+
+        const velocity = dx / dt;
+
+        if (Math.abs(velocity) > 0.5) {
+            velocity > 0 ? retreat() : advance();
+        } else if (Math.abs(dx) > 50) {
+            dx > 0 ? retreat() : advance();
+        }
     }, { passive: true });
 
     /* Keyboard */
@@ -253,17 +266,30 @@
     });
 
     /* Auto-advance */
-    function startAuto() { autoId = setInterval(advance, 5500); }
-    function stopAuto()  { clearInterval(autoId); }
+    function startAutoRotate() {
+        stopAutoRotate();
 
-    carousel.addEventListener('mouseenter', stopAuto);
-    carousel.addEventListener('mouseleave', startAuto);
-    carousel.addEventListener('focusin',    stopAuto);
-    carousel.addEventListener('focusout',   startAuto);
+        autoId = setInterval(() => {
+            goTo(current + 1);
+        }, 5500);
+    }
+
+    function stopAutoRotate() {
+        if (autoId) {
+            clearInterval(autoId);
+            autoId = null;
+        }
+    }
+
+    carousel.addEventListener('mouseenter', stopAutoRotate);
+    carousel.addEventListener('mouseleave', startAutoRotate);
+    carousel.addEventListener('focusin',    stopAutoRotate);
+    carousel.addEventListener('focusout',   startAutoRotate);
+
+    startAutoRotate();
+
 
     update();
-    startAuto();
-
     /* ── SECTION BACKGROUND ───────────────────────────────── */
     initTeamBg();
 
@@ -461,5 +487,30 @@
             if (e.key === 'Escape' && panel.classList.contains('active')) closePanel();
         });
     })();
+
+    let velocity = 0;
+    let lastX = 0;
+    let momentumFrame;
+
+    track.addEventListener('pointermove', (e) => {
+        velocity = e.clientX - lastX;
+        lastX = e.clientX;
+    });
+
+    track.addEventListener('pointerup', () => {
+        cancelAnimationFrame(momentumFrame);
+
+        function momentum() {
+            velocity *= 0.92;
+
+            track.style.transform = `translateX(${velocity}px)`;
+
+            if (Math.abs(velocity) > 0.5) {
+                momentumFrame = requestAnimationFrame(momentum);
+            }
+        }
+
+        momentum();
+    });
 
 })();

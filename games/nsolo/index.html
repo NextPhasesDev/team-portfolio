@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
 
     <meta charset="UTF-8" />
@@ -15,10 +15,10 @@
     <meta name="twitter:description" content="Traditional Zambian board game. Download now, web play coming soon.">
     <meta name="twitter:image" content="https://nextphases.dev/og-banner.png">
     <title>Nsolo - NextPhases Games</title>
-    <link rel="icon" href-"/favicon.ico" sizes="any" />
-    <link rel="icon" type="image/png" sizes="32x32" href-"/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href-"/favicon-16x16.png" />
-    <link rel="apple-touch-icon" sizes="192x192" href="R-192.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/favicon-192.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -26,7 +26,58 @@
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "NextPhases.dev",
+      "url": "https://nextphases.dev",
+      "logo": "https://nextphases.dev/Logo_transparent.png",
+      "sameAs": [
+        "https://www.youtube.com/@nextphases",
+        "https://x.com/NextPhases",
+        "https://www.tiktok.com/@nextphases.dev?lang=en",
+        "https://www.instagram.com/nextphases.dev/",
+        "https://www.linkedin.com/company/nextphases",
+        "https://discord.gg/DkybgpuRwp"
+      ],
+      "description": "Software development company building websites, SaaS platforms, applications, and digital products for businesses globally.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lusaka",
+        "addressCountry": "Zambia"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "NextPhases.dev",
+      "image": "https://nextphases.dev/Logo_transparent.png",
+      "url": "https://nextphases.dev",
+      "telephone": "+260978131906",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lusaka",
+        "addressCountry": "ZM"
+      },
+      "priceRange": "$$"
+    }
+    </script>
 </head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5T40D6EZG4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5T40D6EZG4');
+</script>
 <body>
 <nav class="main-nav" id="mainNav">
     <div class="nav-container">
@@ -48,13 +99,20 @@
             <li><a href="/portfolio.html" class="nav-link">Portfolio</a></li>
             <li><a href="/testimonials.html" class="nav-link">Testimonials</a></li>
             <li><a href="/about.html" class="nav-link">About</a></li>
-            <li><a href="/contact.html" class="cta-button">Contact</a></li>
+            <li><a href="" class="cta-button" target="_blank" rel="noopener">WhatsApp</a></li>
         </ul>
         <div class="nav-actions">
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
-                <i class="fas fa-sun toggle-icon sun"></i>
-                <i class="fas fa-moon toggle-icon moon"></i>
-            </button>
+            <div class="theme-toggle-group">
+    <button data-theme-mode="light" aria-label="Light theme">
+        <i class="fas fa-sun"></i>
+    </button>
+    <button data-theme-mode="system" class="active" aria-label="System theme">
+        <i class="fas fa-laptop"></i>
+    </button>
+    <button data-theme-mode="dark" aria-label="Dark theme">
+        <i class="fas fa-moon"></i>
+    </button>
+</div>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                 <span></span><span></span><span></span>
             </button>
@@ -62,7 +120,7 @@
     </div>
 </nav>
 
-<div class="background-animation">
+<div class="background-animation" data-parallax="0.12">
     <canvas id="moonCanvas"></canvas>
 </div>
 
@@ -175,7 +233,7 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <div class="footer-logo">
-                    <img src="footer-icon.png" alt="NextPhases" class="footer-icon" />
+                    <img src="/footer-icon.svg" alt="NextPhases" class="footer-icon" />
                     <span>NextPhases</span>
                 </div>
                 <p class="footer-tagline">Engineering your next phase of success.</p>
@@ -352,4 +410,7 @@
 </script>
 </body>
 </html>
+
+
+
 

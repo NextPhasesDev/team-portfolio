@@ -461,3 +461,123 @@
     scheduleIdleCycle();
 })();
 
+(function initConnectionArcs() {
+    var canvas = document.getElementById('npConnectionArcs');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var container = canvas.parentElement;
+
+    var NODES = {
+        zambia: { x: 0.5382, y: 0.7209 },
+        zimbabwe: { x: 0.5550, y: 0.7613 },
+        southernAfrica: { x: 0.5472, y: 0.6536 },
+        northAfrica: { x: 0.4739, y: 0.5425 },
+        middleEast: { x: 0.6006, y: 0.5210 },
+        southAfrica: { x: 0.5262, y: 0.8188 },
+        uk: { x: 0.4313, y: 0.3413 },
+        europe: { x: 0.5112, y: 0.3724 },
+        us: { x: 0.1893, y: 0.4099 }
+    };
+
+    // Interconnected network routes for a stronger global operations feel.
+    var LINKS = [
+        ['zambia', 'zimbabwe'],
+        ['zambia', 'southernAfrica'],
+        ['zambia', 'southAfrica'],
+        ['zambia', 'uk'],
+        ['zambia', 'europe'],
+        ['southAfrica', 'uk'],
+        ['uk', 'us'],
+        ['northAfrica', 'middleEast'],
+        ['northAfrica', 'europe'],
+        ['middleEast', 'europe'],
+        ['europe', 'us']
+    ];
+
+    var W = 0, H = 0;
+    var particles = [];
+
+    function resize() {
+        var rect = container.getBoundingClientRect();
+        W = rect.width; H = rect.height;
+        var dpr = window.devicePixelRatio || 1;
+        canvas.width = Math.round(W * dpr);
+        canvas.height = Math.round(H * dpr);
+        ctx.scale(dpr, dpr);
+        buildParticles();
+    }
+
+    function buildParticles() {
+        particles = [];
+        LINKS.forEach(function(link) {
+            var fromNode = NODES[link[0]];
+            var toNode = NODES[link[1]];
+            if (!fromNode || !toNode) return;
+            particles.push({
+                ox: fromNode.x * W, oy: fromNode.y * H,
+                tx: toNode.x * W, ty: toNode.y * H,
+                progress: Math.random(),
+                speed: 0.0012 + Math.random() * 0.001,
+                size: 2 + Math.random() * 1.5,
+                opacity: 0.6 + Math.random() * 0.4
+            });
+        });
+    }
+
+    function getPointOnArc(ox, oy, tx, ty, t) {
+        var cx = (ox + tx) / 2;
+        var cy = Math.min(oy, ty) - Math.abs(tx - ox) * 0.3;
+        var mt = 1 - t;
+        return {
+            x: mt * mt * ox + 2 * mt * t * cx + t * t * tx,
+            y: mt * mt * oy + 2 * mt * t * cy + t * t * ty
+        };
+    }
+
+    function draw() {
+        if (!W || !H) { requestAnimationFrame(draw); return; }
+        ctx.clearRect(0, 0, W, H);
+
+        particles.forEach(function(p) {
+            p.progress += p.speed;
+            if (p.progress > 1) p.progress = 0;
+
+            // Draw the arc path faintly
+            var cx = (p.ox + p.tx) / 2;
+            var cy = Math.min(p.oy, p.ty) - Math.abs(p.tx - p.ox) * 0.3;
+            ctx.beginPath();
+            ctx.moveTo(p.ox, p.oy);
+            ctx.quadraticCurveTo(cx, cy, p.tx, p.ty);
+            ctx.strokeStyle = 'rgba(20, 184, 166, 0.07)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            // Draw the travelling dot
+            var pos = getPointOnArc(p.ox, p.oy, p.tx, p.ty, p.progress);
+            var grad = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, p.size * 2);
+            grad.addColorStop(0, 'rgba(20, 184, 166, ' + p.opacity + ')');
+            grad.addColorStop(1, 'rgba(20, 184, 166, 0)');
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.arc(pos.x, pos.y, p.size * 2, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = 'rgba(20, 184, 166, ' + p.opacity + ')';
+            ctx.beginPath();
+            ctx.arc(pos.x, pos.y, p.size * 0.6, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        requestAnimationFrame(draw);
+    }
+
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(resize, 150);
+    });
+
+    resize();
+    draw();
+})();
+
