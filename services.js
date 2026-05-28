@@ -467,19 +467,31 @@
     var ctx = canvas.getContext('2d');
     var container = canvas.parentElement;
 
-    // Zambia dot approximate position
-    var ORIGIN = { x: 0.5382, y: 0.7209 };
+    var NODES = {
+        zambia: { x: 0.5382, y: 0.7209 },
+        zimbabwe: { x: 0.5550, y: 0.7613 },
+        southernAfrica: { x: 0.5472, y: 0.6536 },
+        northAfrica: { x: 0.4739, y: 0.5425 },
+        middleEast: { x: 0.6006, y: 0.5210 },
+        southAfrica: { x: 0.5262, y: 0.8188 },
+        uk: { x: 0.4313, y: 0.3413 },
+        europe: { x: 0.5112, y: 0.3724 },
+        us: { x: 0.1893, y: 0.4099 }
+    };
 
-    // All pricing dot positions (left%, top% from data-* attributes)
-    var TARGETS = [
-        { x: 0.5550, y: 0.7613 },
-        { x: 0.5472, y: 0.6536 },
-        { x: 0.4739, y: 0.5425 },
-        { x: 0.6006, y: 0.5210 },
-        { x: 0.5262, y: 0.8188 },
-        { x: 0.4313, y: 0.3413 },
-        { x: 0.5112, y: 0.3724 },
-        { x: 0.1893, y: 0.4099 }
+    // Interconnected network routes for a stronger global operations feel.
+    var LINKS = [
+        ['zambia', 'zimbabwe'],
+        ['zambia', 'southernAfrica'],
+        ['zambia', 'southAfrica'],
+        ['zambia', 'uk'],
+        ['zambia', 'europe'],
+        ['southAfrica', 'uk'],
+        ['uk', 'us'],
+        ['northAfrica', 'middleEast'],
+        ['northAfrica', 'europe'],
+        ['middleEast', 'europe'],
+        ['europe', 'us']
     ];
 
     var W = 0, H = 0;
@@ -497,10 +509,13 @@
 
     function buildParticles() {
         particles = [];
-        TARGETS.forEach(function(t) {
+        LINKS.forEach(function(link) {
+            var fromNode = NODES[link[0]];
+            var toNode = NODES[link[1]];
+            if (!fromNode || !toNode) return;
             particles.push({
-                ox: ORIGIN.x * W, oy: ORIGIN.y * H,
-                tx: t.x * W, ty: t.y * H,
+                ox: fromNode.x * W, oy: fromNode.y * H,
+                tx: toNode.x * W, ty: toNode.y * H,
                 progress: Math.random(),
                 speed: 0.0012 + Math.random() * 0.001,
                 size: 2 + Math.random() * 1.5,

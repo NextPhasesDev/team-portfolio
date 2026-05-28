@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
-    <script>(function(){var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
+    <script>(function(){var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -115,10 +115,17 @@
             <li><a href="" class="cta-button" target="_blank" rel="noopener">WhatsApp</a></li>
         </ul>
         <div class="nav-actions">
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
-                <i class="fas fa-sun toggle-icon sun"></i>
-                <i class="fas fa-moon toggle-icon moon"></i>
-            </button>
+            <div class="theme-toggle-group">
+    <button data-theme-mode="light" aria-label="Light theme">
+        <i class="fas fa-sun"></i>
+    </button>
+    <button data-theme-mode="system" class="active" aria-label="System theme">
+        <i class="fas fa-laptop"></i>
+    </button>
+    <button data-theme-mode="dark" aria-label="Dark theme">
+        <i class="fas fa-moon"></i>
+    </button>
+</div>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                 <span></span><span></span><span></span>
             </button>
@@ -126,7 +133,7 @@
     </div>
 </nav>
 
-<div class="background-animation">
+<div class="background-animation" data-parallax="0.12">
     <canvas id="moonCanvas"></canvas>
 </div>
 
@@ -306,8 +313,8 @@
             <h2>Pricing by Region</h2>
             <p>Hover each region point to see a quick pricing snapshot. We keep pricing fair by local market conditions.</p>
 
-            <div class="pricing-map" id="pricingMap" aria-label="Interactive regional pricing map">
-                    <div class="pricing-map-canvas pricing-map-canvas--globe" id="pricingMapCanvas">
+            <div class="pricing-map services-map-wrap" id="pricingMap" aria-label="Interactive regional pricing map">
+                    <div class="pricing-map-canvas pricing-map-canvas--globe services-map" id="pricingMapCanvas">
                     <img src="world-map.svg" alt="World map with highlighted pricing regions" class="pricing-map-image" />
                     <canvas id="npConnectionArcs" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;" aria-hidden="true"></canvas>
 
@@ -429,166 +436,17 @@
         </div>
     </section>
 
-    <section class="service-detail" id="faq">
-        <div class="pricing-content" data-aos="fade-up">
-            <h2>Frequently Asked Questions</h2>
-            <p class="section-intro">Real answers, not templated ones.</p>
-        </div>
-        <div class="testimonials-cta-content" style="max-width: 740px; margin: 2rem auto 0;" data-aos="fade-up">
-            <div class="faq-list" id="faqList">
-
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        How long does a web development project take?
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </button>
-                    <div class="faq-answer" hidden>
-                        <p>A business website or landing page typically takes 4 to 6 weeks. A full web application with user accounts, a database, and custom logic is usually 8 to 16 weeks. We give you a realistic estimate upfront and break the work into milestones so you always know where things stand.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        Do you work with clients outside Zambia?
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </button>
-                    <div class="faq-answer" hidden>
-                        <p>Yes. We work with clients in Zambia, Zimbabwe, South Africa, the UK, Europe, the US, Canada, and across Africa and the Middle East. Our workflow is fully remote and we've handled international projects from the start. We invoice in your regional currency and communicate reliably across timezones.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        Can you redesign or rebuild an existing website or app?
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </button>
-                    <div class="faq-answer" hidden>
-                        <p>Yes. Redesigns are one of our most common requests. We'll audit what you have, be honest about what's worth keeping, and rebuild or refresh accordingly. We don't push full rebuilds when a targeted fix will do the job — but when a rebuild is the right call, we'll tell you why.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        Will my site work on mobile?
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </button>
-                    <div class="faq-answer" hidden>
-                        <p>Every site we build is mobile-first by default. We design for the smallest screen first, then scale up. We test on real devices — not just browser DevTools. Most traffic in Africa arrives on mobile, so this is non-negotiable for us regardless of where your audience is.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        What technologies do you use?
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </button>
-                    <div class="faq-answer" hidden>
-                        <p>We choose the right tool for each project. We're comfortable with vanilla HTML, CSS and JavaScript, React, Node.js, Python, Java, PostgreSQL, MySQL, REST APIs, and deployment on Netlify, Render, Railway, and various cloud platforms. Simple projects get a simple stack. Complex projects get whatever scales appropriately. We'll always explain our choices.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        Do you help with SEO?
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </button>
-                    <div class="faq-answer" hidden>
-                        <p>Yes, and it's included as standard. Every site we build has semantic HTML, proper heading structure, fast load times, mobile optimisation, descriptive meta tags, structured data markup, and a sitemap. These aren't add-ons — they're part of building a website correctly. We also offer performance audits for existing sites that aren't ranking or loading well.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        Can you build custom business software?
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </button>
-                    <div class="faq-answer" hidden>
-                        <p>Yes. Dashboards, staff tools, inventory systems, booking platforms, reporting software, workflow automation — if your business currently runs it on spreadsheets or disconnected tools, we can likely build something better and more reliable. Our product ExamGuard is an example of exactly this kind of work applied to our own market.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" aria-expanded="false">
-                        How much does a project cost?
-                        <i class="fas fa-chevron-down faq-icon"></i>
-                    </button>
-                    <div class="faq-answer" hidden>
-                        <p>It depends on scope and complexity. We use regional pricing — Zambian clients are quoted in ZMW, Southern African clients in ZAR or USD, UK and US clients at market rates. We provide detailed estimates before any work starts. Pricing doesn't change mid-project without written agreement and a documented scope change. We require a 30% deposit after a prototype is approved, with the remaining 70% on final delivery.</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-</main>
+    </main>
 
 <!-- Footer will be injected here via JavaScript from footer.html -->
 
 <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top"><i class="fas fa-chevron-up"></i></button>
 
-<style>
-.faq-item {
-    border-bottom: 1px solid var(--card-border);
-    margin-bottom: 0;
-}
-.faq-question {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.1rem 0;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    color: var(--text-heading);
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: left;
-    font-family: inherit;
-    transition: color 0.2s ease;
-}
-.faq-question:hover { color: var(--primary-teal); }
-.faq-icon {
-    color: var(--primary-teal);
-    transition: transform 0.3s ease;
-    flex-shrink: 0;
-    font-size: 0.85rem;
-}
-.faq-question[aria-expanded="true"] .faq-icon {
-    transform: rotate(180deg);
-}
-.faq-answer {
-    padding-bottom: 1.1rem;
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    line-height: 1.72;
-}
-.faq-answer p { margin: 0; }
-</style>
-
 <script src="/script.js"></script>
 <script src="services.js"></script>
-<script>
-document.querySelectorAll('.faq-question').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-        var expanded = btn.getAttribute('aria-expanded') === 'true';
-        var answer = btn.nextElementSibling;
-        document.querySelectorAll('.faq-question').forEach(function(other) {
-            other.setAttribute('aria-expanded', 'false');
-            if (other.nextElementSibling) other.nextElementSibling.hidden = true;
-            var icon = other.querySelector('.faq-icon');
-            if (icon) icon.style.transform = '';
-        });
-        if (!expanded) {
-            btn.setAttribute('aria-expanded', 'true');
-            answer.hidden = false;
-        }
-    });
-});
-</script>
 </body>
 </html>
+
+
 
 

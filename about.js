@@ -266,17 +266,30 @@
     });
 
     /* Auto-advance */
-    function startAuto() { autoId = setInterval(advance, 5500); }
-    function stopAuto()  { clearInterval(autoId); }
+    function startAutoRotate() {
+        stopAutoRotate();
 
-    carousel.addEventListener('mouseenter', stopAuto);
-    carousel.addEventListener('mouseleave', startAuto);
-    carousel.addEventListener('focusin',    stopAuto);
-    carousel.addEventListener('focusout',   startAuto);
+        autoId = setInterval(() => {
+            goTo(current + 1);
+        }, 5500);
+    }
+
+    function stopAutoRotate() {
+        if (autoId) {
+            clearInterval(autoId);
+            autoId = null;
+        }
+    }
+
+    carousel.addEventListener('mouseenter', stopAutoRotate);
+    carousel.addEventListener('mouseleave', startAutoRotate);
+    carousel.addEventListener('focusin',    stopAutoRotate);
+    carousel.addEventListener('focusout',   startAutoRotate);
+
+    startAutoRotate();
+
 
     update();
-    startAuto();
-
     /* ── SECTION BACKGROUND ───────────────────────────────── */
     initTeamBg();
 
@@ -474,5 +487,30 @@
             if (e.key === 'Escape' && panel.classList.contains('active')) closePanel();
         });
     })();
+
+    let velocity = 0;
+    let lastX = 0;
+    let momentumFrame;
+
+    track.addEventListener('pointermove', (e) => {
+        velocity = e.clientX - lastX;
+        lastX = e.clientX;
+    });
+
+    track.addEventListener('pointerup', () => {
+        cancelAnimationFrame(momentumFrame);
+
+        function momentum() {
+            velocity *= 0.92;
+
+            track.style.transform = `translateX(${velocity}px)`;
+
+            if (Math.abs(velocity) > 0.5) {
+                momentumFrame = requestAnimationFrame(momentum);
+            }
+        }
+
+        momentum();
+    });
 
 })();

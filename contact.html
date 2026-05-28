@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
-    <script>(function(){var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
+    <script>(function(){var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,10 +18,10 @@
     <meta name="twitter:description" content="Web, app, and system development for your next phase of growth.">
     <meta name="twitter:image" content="https://nextphases.dev/og-banner.png">
     <title>Contact - NextPhases</title>
-    <link rel="icon" href-"/favicon.ico" sizes="any" />
-    <link rel="icon" type="image/png" sizes="32x32" href-"/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href-"/favicon-16x16.png" />
-    <link rel="apple-touch-icon" sizes="192x192" href-"/favicon-192.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/favicon-192.png" />
     <!-- Google Fonts - Open Sans with fallback strategy -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -113,13 +113,20 @@
             <li><a href="/portfolio.html" class="nav-link">Portfolio</a></li>
             <li><a href="/testimonials.html" class="nav-link">Testimonials</a></li>
             <li><a href="/about.html" class="nav-link">About</a></li>
-            <li><a href="" class="cta-button" target="_blank" rel="noopener">WhatsApp</a></li>
+            <li><a href="#contactForm" class="cta-button">Contact</a></li>
         </ul>
         <div class="nav-actions">
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
-                <i class="fas fa-sun toggle-icon sun"></i>
-                <i class="fas fa-moon toggle-icon moon"></i>
-            </button>
+            <div class="theme-toggle-group">
+    <button data-theme-mode="light" aria-label="Light theme">
+        <i class="fas fa-sun"></i>
+    </button>
+    <button data-theme-mode="system" class="active" aria-label="System theme">
+        <i class="fas fa-laptop"></i>
+    </button>
+    <button data-theme-mode="dark" aria-label="Dark theme">
+        <i class="fas fa-moon"></i>
+    </button>
+</div>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                 <span></span><span></span><span></span>
             </button>
@@ -127,7 +134,7 @@
     </div>
 </nav>
 
-<div class="background-animation">
+<div class="background-animation" data-parallax="0.12">
     <canvas id="moonCanvas"></canvas>
 </div>
 
@@ -156,13 +163,13 @@
                             </div>
                         </div>
 
-                        <div class="contact-method">
+                        <div class="contact-method" data-whatsapp-contact="true">
                             <div class="contact-method-icon">
                                 <i class="fab fa-whatsapp"></i>
                             </div>
                             <div>
                                 <h4>WhatsApp Us</h4>
-                                <a href="https://wa.me/260978131906?text=Hi%20NextPhases%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener">+260 978 131 906</a>
+                                <a href="https://wa.me/260978131906?text=Hi%20NextPhases%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener">+260 97 813 1906</a>
                             </div>
                         </div>
 
@@ -195,7 +202,6 @@
                             <a href="https://www.tiktok.com/@nextphases.dev?lang=en" class="social-link" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                             <a href="https://www.instagram.com/nextphases.dev/" class="social-link" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                             <a href="https://www.linkedin.com/company/nextphases" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                            <a href="https://wa.me/260978131906?text=Hi%20NextPhases%2C%20I%27d%20like%20to%20discuss%20a%20project." class="social-link" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                             <a href="https://discord.gg/DkybgpuRwp" class="social-link" target="_blank" rel="noopener" aria-label="Discord"><i class="fab fa-discord"></i></a>
                         </div>
                     </div>
@@ -249,9 +255,9 @@
 
                     <div class="form-group full-width">
                         <label for="region">
-                            <i class="fas fa-globe"></i> Region
+                            <i class="fas fa-globe"></i> Your Region
                         </label>
-                        <select id="region" name="region">
+                        <select id="region" name="region" required>
                             <option value="">Select your region</option>
                             <option value="zambia">Zambia</option>
                             <option value="zimbabwe-usd">Zimbabwe</option>
@@ -268,7 +274,7 @@
                         <input type="hidden" id="currency" name="currency" value="USD" />
                     </div>
 
-                    <div class="form-row budget-timeline-row full-width">
+                    <div class="form-row">
                         <div class="form-group">
                             <label for="budget">
                                 <i class="fas fa-dollar-sign"></i> Budget Range (Optional)
@@ -318,6 +324,65 @@
             </div>
         </div>
     </section>
+
+    <section class="faq-section" id="faq-section">
+        <div class="faq-container">
+            <h2>Frequently Asked Questions</h2>
+            <p class="faq-intro">Find answers to common questions about our services, pricing, and process.</p>
+
+            <div class="faq-grid">
+                <details class="faq-item">
+                    <summary>How long does a web development project take with NextPhases?</summary>
+                    <p>A straightforward business website typically takes 4 to 6 weeks from signed agreement to delivery. A full web application with authentication, database, and multiple user roles is usually 8 to 16 weeks. We break every project into clear milestones and communicate progress at each stage.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Do NextPhases work with international clients?</summary>
+                    <p>Yes. We work with clients in Zambia, Zimbabwe, South Africa, the UK, Europe, the US, Canada, and across Africa and the Middle East. Our entire workflow is remote-friendly. We use email, WhatsApp, and video calls to stay aligned regardless of timezone.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Can NextPhases redesign or rebuild an existing website?</summary>
+                    <p>Yes, and it's one of the most common requests we handle. We can audit your existing site or app, identify what's working and what isn't, then redesign it while preserving anything worth keeping. We'll tell you what's worth keeping before recommending a full restart.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Will my website work on mobile phones and tablets?</summary>
+                    <p>Every website and application we build is mobile-first by default. We design for the smallest screen first, then scale up. We test on real devices across multiple screen sizes and browsers before delivery. Given that most traffic in Africa comes from mobile devices, this is non-negotiable for us.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>What technologies does NextPhases use?</summary>
+                    <p>We choose the right tool for the job rather than forcing every project into one stack. We're experienced with HTML, CSS, JavaScript, React, Node.js, Python, Java, PostgreSQL, MySQL, REST APIs, and deployment on Netlify, Render, Railway, and cloud platforms.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Do you provide maintenance and support after launch?</summary>
+                    <p>Yes. Every project includes a post-launch support window during which we handle any bugs or issues that appear. Beyond that, we offer ongoing maintenance arrangements covering security updates, performance checks, feature additions, and content changes.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Can NextPhases build custom business systems?</summary>
+                    <p>Yes. Custom business systems like dashboards, staff management tools, inventory trackers, booking systems, and workflow automation are a core part of what we do. If you have a business process that relies on spreadsheets, paper, or disconnected tools, we can build something better.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>How much does a project cost?</summary>
+                    <p>Pricing depends on scope, complexity, and timeline. We use regional pricing to keep our services accessible. We're transparent about pricing from the first conversation and provide detailed estimates before any work starts. We require a 30% deposit after a prototype is approved, with the remaining 70% on final delivery.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Does NextPhases help with SEO and performance?</summary>
+                    <p>Yes. Every website we build includes SEO foundations as standard: semantic HTML structure, proper heading hierarchy, fast load times, mobile optimization, descriptive meta tags, and structured data markup. We don't charge extra for these—they're part of building a website correctly.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>How do I start a project with NextPhases?</summary>
+                    <p>Reach out through our contact form or directly on WhatsApp. Tell us what you're building, who it's for, and roughly when you need it. We'll respond within 24 to 48 hours and schedule a free discovery call. No commitment required at that stage.</p>
+                </details>
+            </div>
+        </div>
+    </section>
 </main>
 
 <!-- Footer will be injected here via JavaScript from footer.html -->
@@ -326,5 +391,6 @@
 <script src="/script.js"></script>
 </body>
 </html>
+
 
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
-    <script>(function(){var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);})();</script>
+    <script>(function(){var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,10 +18,10 @@
     <meta name="twitter:description" content="Web, app, and system development for your next phase of growth.">
     <meta name="twitter:image" content="https://nextphases.dev/og-banner.png">
     <title>About Us — NextPhases</title>
-    <link rel="icon" href-"/favicon.ico" sizes="any" />
-    <link rel="icon" type="image/png" sizes="32x32" href-"/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href-"/favicon-16x16.png" />
-    <link rel="apple-touch-icon" sizes="192x192" href-"/favicon-192.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/favicon-192.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -112,10 +112,17 @@
             <li><a href="" class="cta-button" target="_blank" rel="noopener">WhatsApp</a></li>
         </ul>
         <div class="nav-actions">
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
-                <i class="fas fa-sun toggle-icon sun"></i>
-                <i class="fas fa-moon toggle-icon moon"></i>
-            </button>
+            <div class="theme-toggle-group">
+    <button data-theme-mode="light" aria-label="Light theme">
+        <i class="fas fa-sun"></i>
+    </button>
+    <button data-theme-mode="system" class="active" aria-label="System theme">
+        <i class="fas fa-laptop"></i>
+    </button>
+    <button data-theme-mode="dark" aria-label="Dark theme">
+        <i class="fas fa-moon"></i>
+    </button>
+</div>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                 <span></span><span></span><span></span>
             </button>
@@ -123,7 +130,7 @@
     </div>
 </nav>
 
-<div class="background-animation">
+<div class="background-animation" data-parallax="0.12">
     <canvas id="moonCanvas"></canvas>
 </div>
 
@@ -268,5 +275,6 @@
 <script src="about.js"></script>
 </body>
 </html>
+
 
 

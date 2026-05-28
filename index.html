@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
 
     <meta charset="UTF-8" />
@@ -386,10 +386,17 @@
             <li><a href="" class="cta-button" target="_blank" rel="noopener">WhatsApp</a></li>
         </ul>
         <div class="nav-actions">
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
-                <i class="fas fa-sun toggle-icon sun"></i>
-                <i class="fas fa-moon toggle-icon moon"></i>
-            </button>
+            <div class="theme-toggle-group">
+    <button data-theme-mode="light" aria-label="Light theme">
+        <i class="fas fa-sun"></i>
+    </button>
+    <button data-theme-mode="system" class="active" aria-label="System theme">
+        <i class="fas fa-laptop"></i>
+    </button>
+    <button data-theme-mode="dark" aria-label="Dark theme">
+        <i class="fas fa-moon"></i>
+    </button>
+</div>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                 <span></span>
                 <span></span>
@@ -400,7 +407,7 @@
 </nav>
 
 <!-- Animated Moon Phase Background -->
-<div class="background-animation">
+<div class="background-animation" data-parallax="0.12">
     <canvas id="moonCanvas"></canvas>
 </div>
 
@@ -415,9 +422,30 @@
 
 <main>
     <section class="hero" role="region" aria-label="Main value proposition">
-        <p class="company-description">We're a software development company building modern websites, mobile applications, SaaS platforms, and AI-powered automation solutions for startups, digital agencies, and businesses ready to scale globally.</p>
+        <div class="hero-company-statement glass-panel">
+            <div class="hero-company-pill">
+                <span class="pulse-dot"></span>
+                Trusted Software Partner • Zambia → Global
+            </div>
+
+            <h2>
+                Websites, apps, SaaS platforms, and AI systems designed to scale.
+            </h2>
+
+            <p>
+                NextPhases builds modern digital products for startups, businesses, and agencies across Africa and internationally, combining premium execution with regional pricing.
+            </p>
+
+            <div class="hero-company-tags">
+                <span>Web Development</span>
+                <span>Apps</span>
+                <span>SaaS</span>
+                <span>AI Automation</span>
+                <span>UX Systems</span>
+            </div>
+        </div>
         <p class="intro">From concept to deployment — we deliver scalable, user-focused technology solutions that help your business grow.</p>
-        <p class="location-statement">Based in Lusaka, Zambia. Serving clients across Africa, North America, and worldwide with award-quality work at regional pricing.</p>
+        <p class="location-statement">• Based in Lusaka, Zambia. Serving clients across Africa, North America, and worldwide with award-quality work at regional pricing.</p>
         <div class="cta">
             <a href="https://wa.me/260978131906?text=Hi%20NextPhases%2C%20I%27d%20like%20to%20discuss%20a%20project." class="cta-button" target="_blank" rel="noopener" aria-label="Start your next project on WhatsApp">
                 <span>Get Started</span>
@@ -561,67 +589,6 @@
         </div>
     </section>
 
-    <!-- Frequently Asked Questions Section -->
-    <section class="faq-section" role="region" aria-labelledby="faq-heading">
-        <h2 id="faq-heading">Frequently Asked Questions</h2>
-        <p class="section-description">Answers to common questions about our services, pricing, and process.</p>
-
-        <div class="faq-grid">
-            <details class="faq-item" data-aos="fade-up">
-                <summary><h3>How long does a web development project take with NextPhases?</h3></summary>
-                <p>A straightforward business website typically takes 4 to 6 weeks from signed agreement to delivery. A full web application with authentication, database, and multiple user roles is usually 8 to 16 weeks. We break every project into clear milestones — planning, design approval, development sprints, testing, and handover — and communicate progress at each stage.</p>
-            </details>
-
-            <details class="faq-item" data-aos="fade-up" data-aos-delay="50">
-                <summary><h3>Do NextPhases work with international clients outside Zambia?</h3></summary>
-                <p>Yes. We work with clients across Africa, the UK, Europe, North America, and internationally. Our workflow is remote-first — we use email, WhatsApp, and video calls to collaborate across timezones. We invoice in currencies appropriate to the client's region and are experienced with international expectations and contracts.</p>
-            </details>
-
-            <details class="faq-item" data-aos="fade-up" data-aos-delay="100">
-                <summary><h3>Can NextPhases redesign or rebuild an existing website or application?</h3></summary>
-                <p>Yes. We audit existing code and designs, identify what's worth preserving, and recommend either iterative improvements or a full rebuild depending on cost, maintainability, and long-term goals. Our audits include performance, accessibility, security, and UX considerations.</p>
-            </details>
-
-            <details class="faq-item" data-aos="fade-up" data-aos-delay="150">
-                <summary><h3>Will my website work on mobile phones and tablets?</h3></summary>
-                <p>Every site and app we build is mobile-first by default. We design for small screens first, then scale up, and we test on real devices across multiple screen sizes and browsers before delivery to ensure consistent behaviour and performance.</p>
-            </details>
-
-            <details class="faq-item" data-aos="fade-up" data-aos-delay="200">
-                <summary><h3>What technologies and programming languages does NextPhases use?</h3></summary>
-                <p>We pick the right tools per project. Common technologies we use include HTML, CSS, JavaScript (vanilla and frameworks like React), Node.js, Python, Java, PostgreSQL, MySQL, and standard REST APIs. For hosting and deployment we use Netlify, Render, Railway, and common cloud providers depending on requirements.</p>
-            </details>
-
-            <details class="faq-item" data-aos="fade-up" data-aos-delay="250">
-                <summary><h3>Does NextPhases provide maintenance and support after a project launches?</h3></summary>
-                <p>Yes. Projects include a post-launch support window for immediate fixes. We also offer ongoing maintenance contracts for updates, security patches, performance checks, and new feature work. Many clients return to us months or years later for additional phases.</p>
-            </details>
-
-            <details class="faq-item" data-aos="fade-up" data-aos-delay="300">
-                <summary><h3>Can NextPhases build custom software or internal business systems?</h3></summary>
-                <p>Yes. We build custom dashboards, staff management systems, inventory trackers, booking platforms, and workflow automation. ExamGuard is an example of a product that began as a solution to a real problem and evolved into a full SaaS offering.</p>
-            </details>
-
-            <details class="faq-item" data-aos="fade-up" data-aos-delay="350">
-                <summary><h3>How much does a project cost at NextPhases?</h3></summary>
-                <p>Pricing depends on scope, complexity, and timeline. We use regional pricing to keep services accessible — Zambian projects quoted in ZMW, Southern African/other regions in ZAR or USD, and UK/US projects at market-aligned rates. We provide detailed estimates before work begins and require a 30% deposit (after prototype approval) with the remaining balance on final delivery.</p>
-            </details>
-
-            <details class="faq-item" data-aos="fade-up" data-aos-delay="400">
-                <summary><h3>Does NextPhases help with SEO and website performance?</h3></summary>
-                <p>Yes. We include SEO fundamentals as standard: semantic HTML, proper heading structure, fast loading, mobile optimisation, descriptive meta tags, structured data, and a sitemap. We also offer performance audits and ongoing optimisation services.</p>
-            </details>
-
-            <details class="faq-item" data-aos="fade-up" data-aos-delay="450">
-                <summary><h3>How do I start a project with NextPhases?</h3></summary>
-                <p>Contact us via the site form or WhatsApp. Tell us what you're building, who it's for, and your target timeline. We'll respond within 24–48 hours to schedule a discovery call and provide an initial estimate. No commitment at the discovery stage.</p>
-            </details>
-        </div>
-
-        <div class="faq-cta">
-            <p>Didn't find your answer? <a href="/contact.html" class="link-styled">Get in touch directly</a> or <a href="https://wa.me/260978131906?text=Hi%20NextPhases%2C%20I%20have%20a%20question%20about%20your%20services." target="_blank" rel="noopener" class="link-styled">message us on WhatsApp</a>.</p>
-        </div>
-    </section>
 
     <!-- Quick Contact CTA -->
     <section class="quick-contact" role="region" aria-labelledby="cta-heading">
@@ -649,20 +616,49 @@
 
 <!-- Help Button -->
 <button class="help-guide-button" id="helpGuideButton" aria-label="Get help navigating the site"></button>
-<div class="help-guide-tooltip">
-    <h3>Quick Tips</h3>
-    <ul>
-        <li><a href="#services">See what we build</a> in our services</li>
-        <li><a href="#faq-heading">Browse FAQs</a> for common questions</li>
-        <li><a href="/portfolio.html">Check our portfolio</a> to see our work</li>
-        <li><a href="/contact.html">Get in touch</a> to start a project</li>
-        <li>Toggle dark mode with the sun/moon icon</li>
-    </ul>
-    <div class="help-guide-tooltip-arrow"></div>
+<div class="smart-help-panel glass-panel" aria-hidden="true">
+    <h3>How can we help?</h3>
+
+    <div class="smart-help-grid">
+
+        <a class="smart-help-card" href="/services.html">
+            <i class="fas fa-layer-group"></i>
+            <div>
+                <h4>Explore Services</h4>
+                <p>Websites, apps, SaaS systems, AI workflows.</p>
+            </div>
+        </a>
+
+        <a class="smart-help-card" href="https://wa.me/260978131906" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i>
+            <div>
+                <h4>Start a Project</h4>
+                <p>Get a response directly from the team.</p>
+            </div>
+        </a>
+
+        <a class="smart-help-card" href="/portfolio.html">
+            <i class="fas fa-code"></i>
+            <div>
+                <h4>View Our Work</h4>
+                <p>See live projects and internal products.</p>
+            </div>
+        </a>
+
+        <a class="smart-help-card" href="/contact.html">
+            <i class="fas fa-envelope"></i>
+            <div>
+                <h4>Request Pricing</h4>
+                <p>Regional pricing available worldwide.</p>
+            </div>
+        </a>
+
+    </div>
 </div>
 
 <script src="/script.js"></script>
 </body>
 </html>
+
 
 
