@@ -4,20 +4,26 @@
 
 ## Company
 
-NextPhases is founded by a team of software engineers and digital strategists committed to delivering high-quality, scalable solutions for businesses at every stage of growth. We specialize in transforming business challenges into elegant technical solutions, combining strategic thinking with solid engineering practices. Our team has experience across Africa and internationally, helping startups and enterprises launch products that matter.
+NextPhases is founded and led by a team of four co-founders:
 
-## Team
+- **Thuma** – Co-Founder, CTO & CMO
+- **Simon** – Co-Founder, COO
+- **Christian** – Co-Founder, CEO & Chief Commercial Officer
+- **Shaun** – Co-Founder, VP Engineering
 
-NextPhases is founded and led by experienced software engineers and digital strategists:
+Our team combines expertise in architecture, operations, leadership, and engineering to deliver high-quality, scalable solutions. We also have contributors like **Lans**, a developer supporting active development across NextPhases projects.
 
-- **Founding Lead, Full-Stack Development & Architecture** – Expert in modern web technologies (React, Node.js, Python) with years of real-world experience building scalable systems
--  **Technical Strategy & System Design** – Specialist in infrastructure, database optimization, and long-term technical planning for growing products
-- **Mobile Development** – iOS and Android expert with experience shipping cross-platform apps to production
-- **UX/UI Design & Product** – Creates intuitive interfaces and leads the user experience vision for all projects
-- **DevOps & Infrastructure** – Ensures reliability, performance, and security across all deployments
-- **Client Leadership & Project Management** – Keeps clients informed, teams aligned, and projects moving
+## Team Roles
 
-Each team member brings real-world experience from working on diverse projects across industries, with a shared commitment to clean code, continuous learning, and client success.
+- **Thuma (CTO & CMO)** – Sets technical direction and brand strategy. Leads architecture, development strategy, and company communications. Expert in modern web technologies (React, Node.js, Python) and system design.
+
+- **Simon (COO)** – Manages operations, project delivery, and client communication. Ensures projects move from kickoff to launch without losing momentum.
+
+- **Christian (CEO & CCO)** – Leads company vision, manages client relationships, and drives commercial growth. Handles company voice and strategic partnerships.
+
+- **Shaun (VP Engineering)** – Guides engineering quality and implementation standards. Ensures every shipped feature feels dependable and polished.
+
+- **Lans (Developer Contributor)** – Supports development work across NextPhases projects while building hands-on experience with real clients.
 
 ## Services
 
