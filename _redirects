@@ -17,3 +17,25 @@
 /*/                          /index.html       200
 /*                            /index.html       200
 
+# Redirect .html pages to pretty URLs
+/about.html      /about       301
+/contact.html    /contact     301
+/services.html   /services    301
+/portfolio.html  /portfolio   301
+/pricing.html    /pricing     301
+/privacy.html    /privacy     301
+/terms.html      /terms       301
+/testimonials.html /testimonials 301
+# Redirect blog posts to pretty URLs
+/blogs.html        /blogs        301
+/blogs/index.html  /blogs        301
+
+# Example blog article redirects
+/blogs/building-from-zambia.html  /blogs/building-from-zambia 301
+
+# Redirect games section
+/games.html        /games        301
+/games/index.html  /games        301
+
+# Example game page redirects
+/games/nsolo.html  /games/nsolo  301
