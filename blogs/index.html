@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <script>(function(){var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="NextPhases Blog - Building software from Zambia. Dev diaries, company updates, product stories, and insights from the team behind NextPhases.dev." />
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Blog - NextPhases">
+    <meta property="og:description" content="Dev diaries, company updates, and product stories from the NextPhases team in Lusaka, Zambia.">
+    <meta property="og:url" content="https://nextphases.dev/blogs/">
+    <meta property="og:image" content="https://nextphases.dev/blogs/building-from-zambia/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blog - NextPhases">
+    <meta name="twitter:description" content="Dev diaries, company updates, and product stories from the NextPhases team.">
+    <meta name="twitter:image" content="https://nextphases.dev/blogs/building-from-zambia/og-image.png">
+    <title>Blog - NextPhases</title>
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/favicon-192.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "NextPhases Blog",
+      "url": "https://nextphases.dev/blogs/",
+      "description": "Dev diaries, company updates, and product stories from the NextPhases team in Lusaka, Zambia.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "NextPhases.dev",
+        "url": "https://nextphases.dev",
+        "logo": "https://nextphases.dev/Logo_transparent.png"
+      }
+    }
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5T40D6EZG4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5T40D6EZG4');
+    </script>
+
+    <style>
+    /* =============================================
+       BLOG PAGE - Scoped styles
+       Extends /style.css, never overrides globals
+       ============================================= */
+
+    /* -- Playfair for editorial headings only -- */
+    .blog-display {
+        font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    /* ── HERO ── */
+    .blog-hero {
+        padding: 5rem 2rem 3.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .blog-hero-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--primary-teal);
+        margin-bottom: 1.2rem;
+    }
+
+    .blog-hero-label::before {
+        content: '';
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--primary-teal);
+        border-radius: 1px;
+    }
+
+    .blog-hero h1 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(2.4rem, 5vw, 3.8rem);
+        font-weight: 900;
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+        color: var(--text-heading);
+        margin-bottom: 1.1rem;
+        max-width: 680px;
+    }
+
+    .blog-hero h1 em {
+        font-style: italic;
+        color: var(--primary-teal);
+    }
+
+    .blog-hero-sub {
+        font-size: 1.05rem;
+        color: var(--text-secondary);
+        max-width: 520px;
+        line-height: 1.7;
+        margin-bottom: 2rem;
+    }
+
+    .blog-hero-stats {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .blog-stat {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+    }
+
+    .blog-stat-num {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-heading);
+        line-height: 1;
+    }
+
+    .blog-stat-label {
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+    }
+
+    /* ── CATEGORY FILTER ── */
+    .blog-filters {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem 2.5rem;
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .blog-filter-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.45rem 1rem;
+        border-radius: 100px;
+        border: 1px solid var(--card-border);
+        background: transparent;
+        color: var(--text-secondary);
+        font-size: 0.82rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: inherit;
+    }
+
+    .blog-filter-btn:hover {
+        border-color: var(--primary-teal);
+        color: var(--primary-teal);
+    }
+
+    .blog-filter-btn.active {
+        background: var(--primary-teal);
+        border-color: var(--primary-teal);
+        color: #fff;
+    }
+
+    .blog-filter-count {
+        font-size: 0.7rem;
+        opacity: 0.75;
+    }
+
+    /* ── MAIN GRID ── */
+    .blog-main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem 5rem;
+    }
+
+    /* Featured post (first) */
+    .blog-featured {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        overflow: hidden;
+        margin-bottom: 3rem;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        position: relative;
+    }
+
+    .blog-featured:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 20px 48px var(--shadow-medium);
+    }
+
+    .blog-featured-visual {
+        position: relative;
+        background: linear-gradient(135deg, var(--primary-navy) 0%, var(--bg-secondary) 100%);
+        min-height: 380px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .blog-featured-cover {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: left;
+        opacity: 1;
+    }
+
+    @media (min-width: 900px) {
+        .blog-featured-cover {
+            object-position: 1% center;
+        }
+    }
+
+    .blog-featured-visual::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(13, 27, 42, 0.12), rgba(13, 27, 42, 0.2));
+        z-index: 1;
+    }
+
+    .blog-featured-visual::after {
+        display: none;
+    }
+
+    @keyframes blog-orb-pulse {
+        0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+        50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+    }
+
+    .blog-featured-icon {
+        display: none;
+    }
+
+    .blog-featured-icon svg {
+        width: 64px;
+        height: 64px;
+        color: var(--primary-teal);
+        opacity: 0.9;
+        filter: drop-shadow(0 0 16px rgba(20,184,166,0.35));
+    }
+
+    .blog-featured-icon span {
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--primary-teal);
+        font-weight: 700;
+    }
+
+    .blog-featured-content {
+        padding: 3rem 2.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .blog-featured-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--primary-teal);
+    }
+
+    .blog-featured-badge::before {
+        content: '';
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        background: var(--primary-teal);
+        border-radius: 50%;
+        animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+    }
+
+    .blog-featured h2 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: clamp(1.4rem, 2.5vw, 2rem);
+        font-weight: 900;
+        line-height: 1.18;
+        color: var(--text-heading);
+        letter-spacing: -0.01em;
+    }
+
+    .blog-featured-title-link {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .blog-featured-title-link:hover {
+        color: inherit;
+    }
+
+    .blog-featured h2 em {
+        font-style: italic;
+        color: var(--primary-teal);
+    }
+
+    .blog-featured-excerpt {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        line-height: 1.75;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .blog-featured-meta {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        flex-wrap: wrap;
+    }
+
+    .blog-meta-author {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+
+    .blog-meta-dot {
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: var(--text-secondary);
+        flex-shrink: 0;
+    }
+
+    .blog-meta-date,
+    .blog-meta-read {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+    }
+
+    .blog-read-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--primary-teal);
+        text-decoration: none;
+        letter-spacing: 0.04em;
+        transition: gap 0.2s ease;
+        margin-top: 0.5rem;
+        align-self: flex-start;
+    }
+
+    .blog-read-link:hover {
+        gap: 0.8rem;
+    }
+
+    .blog-read-link i {
+        font-size: 0.75rem;
+        transition: transform 0.2s ease;
+    }
+
+    .blog-read-link:hover i {
+        transform: translateX(3px);
+    }
+
+    /* ── POST GRID ── */
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .blog-card {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 14px;
+        overflow: hidden;
+        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    .blog-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 40px var(--shadow-medium);
+        border-color: rgba(20, 184, 166, 0.25);
+    }
+
+    /* Subtle top accent on hover */
+    .blog-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary-teal), var(--primary-navy));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.35s ease;
+    }
+
+    .blog-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .blog-card-visual {
+        height: 160px;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    /* Per-category visual accents */
+    .blog-card[data-cat="founders"] .blog-card-visual {
+        background: linear-gradient(135deg, rgba(30,58,138,0.4) 0%, rgba(20,184,166,0.15) 100%);
+    }
+    .blog-card[data-cat="devlog"] .blog-card-visual {
+        background: linear-gradient(135deg, rgba(20,184,166,0.15) 0%, rgba(30,58,138,0.3) 100%);
+    }
+    .blog-card[data-cat="product"] .blog-card-visual {
+        background: linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(20,184,166,0.2) 100%);
+    }
+    .blog-card[data-cat="community"] .blog-card-visual {
+        background: linear-gradient(135deg, rgba(20,184,166,0.2) 0%, rgba(96,165,250,0.15) 100%);
+    }
+
+    .blog-card-visual-icon {
+        font-size: 2.5rem;
+        opacity: 0.35;
+        user-select: none;
+        transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .blog-card:hover .blog-card-visual-icon {
+        opacity: 0.55;
+        transform: scale(1.08);
+    }
+
+    /* grid pattern overlay on card visuals */
+    .blog-card-visual::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image:
+            linear-gradient(var(--card-border) 1px, transparent 1px),
+            linear-gradient(90deg, var(--card-border) 1px, transparent 1px);
+        background-size: 30px 30px;
+        opacity: 0.5;
+    }
+
+    .blog-card-body {
+        padding: 1.4rem 1.5rem 1.6rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        flex: 1;
+    }
+
+    .blog-card-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.67rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        padding: 0.25rem 0.65rem;
+        border-radius: 100px;
+        align-self: flex-start;
+    }
+
+    .tag-founders { background: rgba(30,58,138,0.15); color: var(--text-heading); border: 1px solid rgba(30,58,138,0.2); }
+    .tag-devlog   { background: rgba(20,184,166,0.1);  color: var(--primary-teal);  border: 1px solid rgba(20,184,166,0.2); }
+    .tag-product  { background: rgba(59,130,246,0.1);  color: #60a5fa;              border: 1px solid rgba(59,130,246,0.2); }
+    .tag-community{ background: rgba(20,184,166,0.08); color: var(--teal-light);    border: 1px solid rgba(20,184,166,0.15); }
+
+    [data-theme="light"] .tag-founders { background: rgba(30,58,138,0.08); color: var(--primary-navy); }
+    [data-theme="light"] .tag-product  { background: rgba(59,130,246,0.08); color: #3b82f6; }
+
+    .blog-card h3 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        line-height: 1.35;
+        color: var(--text-heading);
+        letter-spacing: -0.01em;
+    }
+
+    .blog-card-excerpt {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        flex: 1;
+    }
+
+    .blog-card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--card-border);
+        margin-top: auto;
+    }
+
+    .blog-card-author {
+        font-size: 0.78rem;
+        color: var(--text-secondary);
+        font-weight: 600;
+    }
+
+    .blog-card-info {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .blog-card-date,
+    .blog-card-read {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+    }
+
+    /* ── EMPTY STATE (placeholder posts) ── */
+    .blog-card.placeholder {
+        opacity: 0.45;
+        pointer-events: none;
+    }
+
+    .blog-card.placeholder .blog-card-body {
+        position: relative;
+    }
+
+    .placeholder-label {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+        gap: 0.5rem;
+    }
+
+    /* ── NEWSLETTER / CTA strip ── */
+    .blog-cta-strip {
+        margin: 3rem 0 0;
+        padding: 2.5rem 2.8rem;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        flex-wrap: wrap;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .blog-cta-strip::before {
+        content: '';
+        position: absolute;
+        top: -60px;
+        right: -60px;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(20,184,166,0.12) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .blog-cta-text h3 {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-heading);
+        margin-bottom: 0.35rem;
+    }
+
+    .blog-cta-text p {
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+
+    .blog-cta-actions {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        flex-shrink: 0;
+    }
+
+    .blog-cta-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.65rem 1.4rem;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        font-family: inherit;
+    }
+
+    .blog-cta-btn.primary {
+        background: var(--primary-teal);
+        color: #fff;
+        border: 1px solid var(--primary-teal);
+    }
+
+    .blog-cta-btn.primary:hover {
+        background: var(--teal-dark);
+    }
+
+    .blog-cta-btn.secondary {
+        background: transparent;
+        color: var(--primary-teal);
+        border: 1px solid var(--card-border);
+    }
+
+    .blog-cta-btn.secondary:hover {
+        border-color: var(--primary-teal);
+        background: rgba(20,184,166,0.06);
+    }
+
+    /* ── SCROLL FADE IN ── */
+    .blog-fade {
+        opacity: 0;
+        transform: translateY(22px);
+        transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .blog-fade.visible {
+        opacity: 1;
+        transform: none;
+    }
+
+    /* ── READING PROGRESS ── */
+    #blog-progress {
+        position: fixed;
+        top: 84px;
+        right: 12px;
+        width: 3px;
+        height: calc(100vh - 104px);
+        background: var(--primary-teal);
+        border-radius: 999px;
+        transform-origin: top;
+        transform: scaleY(0);
+        z-index: 999;
+        transition: transform 0.08s linear;
+        opacity: 0.9;
+    }
+
+    @media (max-width: 600px) {
+        #blog-progress {
+            top: 74px;
+            right: 8px;
+            height: calc(100vh - 88px);
+        }
+    }
+
+    /* ── DIVIDER ── */
+    .blog-section-divider {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: 2.5rem 0 2rem;
+        color: var(--text-secondary);
+    }
+
+    .blog-section-divider span {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .blog-section-divider::before,
+    .blog-section-divider::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: var(--card-border);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+        .blog-featured {
+            grid-template-columns: 1fr;
+        }
+
+        .blog-featured-visual {
+            min-height: 220px;
+        }
+
+        .blog-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 600px) {
+        .blog-hero {
+            padding: 3.5rem 1.25rem 2.5rem;
+        }
+
+        .blog-filters {
+            padding: 0 1.25rem 2rem;
+        }
+
+        .blog-main {
+            padding: 0 1.25rem 4rem;
+        }
+
+        .blog-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .blog-cta-strip {
+            padding: 1.8rem 1.5rem;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .blog-hero-stats {
+            gap: 1.25rem;
+        }
+    }
+    </style>
+</head>
+
+<!-- Google tag already loaded above via script src -->
+<body>
+
+<div id="blog-progress"></div>
+
+<!-- Nav injected by script.js -->
+<div id="navbarMount"></div>
+
+<div class="background-animation" data-parallax="0.12">
+    <canvas id="moonCanvas"></canvas>
+</div>
+
+<main class="page-content">
+
+    <!-- ── HERO ── -->
+    <section class="blog-hero blog-fade">
+        <div class="blog-hero-label">From the team</div>
+        <h1 class="blog-display">Building<br>in <em>public.</em></h1>
+        <p class="blog-hero-sub">Dev diaries, product stories, and honest takes on building a software company from Lusaka, Zambia.</p>
+        <div class="blog-hero-stats">
+            <div class="blog-stat">
+                <span class="blog-stat-num" id="postCount">1</span>
+                <span class="blog-stat-label">Article published</span>
+            </div>
+            <div class="blog-stat">
+                <span class="blog-stat-num">2</span>
+                <span class="blog-stat-label">Products in dev</span>
+            </div>
+            <div class="blog-stat">
+                <span class="blog-stat-num">4</span>
+                <span class="blog-stat-label">Builders on the team</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CATEGORY FILTERS ── -->
+    <div class="blog-filters blog-fade">
+        <button class="blog-filter-btn active" data-filter="all">All <span class="blog-filter-count">(1)</span></button>
+        <button class="blog-filter-btn" data-filter="founders">Founders <span class="blog-filter-count">(1)</span></button>
+        <button class="blog-filter-btn" data-filter="devlog">Dev Log <span class="blog-filter-count">(0)</span></button>
+        <button class="blog-filter-btn" data-filter="product">Product <span class="blog-filter-count">(0)</span></button>
+        <button class="blog-filter-btn" data-filter="community">Community <span class="blog-filter-count">(0)</span></button>
+    </div>
+
+    <div class="blog-main">
+
+        <!-- ── FEATURED POST ── -->
+        <article class="blog-featured blog-fade" data-cat="founders" id="featured-post">
+            <div class="blog-featured-visual">
+                <img class="blog-featured-cover" src="/blogs/building-from-zambia/cover.webp" alt="Cover image for Building From Zambia post" loading="eager" fetchpriority="high" decoding="async">
+                <div class="blog-featured-icon">
+                    <!-- NextPhases logo SVG -->
+                    <svg viewBox="0 0 397 395" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M122.089 321.085C126.922 321.418 138.689 322.085 147.089 322.085C147.589 322.585 152.589 320.085 149.589 317.085C147.255 316.918 141.189 316.085 135.589 314.085C131.422 312.585 121.689 308.685 116.089 305.085C112.422 302.918 103.689 297.285 98.0888 292.085C93.9221 288.251 84.3888 278.985 79.5888 272.585C76.5888 268.418 69.6888 258.185 66.0888 250.585C63.7554 245.251 58.6888 232.885 57.0888 226.085C55.5888 220.085 54.5888 214.085 54.0888 205.585C53.5862 197.041 52.5888 193.085 53.5888 187.085C53.5888 179.585 54.5888 174.085 55.5888 167.585C56.5888 161.085 57.0888 158.085 60.0888 150.085C62.0888 141.585 64.5888 136.085 68.0888 128.585C70.5888 124.085 76.3888 114.085 79.5888 110.085C81.0888 107.751 85.1888 102.085 89.5888 98.0845C91.2554 95.9179 95.4888 90.8845 99.0888 88.0845C101.089 86.0845 106.214 82.5845 109.589 79.5845C111.089 78.2512 114.689 75.2845 117.089 74.0845C119.255 72.4179 124.389 68.7845 127.589 67.5845C131.089 64.5845 136.089 63.0845 146.589 58.5845C150.589 57.0845 160.289 53.7845 167.089 52.5845C188.089 49.0845 174.589 51.0845 183.589 50.0845H198.589C200.755 49.9179 206.689 49.9845 213.089 51.5845C216.922 52.2512 226.189 54.1845 232.589 56.5845C238.589 58.5845 247.275 61.6776 253.089 64.5845C257.089 66.5845 262.089 70.0845 266.589 73.0845C271.089 76.0845 274.089 77.0845 278.589 81.5845C283.089 85.5845 286.589 89.0845 288.089 90.5845C289.364 91.8593 297.089 100.585 298.089 101.085C299.089 101.585 301.089 100.085 301.089 99.0845C301.089 98.0845 301.089 96.5845 298.089 92.5845C295.089 87.0845 294.589 86.0845 290.589 79.5845C286.589 73.0845 287.089 72.5845 282.089 66.5845C277.089 60.5845 276.089 59.5845 273.089 56.0845C268.589 51.5845 262.589 45.5845 258.089 41.5845C249.589 35.0845 244.089 30.5845 236.089 26.0845C226.344 20.6032 219.589 17.5845 206.089 13.5845C205.589 13.5845 187.089 8.58453 176.589 8.58453H156.589C156.089 8.58453 138.089 10.5845 133.589 11.5845C120.776 14.5413 116.706 16.041 107.496 19.4346L107.089 19.5845C93.0888 26.0845 84.5888 30.5845 82.5888 31.5845C80.5888 32.5845 63.5888 45.0845 61.5888 47.0845C59.5888 49.0845 53.0888 54.5845 50.0888 58.0845C47.0888 61.5845 39.0888 69.0845 36.0888 73.5845L26.0888 88.5845C24.0888 91.5845 18.5888 100.585 14.5888 109.585C14.0888 110.085 9.08878 122.585 6.58876 130.585C1.58876 149.585 1.58877 155.085 1.08876 158.085C0.924354 159.071 -0.411244 184.585 1.58876 195.585C3.58876 210.585 3.55029 210.085 5.08876 215.085C7.08876 221.585 9.08876 228.585 13.0888 237.085C14.5888 240.751 18.4888 249.285 22.0888 254.085C27.0888 261.085 27.0888 262.87 32.0888 268.585C35.5888 272.585 45.5888 283.585 54.0888 290.585C62.5888 296.585 66.5888 300.085 72.5888 303.085C77.5888 306.585 96.5888 314.085 98.5888 315.085C100.189 315.885 114.922 319.418 122.089 321.085Z" fill="currentColor"/>
+                        <path d="M139.589 352.085C87.7618 345.654 81.9704 339.492 46.5888 319.085C43.3888 319.485 43.5888 322.251 44.0888 323.585C47.5888 327.418 54.6888 335.285 55.0888 336.085C55.4888 336.885 62.5888 343.418 66.0888 346.585C68.5888 349.251 74.3888 354.885 77.5888 356.085C78.0888 356.085 89.0888 366.585 99.0888 370.085C99.0888 371.085 127.589 384.085 135.589 386.085C135.989 386.885 155.755 390.751 165.589 392.585C171.755 393.418 185.089 394.885 189.089 394.085C189.489 394.885 204.922 393.751 212.589 393.085L215.589 392.585C225.089 391.251 246.889 387.385 258.089 382.585C258.589 383.085 300.589 363.585 313.089 352.585C314.289 352.985 332.922 334.418 342.089 325.085C346.755 320.085 357.589 307.285 363.589 296.085C364.589 294.085 374.089 281.085 379.089 265.585C380.589 263.585 386.589 247.585 390.089 231.585C393.51 215.947 395.589 195.585 395.589 195.085V164.085C395.255 157.085 393.489 139.585 389.089 125.585C383.589 108.085 384.589 110.585 383.589 108.085C382.089 105.585 376.589 91.5845 374.089 88.0845C371.589 84.5845 363.089 69.5845 362.589 69.5845C362.089 69.5845 355.589 59.0845 351.089 55.0845C348.589 53.0845 338.089 40.5845 328.589 33.5845C320.589 28.0845 310.589 21.0845 304.589 18.0845C303.589 17.0845 290.589 12.0845 290.089 11.5845C289.589 11.0845 282.089 8.58453 285.089 9.58452C279.589 7.08452 259.589 2.58453 255.089 2.08452C253.978 1.96105 240.589 0.0845171 239.589 0.584517C238.589 1.08452 238.589 3.08452 239.589 3.58452C246.089 6.08452 265.589 13.0845 282.589 27.5845C302.589 47.1845 312.922 61.7512 315.589 66.5845C321.422 76.4178 334.289 102.385 339.089 127.585C341.589 132.085 342.589 179.585 339.089 196.585C335.589 213.585 326.089 243.085 310.589 267.085C306.089 273.585 290.089 294.585 272.089 309.085C257.689 320.685 245.755 327.585 241.589 329.585C223.255 339.085 177.189 356.885 139.589 352.085Z" fill="currentColor"/>
+                    </svg>
+                    <span>Founders Story</span>
+                </div>
+            </div>
+            <div class="blog-featured-content">
+                <div class="blog-featured-badge">Latest post</div>
+                <h2 class="blog-display"><a class="blog-featured-title-link" href="/blogs/building-from-zambia/">We're Building a Software Company From Zambia. Here's What That <em>Actually</em> Looks Like.</a></h2>
+                <p class="blog-featured-excerpt">The honest version. No funding, no office, no personal money spent until the business generates its own. What it's actually like to start a software company from Lusaka with a team that met through shared frustration.</p>
+                <div class="blog-featured-meta">
+                    <span class="blog-meta-author">Thuma Hamukang'andu</span>
+                    <span class="blog-meta-dot"></span>
+                    <span class="blog-meta-date">May 2026</span>
+                    <span class="blog-meta-dot"></span>
+                    <span class="blog-meta-read">8 min read</span>
+                </div>
+                <a href="/blogs/building-from-zambia/" class="blog-read-link">
+                    Read the full story <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </article>
+
+        <!-- ── SECTION DIVIDER ── -->
+        <div class="blog-section-divider blog-fade">
+            <span>More articles</span>
+        </div>
+
+        <!-- ── POST GRID (2 real placeholders + 1 coming soon) ── -->
+        <div class="blog-grid">
+
+            <!-- Nsolo Dev Log placeholder -->
+            <article class="blog-card blog-fade" data-cat="devlog">
+                <div class="blog-card-visual">
+                    <span class="blog-card-visual-icon" aria-hidden="true">♟</span>
+                </div>
+                <div class="blog-card-body">
+                    <span class="blog-card-tag tag-devlog"><i class="fas fa-code"></i> Dev Log</span>
+                    <h3 class="blog-display">Nsolo v1.2.0: What We Built, What Broke, and What's Next</h3>
+                    <p class="blog-card-excerpt">A behind-the-scenes look at the accessibility improvements, audio fixes, and the EXE packaging problem that nearly delayed the release.</p>
+                    <div class="blog-card-footer">
+                        <span class="blog-card-author">Thuma H.</span>
+                        <div class="blog-card-info">
+                            <span class="blog-card-read">Coming soon</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ExamGuard product placeholder -->
+            <article class="blog-card blog-fade" data-cat="product">
+                <div class="blog-card-visual">
+                    <span class="blog-card-visual-icon" aria-hidden="true">🛡</span>
+                </div>
+                <div class="blog-card-body">
+                    <span class="blog-card-tag tag-product"><i class="fas fa-box-open"></i> Product</span>
+                    <h3 class="blog-display">ExamGuard: Why We're Building for Schools First</h3>
+                    <p class="blog-card-excerpt">Simon on the problem ExamGuard solves, the beta school strategy, and what institutional SaaS looks like when you're building it from Zambia.</p>
+                    <div class="blog-card-footer">
+                        <span class="blog-card-author">Simon M.</span>
+                        <div class="blog-card-info">
+                            <span class="blog-card-read">Coming soon</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Community / coming soon -->
+            <article class="blog-card blog-fade placeholder" data-cat="community" aria-hidden="true">
+                <div class="blog-card-visual">
+                    <span class="blog-card-visual-icon">✦</span>
+                </div>
+                <div class="blog-card-body">
+                    <div class="placeholder-label">
+                        <i class="fas fa-pen-nib"></i> Writing in progress
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- ── CTA STRIP ── -->
+        <div class="blog-cta-strip blog-fade">
+            <div class="blog-cta-text">
+                <h3 class="blog-display">Have a project in mind?</h3>
+                <p>We build websites, apps, and custom software. Regional pricing. Response within 48 hours.</p>
+            </div>
+            <div class="blog-cta-actions">
+                <a href="/contact.html" class="blog-cta-btn primary">
+                    <i class="fas fa-paper-plane"></i> Start a conversation
+                </a>
+                <a href="/portfolio.html" class="blog-cta-btn secondary">
+                    View our work
+                </a>
+            </div>
+        </div>
+
+    </div><!-- /.blog-main -->
+</main>
+
+<!-- Footer injected by script.js -->
+<button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+</button>
+
+<script>
+(function () {
+    var progress = document.getElementById('blog-progress');
+
+    function updateProgress() {
+        if (!progress) return;
+        var scrollTop = window.scrollY || 0;
+        var scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var ratio = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+        progress.style.transform = 'scaleY(' + ratio + ')';
+    }
+
+    updateProgress();
+    window.addEventListener('scroll', updateProgress, { passive: true });
+
+    // Scroll-based fade in
+    var fades = document.querySelectorAll('.blog-fade');
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                observer.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    fades.forEach(function (el) { observer.observe(el); });
+
+    // Category filter
+    var filterBtns = document.querySelectorAll('.blog-filter-btn');
+    var cards = document.querySelectorAll('.blog-card, .blog-featured');
+    filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            filterBtns.forEach(function (b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            var filter = btn.getAttribute('data-filter');
+            cards.forEach(function (card) {
+                if (filter === 'all' || card.getAttribute('data-cat') === filter) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    // Stagger card entrance animations
+    var gridCards = document.querySelectorAll('.blog-grid .blog-card');
+    gridCards.forEach(function (card, i) {
+        card.style.transitionDelay = (i * 0.1) + 's';
+    });
+})();
+</script>
+
+<script src="/script.js"></script>
+</body>
+</html>

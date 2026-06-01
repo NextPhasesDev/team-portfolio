@@ -4668,7 +4668,8 @@ footer {
         right: -120%;
         bottom: 0;
         width: min(84vw, 340px);
-        height: 100vh;
+        height: 100dvh;
+        max-height: 100dvh;
         z-index: 1199;
         background:
             radial-gradient(circle at 14% 8%, rgba(20, 184, 166, 0.14) 0%, transparent 36%),
@@ -4682,8 +4683,10 @@ footer {
         flex-direction: column;
         justify-content: flex-start;
         gap: 0.3rem;
-        padding: 0 0 0.85rem;
+        padding: 0 0 calc(env(safe-area-inset-bottom, 0px) + 0.85rem);
         overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
         transition: right 0.3s ease;
     }
 
@@ -4699,6 +4702,7 @@ footer {
     .nav-menu.active {
         right: 0;
         box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+        touch-action: pan-y;
     }
 
     [data-theme="dark"] .nav-menu.active {

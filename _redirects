@@ -1,11 +1,19 @@
-# Prevent direct access to static files - redirect to homepage
-# This protects source code and configuration from being viewed directly
-/script.js                    /index.html  200
-/*.js                         /index.html  200
-/*.css                        /index.html  200
-/.env*                        /index.html  200
-/config.*                     /index.html  200
+# Protect source files and config from direct access
+/script.js                    /index.html  404
+/about.js                     /index.html  404
+/services.js                  /index.html  404
+/.env*                        /index.html  404
+/config.*                     /index.html  404
+/netlify.toml                 /index.html  404
+*.md                          /index.html  404
+*.json                        /index.html  404
 
-# Allow normal page navigation
-/*                            /index.html  200
+# Protect root-level CSS/JS from direct viewing (except legitimate web requests)
+# CSS and JS in root should not be served as standalone - they're bundled in HTML
+/style.css                    /                 404
+/blog-bg.js                   /                 404
+
+# SPA fallback: any unknown route goes to index.html for client-side routing
+/*/                          /index.html       200
+/*                            /index.html       200
 
