@@ -9,14 +9,14 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Blog - NextPhases">
     <meta property="og:description" content="Dev diaries, company updates, and product stories from the NextPhases team in Lusaka, Zambia.">
-    <meta property="og:url" content="https://nextphases.dev/blog/">
-    <meta property="og:image" content="https://nextphases.dev/og-banner.png">
+    <meta property="og:url" content="https://nextphases.dev/blogs/">
+    <meta property="og:image" content="https://nextphases.dev/blogs/building-from-zambia/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Blog - NextPhases">
     <meta name="twitter:description" content="Dev diaries, company updates, and product stories from the NextPhases team.">
-    <meta name="twitter:image" content="https://nextphases.dev/og-banner.png">
+    <meta name="twitter:image" content="https://nextphases.dev/blogs/building-from-zambia/og-image.png">
     <title>Blog - NextPhases</title>
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -35,7 +35,7 @@
       "@context": "https://schema.org",
       "@type": "Blog",
       "name": "NextPhases Blog",
-      "url": "https://nextphases.dev/blog/",
+      "url": "https://nextphases.dev/blogs/",
       "description": "Dev diaries, company updates, and product stories from the NextPhases team in Lusaka, Zambia.",
       "publisher": {
         "@type": "Organization",
@@ -224,30 +224,32 @@
         overflow: hidden;
     }
 
-    /* Animated grid pattern */
+    .blog-featured-cover {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: left;
+        opacity: 1;
+    }
+
+    @media (min-width: 900px) {
+        .blog-featured-cover {
+            object-position: 1% center;
+        }
+    }
+
     .blog-featured-visual::before {
         content: '';
         position: absolute;
         inset: 0;
-        background-image:
-            linear-gradient(var(--card-border) 1px, transparent 1px),
-            linear-gradient(90deg, var(--card-border) 1px, transparent 1px);
-        background-size: 40px 40px;
-        opacity: 0.6;
+        background: linear-gradient(180deg, rgba(13, 27, 42, 0.12), rgba(13, 27, 42, 0.2));
+        z-index: 1;
     }
 
-    /* Teal glow orb */
     .blog-featured-visual::after {
-        content: '';
-        position: absolute;
-        width: 220px;
-        height: 220px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(20,184,166,0.22) 0%, transparent 70%);
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        animation: blog-orb-pulse 4s ease-in-out infinite;
+        display: none;
     }
 
     @keyframes blog-orb-pulse {
@@ -256,13 +258,7 @@
     }
 
     .blog-featured-icon {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-        text-align: center;
+        display: none;
     }
 
     .blog-featured-icon svg {
@@ -322,6 +318,15 @@
         line-height: 1.18;
         color: var(--text-heading);
         letter-spacing: -0.01em;
+    }
+
+    .blog-featured-title-link {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .blog-featured-title-link:hover {
+        color: inherit;
     }
 
     .blog-featured h2 em {
@@ -683,16 +688,25 @@
     /* ── READING PROGRESS ── */
     #blog-progress {
         position: fixed;
-        top: 70px;
-        left: 0;
-        right: 0;
-        height: 2px;
+        top: 84px;
+        right: 12px;
+        width: 3px;
+        height: calc(100vh - 104px);
         background: var(--primary-teal);
-        transform-origin: left;
-        transform: scaleX(0);
+        border-radius: 999px;
+        transform-origin: top;
+        transform: scaleY(0);
         z-index: 999;
         transition: transform 0.08s linear;
-        opacity: 0;
+        opacity: 0.9;
+    }
+
+    @media (max-width: 600px) {
+        #blog-progress {
+            top: 74px;
+            right: 8px;
+            height: calc(100vh - 88px);
+        }
     }
 
     /* ── DIVIDER ── */
@@ -772,6 +786,7 @@
 <div id="blog-progress"></div>
 
 <!-- Nav injected by script.js -->
+<div id="navbarMount"></div>
 
 <div class="background-animation" data-parallax="0.12">
     <canvas id="moonCanvas"></canvas>
@@ -814,6 +829,7 @@
         <!-- ── FEATURED POST ── -->
         <article class="blog-featured blog-fade" data-cat="founders" id="featured-post">
             <div class="blog-featured-visual">
+                <img class="blog-featured-cover" src="/blogs/building-from-zambia/cover.webp" alt="Cover image for Building From Zambia post" loading="eager" fetchpriority="high" decoding="async">
                 <div class="blog-featured-icon">
                     <!-- NextPhases logo SVG -->
                     <svg viewBox="0 0 397 395" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -825,7 +841,7 @@
             </div>
             <div class="blog-featured-content">
                 <div class="blog-featured-badge">Latest post</div>
-                <h2 class="blog-display">We're Building a Software Company From Zambia. Here's What That <em>Actually</em> Looks Like.</h2>
+                <h2 class="blog-display"><a class="blog-featured-title-link" href="/blogs/building-from-zambia/">We're Building a Software Company From Zambia. Here's What That <em>Actually</em> Looks Like.</a></h2>
                 <p class="blog-featured-excerpt">The honest version. No funding, no office, no personal money spent until the business generates its own. What it's actually like to start a software company from Lusaka with a team that met through shared frustration.</p>
                 <div class="blog-featured-meta">
                     <span class="blog-meta-author">Thuma Hamukang'andu</span>
@@ -834,7 +850,7 @@
                     <span class="blog-meta-dot"></span>
                     <span class="blog-meta-read">8 min read</span>
                 </div>
-                <a href="/blog/building-from-zambia" class="blog-read-link">
+                <a href="/blogs/building-from-zambia/" class="blog-read-link">
                     Read the full story <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
@@ -924,6 +940,19 @@
 
 <script>
 (function () {
+    var progress = document.getElementById('blog-progress');
+
+    function updateProgress() {
+        if (!progress) return;
+        var scrollTop = window.scrollY || 0;
+        var scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var ratio = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+        progress.style.transform = 'scaleY(' + ratio + ')';
+    }
+
+    updateProgress();
+    window.addEventListener('scroll', updateProgress, { passive: true });
+
     // Scroll-based fade in
     var fades = document.querySelectorAll('.blog-fade');
     var observer = new IntersectionObserver(function (entries) {

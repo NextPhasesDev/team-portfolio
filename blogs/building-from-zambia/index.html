@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <script>(function(){var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>We're Building a Software Company From Zambia | NextPhases</title>
+  <meta name="description" content="The honest version of what it's like to start a software development company from Lusaka, Zambia, with no funding, no office, and a team that met through shared frustration.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="We're Building a Software Company From Zambia. Here's What That Actually Looks Like.">
+  <meta property="og:description" content="The honest version. No funding, no office, no personal money spent until the business earns its own.">
+  <meta property="og:url" content="https://nextphases.dev/blogs/building-from-zambia/">
+  <meta property="og:image" content="https://nextphases.dev/blogs/building-from-zambia/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="We're Building a Software Company From Zambia | NextPhases">
+  <meta name="twitter:image" content="https://nextphases.dev/blogs/building-from-zambia/og-image.png">
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="192x192" href="/favicon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- Site nav + footer styles -->
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+  <!-- Google tag -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5T40D6EZG4"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-5T40D6EZG4');</script>
+
+  <style>
+    /* ── BLOG TOKENS (on top of site vars) ── */
+    :root{
+      --b-navy:      #0D1B2A;
+      --b-navy-mid:  #112236;
+      --b-teal:      #00B4D8;
+      --b-teal-dim:  rgba(0,180,216,.18);
+      --b-gold:      #F4C542;
+      --b-white:     #F0F6FA;
+      --b-off:       #C8D8E4;
+      --b-muted:     #6a8ea0;
+      --b-border:    rgba(0,180,216,.13);
+      --ff-display:  'Playfair Display', Georgia, serif;
+      --ff-body:     'Fraunces', Georgia, serif;
+      --ff-mono:     'Space Mono', monospace;
+      --max-w: 740px;
+    }
+
+    [data-theme="light"]{
+      --b-navy:      #f3f7fb;
+      --b-navy-mid:  #e7eff8;
+      --b-white:     #0f172a;
+      --b-off:       #1f2937;
+      --b-muted:     #475569;
+      --b-border:    rgba(2, 132, 199, 0.18);
+      --b-teal-dim:  rgba(2,132,199,.12);
+    }
+
+    /* ── BODY (override site bg for blog) ── */
+    body{
+      background: var(--b-navy) !important;
+      color: var(--b-off);
+      font-size:19px;
+      line-height:1.8;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    /* nav uses site style.css; keep it readable on this page for both themes */
+    body .main-nav{
+      background: rgba(243,247,251,.92) !important;
+      border-bottom: 1px solid var(--b-border) !important;
+      z-index: 200;
+    }
+    [data-theme="dark"] body .main-nav{ background: rgba(13,27,42,.92) !important; }
+    body .nav-logo,
+    body .nav-logo span,
+    body .nav-link{color: var(--b-white) !important;}
+    body .nav-link:hover{ color: var(--b-teal) !important; }
+    body .main-nav .cta-button{
+      background:var(--b-teal) !important;
+      border-color:var(--b-teal) !important;
+      color:#fff !important;
+    }
+    /* hide moonCanvas injected by script.js on blog pages */
+    .background-animation{ display:none !important; }
+
+    /* ── READING PROGRESS ── */
+    #npProgress{
+      position:fixed;
+      top:84px;
+      right:12px;
+      width:3px;
+      height:calc(100vh - 104px);
+      z-index:300;
+      border-radius:999px;
+      background:var(--b-teal);
+      transform-origin:top;
+      transform:scaleY(0);
+      transition:transform .05s linear;
+      opacity:.9;
+    }
+
+    /* ── WRAPPER ── */
+    .blog-wrap{
+      position:relative; z-index:10;
+      padding-top:70px; /* nav height */
+      font-family: var(--ff-body);
+    }
+
+    /* ── HERO BAND ── */
+    .b-hero{
+      padding: 5rem 2rem 3.5rem;
+      max-width:var(--max-w);
+      margin:0 auto;
+      position:relative;
+    }
+
+    .b-meta{
+      display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+      margin-bottom:2.2rem;
+    }
+    .b-tag{
+      font-family:var(--ff-mono); font-size:11px; letter-spacing:2.5px;
+      text-transform:uppercase; color:var(--b-teal);
+    }
+    .b-dot{width:3px;height:3px;border-radius:50%;background:var(--b-muted);}
+    .b-date{font-family:var(--ff-mono); font-size:11px; color:var(--b-muted); letter-spacing:1px;}
+
+    .b-title{
+      font-family:var(--ff-display);
+      font-size:clamp(32px,5.5vw,62px);
+      font-weight:900; line-height:1.06; letter-spacing:-.5px;
+      color:var(--b-white); margin-bottom:1.6rem;
+    }
+    .b-title em{font-style:italic; color:var(--b-teal);}
+
+    .b-deck{
+      font-family:var(--ff-body); font-weight:300; font-style:italic;
+      font-size:clamp(17px,2vw,21px); color:var(--b-muted); line-height:1.65;
+      max-width:560px; margin-bottom:2.4rem;
+    }
+
+    .b-byline{
+      display:flex; align-items:center; gap:14px;
+      padding-top:1.5rem; border-top:1px solid var(--b-border);
+    }
+    .b-av{
+      width:44px; height:44px; border-radius:50%;
+      background:var(--b-teal-dim); border:1px solid var(--b-border);
+      display:flex; align-items:center; justify-content:center;
+      font-family:var(--ff-mono); font-size:14px; font-weight:700; color:var(--b-teal);
+      flex-shrink:0;
+    }
+    .b-av-name{font-family:var(--ff-mono);font-size:13px;color:var(--b-white);font-weight:700;}
+    .b-av-role{font-family:var(--ff-mono);font-size:10px;color:var(--b-muted);letter-spacing:1px;margin-top:2px;}
+
+    /* ── HERO IMAGE ── */
+    .b-hero-img-wrap{
+      max-width:var(--max-w); margin:0 auto;
+      padding:2rem 2rem 0;
+    }
+    .img-cap{
+      font-family:var(--ff-mono); font-size:11px; color:var(--b-muted);
+      letter-spacing:.5px; margin-top:10px; text-align:center;
+    }
+
+    .b-img{
+      width:100%;
+      display:block;
+      border:1px solid var(--b-border);
+      border-radius:6px;
+      background:var(--b-navy-mid);
+      box-sizing:border-box;
+    }
+            .b-hero-img-wrap .b-img.hero{
+              border-width:1px;
+            }
+
+    .b-img.hero,
+    .b-img.inline{
+      aspect-ratio:16 / 9;
+      object-fit:cover;
+    }
+    .b-img.square{
+      aspect-ratio:1 / 1;
+      object-fit:cover;
+      max-width:380px;
+      margin:0 auto;
+    }
+
+    /* ── ARTICLE ── */
+    .b-article{
+      max-width:var(--max-w); margin:0 auto;
+      padding:4.5rem 2rem 6rem;
+    }
+    .b-article p{
+      font-family:var(--ff-body); font-weight:300;
+      font-size:clamp(17px,1.8vw,20px); line-height:1.85;
+      color:var(--b-off); margin-bottom:1.6em;
+    }
+    .b-article p strong{color:var(--b-white); font-weight:600;}
+    .b-article h2{
+      font-family:var(--ff-display); font-size:clamp(24px,3vw,34px);
+      font-weight:700; color:var(--b-white); line-height:1.2;
+      margin:2.8em 0 .9em; letter-spacing:-.2px;
+    }
+    .b-article h2::before{content:'';display:block;width:30px;height:2px;background:var(--b-teal);margin-bottom:16px;}
+
+    .b-pull{
+      border-left:3px solid var(--b-teal);
+      margin:2.4em 0; padding:18px 30px;
+      background:rgba(0,180,216,.04);
+      border-radius:0 6px 6px 0;
+    }
+    .b-pull p{
+      font-family:var(--ff-display); font-size:clamp(19px,2.2vw,26px) !important;
+      font-style:italic; font-weight:400; color:var(--b-white) !important;
+      line-height:1.5 !important; margin-bottom:0 !important;
+    }
+    .b-pull cite{font-family:var(--ff-mono);font-size:11px;color:var(--b-muted);letter-spacing:1px;display:block;margin-top:10px;}
+
+    .b-sep{
+      display:flex; align-items:center; gap:14px;
+      margin:3em 0; color:var(--b-teal); opacity:.4;
+    }
+    .b-sep::before,.b-sep::after{content:'';flex:1;height:1px;background:var(--b-border);}
+    .b-sep span{font-family:var(--ff-mono);font-size:10px;letter-spacing:3px;}
+
+    .b-img-wrap{margin:2.8em -2rem;}
+    .b-img-wrap.sq{margin:2.4em 0;}
+    .b-img-wrap figcaption{
+      font-family:var(--ff-mono);font-size:11px;color:var(--b-muted);
+      letter-spacing:.5px;text-align:center;margin-top:10px;padding:0 2rem;
+    }
+
+    .b-accent{color:var(--b-teal);}
+    .b-gold{color:var(--b-gold);}
+
+    /* ── CTA BOX ── */
+    .b-cta{
+      margin-top:4rem; padding:2.5rem 2.8rem;
+      background:linear-gradient(135deg,rgba(0,180,216,.07) 0%,rgba(13,27,42,0) 60%);
+      border:1px solid var(--b-border); border-radius:8px;
+      position:relative; overflow:hidden;
+    }
+    .b-cta::after{
+      content:''; position:absolute; top:-40px; right:-40px;
+      width:180px; height:180px; border-radius:50%;
+      background:radial-gradient(circle,rgba(0,180,216,.14),transparent 70%);
+      pointer-events:none;
+    }
+    .b-cta h3{font-family:var(--ff-display);font-size:28px;font-weight:700;color:var(--b-white);margin-bottom:10px;}
+    .b-cta p{font-size:16px !important;color:var(--b-muted) !important;margin-bottom:1.5rem !important;max-width:440px;}
+    .b-cta-links{display:flex;gap:12px;flex-wrap:wrap;}
+    .b-cl{
+      font-family:var(--ff-mono); font-size:12px; letter-spacing:1.5px;
+      text-transform:uppercase; text-decoration:none; padding:10px 22px;
+      border-radius:4px; transition:.2s;
+    }
+    .b-cl.pri{background:var(--b-teal);color:var(--b-navy);font-weight:700;}
+    .b-cl.pri:hover{background:#00caf4;}
+    .b-cl.sec{border:1px solid var(--b-border);color:var(--b-teal);}
+    .b-cl.sec:hover{background:rgba(0,180,216,.08);}
+
+    /* ── TAGS ── */
+    .b-tags{
+      margin-top:3rem; padding-top:1.5rem; border-top:1px solid var(--b-border);
+      display:flex; gap:7px; flex-wrap:wrap;
+    }
+    .b-tag-pill{
+      font-family:var(--ff-mono); font-size:11px; letter-spacing:1px;
+      padding:4px 12px; border-radius:20px;
+      background:rgba(0,180,216,.07); border:1px solid var(--b-border);
+      color:var(--b-muted); text-transform:uppercase;
+    }
+
+    /* ── FOOTNOTE ── */
+    .b-footnote{
+      max-width:var(--max-w); margin:0 auto;
+      padding:1.5rem 2rem 3rem;
+      font-family:var(--ff-mono); font-size:11px; color:var(--b-muted);
+      border-top:1px solid var(--b-border);
+      display:flex; gap:2rem; flex-wrap:wrap; align-items:center;
+    }
+    .b-footnote a{color:var(--b-teal); text-decoration:none;}
+
+    /* ── FADE IN ── */
+    .b-fade{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease;}
+    .b-fade.vis{opacity:1;transform:none;}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:720px){
+      .b-hero{padding:3rem 1.25rem 2.5rem;}
+      .b-hero-img-wrap{padding:1.5rem 1.25rem 0;}
+      .b-article{padding:3rem 1.25rem 4rem;}
+      .b-img-wrap{margin:2em -1.25rem;}
+      .b-img-wrap figcaption{padding:0 1.25rem;}
+      .b-cta{padding:1.8rem 1.4rem;}
+    }
+
+    /* keep site footer typography consistent with the rest of the site */
+    footer,
+    footer a,
+    footer p,
+    footer li,
+    footer h2,
+    footer h3,
+    footer h4,
+    .main-nav,
+    .main-nav .nav-link,
+    .main-nav .cta-button,
+    .main-nav .nav-menu-top-left,
+    .main-nav .tagline-line{
+      font-family:'Open Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    @media(max-width:720px){
+      #npProgress{
+        right:8px;
+        top:74px;
+        height:calc(100vh - 88px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- reading progress -->
+<div id="npProgress" aria-hidden="true"></div>
+
+<!-- Navbar will be injected here from /navbar.html -->
+<div id="navbarMount"></div>
+
+<!-- ═══ BLOG CONTENT ═══ -->
+<div class="blog-wrap">
+
+  <!-- Hero -->
+  <div class="b-hero">
+    <div class="b-meta">
+      <span class="b-tag">Founders Story</span>
+      <span class="b-dot"></span>
+      <span class="b-date">May 2026</span>
+      <span class="b-dot"></span>
+      <span class="b-date" style="font-style:italic">8 min read</span>
+    </div>
+    <h1 class="b-title">
+      We're Building a Software Company<br>
+      From Zambia. Here's What That<br>
+      <em>Actually</em> Looks Like.
+    </h1>
+    <p class="b-deck">
+      The honest version. No funding, no office, no personal money spent until the business generates its own. Just a team that believed the continent deserved better software.
+    </p>
+    <div class="b-byline">
+      <div class="b-av">T</div>
+      <div>
+        <div class="b-av-name">Thuma Hamukang'andu</div>
+        <div class="b-av-role">CTO & CMO, NextPhases &nbsp;·&nbsp; Lusaka, Zambia</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero image -->
+  <div class="b-hero-img-wrap b-fade">
+    <figure>
+      <img class="b-img hero" src="/blogs/building-from-zambia/1.jpg" alt="Aerial view of Lusaka at golden hour." loading="eager" fetchpriority="high" decoding="async">
+      <p class="img-cap">Lusaka. Where we build from.</p>
+    </figure>
+  </div>
+
+  <!-- Article body -->
+  <article class="b-article">
+
+    <p>There's a version of this article where I tell you about our tech stack, our pricing model, and our service offering.</p>
+    <p>This isn't that article.</p>
+    <p>This is the honest version of what it's actually like to start a software company from Lusaka, Zambia, with no funding, no office, and a personal rule we've held since day one: <strong>not a single kwacha of our own personal money gets spent until the business generates its own.</strong> Everything we've built so far has been built with time, skill, and tools with free tiers. The business earns before the business spends.</p>
+
+    <div class="b-sep"><span>· · ·</span></div>
+
+    <h2>It Started With a Conversation</h2>
+
+    <p>NextPhases didn't start with a business plan. It started with a few of us in the same room, talking about the same thing we always talked about: why is it so hard to find good, affordable software development in Zambia? Why do local businesses pay international rates for average work, or local rates for work that doesn't hold up?</p>
+    <p>We were already building things individually. At some point the question became: why aren't we doing this together?</p>
+    <p>So we did.</p>
+
+    <!-- Inline image 1 -->
+    <div class="b-img-wrap b-fade">
+      <figure>
+        <img class="b-img inline" src="/blogs/building-from-zambia/2.png" alt="Flat-lay of sketches and keyboard used for early planning." loading="lazy" decoding="async">
+        <figcaption class="img-cap">The kind of problem-solving that happens before a single line of code.</figcaption>
+      </figure>
+    </div>
+
+    <h2>What We Actually Build</h2>
+
+    <p>We build websites, mobile apps, SaaS products, and custom software systems. That sentence sounds simple. In practice it means conversations ranging from "I just need something people can find on Google" to "I need a system that handles exam invigilation for three hundred students simultaneously."</p>
+
+    <div class="b-pull">
+      <p>"Every project we ship is proof that a team from Lusaka can deliver work that competes internationally. We care about that more than most clients realise."</p>
+      <cite>Thuma Hamukang'andu, CTO, NextPhases</cite>
+    </div>
+
+    <p>The range is part of what makes it interesting. The other thing we build, the one that does not show up in a service description, is proof.</p>
+
+    <div class="b-sep"><span>· · ·</span></div>
+
+    <h2>The Businesses Getting Left Behind</h2>
+
+    <p>Something we noticed early: a huge portion of Zambian and African businesses don't have a web presence at all. Not because they don't want one. Because they either don't know how accessible it can be, or every quote they've received has been out of reach.</p>
+    <p>That's a real problem. In 2026, not having a website isn't neutral. It's a competitive disadvantage. Clients search before they call. Partners verify before they commit. Investors look before they meet. A business with no digital presence is invisible to all of them before the conversation even starts.</p>
+    <p>Part of what drives us is fixing that gap. <strong>Affordable, professional web development for businesses that deserve a platform but haven't had one.</strong> We're not trying to be the cheapest option in the market. We're trying to be the option that makes the most sense for where you actually operate.</p>
+
+    <!-- Inline image 2 -->
+    <div class="b-img-wrap b-fade">
+      <figure>
+        <img class="b-img inline" src="/blogs/building-from-zambia/3.jpg" alt="Laptop screen glowing in a dark workspace." loading="lazy" decoding="async">
+        <figcaption class="img-cap">Visibility is now digital-first. Most businesses don't know what they're missing.</figcaption>
+      </figure>
+    </div>
+
+    <h2>The Regional Pricing Conversation</h2>
+
+    <p>One of the first real decisions we made was about pricing.</p>
+    <p>Software development has a global market but deeply unequal purchasing power. A website that costs a UK business GBP 1,500 represents months of revenue for a small Zambian business trying to get online for the first time. We decided not to pretend that isn't true.</p>
+    <p>So we price by region. Zambian businesses pay in Kwacha at rates that reflect the local market. South African clients pay in Rand. UK and European clients pay in GBP and EUR at freelance market rates. American clients pay USD.</p>
+    <p>The code is the same. The quality is the same. <strong class="b-accent">The price reflects where you operate, not where we're based.</strong></p>
+
+    <!-- Inline image 3 -->
+    <div class="b-img-wrap b-fade">
+      <figure>
+        <img class="b-img inline" src="/blogs/building-from-zambia/4.jpg" alt="Stylized map view of Africa with regional connection lines." loading="lazy" decoding="async">
+        <figcaption class="img-cap">One market. Different realities. One fair pricing model.</figcaption>
+      </figure>
+    </div>
+
+    <div class="b-sep"><span>· · ·</span></div>
+
+    <h2>The Thing We Built That No One Expected</h2>
+
+    <p>Alongside client work, we build our own products.</p>
+    <p>The one that gets the most questions is <strong class="b-accent">Nsolo</strong>.</p>
+    <p>Nsolo is a digital adaptation of a traditional African board game, part of the mancala family, played across this continent for thousands of years before the rest of the world had chess. Games like Bao in East Africa, Oware and Ayo across West Africa, Gebeta in Ethiopia. Variants with different rules, different boards, different cultural identities, all sharing the same ancient mathematical logic underneath.</p>
+    <p>We built Nsolo because we wanted to. Because it was ours culturally. Because nobody else was building it. And the vision goes further than one game. The goal is eventually one place where every variant exists, playable, learnable, and accessible to everyone across the continent and beyond.</p>
+
+    <!-- Inline image 4 square -->
+    <div class="b-img-wrap sq b-fade">
+      <figure>
+        <img class="b-img square" src="/blogs/building-from-zambia/5.png" alt="Traditional wooden mancala board with seeds." loading="lazy" decoding="async">
+        <figcaption class="img-cap">500 years of African strategy. Now digital.</figcaption>
+      </figure>
+    </div>
+
+    <h2>What Building From Africa Actually Means</h2>
+
+    <p>It means your internet goes out during a client call sometimes and you learn to send a voice note summarising everything you just said before the connection dropped.</p>
+    <p>It means GMT+2, which is what Zambia runs on, actually overlaps with UK and European business hours better than most people expect. That's not a disadvantage. It's a selling point we lead with.</p>
+    <p>It means competing for the same international projects as developers in Eastern Europe, India, and Latin America, and learning quickly that quality and communication matter more than geography to the clients worth working with.</p>
+    <p>It also means building something with almost no local precedent. There's no template for what a Zambian software company looks like at scale. We're making it up as we go. Most days that's exciting.</p>
+
+    <div class="b-pull">
+      <p>"We haven't spent a single kwacha of our own money to get here. Not because we couldn't. Because we decided the business earns before the business spends."</p>
+      <cite>NextPhases founding principle</cite>
+    </div>
+
+    <!-- Inline image 5 -->
+    <div class="b-img-wrap b-fade">
+      <figure>
+        <img class="b-img inline" src="/blogs/building-from-zambia/6.jpg" alt="Acacia tree silhouette against a sunrise sky." loading="lazy" decoding="async">
+        <figcaption class="img-cap">The continent keeps building. So do we.</figcaption>
+      </figure>
+    </div>
+
+    <div class="b-sep"><span>· · ·</span></div>
+
+    <h2>Why We're Sharing This</h2>
+
+    <p>We're early. The team is small, the portfolio is growing, and we have more to build than we've shipped so far.</p>
+    <p>But we've seen what happens when African tech companies stay quiet until they feel "ready." The international market doesn't wait. The clients who would genuinely love to work with a team like ours don't know we exist if we don't tell them.</p>
+    <p>So this is us telling you.</p>
+    <p>If you're a business looking for a development partner for a website, app, SaaS product, or custom software, we'd like to hear from you. We quote within 48 hours, communicate clearly, and build things that actually work.</p>
+    <p>If you're another developer or founder building from Africa, we'd like to know you. This continent has more technical talent than the world has figured out yet. The more of us who are visible, the better for all of us.</p>
+    <p>And if you're just curious: follow along. We're building in public.</p>
+
+    <!-- CTA -->
+    <div class="b-cta b-fade">
+      <h3>Let's build something.</h3>
+      <p>Website, app, SaaS, or custom software. We quote within 48 hours. Regional pricing. Real team.</p>
+      <div class="b-cta-links">
+        <a class="b-cl pri" href="mailto:info@nextphases.dev">Email us</a>
+        <a class="b-cl sec" href="https://nextphases.dev">Visit nextphases.dev</a>
+      </div>
+    </div>
+
+    <!-- Tags -->
+    <div class="b-tags">
+      <span class="b-tag-pill">Zambia Tech</span>
+      <span class="b-tag-pill">African Tech</span>
+      <span class="b-tag-pill">Build In Africa</span>
+      <span class="b-tag-pill">Software Development</span>
+      <span class="b-tag-pill">Founders</span>
+      <span class="b-tag-pill">Startup Africa</span>
+      <span class="b-tag-pill">Bootstrapped</span>
+    </div>
+
+  </article><!-- /b-article -->
+
+  <div class="b-footnote">
+    <span>© 2026 NextPhases.dev &nbsp;·&nbsp; Lusaka, Zambia</span>
+    <span><a href="mailto:info@nextphases.dev">info@nextphases.dev</a></span>
+    <span><a href="https://nextphases.dev">nextphases.dev</a></span>
+  </div>
+
+</div><!-- /blog-wrap -->
+
+<!-- Footer injected by script.js -->
+<button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top"><i class="fas fa-chevron-up"></i></button>
+
+<!-- Site JS (nav, footer, theme toggle, scroll-to-top) -->
+<script src="/script.js"></script>
+<script>
+  (function(){
+    /* reading progress bar */
+    var bar = document.getElementById('npProgress');
+    window.addEventListener('scroll', function(){
+      var st = window.scrollY;
+      var dh = document.documentElement.scrollHeight - window.innerHeight;
+      if(bar) bar.style.transform = 'scaleY('+(dh>0?st/dh:0)+')';
+    }, {passive:true});
+
+    /* fade-in on scroll */
+    var fades = document.querySelectorAll('.b-fade');
+    if('IntersectionObserver' in window){
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}
+        });
+      },{threshold:.1});
+      fades.forEach(function(el){obs.observe(el);});
+    } else {
+      fades.forEach(function(el){el.classList.add('vis');});
+    }
+  })();
+</script>
+</body>
+</html>
