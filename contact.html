@@ -26,53 +26,52 @@
     <!-- Google Fonts - Open Sans with fallback strategy -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"></noscript>
 
     <link rel="stylesheet" href="/style.css" />
 
     <!-- Font Awesome for icons with fallback strategy -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-
-
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "NextPhases.dev",
-      "url": "https://nextphases.dev",
-      "logo": "https://nextphases.dev/Logo_transparent.png",
-      "sameAs": [
-        "https://www.youtube.com/@nextphases",
-        "https://x.com/NextPhases",
-        "https://www.tiktok.com/@nextphases.dev?lang=en",
-        "https://www.instagram.com/nextphases.dev/",
-        "https://www.linkedin.com/company/nextphases",
-        "https://discord.gg/DkybgpuRwp"
-      ],
-      "description": "Software development company building websites, SaaS platforms, applications, and digital products for businesses globally.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Lusaka",
-        "addressCountry": "Zambia"
-      }
+      "@type": "ContactPage",
+      "@id": "https://nextphases.dev/contact.html#webpage",
+      "url": "https://nextphases.dev/contact.html",
+      "name": "Contact | NextPhases",
+      "description": "Start a project with NextPhases. Get a quote or book a free discovery call.",
+      "isPartOf": {
+        "@id": "https://nextphases.dev/#website"
+      },
+      "about": {
+        "@id": "https://nextphases.dev/#organization"
+      },
+      "publisher": {
+        "@id": "https://nextphases.dev/#organization"
+      },
+      "inLanguage": "en"
     }
     </script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "NextPhases.dev",
-      "image": "https://nextphases.dev/Logo_transparent.png",
-      "url": "https://nextphases.dev",
-      "telephone": "+260978131906",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Lusaka",
-        "addressCountry": "ZM"
-      },
-      "priceRange": "$$"
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nextphases.dev"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contact",
+          "item": "https://nextphases.dev/contact.html"
+        }
+      ]
     }
     </script>
 </head>
@@ -86,7 +85,7 @@
 
   gtag('config', 'G-5T40D6EZG4');
 </script>
-<body>
+<body data-page="contact">
 
 <nav class="main-nav" id="mainNav">
     <div class="nav-container">
@@ -112,6 +111,7 @@
             <li><a href="/index.html" class="nav-link">Home</a></li>
             <li><a href="/services.html" class="nav-link">Services</a></li>
             <li><a href="/portfolio.html" class="nav-link">Portfolio</a></li>
+            <li><a href="/pricing.html" class="nav-link">Pricing</a></li>
             <li><a href="/blogs/" class="nav-link">Blog</a></li>
             <li><a href="/testimonials.html" class="nav-link">Testimonials</a></li>
             <li><a href="/about.html" class="nav-link">About</a></li>
@@ -261,16 +261,153 @@
                         </label>
                         <select id="region" name="region" required>
                             <option value="">Select your region</option>
-                            <option value="zambia">Zambia</option>
-                            <option value="zimbabwe-usd">Zimbabwe</option>
-                            <option value="southern-africa-usd">Southern Africa (Mozambique, Malawi, Botswana)</option>
-                            <option value="west-east-africa">West &amp; East Africa (Nigeria, Kenya, Ghana, Tanzania, Ethiopia)</option>
-                            <option value="north-africa-me">North Africa &amp; Middle East (Egypt, UAE, Saudi Arabia, Morocco, Qatar)</option>
-                            <option value="south-africa">South Africa</option>
-                            <option value="uk">United Kingdom</option>
-                            <option value="europe">Europe</option>
-                            <option value="us-canada">US &amp; Canada</option>
-                            <option value="other-international">Other / International</option>
+                            <optgroup label="Africa">
+                                <option value="zambia">Zambia</option>
+                                <option value="algeria">Algeria</option>
+                                <option value="botswana">Botswana</option>
+                                <option value="cameroon">Cameroon</option>
+                                <option value="egypt">Egypt</option>
+                                <option value="ethiopia">Ethiopia</option>
+                                <option value="ghana">Ghana</option>
+                                <option value="kenya">Kenya</option>
+                                <option value="libya">Libya</option>
+                                <option value="morocco">Morocco</option>
+                                <option value="mozambique">Mozambique</option>
+                                <option value="namibia">Namibia</option>
+                                <option value="nigeria">Nigeria</option>
+                                <option value="senegal">Senegal</option>
+                                <option value="south-africa">South Africa</option>
+                                <option value="tanzania">Tanzania</option>
+                                <option value="tunisia">Tunisia</option>
+                                <option value="uganda">Uganda</option>
+                                <option value="zimbabwe-usd">Zimbabwe</option>
+                                <option value="southern-africa-usd">Southern Africa (other)</option>
+                                <option value="west-east-africa">West &amp; East Africa (other)</option>
+                                <option value="north-africa-me">North Africa (other)</option>
+                            </optgroup>
+                            <optgroup label="Middle East">
+                                <option value="bahrain">Bahrain</option>
+                                <option value="iraq">Iraq</option>
+                                <option value="israel">Israel</option>
+                                <option value="jordan">Jordan</option>
+                                <option value="kuwait">Kuwait</option>
+                                <option value="lebanon">Lebanon</option>
+                                <option value="oman">Oman</option>
+                                <option value="qatar">Qatar</option>
+                                <option value="saudi-arabia">Saudi Arabia</option>
+                                <option value="uae">United Arab Emirates</option>
+                                <option value="yemen">Yemen</option>
+                            </optgroup>
+                            <optgroup label="Western Europe">
+                                <option value="uk">United Kingdom</option>
+                                <option value="austria">Austria</option>
+                                <option value="belgium">Belgium</option>
+                                <option value="cyprus">Cyprus</option>
+                                <option value="denmark">Denmark</option>
+                                <option value="finland">Finland</option>
+                                <option value="france">France</option>
+                                <option value="germany">Germany</option>
+                                <option value="greece">Greece</option>
+                                <option value="iceland">Iceland</option>
+                                <option value="ireland">Ireland</option>
+                                <option value="italy">Italy</option>
+                                <option value="luxembourg">Luxembourg</option>
+                                <option value="malta">Malta</option>
+                                <option value="netherlands">Netherlands</option>
+                                <option value="norway">Norway</option>
+                                <option value="portugal">Portugal</option>
+                                <option value="spain">Spain</option>
+                                <option value="sweden">Sweden</option>
+                                <option value="switzerland">Switzerland</option>
+                                <option value="europe">Europe (other)</option>
+                            </optgroup>
+                            <optgroup label="Central &amp; Eastern Europe">
+                                <option value="albania">Albania</option>
+                                <option value="armenia">Armenia</option>
+                                <option value="azerbaijan">Azerbaijan</option>
+                                <option value="belarus">Belarus</option>
+                                <option value="bosnia">Bosnia and Herzegovina</option>
+                                <option value="bulgaria">Bulgaria</option>
+                                <option value="croatia">Croatia</option>
+                                <option value="czech-republic">Czech Republic</option>
+                                <option value="estonia">Estonia</option>
+                                <option value="georgia">Georgia</option>
+                                <option value="hungary">Hungary</option>
+                                <option value="latvia">Latvia</option>
+                                <option value="lithuania">Lithuania</option>
+                                <option value="moldova">Moldova</option>
+                                <option value="montenegro">Montenegro</option>
+                                <option value="north-macedonia">North Macedonia</option>
+                                <option value="poland">Poland</option>
+                                <option value="romania">Romania</option>
+                                <option value="russia">Russia</option>
+                                <option value="serbia">Serbia</option>
+                                <option value="slovakia">Slovakia</option>
+                                <option value="slovenia">Slovenia</option>
+                                <option value="turkey">Turkey</option>
+                                <option value="ukraine">Ukraine</option>
+                                <option value="europe-east">Eastern Europe (other)</option>
+                            </optgroup>
+                            <optgroup label="North America">
+                                <option value="united-states">United States</option>
+                                <option value="canada">Canada</option>
+                                <option value="us-canada">US &amp; Canada (other)</option>
+                            </optgroup>
+                            <optgroup label="Latin America &amp; Caribbean">
+                                <option value="argentina">Argentina</option>
+                                <option value="bolivia">Bolivia</option>
+                                <option value="brazil">Brazil</option>
+                                <option value="chile">Chile</option>
+                                <option value="colombia">Colombia</option>
+                                <option value="costa-rica">Costa Rica</option>
+                                <option value="ecuador">Ecuador</option>
+                                <option value="guatemala">Guatemala</option>
+                                <option value="honduras">Honduras</option>
+                                <option value="jamaica">Jamaica</option>
+                                <option value="mexico">Mexico</option>
+                                <option value="nicaragua">Nicaragua</option>
+                                <option value="panama">Panama</option>
+                                <option value="paraguay">Paraguay</option>
+                                <option value="peru">Peru</option>
+                                <option value="trinidad-tobago">Trinidad and Tobago</option>
+                                <option value="uruguay">Uruguay</option>
+                                <option value="venezuela">Venezuela</option>
+                            </optgroup>
+                            <optgroup label="Asia">
+                                <option value="afghanistan">Afghanistan</option>
+                                <option value="bangladesh">Bangladesh</option>
+                                <option value="brunei">Brunei</option>
+                                <option value="cambodia">Cambodia</option>
+                                <option value="china">China</option>
+                                <option value="hong-kong">Hong Kong</option>
+                                <option value="india">India</option>
+                                <option value="indonesia">Indonesia</option>
+                                <option value="japan">Japan</option>
+                                <option value="kazakhstan">Kazakhstan</option>
+                                <option value="malaysia">Malaysia</option>
+                                <option value="mongolia">Mongolia</option>
+                                <option value="myanmar">Myanmar</option>
+                                <option value="nepal">Nepal</option>
+                                <option value="pakistan">Pakistan</option>
+                                <option value="philippines">Philippines</option>
+                                <option value="singapore">Singapore</option>
+                                <option value="south-korea">South Korea</option>
+                                <option value="sri-lanka">Sri Lanka</option>
+                                <option value="taiwan">Taiwan</option>
+                                <option value="thailand">Thailand</option>
+                                <option value="uzbekistan">Uzbekistan</option>
+                                <option value="vietnam">Vietnam</option>
+                                <option value="asia-premium">Premium Asia (other)</option>
+                                <option value="asia-standard">Southeast Asia (other)</option>
+                                <option value="asia-affordable">South Asia (other)</option>
+                            </optgroup>
+                            <optgroup label="Oceania">
+                                <option value="australia">Australia</option>
+                                <option value="new-zealand">New Zealand</option>
+                            </optgroup>
+                            <optgroup label="Elsewhere">
+                                <option value="other-international">Other / International</option>
+                            </optgroup>
                         </select>
                         <small class="form-hint">Currency: <strong id="currencyLabel">USD</strong></small>
                         <input type="hidden" id="currency" name="currency" value="USD" />
@@ -294,8 +431,8 @@
                             <select id="timeline" name="timeline" required>
                                 <option value="">Select timeline</option>
                                 <option value="URGENT - within 2 weeks">ASAP (Within 2 weeks)</option>
-                                <option value="1-2 months">1–2 months</option>
-                                <option value="2-4 months">2–4 months</option>
+                                <option value="1-2 months">1 to 2 months</option>
+                                <option value="2-4 months">2 to 4 months</option>
                                 <option value="planning">Just planning / exploring</option>
                             </select>
                         </div>
@@ -375,7 +512,7 @@
 
                 <details class="faq-item">
                     <summary>Does NextPhases help with SEO and performance?</summary>
-                    <p>Yes. Every website we build includes SEO foundations as standard: semantic HTML structure, proper heading hierarchy, fast load times, mobile optimization, descriptive meta tags, and structured data markup. We don't charge extra for these—they're part of building a website correctly.</p>
+                    <p>Yes. Every website we build includes SEO foundations as standard: semantic HTML structure, proper heading hierarchy, fast load times, mobile optimization, descriptive meta tags, and structured data markup. We don't charge extra for these, they're part of building a website correctly.</p>
                 </details>
 
                 <details class="faq-item">

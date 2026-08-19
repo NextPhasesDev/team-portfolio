@@ -61,3 +61,14 @@ _snapshot_style_66f2fa6.css
 747224.json
 *.bak
 *.orig
+
+
+# --- More internal planning (not for public repo) ---
+ASSETS-AND-DECISIONS.md
+portfolio/natures-cart/README.md
+
+# --- Local dev tooling ---
+.claude/
+
+# --- Scratch prototypes ---
+np mascot prototype v0.html

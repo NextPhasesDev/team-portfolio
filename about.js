@@ -20,7 +20,11 @@
             icon:      'fas fa-laptop-code',
             artStart:  '#0c2248',
             artEnd:    '#083d38',
-            artImg:    null, /* Replace with 'assets/team/thuma.png' when ready */
+            artImg:    null,
+            /* Photos live in /team/ as .png. onerror hides a missing file so the
+               CSS art underneath stays as the fallback. */
+            photo:     '/team/thuma.png',
+            photoAlt:  "Thuma Hamukang'andu, CTO and CMO at NextPhases",
             particles: ['{}', '</>', '=>', '===', 'fn()', 'const', '&&', '//', '[]', 'let'],
             links: [
                 { label: 'Media & press', href: 'mailto:media@nextphases.dev', icon: 'fas fa-envelope' }
@@ -40,11 +44,15 @@
             artStart:  '#14103a',
             artEnd:    '#083d38',
             artImg:    null,
+            photo:     '/team/simon.png',
+            photoAlt:  'Simon Muleya, COO at NextPhases',
             particles: ['SHIP', 'merge', 'done', 'PR', 'v2.0', 'fix', 'push', 'sync'],
             links: [
                 { label: 'Partnerships', href: 'mailto:team@nextphases.dev', icon: 'fas fa-envelope' }
             ],
-            linkedin: 'https://www.linkedin.com/company/nextphases'
+            /* No personal LinkedIn URL confirmed yet. Leave null rather than
+               pointing at the company page as if it were a profile. */
+            linkedin: null
         },
         {
             id:        'chris',
@@ -59,11 +67,13 @@
             artStart:  '#1a0a3a',
             artEnd:    '#0b3d30',
             artImg:    null,
+            photo:     '/team/chris.png',
+            photoAlt:  'Christian Chadambuka, CEO and CCO at NextPhases',
             particles: ['@', 'deal', 'hi!', 'yes!', '$', 'mail', ':)', 'sync'],
             links: [
                 { label: 'Client enquiries', href: 'mailto:info@nextphases.dev', icon: 'fas fa-envelope' }
             ],
-            linkedin: 'https://www.linkedin.com/company/nextphases'
+            linkedin: null
         },
         {
             id:        'shaun',
@@ -78,13 +88,15 @@
             artStart:  '#0d1e3a',
             artEnd:    '#0a3848',
             artImg:    null,
+            photo:     '/team/shaun.png',
+            photoAlt:  'Shaun Nkomo, VP Engineering at NextPhases',
             particles: ['px', 'rem', '#fff', 'UI', 'flex', 'grid', 'UX', 'var()'],
             links:     [],
-            linkedin:  'https://www.linkedin.com/company/nextphases'
+            linkedin:  null
         },
         {
             id:        'lans',
-            name:      'Lans',
+            name:      'Lans Tshala',
             short:     'Lans',
             badge:     'Contributor',
             badgeType: 'contrib',
@@ -163,9 +175,10 @@
             return '<a href="' + l.href + '" class="np-link">'
                 + '<i class="' + l.icon + '" aria-hidden="true"></i>' + l.label + '</a>';
         });
+        /* Only rendered when a confirmed personal profile URL exists */
         if (m.linkedin) {
-            links.push('<a href="' + m.linkedin + '" class="np-link" target="_blank" rel="noopener noreferrer">'
-                + '<i class="fab fa-linkedin" aria-hidden="true"></i>LinkedIn</a>');
+            links.push('<a href="' + m.linkedin + '" class="np-link team-linkedin-link" target="_blank" rel="noopener noreferrer" aria-label="' + m.name + ' on LinkedIn">'
+                + '<i class="fab fa-linkedin-in" aria-hidden="true"></i>LinkedIn</a>');
         }
 
         /* Optional illustration image */
@@ -173,11 +186,19 @@
             ? '<img src="' + m.artImg + '" alt="" loading="lazy">'
             : '';
 
+        /* Real photograph, layered over the CSS art. If the file is missing the
+           onerror handler hides it and the generated art shows through instead. */
+        var photoTag = m.photo
+            ? '<img src="' + m.photo + '" alt="' + (m.photoAlt || (m.name + ', ' + m.role + ' at NextPhases')) + '"'
+                + ' loading="lazy" class="team-photo" onerror="this.style.display=\'none\'">'
+            : '';
+
         card.innerHTML = ''
             + '<div class="np-art" style="--art-s:' + m.artStart + ';--art-e:' + m.artEnd + '" aria-hidden="true">'
             +   imgTag
             +   particles
             +   '<i class="np-art-icon ' + m.icon + '"></i>'
+            +   photoTag
             +   '<div class="np-art-shine"></div>'
             +   '<span class="np-art-label">' + m.short + '</span>'
             + '</div>'
@@ -237,26 +258,77 @@
     prevBtn.addEventListener('click', retreat);
     nextBtn.addEventListener('click', advance);
 
-    /* Touch/swipe */
-    let startX = 0;
-    let startTime = 0;
+    /* ── TOUCH: FLICK TO SPIN ─────────────────────────────────
+       The carousel behaves like a weighted wheel. A hard flick spins through
+       several members and decelerates to a stop; a gentle swipe moves one.  */
+    var startX      = 0;
+    var startTime   = 0;
+    var spinTimer   = null;
+    var spinPending = 0;
+    var spinDir     = 1;
+    var spinDelay   = 0;
 
-    carousel.addEventListener('touchstart', e => {
+    var SPIN_MIN_DELAY = 90;    /* fastest step, ms                       */
+    var SPIN_MAX_DELAY = 520;   /* slowest step before it settles, ms     */
+    var SPIN_FRICTION  = 1.28;  /* each step is this much slower          */
+    var MAX_STEPS      = 14;
+
+    function stopSpin() {
+        if (spinTimer) { clearTimeout(spinTimer); spinTimer = null; }
+        spinPending = 0;
+        carousel.classList.remove('is-spinning');
+    }
+
+    /* Steps the wheel without the 620ms navigation lock */
+    function spinStep() {
+        current = ((current + spinDir) % N + N) % N;
+        update();
+        spinPending--;
+
+        if (spinPending <= 0) {
+            carousel.classList.remove('is-spinning');
+            spinTimer = null;
+            animating = false;
+            startAutoRotate();
+            return;
+        }
+
+        spinDelay = Math.min(spinDelay * SPIN_FRICTION, SPIN_MAX_DELAY);
+        spinTimer = setTimeout(spinStep, spinDelay);
+    }
+
+    function spin(steps, dir) {
+        stopSpin();
+        stopAutoRotate();
+        spinPending = Math.min(steps, MAX_STEPS);
+        spinDir     = dir;
+        spinDelay   = SPIN_MIN_DELAY;
+        animating   = true;
+        carousel.classList.add('is-spinning');
+        spinStep();
+    }
+
+    carousel.addEventListener('touchstart', function (e) {
+        stopSpin();
+        animating = false;
         startX = e.touches[0].clientX;
         startTime = Date.now();
     }, { passive: true });
 
-    carousel.addEventListener('touchend', e => {
-        const dx = e.changedTouches[0].clientX - startX;
-        const dt = Date.now() - startTime;
+    carousel.addEventListener('touchend', function (e) {
+        var dx = e.changedTouches[0].clientX - startX;
+        var dt = Math.max(Date.now() - startTime, 1);
+        var velocity = dx / dt;            /* px per ms */
+        var speed = Math.abs(velocity);
+        var dir = dx > 0 ? -1 : 1;         /* drag right goes back */
 
-        const velocity = dx / dt;
+        if (speed < 0.18 && Math.abs(dx) < 45) return;
 
-        if (Math.abs(velocity) > 0.5) {
-            velocity > 0 ? retreat() : advance();
-        } else if (Math.abs(dx) > 50) {
-            dx > 0 ? retreat() : advance();
-        }
+        /* Harder flick, more revolutions. Roughly 1 step per 0.35 px/ms. */
+        var steps = Math.max(1, Math.round(speed / 0.35));
+
+        if (steps > 1) spin(steps, dir);
+        else dir === -1 ? retreat() : advance();
     }, { passive: true });
 
     /* Keyboard */

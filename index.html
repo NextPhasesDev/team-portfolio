@@ -32,8 +32,8 @@
     <!-- Google Fonts - Open Sans with fallback strategy -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"></noscript>
 
     <link rel="stylesheet" href="/style.css" />
 
@@ -46,9 +46,88 @@
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "NextPhases.dev",
+      "@id": "https://nextphases.dev/#organization",
+      "name": "NextPhases",
+      "alternateName": "NextPhases.dev",
       "url": "https://nextphases.dev",
       "logo": "https://nextphases.dev/Logo_transparent.png",
+      "image": "https://nextphases.dev/og-banner.png",
+      "email": "info@nextphases.dev",
+      "telephone": "+260978131906",
+      "description": "Professional software development company based in Lusaka, Zambia. We build websites, web and mobile applications, custom software systems, and digital products for businesses in Zambia, across Africa, and internationally.",
+      "slogan": "Engineering your next phase of success",
+      "knowsLanguage": ["en"],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lusaka",
+        "addressRegion": "Lusaka Province",
+        "addressCountry": "ZM"
+      },
+      "areaServed": [
+        {"@type": "Country", "name": "Zambia"},
+        {"@type": "Country", "name": "Zimbabwe"},
+        {"@type": "Country", "name": "South Africa"},
+        {"@type": "Country", "name": "Kenya"},
+        {"@type": "Country", "name": "Nigeria"},
+        {"@type": "Country", "name": "United Kingdom"},
+        {"@type": "Country", "name": "United States"},
+        {"@type": "Country", "name": "Canada"},
+        {"@type": "Country", "name": "Australia"}
+      ],
+      "founder": [
+        {
+          "@type": "Person",
+          "name": "Thuma Hamukang'andu",
+          "jobTitle": "Co-Founder, Chief Technology Officer and Chief Marketing Officer",
+          "email": "media@nextphases.dev",
+          "sameAs": [
+            "https://www.linkedin.com/in/thuma-hamukang-andu-3a78583b4/",
+            "https://github.com/Thuma-H"
+          ]
+        },
+        {
+          "@type": "Person",
+          "name": "Christian Chadambuka",
+          "jobTitle": "Co-Founder, Chief Executive Officer and Chief Commercial Officer",
+          "email": "info@nextphases.dev"
+        },
+        {
+          "@type": "Person",
+          "name": "Simon Muleya",
+          "jobTitle": "Co-Founder, Chief Operating Officer",
+          "email": "team@nextphases.dev"
+        },
+        {
+          "@type": "Person",
+          "name": "Shaun Nkomo",
+          "jobTitle": "Co-Founder, VP Engineering"
+        }
+      ],
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "name": "New project enquiries",
+          "email": "info@nextphases.dev",
+          "telephone": "+260978131906",
+          "availableLanguage": "English",
+          "areaServed": "Worldwide"
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "business partnerships",
+          "name": "Partnerships and suppliers",
+          "email": "team@nextphases.dev",
+          "availableLanguage": "English"
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "public relations",
+          "name": "Media and press",
+          "email": "media@nextphases.dev",
+          "availableLanguage": "English"
+        }
+      ],
       "sameAs": [
         "https://www.youtube.com/@nextphases",
         "https://x.com/NextPhases",
@@ -56,29 +135,45 @@
         "https://www.instagram.com/nextphases.dev/",
         "https://www.linkedin.com/company/nextphases",
         "https://discord.gg/DkybgpuRwp"
-      ],
-      "description": "Software development company building websites, SaaS platforms, applications, and digital products for businesses globally.",
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "@id": "https://nextphases.dev/#business",
+      "name": "NextPhases",
+      "image": "https://nextphases.dev/Logo_transparent.png",
+      "url": "https://nextphases.dev",
+      "telephone": "+260978131906",
+      "email": "info@nextphases.dev",
+      "parentOrganization": {"@id": "https://nextphases.dev/#organization"},
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Lusaka",
-        "addressCountry": "Zambia"
+        "addressCountry": "ZM"
+      },
+      "priceRange": "$$",
+      "currenciesAccepted": "ZMW, ZAR, USD, GBP, EUR, AUD, NZD, CAD, CHF",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "17:00"
       }
     }
     </script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "NextPhases.dev",
-      "image": "https://nextphases.dev/Logo_transparent.png",
+      "@type": "WebSite",
+      "@id": "https://nextphases.dev/#website",
       "url": "https://nextphases.dev",
-      "telephone": "+260978131906",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Lusaka",
-        "addressCountry": "ZM"
-      },
-      "priceRange": "$$"
+      "name": "NextPhases",
+      "description": "Software development company in Lusaka, Zambia building websites, applications, and custom systems for clients worldwide.",
+      "publisher": {"@id": "https://nextphases.dev/#organization"},
+      "inLanguage": "en"
     }
     </script>
     <script type="application/ld+json">
@@ -86,8 +181,7 @@
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://nextphases.dev"},
-        {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://nextphases.dev/services.html"}
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://nextphases.dev"}
       ]
     }
     </script>
@@ -103,8 +197,8 @@
           "item": {
             "@type": "Service",
             "name": "Web Development",
-            "description": "Professional web development including business websites, landing pages, web applications, e-commerce platforms, and scalable frontend and backend systems. Responsive design, SEO-optimised architecture, and performance tuning included.",
-            "provider": {"@type": "Organization", "name": "NextPhases", "url": "https://nextphases.dev"},
+            "description": "Business websites, landing pages, web applications, and e-commerce platforms. Responsive design, SEO-optimised architecture, and performance tuning are included as standard rather than charged as extras.",
+            "provider": {"@id": "https://nextphases.dev/#organization"},
             "areaServed": ["Zambia", "Zimbabwe", "South Africa", "United Kingdom", "United States", "International"],
             "url": "https://nextphases.dev/services.html#web-dev"
           }
@@ -114,8 +208,8 @@
           "item": {
             "@type": "Service",
             "name": "App Development",
-            "description": "Custom web and mobile application development for Android and iOS. Cross-platform solutions, scalable architecture, user authentication, API integration, and deployment. Experience building real products including ExamGuard.",
-            "provider": {"@type": "Organization", "name": "NextPhases", "url": "https://nextphases.dev"},
+            "description": "Custom web and mobile application development for Android and iOS. Cross-platform builds, scalable architecture, user authentication, API integration, and deployment.",
+            "provider": {"@id": "https://nextphases.dev/#organization"},
             "areaServed": ["Zambia", "Zimbabwe", "South Africa", "United Kingdom", "United States", "International"],
             "url": "https://nextphases.dev/services.html#app-dev"
           }
@@ -124,9 +218,20 @@
           "@type": "ListItem", "position": 3,
           "item": {
             "@type": "Service",
+            "name": "Custom Software Systems",
+            "description": "Dashboards, staff and inventory management tools, booking platforms, reporting systems, and workflow automation for businesses that have outgrown spreadsheets.",
+            "provider": {"@id": "https://nextphases.dev/#organization"},
+            "areaServed": ["Zambia", "Zimbabwe", "South Africa", "United Kingdom", "United States", "International"],
+            "url": "https://nextphases.dev/services.html#consulting"
+          }
+        },
+        {
+          "@type": "ListItem", "position": 4,
+          "item": {
+            "@type": "Service",
             "name": "Technical Consulting",
-            "description": "Technology strategy and advisory for businesses at any stage. Covers tech stack selection, digital transformation planning, infrastructure guidance, security best practices, workflow automation, and cost-effective scaling strategies.",
-            "provider": {"@type": "Organization", "name": "NextPhases", "url": "https://nextphases.dev"},
+            "description": "Technology strategy and advisory covering tech stack selection, digital transformation planning, infrastructure guidance, security practices, and cost-effective scaling.",
+            "provider": {"@id": "https://nextphases.dev/#organization"},
             "areaServed": ["Zambia", "Zimbabwe", "South Africa", "United Kingdom", "United States", "International"],
             "url": "https://nextphases.dev/services.html#consulting"
           }
@@ -144,15 +249,15 @@
           "name": "How long does a web development project take with NextPhases?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A straightforward business website typically takes 4 to 6 weeks from signed agreement to delivery. A full web application with authentication, database, and multiple user roles is usually 8 to 16 weeks. We break every project into clear milestones — planning, design approval, development sprints, testing, and handover — and communicate progress at each stage. We always give an honest timeline estimate upfront, not an optimistic one we can't keep."
+            "text": "A straightforward business website typically takes 2 to 6 weeks from signed agreement to delivery. A full web application with authentication, a database, and multiple user roles is usually 8 to 12 weeks. We break every project into clear milestones covering planning, design approval, development sprints, testing, and handover, and we report progress at each stage. We give an honest timeline upfront rather than an optimistic one we cannot keep."
           }
         },
         {
           "@type": "Question",
-          "name": "Do NextPhases work with international clients outside Zambia?",
+          "name": "Does NextPhases work with international clients outside Zambia?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. We work with clients in Zambia, Zimbabwe, South Africa, the UK, Europe, the US, Canada, and across Africa and the Middle East. Our entire workflow is remote-friendly — we use email, WhatsApp, and video calls to stay aligned regardless of timezone. We invoice in the currency that works for the client's region, and we're experienced managing international project expectations and communication cadences."
+            "text": "Yes. We work with clients in Zambia, Zimbabwe, South Africa, Kenya, Nigeria, the UK, Europe, the US, Canada, Australia, and across Asia and the Middle East. Our workflow is fully remote, using email, WhatsApp, and video calls to stay aligned across timezones. We quote in the currency of the client's own region, so Zambian clients see ZMW, UK clients see GBP, Australian clients see AUD, and so on."
           }
         },
         {
@@ -160,7 +265,7 @@
           "name": "Can NextPhases redesign or rebuild an existing website or application?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, and it's one of the most common requests we handle. We can audit your existing site or app, identify what's working and what isn't, then redesign it while preserving anything worth keeping. Whether you need a full rebuild, a visual refresh, or performance improvements to an existing codebase, we approach it practically — we'll tell you what's worth keeping before recommending a full restart."
+            "text": "Yes, and it is one of the most common requests we handle. We audit your existing site or app, identify what is working and what is not, then rebuild what needs rebuilding while preserving anything worth keeping. Whether you need a full rebuild, a visual refresh, or performance work on an existing codebase, we will tell you honestly if a rebuild is not actually necessary."
           }
         },
         {
@@ -168,7 +273,7 @@
           "name": "Will my website work on mobile phones and tablets?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Every website and application we build is mobile-first by default. We design for the smallest screen first, then scale up — which means the mobile experience is never an afterthought. We test on real devices across multiple screen sizes and browsers before delivery, not just browser DevTools. Given that most traffic in Africa comes from mobile devices, this is non-negotiable for us."
+            "text": "Every website and application we build is mobile-first by default. We design for the smallest screen first and scale up, so the mobile experience is never an afterthought. We test on real devices across multiple screen sizes and browsers before delivery, not only in browser developer tools. Since most traffic in Africa comes from mobile devices on variable connections, this is non-negotiable for us."
           }
         },
         {
@@ -176,7 +281,7 @@
           "name": "What technologies and programming languages does NextPhases use?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "We choose the right tool for the job rather than forcing every project into one stack. We're experienced with HTML, CSS, JavaScript (vanilla and modern), React, Node.js, Python, Java, PostgreSQL, MySQL, REST APIs, and deployment on Netlify, Render, Railway, and cloud platforms. For simpler projects we keep the stack lightweight and fast. For complex systems we choose what scales. We'll always explain our technology choices and why they suit your specific project."
+            "text": "We choose the right tool for the job rather than forcing every project into one stack. We work with HTML, CSS, JavaScript, React, Node.js, Python, Java, PostgreSQL, MySQL, REST APIs, and deployment on Netlify, Render, Railway, and major cloud platforms. Simpler projects get a lightweight, fast stack. Complex systems get whatever scales properly. We always explain our technology choices and why they suit your specific project."
           }
         },
         {
@@ -184,7 +289,7 @@
           "name": "Does NextPhases provide maintenance and support after a project launches?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Every project includes a post-launch support window during which we handle any bugs or issues that appear. Beyond that, we offer ongoing maintenance arrangements covering security updates, performance checks, feature additions, and content changes. We also have clients who come back to us months or years after their initial project to build new features — we keep records of every project we ship so we can pick up where we left off efficiently."
+            "text": "Yes. Every project includes a post-launch support window during which we fix any bugs or issues at no extra cost, ranging from 30 days on the Starter tier to ongoing support on Enterprise. Beyond that we offer maintenance arrangements covering security updates, performance checks, feature additions, and content changes. We keep records of every project we ship so we can pick up efficiently months or years later."
           }
         },
         {
@@ -192,7 +297,7 @@
           "name": "Can NextPhases build custom software or internal business systems?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Custom business systems — dashboards, staff management tools, inventory trackers, booking systems, reporting platforms, and workflow automation — are a core part of what we do. Our product ExamGuard is an example: it started as a problem we identified in how schools manage exam invigilation, and we built a complete digital solution around it. If you have a business process that currently relies on spreadsheets, paper, or disconnected tools, we can likely build something better."
+            "text": "Yes. Custom business systems such as dashboards, staff management tools, inventory trackers, booking systems, reporting platforms, and workflow automation are a core part of what we do. A recent example is a cashless tuckshop management platform with vendor point of sale, customer accounts, inventory, SMS notifications, and an admin dashboard. If a business process currently runs on spreadsheets, paper, or disconnected tools, we can usually build something better."
           }
         },
         {
@@ -200,7 +305,7 @@
           "name": "How much does a project cost at NextPhases?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Pricing depends on scope, complexity, and timeline. We use regional pricing to keep our services accessible — Zambian clients are quoted in ZMW, Southern African clients in ZAR or USD, and UK and US clients at rates aligned with their markets. We're transparent about pricing from the first conversation. We provide detailed estimates before any work starts, and we don't change the price mid-project without mutual agreement and a scope change document. We require a 30% deposit after a prototype is approved, with the remaining 70% on final delivery."
+            "text": "Pricing depends on scope, complexity, and timeline, and we quote in your local currency. Zambian clients are quoted in ZMW starting around 2,000 for a starter website, South African clients in ZAR, UK clients in GBP, European clients in EUR, Australian clients in AUD, Canadian clients in CAD, and other regions at rates aligned to their market. Custom systems cost more than websites. We provide a detailed written estimate before any work starts and we do not change the price mid-project without a mutually agreed scope change. We require a 30 percent deposit only after you have approved a working prototype, with the remaining 70 percent on final delivery."
           }
         },
         {
@@ -208,7 +313,15 @@
           "name": "Does NextPhases help with SEO and website performance?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Every website we build includes SEO foundations as standard: semantic HTML structure, proper heading hierarchy, fast load times, mobile optimisation, descriptive meta tags, structured data markup, and a sitemap. We don't charge extra for these — they're part of building a website correctly. We also offer performance audits for existing sites if you want to understand why your current site isn't ranking or loading fast enough."
+            "text": "Yes. Every website we build includes SEO foundations as standard: semantic HTML structure, correct heading hierarchy, fast load times, mobile optimisation, descriptive meta tags, structured data markup, and a sitemap. We do not charge extra for these because they are simply part of building a website correctly. We also offer performance audits for existing sites if you want to understand why your current site is not ranking or loading quickly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who owns the code and accounts when the project is finished?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You do. Source code, domains, hosting accounts, and any third-party service accounts are transferred to you on final delivery. There is no vendor lock-in and we do not hold assets hostage to keep you on a retainer. If you later want to move to another developer or bring the work in-house, everything you need is already yours."
           }
         },
         {
@@ -216,128 +329,7 @@
           "name": "How do I start a project with NextPhases?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Reach out through our contact form or directly on WhatsApp. Tell us what you're building, who it's for, and roughly when you need it. We'll respond within 24 to 48 hours and schedule a free discovery call to talk through your project, ask the right questions, and give you an honest estimate. No commitment required at that stage — we want to make sure we're a good fit before either of us commits."
-          }
-        }
-      ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://nextphases.dev"
-        }
-      ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Web Development & SaaS Solutions | NextPhases",
-      "description": "Award-quality web development, SaaS platforms, and AI automation for startups and businesses globally.",
-      "url": "https://nextphases.dev",
-      "publisher": {
-        "@type": "Organization",
-        "name": "NextPhases.dev",
-        "logo": "https://nextphases.dev/Logo_transparent.png"
-      },
-      "mainEntity": {
-        "@type": "Organization",
-        "name": "NextPhases.dev",
-        "description": "Software development company building websites, applications, SaaS platforms, and digital solutions."
-      }
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What services do you offer?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "We specialize in web development, mobile app development, SaaS platform creation, and AI automation solutions. Whether you need a landing page, a full web application, a mobile app, or intelligent automation for your business processes, we have the expertise to deliver."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How much does a project cost?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Project costs vary based on scope, complexity, and timeline. We offer flexible pricing models including fixed-price projects, time-and-materials engagement, and retainer-based support. We're transparent about pricing and will provide detailed estimates before beginning work."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What's your typical project timeline?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Timelines depend on project scope. A simple website might take 4-8 weeks, while a custom SaaS platform could take 3-6 months. We break projects into milestones and maintain transparent communication about progress."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do you provide ongoing support after launch?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, absolutely. We offer maintenance packages covering bug fixes, security updates, performance optimization, and feature enhancements. Many of our clients work with us on retainer arrangements for continuous support and feature development."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can you help with SEO and performance?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. We build with SEO best practices from the ground up — proper semantic HTML, fast load times, mobile optimization, and structured data. We also offer SEO consulting and performance audits to ensure your site ranks well."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What technology stack do you use?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "We're technology-agnostic and choose the best tools for each project's specific needs. Common choices include React, Vue, Node.js, Python, PostgreSQL, and cloud platforms like AWS or Azure."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do you work with international clients?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, we serve clients across Africa, North America, and globally. Our time zone is CAT (Central Africa Time, UTC+2). We're experienced with international project management, currency conversions, and compliance requirements."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do you handle project communication?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "We maintain clear, regular communication through WhatsApp, email, video calls, and project management tools. You'll get regular updates on progress, a dedicated point of contact, and quick responses to your questions."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do you offer AI and automation services?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. We can integrate AI capabilities into your applications, automate business processes, implement machine learning models, build chatbots, and create intelligent automation workflows."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do I get started?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Simply reach out to us on WhatsApp, email, or through our contact form. Tell us about your project idea, goals, and timeline. We'll schedule a free consultation call to discuss your needs and outline next steps."
+            "text": "Reach out through the contact form at nextphases.dev/contact.html or directly on WhatsApp at +260978131906. Tell us what you are building, who it is for, and roughly when you need it. We respond within 48 hours and schedule a free discovery call to talk through the project, ask the right questions, and give you an honest estimate. No commitment is required at that stage, since we want to be sure we are a good fit before either side commits."
           }
         }
       ]
@@ -354,7 +346,7 @@
 
   gtag('config', 'G-5T40D6EZG4');
 </script>
-<body>
+<body data-page="home">
 
 <!-- Navigation -->
 <nav class="main-nav" id="mainNav">
@@ -381,10 +373,11 @@
             <li><a href="/index.html" class="nav-link active">Home</a></li>
             <li><a href="/services.html" class="nav-link">Services</a></li>
             <li><a href="/portfolio.html" class="nav-link">Portfolio</a></li>
+            <li><a href="/pricing.html" class="nav-link">Pricing</a></li>
             <li><a href="/blogs/" class="nav-link">Blog</a></li>
             <li><a href="/testimonials.html" class="nav-link">Testimonials</a></li>
             <li><a href="/about.html" class="nav-link">About</a></li>
-            <li><a href="" class="cta-button" target="_blank" rel="noopener">WhatsApp</a></li>
+            <li><a href="/contact.html" class="cta-button"><i class="fas fa-paper-plane" aria-hidden="true"></i> Contact</a></li>
         </ul>
         <div class="nav-actions">
             <div class="theme-toggle-group">
@@ -429,12 +422,22 @@
                 Trusted Software Partner • Zambia → Global
             </div>
 
-            <h2>
-                Websites, apps, SaaS platforms, and AI systems designed to scale.
+            <h2 class="hero-rotator" aria-label="Websites, apps, SaaS platforms, and AI systems designed to scale">
+                <span class="hero-rotator-static">We build</span>
+                <span class="hero-rotator-track" aria-hidden="true">
+                    <span class="hero-rotator-word">websites</span>
+                    <span class="hero-rotator-word">mobile apps</span>
+                    <span class="hero-rotator-word">SaaS platforms</span>
+                    <span class="hero-rotator-word">custom systems</span>
+                    <span class="hero-rotator-word">AI workflows</span>
+                </span>
+                <span class="hero-rotator-tail">designed to scale.</span>
             </h2>
 
-            <p>
-                NextPhases builds modern digital products for startups, businesses, and agencies across Africa and internationally, combining premium execution with regional pricing.
+            <p class="hero-reveal">
+                <span class="hero-reveal-line">Modern digital products for startups, businesses, and agencies</span>
+                <span class="hero-reveal-line">across Africa and internationally.</span>
+                <span class="hero-reveal-line">Premium execution, priced for your region.</span>
             </p>
 
             <div class="hero-company-tags">
@@ -445,8 +448,8 @@
                 <span>UX Systems</span>
             </div>
         </div>
-        <p class="intro">From concept to deployment — we deliver scalable, user-focused technology solutions that help your business grow.</p>
-        <p class="location-statement">• Based in Lusaka, Zambia. Serving clients across Africa, North America, and worldwide with award-quality work at regional pricing.</p>
+        <p class="intro">From concept to deployment, we deliver scalable, user-focused technology solutions that help your business grow.</p>
+        <p class="location-statement">Based in Lusaka, Zambia. Serving clients across Africa, North America, and worldwide with award-quality work at regional pricing.</p>
         <div class="cta">
             <a href="https://wa.me/260978131906?text=Hi%20NextPhases%2C%20I%27d%20like%20to%20discuss%20a%20project." class="cta-button" target="_blank" rel="noopener" aria-label="Start your next project on WhatsApp">
                 <span>Get Started</span>
@@ -492,38 +495,139 @@
     </section>
 
     <section class="why-us" role="region" aria-labelledby="why-heading">
-        <h2 id="why-heading">Why Businesses Choose NextPhases</h2>
+        <h2 id="why-heading" class="section-accent-heading">Why Businesses Choose NextPhases</h2>
         <p class="section-description">Expert software development paired with transparent communication and competitive pricing.</p>
         <div class="benefits">
             <div class="benefit" data-aos="fade-right">
-                <span class="benefit-icon" aria-hidden="true"><i class="fas fa-check-circle"></i></span>
+                <span class="benefit-icon" aria-hidden="true"><i class="fas fa-gem"></i></span>
                 <h3>Professional Quality at Competitive Rates</h3>
                 <p>Enterprise-grade development without enterprise pricing. Regional rates that don't compromise on quality.</p>
             </div>
             <div class="benefit" data-aos="fade-right" data-aos-delay="100">
-                <span class="benefit-icon" aria-hidden="true"><i class="fas fa-check-circle"></i></span>
-                <h3>Clear Communication & Project Transparency</h3>
+                <span class="benefit-icon" aria-hidden="true"><i class="fas fa-comments"></i></span>
+                <h3>Clear Communication &amp; Project Transparency</h3>
                 <p>Regular updates, milestone-based delivery, and responsive support throughout your project lifecycle.</p>
             </div>
             <div class="benefit" data-aos="fade-right" data-aos-delay="200">
-                <span class="benefit-icon" aria-hidden="true"><i class="fas fa-check-circle"></i></span>
+                <span class="benefit-icon" aria-hidden="true"><i class="fas fa-rocket"></i></span>
                 <h3>On-Time Delivery with Long-Term Support</h3>
                 <p>We stand behind our work with ongoing maintenance, updates, and technical support after launch.</p>
             </div>
             <div class="benefit" data-aos="fade-right" data-aos-delay="300">
-                <span class="benefit-icon" aria-hidden="true"><i class="fas fa-check-circle"></i></span>
+                <span class="benefit-icon" aria-hidden="true"><i class="fas fa-globe-africa"></i></span>
                 <h3>Global Reach with Local Understanding</h3>
                 <p>Based in Lusaka with experience serving clients worldwide. We understand diverse markets and compliance needs.</p>
             </div>
         </div>
     </section>
 
+    <!-- Use Cases: helps a visitor self-qualify before they enquire -->
+    <section class="usecases" id="use-cases" role="region" aria-labelledby="usecases-heading">
+        <span class="np-eyebrow">Is this right for you</span>
+        <h2 id="usecases-heading" class="section-accent-heading">What We Are a Good Fit For</h2>
+        <p class="section-description">We would rather tell you upfront than take a project that was never going to work. Find the situation closest to yours.</p>
+        <div class="usecase-grid">
+            <article class="usecase-card">
+                <div class="usecase-icon" aria-hidden="true"><i class="fas fa-store"></i></div>
+                <h3>You run a business with no real website</h3>
+                <p>Customers search for you and find nothing, or find a social page that does not answer their questions. You need a credible site that loads fast on mobile data and shows up in search.</p>
+                <ul class="usecase-list">
+                    <li>Starter or Standard tier</li>
+                    <li>2 to 6 weeks</li>
+                    <li>SEO and contact form included</li>
+                </ul>
+                <a class="usecase-link" href="/pricing.html">See pricing for this <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            </article>
+            <article class="usecase-card">
+                <div class="usecase-icon" aria-hidden="true"><i class="fas fa-table"></i></div>
+                <h3>Your operation runs on spreadsheets and paper</h3>
+                <p>Stock, bookings, staff records, or invoicing live in files that only one person understands. You need a system with proper accounts, permissions, and a dashboard you can trust.</p>
+                <ul class="usecase-list">
+                    <li>Professional or Enterprise tier</li>
+                    <li>8 to 12 weeks</li>
+                    <li>Database, auth, and admin dashboard</li>
+                </ul>
+                <a class="usecase-link" href="/services.html#consulting">Talk through the scope <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            </article>
+            <article class="usecase-card">
+                <div class="usecase-icon" aria-hidden="true"><i class="fas fa-mobile-screen"></i></div>
+                <h3>You have an app idea and need a first version</h3>
+                <p>You want something real in front of users before you spend heavily. We scope an MVP that proves the core idea and can be extended rather than rebuilt.</p>
+                <ul class="usecase-list">
+                    <li>Standard or Professional tier</li>
+                    <li>6 to 12 weeks</li>
+                    <li>Built to extend, not to throw away</li>
+                </ul>
+                <a class="usecase-link" href="/services.html#app-dev">See app development <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            </article>
+            <article class="usecase-card">
+                <div class="usecase-icon" aria-hidden="true"><i class="fas fa-arrows-rotate"></i></div>
+                <h3>You already have a site and it is holding you back</h3>
+                <p>Slow, dated, unmaintained, or built by someone you can no longer reach. We audit what exists, tell you honestly what is worth keeping, then rebuild the rest.</p>
+                <ul class="usecase-list">
+                    <li>Audit first, quote after</li>
+                    <li>2 to 8 weeks depending on findings</li>
+                    <li>We will say if a rebuild is not needed</li>
+                </ul>
+                <a class="usecase-link" href="/contact.html">Request an audit <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            </article>
+        </div>
+    </section>
+
+    <!-- Delivery guarantees: reduces perceived risk before the CTA -->
+    <section class="proof-band" role="region" aria-labelledby="proof-heading">
+        <h2 id="proof-heading" class="section-accent-heading">How We Work With You</h2>
+        <p class="section-description">The commitments that apply to every engagement, regardless of tier or region.</p>
+        <div class="proof-grid">
+            <div class="proof-card">
+                <div class="proof-icon" aria-hidden="true"><i class="fas fa-file-signature"></i></div>
+                <h3>Fixed scope, fixed price</h3>
+                <p>You approve a written scope before work starts. The price does not move unless you request a change and sign off on it.</p>
+            </div>
+            <div class="proof-card">
+                <div class="proof-icon" aria-hidden="true"><i class="fas fa-eye"></i></div>
+                <h3>Prototype before deposit</h3>
+                <p>You see a working prototype before paying anything. The 30 percent deposit is only due once you have approved it.</p>
+            </div>
+            <div class="proof-card">
+                <div class="proof-icon" aria-hidden="true"><i class="fas fa-key"></i></div>
+                <h3>You own everything</h3>
+                <p>Source code, domains, accounts, and hosting are transferred to you on final delivery. No lock-in and no hostage assets.</p>
+            </div>
+            <div class="proof-card">
+                <div class="proof-icon" aria-hidden="true"><i class="fas fa-headset"></i></div>
+                <h3>Support after launch</h3>
+                <p>Every tier includes a post-launch window where we fix anything that breaks, at no extra cost, plus direct WhatsApp access to the team.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Portfolio Preview Section -->
     <section class="portfolio-preview" role="region" aria-labelledby="portfolio-heading">
-        <h2 id="portfolio-heading">Our Work</h2>
-        <p class="section-intro">Live projects we've built and deployed. From SaaS platforms to cultural games.</p>
+        <h2 id="portfolio-heading" class="section-accent-heading">Our Work</h2>
+        <p class="section-intro">Client software we have delivered, alongside the products we build and run ourselves.</p>
         <div class="portfolio-grid">
+<!-- ===== NATURE'S CART: HIDDEN UNTIL CLIENT SIGN-OFF AND FINAL INVOICE =====
+     Restore by deleting this comment wrapper. Nothing inside was changed.
             <article class="portfolio-card" data-aos="fade-up">
+                <div class="portfolio-card-icon" aria-hidden="true">
+                    <i class="fas fa-basket-shopping"></i>
+                </div>
+                <div class="portfolio-badge portfolio-badge--delivered">Delivered</div>
+                <h3>Nature's Cart</h3>
+                <p>Cashless tuckshop management PWA built for Nature's Cart, a school tuckshop operator in Lusaka. Vendor point of sale, student account system, inventory management, SMS notifications via Africa's Talking, and an admin oversight dashboard.</p>
+                <div class="portfolio-tags" role="list">
+                    <span role="listitem">PWA</span>
+                    <span role="listitem">React</span>
+                    <span role="listitem">Node.js</span>
+                    <span role="listitem">PostgreSQL</span>
+                    <span role="listitem">Zambia</span>
+                </div>
+                <a class="portfolio-discuss" href="/contact.html">Discuss a similar project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            </article>
+
+     ===== END HIDDEN NATURE'S CART ===== -->
+            <article class="portfolio-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="portfolio-card-icon" aria-hidden="true">
                     <i class="fas fa-shield-alt"></i>
                 </div>
@@ -578,7 +682,7 @@
                 </div>
                 <div class="easter-egg-note">
                     <i class="fas fa-rocket"></i>
-                    <span>Be our first review — <a href="/contact.html">let's build something</a></span>
+                    <span>Be our first review. <a href="/contact.html">Let's build something</a></span>
                 </div>
             </div>
         </div>
@@ -646,7 +750,7 @@
             </div>
         </a>
 
-        <a class="smart-help-card" href="/contact.html">
+        <a class="smart-help-card" href="/pricing.html">
             <i class="fas fa-envelope"></i>
             <div>
                 <h4>Request Pricing</h4>
@@ -655,9 +759,13 @@
         </a>
 
     </div>
+
+    </div>
 </div>
 
+
 <script src="/script.js"></script>
+<script type="module" src="/orbital-scene.js"></script>
 </body>
 </html>
 

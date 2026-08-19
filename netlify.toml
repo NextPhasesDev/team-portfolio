@@ -4,47 +4,66 @@
 [build]
   command = "echo 'Static site - no build needed'"
   publish = "."
+  edge_functions = "netlify/edge-functions"
 
-# Redirect attempts to access code files to homepage
-[[redirects]]
-  from = "/script.js"
-  to = "/"
-  status = 301
+# Direct navigation to source files is bounced to the homepage by the
+# asset-guard edge function. It cannot be done with [[redirects]]: without
+# force = true the rule never fires because the file exists, and with
+# force = true the site's own <link> and <script> tags break too.
+# See netlify/edge-functions/asset-guard.js.
 
 [[redirects]]
   from = "/scripts/*"
   to = "/"
   status = 301
-
-[[redirects]]
-  from = "/style.css"
-  to = "/"
-  status = 301
+  force = true
 
 [[redirects]]
   from = "/styles/*"
   to = "/"
   status = 301
+  force = true
+
+# Clean URLs
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
 
 [[redirects]]
-  from = "/*.js"
-  to = "/"
-  status = 301
+  from = "/services"
+  to = "/services.html"
+  status = 200
 
 [[redirects]]
-  from = "/*.css"
-  to = "/"
-  status = 301
+  from = "/portfolio"
+  to = "/portfolio.html"
+  status = 200
 
 [[redirects]]
-  from = "/about.js"
-  to = "/"
-  status = 301
+  from = "/pricing"
+  to = "/pricing.html"
+  status = 200
 
 [[redirects]]
-  from = "/services.js"
-  to = "/"
-  status = 301
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/testimonials"
+  to = "/testimonials.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms"
+  to = "/terms.html"
+  status = 200
 
 # Add security headers
 [[headers]]
@@ -88,3 +107,8 @@
   [headers.values]
     Cache-Control = "public, max-age=3600, must-revalidate"
 
+# Rates cache is refreshed daily by the client, so keep it short
+[[headers]]
+  for = "/rates.json"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
