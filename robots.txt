@@ -6,3 +6,5 @@ Allow: /
 Sitemap: https://nextphases.dev/sitemap.xml
 # Optional: Crawl-delay (uncomment if needed)
 # Crawl-delay: 10
+# AI crawlers
+llms: https://nextphases.dev/llms.txt

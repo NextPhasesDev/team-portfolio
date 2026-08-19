@@ -7,636 +7,544 @@
     // GLOBAL PRICING DATA - Single Source of Truth
     // ============================================================================
     // Budget tiers for default project types (Web, App, etc.)
-    const budgetMapDefault = {
-        USD_ZW: [
-            { value: '', label: 'Select budget range' },
-            { value: 'usd-300-600', label: 'Starter: USD 300 - 600' },
-            { value: 'usd-600-1000', label: 'Standard: USD 600 - 1,000' },
-            { value: 'usd-1000-1800', label: 'Professional: USD 1,000 - 1,800' },
-            { value: 'usd-1800+', label: 'Enterprise: USD 1,800+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        USD_USCA: [
-            { value: '', label: 'Select budget range' },
-            { value: 'usd-700-1500', label: 'Starter: USD 700 - 1,500' },
-            { value: 'usd-1500-2500', label: 'Standard: USD 1,500 - 2,500' },
-            { value: 'usd-2500-4000', label: 'Professional: USD 2,500 - 4,000' },
-            { value: 'usd-4000+', label: 'Enterprise: USD 4,000+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        USD_WE: [
-            { value: '', label: 'Select budget range' },
-            { value: 'usd-500-900', label: 'Starter: USD 500 - 900' },
-            { value: 'usd-900-1500', label: 'Standard: USD 900 - 1,500' },
-            { value: 'usd-1500-2500', label: 'Professional: USD 1,500 - 2,500' },
-            { value: 'usd-2500+', label: 'Enterprise: USD 2,500+' }
-        ],
-        USD_NAM: [
-            { value: '', label: 'Select budget range' },
-            { value: 'usd-800-1500', label: 'Starter: USD 800 - 1,500' },
-            { value: 'usd-1500-2800', label: 'Standard: USD 1,500 - 2,800' },
-            { value: 'usd-2800-5000', label: 'Professional: USD 2,800 - 5,000' },
-            { value: 'usd-5000+', label: 'Enterprise: USD 5,000+' }
-        ],
-        USD: [
-            { value: '', label: 'Select budget range' },
-            { value: 'usd-300-700', label: 'Starter: USD 300 - 700' },
-            { value: 'usd-700-1500', label: 'Standard: USD 700 - 1,500' },
-            { value: 'usd-1500-3000', label: 'Professional: USD 1,500 - 3,000' },
-            { value: 'usd-3000+', label: 'Enterprise: USD 3,000+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        ZMW: [
-            { value: '', label: 'Select budget range' },
-            { value: 'zmw-2000-3500', label: 'Starter: ZMW 2,000 - 3,500' },
-            { value: 'zmw-3500-5500', label: 'Standard: ZMW 3,500 - 5,500' },
-            { value: 'zmw-5500-8000', label: 'Professional: ZMW 5,500 - 8,000' },
-            { value: 'zmw-8000+', label: 'Enterprise: ZMW 8,000+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        ZAR: [
-            { value: '', label: 'Select budget range' },
-            { value: 'zar-2500-4500', label: 'Starter: ZAR 2,500 - 4,500' },
-            { value: 'zar-4500-7000', label: 'Standard: ZAR 4,500 - 7,000' },
-            { value: 'zar-7000-10000', label: 'Professional: ZAR 7,000 - 10,000' },
-            { value: 'zar-10000+', label: 'Enterprise: ZAR 10,000+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        GBP: [
-            { value: '', label: 'Select budget range' },
-            { value: 'gbp-500-900', label: 'Starter: GBP 500 - 900' },
-            { value: 'gbp-900-1400', label: 'Standard: GBP 900 - 1,400' },
-            { value: 'gbp-1400-2000', label: 'Professional: GBP 1,400 - 2,000' },
-            { value: 'gbp-2000+', label: 'Enterprise: GBP 2,000+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        AUD: [
-            { value: '', label: 'Select budget range' },
-            { value: 'aud-1200-2200', label: 'Starter: AUD 1,200 - 2,200' },
-            { value: 'aud-2200-3800', label: 'Standard: AUD 2,200 - 3,800' },
-            { value: 'aud-3800-6000', label: 'Professional: AUD 3,800 - 6,000' },
-            { value: 'aud-6000+', label: 'Enterprise: AUD 6,000+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        NZD: [
-            { value: '', label: 'Select budget range' },
-            { value: 'nzd-1300-2400', label: 'Starter: NZD 1,300 - 2,400' },
-            { value: 'nzd-2400-4000', label: 'Standard: NZD 2,400 - 4,000' },
-            { value: 'nzd-4000-6500', label: 'Professional: NZD 4,000 - 6,500' },
-            { value: 'nzd-6500+', label: 'Enterprise: NZD 6,500+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        CAD: [
-            { value: '', label: 'Select budget range' },
-            { value: 'cad-900-1800', label: 'Starter: CAD 900 - 1,800' },
-            { value: 'cad-1800-3200', label: 'Standard: CAD 1,800 - 3,200' },
-            { value: 'cad-3200-5500', label: 'Professional: CAD 3,200 - 5,500' },
-            { value: 'cad-5500+', label: 'Enterprise: CAD 5,500+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        CHF: [
-            { value: '', label: 'Select budget range' },
-            { value: 'chf-600-1100', label: 'Starter: CHF 600 - 1,100' },
-            { value: 'chf-1100-1800', label: 'Standard: CHF 1,100 - 1,800' },
-            { value: 'chf-1800-2800', label: 'Professional: CHF 1,800 - 2,800' },
-            { value: 'chf-2800+', label: 'Enterprise: CHF 2,800+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        EUR_EAST: [
-            { value: '', label: 'Select budget range' },
-            { value: 'eur-350-650', label: 'Starter: EUR 350 - 650' },
-            { value: 'eur-650-1100', label: 'Standard: EUR 650 - 1,100' },
-            { value: 'eur-1100-1800', label: 'Professional: EUR 1,100 - 1,800' },
-            { value: 'eur-1800+', label: 'Enterprise: EUR 1,800+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        USD_GULF: [
-            { value: '', label: 'Select budget range' },
-            { value: 'usd-1000-1800', label: 'Starter: USD 1,000 - 1,800' },
-            { value: 'usd-1800-3200', label: 'Standard: USD 1,800 - 3,200' },
-            { value: 'usd-3200-5500', label: 'Professional: USD 3,200 - 5,500' },
-            { value: 'usd-5500+', label: 'Enterprise: USD 5,500+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        USD_ASIA_PREM: [
-            { value: '', label: 'Select budget range' },
-            { value: 'usd-800-1500', label: 'Starter: USD 800 - 1,500' },
-            { value: 'usd-1500-2500', label: 'Standard: USD 1,500 - 2,500' },
-            { value: 'usd-2500-4200', label: 'Professional: USD 2,500 - 4,200' },
-            { value: 'usd-4200+', label: 'Enterprise: USD 4,200+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        USD_ASIA_STD: [
-            { value: '', label: 'Select budget range' },
-            { value: 'usd-450-850', label: 'Starter: USD 450 - 850' },
-            { value: 'usd-850-1400', label: 'Standard: USD 850 - 1,400' },
-            { value: 'usd-1400-2400', label: 'Professional: USD 1,400 - 2,400' },
-            { value: 'usd-2400+', label: 'Enterprise: USD 2,400+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        USD_ASIA_AFD: [
-            { value: '', label: 'Select budget range' },
-            { value: 'usd-350-650', label: 'Starter: USD 350 - 650' },
-            { value: 'usd-650-1100', label: 'Standard: USD 650 - 1,100' },
-            { value: 'usd-1100-1900', label: 'Professional: USD 1,100 - 1,900' },
-            { value: 'usd-1900+', label: 'Enterprise: USD 1,900+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        USD_LATAM: [
-            { value: '', label: 'Select budget range' },
-            { value: 'usd-350-650', label: 'Starter: USD 350 - 650' },
-            { value: 'usd-650-1100', label: 'Standard: USD 650 - 1,100' },
-            { value: 'usd-1100-1900', label: 'Professional: USD 1,100 - 1,900' },
-            { value: 'usd-1900+', label: 'Enterprise: USD 1,900+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        EUR: [
-            { value: '', label: 'Select budget range' },
-            { value: 'eur-550-1000', label: 'Starter: EUR 550 - 1,000' },
-            { value: 'eur-1000-1600', label: 'Standard: EUR 1,000 - 1,600' },
-            { value: 'eur-1600-2300', label: 'Professional: EUR 1,600 - 2,300' },
-            { value: 'eur-2300+', label: 'Enterprise: EUR 2,300+' },
-            { value: 'flexible', label: 'Flexible' }
-        ]
-    };
-
-    // Budget tiers specifically for System Development projects
-    const budgetMapSystems = {
-        USD_ZW: [
-            { value: '', label: 'Select budget range' },
-            { value: 'usd-700-1200', label: 'Starter: USD 700 - 1,200' },
-            { value: 'usd-1200-2000', label: 'Standard: USD 1,200 - 2,000' },
-            { value: 'usd-2000-3500', label: 'Professional: USD 2,000 - 3,500' },
-            { value: 'usd-3500+', label: 'Enterprise: USD 3,500+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        USD_USCA: [
-            { value: '', label: 'Select budget range' },
-            { value: 'usd-2000-3500', label: 'Starter: USD 2,000 - 3,500' },
-            { value: 'usd-3500-6000', label: 'Standard: USD 3,500 - 6,000' },
-            { value: 'usd-6000-10000', label: 'Professional: USD 6,000 - 10,000' },
-            { value: 'usd-10000+', label: 'Enterprise: USD 10,000+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        USD_WE: [
-            { value: '', label: 'Select budget range' },
-            { value: 'usd-1000-2000', label: 'Starter: USD 1,000 - 2,000' },
-            { value: 'usd-2000-3500', label: 'Standard: USD 2,000 - 3,500' },
-            { value: 'usd-3500-6000', label: 'Professional: USD 3,500 - 6,000' },
-            { value: 'usd-6000+', label: 'Enterprise: USD 6,000+' }
-        ],
-        USD_NAM: [
-            { value: '', label: 'Select budget range' },
-            { value: 'usd-2000-3500', label: 'Starter: USD 2,000 - 3,500' },
-            { value: 'usd-3500-6000', label: 'Standard: USD 3,500 - 6,000' },
-            { value: 'usd-6000-10000', label: 'Professional: USD 6,000 - 10,000' },
-            { value: 'usd-10000+', label: 'Enterprise: USD 10,000+' }
-        ],
-        USD: [
-            { value: '', label: 'Select budget range' },
-            { value: 'usd-700-1200', label: 'Starter: USD 700 - 1,200' },
-            { value: 'usd-1200-2000', label: 'Standard: USD 1,200 - 2,000' },
-            { value: 'usd-2000-3500', label: 'Professional: USD 2,000 - 3,500' },
-            { value: 'usd-3500+', label: 'Enterprise: USD 3,500+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        ZMW: [
-            { value: '', label: 'Select budget range' },
-            { value: 'zmw-5000-8000', label: 'Starter: ZMW 5,000 - 8,000' },
-            { value: 'zmw-8000-12000', label: 'Standard: ZMW 8,000 - 12,000' },
-            { value: 'zmw-12000-18000', label: 'Professional: ZMW 12,000 - 18,000' },
-            { value: 'zmw-18000+', label: 'Enterprise: ZMW 18,000+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        ZAR: [
-            { value: '', label: 'Select budget range' },
-            { value: 'zar-6500-10000', label: 'Starter: ZAR 6,500 - 10,000' },
-            { value: 'zar-10000-15000', label: 'Standard: ZAR 10,000 - 15,000' },
-            { value: 'zar-15000-22000', label: 'Professional: ZAR 15,000 - 22,000' },
-            { value: 'zar-22000+', label: 'Enterprise: ZAR 22,000+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        GBP: [
-            { value: '', label: 'Select budget range' },
-            { value: 'gbp-1200-2000', label: 'Starter: GBP 1,200 - 2,000' },
-            { value: 'gbp-2000-3200', label: 'Standard: GBP 2,000 - 3,200' },
-            { value: 'gbp-3200-5000', label: 'Professional: GBP 3,200 - 5,000' },
-            { value: 'gbp-5000+', label: 'Enterprise: GBP 5,000+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        AUD: [
-            { value: '', label: 'Select budget range' },
-            { value: 'aud-3000-5500', label: 'Starter: AUD 3,000 - 5,500' },
-            { value: 'aud-5500-9000', label: 'Standard: AUD 5,500 - 9,000' },
-            { value: 'aud-9000-15000', label: 'Professional: AUD 9,000 - 15,000' },
-            { value: 'aud-15000+', label: 'Enterprise: AUD 15,000+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        NZD: [
-            { value: '', label: 'Select budget range' },
-            { value: 'nzd-3500-6000', label: 'Starter: NZD 3,500 - 6,000' },
-            { value: 'nzd-6000-10000', label: 'Standard: NZD 6,000 - 10,000' },
-            { value: 'nzd-10000-16000', label: 'Professional: NZD 10,000 - 16,000' },
-            { value: 'nzd-16000+', label: 'Enterprise: NZD 16,000+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        CAD: [
-            { value: '', label: 'Select budget range' },
-            { value: 'cad-2500-4500', label: 'Starter: CAD 2,500 - 4,500' },
-            { value: 'cad-4500-7500', label: 'Standard: CAD 4,500 - 7,500' },
-            { value: 'cad-7500-13000', label: 'Professional: CAD 7,500 - 13,000' },
-            { value: 'cad-13000+', label: 'Enterprise: CAD 13,000+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        CHF: [
-            { value: '', label: 'Select budget range' },
-            { value: 'chf-1600-2800', label: 'Starter: CHF 1,600 - 2,800' },
-            { value: 'chf-2800-4500', label: 'Standard: CHF 2,800 - 4,500' },
-            { value: 'chf-4500-7000', label: 'Professional: CHF 4,500 - 7,000' },
-            { value: 'chf-7000+', label: 'Enterprise: CHF 7,000+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        EUR_EAST: [
-            { value: '', label: 'Select budget range' },
-            { value: 'eur-900-1600', label: 'Starter: EUR 900 - 1,600' },
-            { value: 'eur-1600-2800', label: 'Standard: EUR 1,600 - 2,800' },
-            { value: 'eur-2800-4500', label: 'Professional: EUR 2,800 - 4,500' },
-            { value: 'eur-4500+', label: 'Enterprise: EUR 4,500+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        USD_GULF: [
-            { value: '', label: 'Select budget range' },
-            { value: 'usd-2500-4500', label: 'Starter: USD 2,500 - 4,500' },
-            { value: 'usd-4500-7500', label: 'Standard: USD 4,500 - 7,500' },
-            { value: 'usd-7500-12000', label: 'Professional: USD 7,500 - 12,000' },
-            { value: 'usd-12000+', label: 'Enterprise: USD 12,000+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        USD_ASIA_PREM: [
-            { value: '', label: 'Select budget range' },
-            { value: 'usd-2000-3500', label: 'Starter: USD 2,000 - 3,500' },
-            { value: 'usd-3500-6000', label: 'Standard: USD 3,500 - 6,000' },
-            { value: 'usd-6000-10000', label: 'Professional: USD 6,000 - 10,000' },
-            { value: 'usd-10000+', label: 'Enterprise: USD 10,000+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        USD_ASIA_STD: [
-            { value: '', label: 'Select budget range' },
-            { value: 'usd-1100-2000', label: 'Starter: USD 1,100 - 2,000' },
-            { value: 'usd-2000-3500', label: 'Standard: USD 2,000 - 3,500' },
-            { value: 'usd-3500-6000', label: 'Professional: USD 3,500 - 6,000' },
-            { value: 'usd-6000+', label: 'Enterprise: USD 6,000+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        USD_ASIA_AFD: [
-            { value: '', label: 'Select budget range' },
-            { value: 'usd-850-1500', label: 'Starter: USD 850 - 1,500' },
-            { value: 'usd-1500-2500', label: 'Standard: USD 1,500 - 2,500' },
-            { value: 'usd-2500-4500', label: 'Professional: USD 2,500 - 4,500' },
-            { value: 'usd-4500+', label: 'Enterprise: USD 4,500+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        USD_LATAM: [
-            { value: '', label: 'Select budget range' },
-            { value: 'usd-850-1500', label: 'Starter: USD 850 - 1,500' },
-            { value: 'usd-1500-2600', label: 'Standard: USD 1,500 - 2,600' },
-            { value: 'usd-2600-4500', label: 'Professional: USD 2,600 - 4,500' },
-            { value: 'usd-4500+', label: 'Enterprise: USD 4,500+' },
-            { value: 'flexible', label: 'Flexible' }
-        ],
-        EUR: [
-            { value: '', label: 'Select budget range' },
-            { value: 'eur-1400-2200', label: 'Starter: EUR 1,400 - 2,200' },
-            { value: 'eur-2200-3500', label: 'Standard: EUR 2,200 - 3,500' },
-            { value: 'eur-3500-5500', label: 'Professional: EUR 3,500 - 5,500' },
-            { value: 'eur-5500+', label: 'Enterprise: EUR 5,500+' },
-            { value: 'flexible', label: 'Flexible' }
-        ]
-    };
-
-    // Pricing display values mapped to tiers and currencies (Default Projects)
-    // Extracted from budgetMapDefault - single source of truth
-    const pricingDisplayData = {
-        starter: {
-            ZMW: 'ZMW 2,000 - 3,500',
-            ZAR: 'ZAR 2,500 - 4,500',
-            USD_ZW: 'USD 300 - 600',         // Zimbabwe/Southern Africa
-            USD_USCA: 'USD 700 - 1,500',     // US & Canada
-            USD_WE: 'USD 500 - 900',         // West & East Africa
-            USD_NAM: 'USD 800 - 1,500',      // North Africa & Middle East
-            USD: 'USD 300 - 700',            // Generic/International fallback
-            GBP: 'GBP 500 - 900',
-            EUR: 'EUR 550 - 1,000',
-            AUD: 'AUD 1,200 - 2,200',
-            NZD: 'NZD 1,300 - 2,400',
-            CAD: 'CAD 900 - 1,800',
-            CHF: 'CHF 600 - 1,100',
-            EUR_EAST: 'EUR 350 - 650',
-            USD_GULF: 'USD 1,000 - 1,800',
-            USD_ASIA_PREM: 'USD 800 - 1,500',
-            USD_ASIA_STD: 'USD 450 - 850',
-            USD_ASIA_AFD: 'USD 350 - 650',
-            USD_LATAM: 'USD 350 - 650'
-        },
-        standard: {
-            ZMW: 'ZMW 3,500 - 5,500',
-            ZAR: 'ZAR 4,500 - 7,000',
-            USD_ZW: 'USD 600 - 1,000',
-            USD_USCA: 'USD 1,500 - 2,500',
-            USD_WE: 'USD 900 - 1,500',
-            USD_NAM: 'USD 1,500 - 2,800',
-            USD: 'USD 700 - 1,500',
-            GBP: 'GBP 900 - 1,400',
-            EUR: 'EUR 1,000 - 1,600',
-            AUD: 'AUD 2,200 - 3,800',
-            NZD: 'NZD 2,400 - 4,000',
-            CAD: 'CAD 1,800 - 3,200',
-            CHF: 'CHF 1,100 - 1,800',
-            EUR_EAST: 'EUR 650 - 1,100',
-            USD_GULF: 'USD 1,800 - 3,200',
-            USD_ASIA_PREM: 'USD 1,500 - 2,500',
-            USD_ASIA_STD: 'USD 850 - 1,400',
-            USD_ASIA_AFD: 'USD 650 - 1,100',
-            USD_LATAM: 'USD 650 - 1,100'
-        },
-        professional: {
-            ZMW: 'ZMW 5,500 - 8,000',
-            ZAR: 'ZAR 7,000 - 10,000',
-            USD_ZW: 'USD 1,000 - 1,800',
-            USD_USCA: 'USD 2,500 - 4,000',
-            USD_WE: 'USD 1,500 - 2,500',
-            USD_NAM: 'USD 2,800 - 5,000',
-            USD: 'USD 1,500 - 3,000',
-            GBP: 'GBP 1,400 - 2,000',
-            EUR: 'EUR 1,600 - 2,300',
-            AUD: 'AUD 3,800 - 6,000',
-            NZD: 'NZD 4,000 - 6,500',
-            CAD: 'CAD 3,200 - 5,500',
-            CHF: 'CHF 1,800 - 2,800',
-            EUR_EAST: 'EUR 1,100 - 1,800',
-            USD_GULF: 'USD 3,200 - 5,500',
-            USD_ASIA_PREM: 'USD 2,500 - 4,200',
-            USD_ASIA_STD: 'USD 1,400 - 2,400',
-            USD_ASIA_AFD: 'USD 1,100 - 1,900',
-            USD_LATAM: 'USD 1,100 - 1,900'
-        },
-        enterprise: {
-            ZMW: 'ZMW 8,000+',
-            ZAR: 'ZAR 10,000+',
-            USD_ZW: 'USD 1,800+',
-            USD_USCA: 'USD 4,000+',
-            USD_WE: 'USD 2,500+',
-            USD_NAM: 'USD 5,000+',
-            USD: 'USD 3,000+',
-            GBP: 'GBP 2,000+',
-            EUR: 'EUR 2,300+',
-            AUD: 'AUD 6,000+',
-            NZD: 'NZD 6,500+',
-            CAD: 'CAD 5,500+',
-            CHF: 'CHF 2,800+',
-            EUR_EAST: 'EUR 1,800+',
-            USD_GULF: 'USD 5,500+',
-            USD_ASIA_PREM: 'USD 4,200+',
-            USD_ASIA_STD: 'USD 2,400+',
-            USD_ASIA_AFD: 'USD 1,900+',
-            USD_LATAM: 'USD 1,900+'
-        }
-    };
-
-    // Pricing display values for System Development projects
-    // Extracted from budgetMapSystems - single source of truth
-    const pricingDisplayDataSystems = {
-        starter: {
-            ZMW: 'ZMW 5,000 - 8,000',
-            ZAR: 'ZAR 6,500 - 10,000',
-            USD_ZW: 'USD 700 - 1,200',       // Zimbabwe/Southern Africa
-            USD_USCA: 'USD 2,000 - 3,500',   // US & Canada
-            USD_WE: 'USD 1,000 - 2,000',     // West & East Africa
-            USD_NAM: 'USD 2,000 - 3,500',    // North Africa & Middle East
-            USD: 'USD 700 - 1,200',          // Generic/International fallback
-            GBP: 'GBP 1,200 - 2,000',
-            EUR: 'EUR 1,400 - 2,200',
-            AUD: 'AUD 3,000 - 5,500',
-            NZD: 'NZD 3,500 - 6,000',
-            CAD: 'CAD 2,500 - 4,500',
-            CHF: 'CHF 1,600 - 2,800',
-            EUR_EAST: 'EUR 900 - 1,600',
-            USD_GULF: 'USD 2,500 - 4,500',
-            USD_ASIA_PREM: 'USD 2,000 - 3,500',
-            USD_ASIA_STD: 'USD 1,100 - 2,000',
-            USD_ASIA_AFD: 'USD 850 - 1,500',
-            USD_LATAM: 'USD 850 - 1,500'
-        },
-        standard: {
-            ZMW: 'ZMW 8,000 - 12,000',
-            ZAR: 'ZAR 10,000 - 15,000',
-            USD_ZW: 'USD 1,200 - 2,000',
-            USD_USCA: 'USD 3,500 - 6,000',
-            USD_WE: 'USD 2,000 - 3,500',
-            USD_NAM: 'USD 3,500 - 6,000',
-            USD: 'USD 1,200 - 2,000',
-            GBP: 'GBP 2,000 - 3,200',
-            EUR: 'EUR 2,200 - 3,500',
-            AUD: 'AUD 5,500 - 9,000',
-            NZD: 'NZD 6,000 - 10,000',
-            CAD: 'CAD 4,500 - 7,500',
-            CHF: 'CHF 2,800 - 4,500',
-            EUR_EAST: 'EUR 1,600 - 2,800',
-            USD_GULF: 'USD 4,500 - 7,500',
-            USD_ASIA_PREM: 'USD 3,500 - 6,000',
-            USD_ASIA_STD: 'USD 2,000 - 3,500',
-            USD_ASIA_AFD: 'USD 1,500 - 2,500',
-            USD_LATAM: 'USD 1,500 - 2,600'
-        },
-        professional: {
-            ZMW: 'ZMW 12,000 - 18,000',
-            ZAR: 'ZAR 15,000 - 22,000',
-            USD_ZW: 'USD 2,000 - 3,500',
-            USD_USCA: 'USD 6,000 - 10,000',
-            USD_WE: 'USD 3,500 - 6,000',
-            USD_NAM: 'USD 6,000 - 10,000',
-            USD: 'USD 2,000 - 3,500',
-            GBP: 'GBP 3,200 - 5,000',
-            EUR: 'EUR 3,500 - 5,500',
-            AUD: 'AUD 9,000 - 15,000',
-            NZD: 'NZD 10,000 - 16,000',
-            CAD: 'CAD 7,500 - 13,000',
-            CHF: 'CHF 4,500 - 7,000',
-            EUR_EAST: 'EUR 2,800 - 4,500',
-            USD_GULF: 'USD 7,500 - 12,000',
-            USD_ASIA_PREM: 'USD 6,000 - 10,000',
-            USD_ASIA_STD: 'USD 3,500 - 6,000',
-            USD_ASIA_AFD: 'USD 2,500 - 4,500',
-            USD_LATAM: 'USD 2,600 - 4,500'
-        },
-        enterprise: {
-            ZMW: 'ZMW 18,000+',
-            ZAR: 'ZAR 22,000+',
-            USD_ZW: 'USD 3,500+',
-            USD_USCA: 'USD 10,000+',
-            USD_WE: 'USD 6,000+',
-            USD_NAM: 'USD 10,000+',
-            USD: 'USD 3,500+',
-            GBP: 'GBP 5,000+',
-            EUR: 'EUR 5,500+',
-            AUD: 'AUD 15,000+',
-            NZD: 'NZD 16,000+',
-            CAD: 'CAD 13,000+',
-            CHF: 'CHF 7,000+',
-            EUR_EAST: 'EUR 4,500+',
-            USD_GULF: 'USD 12,000+',
-            USD_ASIA_PREM: 'USD 10,000+',
-            USD_ASIA_STD: 'USD 6,000+',
-            USD_ASIA_AFD: 'USD 4,500+',
-            USD_LATAM: 'USD 4,500+'
-        }
-    };
-
     // ============================================================================
-    // PRICING HELPER FUNCTIONS
+    // PRICING -- local price book, live FX, and drift-based re-pegging
     // ============================================================================
+    // How this works, and why it is not a live currency converter:
+    //
+    //   1. LOCAL_PRICE_BOOK holds prices we have actually decided on for a market,
+    //      written in that market's own currency and set against what local
+    //      agencies charge there. These are shown verbatim. They do not move when
+    //      the exchange rate wobbles, which is how real firms quote.
+    //
+    //   2. Markets we have not priced by hand fall back to TIER_BANDS, converted
+    //      from the band's anchor currency.
+    //
+    //   3. Live rates are fetched once a day and cached. They are used for two
+    //      things only: converting the fallback markets, and checking whether an
+    //      authored local price has drifted too far from its original USD value.
+    //      A price is only re-pegged when drift passes REBASE_THRESHOLD, so
+    //      day-to-day rate noise never changes what a visitor sees.
+    //
+    //   4. If the rate API is unreachable we use FALLBACK_RATES and carry on.
+    //      Nothing on the page depends on the network call succeeding.
+    //
+    // To change a price for a market we have authored: edit LOCAL_PRICE_BOOK.
+    // To change a price for everywhere else: edit TIER_BANDS.
+    // ============================================================================
+
+    const RATES_UPDATED = 'August 2026';
+    const RATES_ENDPOINT = 'https://open.er-api.com/v6/latest/USD';
+    const RATES_CACHE_KEY = 'np_fx_rates_v1';
+    const RATES_TTL_MS = 24 * 60 * 60 * 1000;
+
+    // A published price only moves once it is this far from its authored value.
+    // 12% is wide enough to absorb normal currency movement and narrow enough
+    // that we are never badly mispriced.
+    const REBASE_THRESHOLD = 0.12;
+
+    // Units per 1 USD at authoring time. Also the offline fallback.
+    const FALLBACK_RATES = {
+        USD: 1, EUR: 0.92, GBP: 0.79, ZMW: 26, ZAR: 18.2, AUD: 1.52, NZD: 1.66,
+        CAD: 1.37, CHF: 0.88,
+        BWP: 13.6, NAD: 18.2, MZN: 63.9, NGN: 1550, GHS: 15.2, KES: 129,
+        UGX: 3700, TZS: 2700, ETB: 122, XAF: 604, XOF: 604, EGP: 48.5,
+        MAD: 9.9, DZD: 134, TND: 3.1, LYD: 4.8,
+        AED: 3.67, SAR: 3.75, KWD: 0.31, QAR: 3.64, BHD: 0.38, OMR: 0.38,
+        ILS: 3.7, JOD: 0.71, IQD: 1310, YER: 250,
+        ISK: 138, NOK: 10.7, SEK: 10.5, DKK: 6.9, PLN: 3.95, CZK: 23.2,
+        RON: 4.57, HUF: 360, BGN: 1.8, RSD: 108, ALL: 92, BAM: 1.8, MKD: 56.5,
+        MDL: 17.8, UAH: 41.5, BYN: 3.27, GEL: 2.7, AMD: 388, AZN: 1.7,
+        RUB: 92, TRY: 34,
+        BRL: 5.5, MXN: 19.8, COP: 4200, CLP: 950, PEN: 3.75, BOB: 6.9,
+        UYU: 41, PYG: 7800, GTQ: 7.7, HNL: 25, NIO: 36.8, CRC: 515,
+        JMD: 157, TTD: 6.8,
+        SGD: 1.34, JPY: 150, KRW: 1370, HKD: 7.8, TWD: 32.2, CNY: 7.15,
+        MYR: 4.4, IDR: 15800, THB: 34.5, PHP: 57.5, VND: 25200, MMK: 2100,
+        KHR: 4050, BND: 1.34, MNT: 3400, INR: 84, PKR: 278, BDT: 120,
+        LKR: 295, NPR: 134, AFN: 68, KZT: 480, UZS: 12800
+    };
+
+    // Rounding step per currency, so figures read as estimates not false precision.
+    const CURRENCY_STEP = {
+        USD: 50, EUR: 50, GBP: 50, CHF: 50, AUD: 100, NZD: 100, CAD: 100,
+        ZMW: 500, ZAR: 500, BWP: 500, NAD: 500, MZN: 1000, NGN: 50000,
+        GHS: 500, KES: 5000, UGX: 100000, TZS: 100000, ETB: 5000,
+        XAF: 25000, XOF: 25000, EGP: 1000, MAD: 500, DZD: 5000, TND: 100,
+        LYD: 100, AED: 100, SAR: 100, KWD: 25, QAR: 100, BHD: 25, OMR: 25,
+        ILS: 100, JOD: 25, IQD: 50000, YER: 10000, ISK: 5000, NOK: 500,
+        SEK: 500, DKK: 250, PLN: 100, CZK: 500, RON: 100, HUF: 10000,
+        BGN: 50, RSD: 5000, ALL: 5000, BAM: 50, MKD: 2500, MDL: 500,
+        UAH: 1000, BYN: 100, GEL: 100, AMD: 10000, AZN: 50, RUB: 2500,
+        TRY: 1000, BRL: 250, MXN: 500, COP: 100000, CLP: 25000, PEN: 100,
+        BOB: 250, UYU: 1000, PYG: 250000, GTQ: 250, HNL: 500, NIO: 1000,
+        CRC: 25000, JMD: 5000, TTD: 250, SGD: 50, JPY: 5000, KRW: 50000,
+        HKD: 250, TWD: 1000, CNY: 250, MYR: 100, IDR: 500000, THB: 1000,
+        PHP: 2500, VND: 1000000, MMK: 50000, KHR: 100000, BND: 50,
+        MNT: 100000, INR: 2500, PKR: 10000, BDT: 5000, LKR: 10000,
+        NPR: 5000, AFN: 2500, KZT: 25000, UZS: 500000
+    };
+
+    // Price bands per budget key, in that key's anchor currency.
+    // Order: starter, standard, professional, enterprise. null upper bound = "N+".
+    const TIER_BANDS = {
+        ZMW:           { base: 'ZMW', def: [[2000,3500],[3500,5500],[5500,8000],[8000,null]],   sys: [[5000,8000],[8000,12000],[12000,18000],[18000,null]] },
+        ZAR:           { base: 'ZAR', def: [[2500,4500],[4500,7000],[7000,10000],[10000,null]], sys: [[6500,10000],[10000,15000],[15000,22000],[22000,null]] },
+        GBP:           { base: 'GBP', def: [[500,900],[900,1400],[1400,2000],[2000,null]],      sys: [[1200,2000],[2000,3200],[3200,5000],[5000,null]] },
+        EUR:           { base: 'EUR', def: [[550,1000],[1000,1600],[1600,2300],[2300,null]],    sys: [[1400,2200],[2200,3500],[3500,5500],[5500,null]] },
+        EUR_EAST:      { base: 'EUR', def: [[350,650],[650,1100],[1100,1800],[1800,null]],      sys: [[900,1600],[1600,2800],[2800,4500],[4500,null]] },
+        CHF:           { base: 'CHF', def: [[600,1100],[1100,1800],[1800,2800],[2800,null]],    sys: [[1600,2800],[2800,4500],[4500,7000],[7000,null]] },
+        AUD:           { base: 'AUD', def: [[1200,2200],[2200,3800],[3800,6000],[6000,null]],   sys: [[3000,5500],[5500,9000],[9000,15000],[15000,null]] },
+        NZD:           { base: 'NZD', def: [[1300,2400],[2400,4000],[4000,6500],[6500,null]],   sys: [[3500,6000],[6000,10000],[10000,16000],[16000,null]] },
+        CAD:           { base: 'CAD', def: [[900,1800],[1800,3200],[3200,5500],[5500,null]],    sys: [[2500,4500],[4500,7500],[7500,13000],[13000,null]] },
+        USD:           { base: 'USD', def: [[300,700],[700,1500],[1500,3000],[3000,null]],      sys: [[700,1200],[1200,2000],[2000,3500],[3500,null]] },
+        USD_ZW:        { base: 'USD', def: [[300,600],[600,1000],[1000,1800],[1800,null]],      sys: [[700,1200],[1200,2000],[2000,3500],[3500,null]] },
+        USD_WE:        { base: 'USD', def: [[500,900],[900,1500],[1500,2500],[2500,null]],      sys: [[1000,2000],[2000,3500],[3500,6000],[6000,null]] },
+        USD_NAM:       { base: 'USD', def: [[800,1500],[1500,2800],[2800,5000],[5000,null]],    sys: [[2000,3500],[3500,6000],[6000,10000],[10000,null]] },
+        USD_USCA:      { base: 'USD', def: [[700,1500],[1500,2500],[2500,4000],[4000,null]],    sys: [[2000,3500],[3500,6000],[6000,10000],[10000,null]] },
+        USD_GULF:      { base: 'USD', def: [[1000,1800],[1800,3200],[3200,5500],[5500,null]],   sys: [[2500,4500],[4500,7500],[7500,12000],[12000,null]] },
+        USD_ASIA_PREM: { base: 'USD', def: [[800,1500],[1500,2500],[2500,4200],[4200,null]],    sys: [[2000,3500],[3500,6000],[6000,10000],[10000,null]] },
+        USD_ASIA_STD:  { base: 'USD', def: [[450,850],[850,1400],[1400,2400],[2400,null]],      sys: [[1100,2000],[2000,3500],[3500,6000],[6000,null]] },
+        USD_ASIA_AFD:  { base: 'USD', def: [[350,650],[650,1100],[1100,1900],[1900,null]],      sys: [[850,1500],[1500,2500],[2500,4500],[4500,null]] },
+        USD_LATAM:     { base: 'USD', def: [[350,650],[650,1100],[1100,1900],[1900,null]],      sys: [[850,1500],[1500,2600],[2600,4500],[4500,null]] }
+    };
+
+    // ---------------------------------------------------------------------------
+    // LOCAL PRICE BOOK
+    // ---------------------------------------------------------------------------
+    // Prices we have set by hand for a market, in that market's currency, pitched
+    // against what local agencies charge for equivalent work. These are shown as
+    // written. `pegUSD` is the USD value of the starter band's lower bound on the
+    // day it was authored; drift is measured against it.
+    //
+    // REVIEW THESE. They are researched starting points, not quotes. Adjust any
+    // figure you disagree with and update pegUSD to match.
+    // ---------------------------------------------------------------------------
+    const LOCAL_PRICE_BOOK = {
+        NGN: { pegUSD: 520,
+            def: [[800000,1400000],[1400000,2400000],[2400000,4000000],[4000000,null]],
+            sys: [[1600000,3100000],[3100000,5400000],[5400000,9300000],[9300000,null]] },
+        KES: { pegUSD: 500,
+            def: [[65000,115000],[115000,195000],[195000,325000],[325000,null]],
+            sys: [[130000,260000],[260000,450000],[450000,775000],[775000,null]] },
+        GHS: { pegUSD: 500,
+            def: [[7500,13500],[13500,23000],[23000,38000],[38000,null]],
+            sys: [[15000,30000],[30000,53000],[53000,91000],[91000,null]] },
+        TZS: { pegUSD: 500,
+            def: [[1300000,2400000],[2400000,4000000],[4000000,6800000],[6800000,null]],
+            sys: [[2700000,5400000],[5400000,9500000],[9500000,16000000],[16000000,null]] },
+        UGX: { pegUSD: 500,
+            def: [[1800000,3300000],[3300000,5600000],[5600000,9300000],[9300000,null]],
+            sys: [[3700000,7400000],[7400000,13000000],[13000000,22000000],[22000000,null]] },
+        EGP: { pegUSD: 800,
+            def: [[39000,73000],[73000,136000],[136000,242000],[242000,null]],
+            sys: [[97000,170000],[170000,291000],[291000,485000],[485000,null]] },
+        INR: { pegUSD: 350,
+            def: [[30000,55000],[55000,92500],[92500,160000],[160000,null]],
+            sys: [[72500,127500],[127500,210000],[210000,380000],[380000,null]] },
+        PKR: { pegUSD: 350,
+            def: [[97500,180000],[180000,305000],[305000,530000],[530000,null]],
+            sys: [[240000,420000],[420000,695000],[695000,1250000],[1250000,null]] },
+        BDT: { pegUSD: 350,
+            def: [[42000,78000],[78000,132000],[132000,228000],[228000,null]],
+            sys: [[102000,180000],[180000,300000],[300000,540000],[540000,null]] },
+        PHP: { pegUSD: 450,
+            def: [[25000,49000],[49000,80000],[80000,138000],[138000,null]],
+            sys: [[62500,115000],[115000,200000],[200000,345000],[345000,null]] },
+        IDR: { pegUSD: 450,
+            def: [[7000000,13500000],[13500000,22000000],[22000000,38000000],[38000000,null]],
+            sys: [[17500000,31500000],[31500000,55000000],[55000000,95000000],[95000000,null]] },
+        VND: { pegUSD: 450,
+            def: [[11000000,21000000],[21000000,35000000],[35000000,60000000],[60000000,null]],
+            sys: [[28000000,50000000],[50000000,88000000],[88000000,151000000],[151000000,null]] },
+        BRL: { pegUSD: 350,
+            def: [[2000,3500],[3500,6000],[6000,10500],[10500,null]],
+            sys: [[4750,8250],[8250,14250],[14250,24750],[24750,null]] },
+        MXN: { pegUSD: 350,
+            def: [[7000,13000],[13000,22000],[22000,37500],[37500,null]],
+            sys: [[17000,30000],[30000,51500],[51500,89000],[89000,null]] },
+        TRY: { pegUSD: 380,
+            def: [[13000,24000],[24000,41000],[41000,67000],[67000,null]],
+            sys: [[33000,59000],[59000,103000],[103000,166000],[166000,null]] },
+        PLN: { pegUSD: 380,
+            def: [[1500,2800],[2800,4700],[4700,7700],[7700,null]],
+            sys: [[3900,6900],[6900,12000],[12000,19500],[19500,null]] },
+        RON: { pegUSD: 380,
+            def: [[1700,3200],[3200,5400],[5400,8900],[8900,null]],
+            sys: [[4500,8000],[8000,13900],[13900,22500],[22500,null]] }
+    };
+
+    const TIER_NAMES = ['starter', 'standard', 'professional', 'enterprise'];
+    const TIER_LABELS = ['Starter', 'Standard', 'Professional', 'Enterprise'];
+
+    // --------------------------------------------------------------- live rates
+    let liveRates = null;          // populated once fetched
+    let ratesAreLive = false;
+
+    function currentRates() {
+        return liveRates || FALLBACK_RATES;
+    }
+
+    function readCachedRates() {
+        try {
+            const raw = localStorage.getItem(RATES_CACHE_KEY);
+            if (!raw) return null;
+            const parsed = JSON.parse(raw);
+            if (!parsed || !parsed.at || !parsed.rates) return null;
+            if (Date.now() - parsed.at > RATES_TTL_MS) return null;
+            return parsed.rates;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function writeCachedRates(rates) {
+        try {
+            localStorage.setItem(RATES_CACHE_KEY, JSON.stringify({ at: Date.now(), rates: rates }));
+        } catch (e) {
+            /* storage full or blocked; rates just will not persist */
+        }
+    }
+
+    // Resolves once rates are settled, whether from cache, network, or fallback.
+    function loadRates() {
+        const cached = readCachedRates();
+        if (cached) {
+            liveRates = cached;
+            ratesAreLive = true;
+            return Promise.resolve(cached);
+        }
+
+        if (typeof fetch !== 'function') return Promise.resolve(FALLBACK_RATES);
+
+        const controller = typeof AbortController === 'function' ? new AbortController() : null;
+        const timeout = setTimeout(function () { if (controller) controller.abort(); }, 4000);
+
+        return fetch(RATES_ENDPOINT, controller ? { signal: controller.signal } : undefined)
+            .then(function (res) { return res.ok ? res.json() : null; })
+            .then(function (data) {
+                if (data && data.rates && data.rates.EUR) {
+                    liveRates = data.rates;
+                    ratesAreLive = true;
+                    writeCachedRates(data.rates);
+                    return data.rates;
+                }
+                return FALLBACK_RATES;
+            })
+            .catch(function () { return FALLBACK_RATES; })
+            .finally(function () { clearTimeout(timeout); });
+    }
+
+    // ------------------------------------------------------------- conversion
+    function convertAmount(amount, fromCode, toCode, rates) {
+        if (amount === null || amount === undefined) return null;
+        if (fromCode === toCode) return amount;
+        const r = rates || currentRates();
+        const from = r[fromCode], to = r[toCode];
+        if (!from || !to) return amount;
+        return (amount / from) * to;
+    }
+
+    function roundToStep(amount, code) {
+        if (amount === null || amount === undefined) return null;
+        const step = CURRENCY_STEP[code] || 50;
+        const rounded = Math.round(amount / step) * step;
+        return rounded < step ? step : rounded;
+    }
+
+    function groupNumber(n) {
+        return Math.round(n).toLocaleString('en-US');
+    }
+
+    // How far an authored local price has drifted from its original USD value.
+    function driftFor(currencyCode) {
+        const book = LOCAL_PRICE_BOOK[currencyCode];
+        if (!book || !book.pegUSD) return 0;
+        const rates = currentRates();
+        const rate = rates[currencyCode];
+        if (!rate) return 0;
+        const nowUSD = book.def[0][0] / rate;
+        return Math.abs(nowUSD - book.pegUSD) / book.pegUSD;
+    }
+
+    // Returns the bands to display, plus how they were arrived at.
+    function resolveBands(budgetKey, currencyCode, isSystems) {
+        const anchor = TIER_BANDS[budgetKey] || TIER_BANDS.USD;
+        const book = LOCAL_PRICE_BOOK[currencyCode];
+
+        if (book) {
+            const drift = driftFor(currencyCode);
+            if (drift <= REBASE_THRESHOLD) {
+                // Within tolerance: show the price we set, untouched.
+                return {
+                    bands: isSystems ? book.sys : book.def,
+                    base: currencyCode,
+                    mode: 'authored',
+                    drift: drift
+                };
+            }
+            // Drifted too far: re-peg from the original USD value.
+            const rates = currentRates();
+            const scale = (book.pegUSD * rates[currencyCode]) / book.def[0][0];
+            const src = isSystems ? book.sys : book.def;
+            return {
+                bands: src.map(function (b) {
+                    return [b[0] * scale, b[1] === null ? null : b[1] * scale];
+                }),
+                base: currencyCode,
+                mode: 'rebased',
+                drift: drift
+            };
+        }
+
+        return {
+            bands: isSystems ? anchor.sys : anchor.def,
+            base: anchor.base,
+            mode: anchor.base === currencyCode ? 'authored' : 'converted',
+            drift: 0
+        };
+    }
+
+    function formatBand(band, baseCode, targetCode) {
+        const lo = roundToStep(convertAmount(band[0], baseCode, targetCode), targetCode);
+        const hi = band[1] === null ? null : roundToStep(convertAmount(band[1], baseCode, targetCode), targetCode);
+        if (hi === null) return targetCode + ' ' + groupNumber(lo) + '+';
+        return targetCode + ' ' + groupNumber(lo) + ' - ' + groupNumber(hi);
+    }
+
+    function tierValue(targetCode, tierIndex, band, baseCode) {
+        const lo = roundToStep(convertAmount(band[0], baseCode, targetCode), targetCode);
+        const hi = band[1] === null ? null : roundToStep(convertAmount(band[1], baseCode, targetCode), targetCode);
+        const suffix = hi === null ? Math.round(lo) + '+' : Math.round(lo) + '-' + Math.round(hi);
+        return targetCode.toLowerCase() + '-' + TIER_NAMES[tierIndex] + '-' + suffix;
+    }
+
+    function buildBudgetOptions(budgetKey, currencyCode, isSystems) {
+        const r = resolveBands(budgetKey, currencyCode, isSystems);
+        const target = CURRENCY_STEP[currencyCode] ? currencyCode : r.base;
+
+        const options = [{ value: '', label: 'Select budget range' }];
+        r.bands.forEach(function (band, i) {
+            options.push({
+                value: tierValue(target, i, band, r.base),
+                label: TIER_LABELS[i] + ': ' + formatBand(band, r.base, target)
+            });
+        });
+        options.push({ value: 'flexible', label: 'Flexible / not sure yet' });
+        return options;
+    }
+
+    function getPricingTierValues(budgetKey, isSystemProject, currencyCode) {
+        const r = resolveBands(budgetKey, currencyCode, isSystemProject);
+        const target = CURRENCY_STEP[currencyCode] ? currencyCode : r.base;
+        const out = {};
+        r.bands.forEach(function (band, i) {
+            out[TIER_NAMES[i]] = formatBand(band, r.base, target);
+        });
+        return out;
+    }
+
+    function priceModeFor(budgetKey, currencyCode) {
+        return resolveBands(budgetKey, currencyCode, false).mode;
+    }
+
+    function updatePricingDisplay(budgetKey, isSystemProject, currencyCode) {
+        const priceElements = document.querySelectorAll('.price-amount');
+        if (!priceElements.length) return;
+
+        const tierValues = getPricingTierValues(budgetKey, isSystemProject, currencyCode);
+
+        priceElements.forEach(function (el) {
+            const holder = el.closest('[data-tier]');
+            const tier = holder && holder.getAttribute('data-tier');
+            if (tier && tierValues[tier]) {
+                el.textContent = tierValues[tier];
+                el.classList.remove('priceShuffleIn');
+                void el.offsetWidth; // trigger reflow so the animation replays
+                el.classList.add('priceShuffleIn');
+            }
+        });
+
+        const note = document.getElementById('pricingConversionNote');
+        if (!note) return;
+
+        const mode = priceModeFor(budgetKey, currencyCode);
+        const anchor = (TIER_BANDS[budgetKey] || TIER_BANDS.USD).base;
+        const source = ratesAreLive ? 'live rates' : 'reference rates (' + RATES_UPDATED + ')';
+
+        if (mode === 'authored') {
+            note.textContent = 'Set directly in ' + currencyCode +
+                ' against local market rates. This figure is held steady and does not track daily exchange movement.';
+        } else if (mode === 'rebased') {
+            note.textContent = 'Shown in ' + currencyCode + ', reviewed against ' + source +
+                ' after currency movement passed our ' + Math.round(REBASE_THRESHOLD * 100) +
+                ' percent tolerance. Your written quote is issued in ' + currencyCode + '.';
+        } else {
+            note.textContent = 'Shown in ' + currencyCode + ', converted from ' + anchor +
+                ' using ' + source + '. Your written quote is issued in ' + currencyCode + '.';
+        }
+    }
+    // ============================================================================
+    // REGION CONFIG
+    // ============================================================================
+    // currency  = what the visitor actually sees and gets invoiced in
+    // budgetKey = which price band applies (see TIER_BANDS)
+    //
+    // A few countries deliberately stay on USD because their own currency is
+    // too volatile to quote a fixed project price in: Zimbabwe, Lebanon,
+    // Argentina, Venezuela, Ecuador and Panama (the last two are USD by law).
     function getRegionConfig(regionCode) {
         const map = {
-            // ── AFRICA ──────────────────────────────────────────────
-            'zambia':                   { label: 'Zambia',                currency: 'ZMW',           budgetKey: 'ZMW' },
-            'south-africa':             { label: 'South Africa',          currency: 'ZAR',           budgetKey: 'ZAR' },
-            'zimbabwe-usd':             { label: 'Zimbabwe',              currency: 'USD',           budgetKey: 'USD_ZW' },
-            'botswana':                 { label: 'Botswana',              currency: 'USD',           budgetKey: 'USD_ZW' },
-            'namibia':                  { label: 'Namibia',               currency: 'USD',           budgetKey: 'USD_ZW' },
-            'mozambique':               { label: 'Mozambique',            currency: 'USD',           budgetKey: 'USD_ZW' },
-            'southern-africa-usd':      { label: 'Southern Africa',       currency: 'USD',           budgetKey: 'USD_ZW' },
-            'nigeria':                  { label: 'Nigeria',               currency: 'USD',           budgetKey: 'USD_WE' },
-            'ghana':                    { label: 'Ghana',                 currency: 'USD',           budgetKey: 'USD_WE' },
-            'kenya':                    { label: 'Kenya',                 currency: 'USD',           budgetKey: 'USD_WE' },
-            'uganda':                   { label: 'Uganda',                currency: 'USD',           budgetKey: 'USD_WE' },
-            'tanzania':                 { label: 'Tanzania',              currency: 'USD',           budgetKey: 'USD_WE' },
-            'ethiopia':                 { label: 'Ethiopia',              currency: 'USD',           budgetKey: 'USD_WE' },
-            'cameroon':                 { label: 'Cameroon',              currency: 'USD',           budgetKey: 'USD_WE' },
-            'senegal':                  { label: 'Senegal',               currency: 'USD',           budgetKey: 'USD_WE' },
-            'west-east-africa':         { label: 'West & East Africa',    currency: 'USD',           budgetKey: 'USD_WE' },
-            'egypt':                    { label: 'Egypt',                 currency: 'USD',           budgetKey: 'USD_NAM' },
-            'morocco':                  { label: 'Morocco',               currency: 'USD',           budgetKey: 'USD_NAM' },
-            'algeria':                  { label: 'Algeria',               currency: 'USD',           budgetKey: 'USD_NAM' },
-            'tunisia':                  { label: 'Tunisia',               currency: 'USD',           budgetKey: 'USD_NAM' },
-            'libya':                    { label: 'Libya',                 currency: 'USD',           budgetKey: 'USD_NAM' },
-            'north-africa-me':          { label: 'North Africa & Middle East', currency: 'USD',      budgetKey: 'USD_NAM' },
-            // ── MIDDLE EAST ─────────────────────────────────────────
-            'uae':                      { label: 'UAE',                   currency: 'USD',           budgetKey: 'USD_GULF' },
-            'saudi-arabia':             { label: 'Saudi Arabia',          currency: 'USD',           budgetKey: 'USD_GULF' },
-            'kuwait':                   { label: 'Kuwait',                currency: 'USD',           budgetKey: 'USD_GULF' },
-            'qatar':                    { label: 'Qatar',                 currency: 'USD',           budgetKey: 'USD_GULF' },
-            'bahrain':                  { label: 'Bahrain',               currency: 'USD',           budgetKey: 'USD_GULF' },
-            'oman':                     { label: 'Oman',                  currency: 'USD',           budgetKey: 'USD_GULF' },
-            'israel':                   { label: 'Israel',                currency: 'USD',           budgetKey: 'USD_GULF' },
-            'jordan':                   { label: 'Jordan',                currency: 'USD',           budgetKey: 'USD_NAM' },
-            'lebanon':                  { label: 'Lebanon',               currency: 'USD',           budgetKey: 'USD_NAM' },
-            'iraq':                     { label: 'Iraq',                  currency: 'USD',           budgetKey: 'USD_NAM' },
-            'yemen':                    { label: 'Yemen',                 currency: 'USD',           budgetKey: 'USD_NAM' },
-            // ── EUROPE — WESTERN ────────────────────────────────────
-            'uk':                       { label: 'United Kingdom',        currency: 'GBP',           budgetKey: 'GBP' },
-            'switzerland':              { label: 'Switzerland',           currency: 'CHF',           budgetKey: 'CHF' },
-            'germany':                  { label: 'Germany',               currency: 'EUR',           budgetKey: 'EUR' },
-            'france':                   { label: 'France',                currency: 'EUR',           budgetKey: 'EUR' },
-            'italy':                    { label: 'Italy',                 currency: 'EUR',           budgetKey: 'EUR' },
-            'spain':                    { label: 'Spain',                 currency: 'EUR',           budgetKey: 'EUR' },
-            'netherlands':              { label: 'Netherlands',           currency: 'EUR',           budgetKey: 'EUR' },
-            'belgium':                  { label: 'Belgium',               currency: 'EUR',           budgetKey: 'EUR' },
-            'austria':                  { label: 'Austria',               currency: 'EUR',           budgetKey: 'EUR' },
-            'ireland':                  { label: 'Ireland',               currency: 'EUR',           budgetKey: 'EUR' },
-            'portugal':                 { label: 'Portugal',              currency: 'EUR',           budgetKey: 'EUR' },
-            'finland':                  { label: 'Finland',               currency: 'EUR',           budgetKey: 'EUR' },
-            'greece':                   { label: 'Greece',                currency: 'EUR',           budgetKey: 'EUR' },
-            'luxembourg':               { label: 'Luxembourg',            currency: 'EUR',           budgetKey: 'EUR' },
-            'cyprus':                   { label: 'Cyprus',                currency: 'EUR',           budgetKey: 'EUR' },
-            'malta':                    { label: 'Malta',                 currency: 'EUR',           budgetKey: 'EUR' },
-            'iceland':                  { label: 'Iceland',               currency: 'EUR',           budgetKey: 'EUR' },
-            'norway':                   { label: 'Norway',                currency: 'EUR',           budgetKey: 'EUR' },
-            'sweden':                   { label: 'Sweden',                currency: 'EUR',           budgetKey: 'EUR' },
-            'denmark':                  { label: 'Denmark',               currency: 'EUR',           budgetKey: 'EUR' },
-            'europe':                   { label: 'Europe',                currency: 'EUR',           budgetKey: 'EUR' },
-            // ── EUROPE — EASTERN ────────────────────────────────────
-            'poland':                   { label: 'Poland',                currency: 'EUR',           budgetKey: 'EUR_EAST' },
-            'czech-republic':           { label: 'Czech Republic',        currency: 'EUR',           budgetKey: 'EUR_EAST' },
-            'romania':                  { label: 'Romania',               currency: 'EUR',           budgetKey: 'EUR_EAST' },
-            'hungary':                  { label: 'Hungary',               currency: 'EUR',           budgetKey: 'EUR_EAST' },
-            'bulgaria':                 { label: 'Bulgaria',              currency: 'EUR',           budgetKey: 'EUR_EAST' },
-            'slovakia':                 { label: 'Slovakia',              currency: 'EUR',           budgetKey: 'EUR_EAST' },
-            'slovenia':                 { label: 'Slovenia',              currency: 'EUR',           budgetKey: 'EUR_EAST' },
-            'croatia':                  { label: 'Croatia',               currency: 'EUR',           budgetKey: 'EUR_EAST' },
-            'estonia':                  { label: 'Estonia',               currency: 'EUR',           budgetKey: 'EUR_EAST' },
-            'latvia':                   { label: 'Latvia',                currency: 'EUR',           budgetKey: 'EUR_EAST' },
-            'lithuania':                { label: 'Lithuania',             currency: 'EUR',           budgetKey: 'EUR_EAST' },
-            'serbia':                   { label: 'Serbia',                currency: 'EUR',           budgetKey: 'EUR_EAST' },
-            'albania':                  { label: 'Albania',               currency: 'EUR',           budgetKey: 'EUR_EAST' },
-            'bosnia':                   { label: 'Bosnia and Herzegovina', currency: 'EUR',          budgetKey: 'EUR_EAST' },
-            'montenegro':               { label: 'Montenegro',            currency: 'EUR',           budgetKey: 'EUR_EAST' },
-            'north-macedonia':          { label: 'North Macedonia',       currency: 'EUR',           budgetKey: 'EUR_EAST' },
-            'moldova':                  { label: 'Moldova',               currency: 'USD',           budgetKey: 'EUR_EAST' },
-            'ukraine':                  { label: 'Ukraine',               currency: 'USD',           budgetKey: 'EUR_EAST' },
-            'belarus':                  { label: 'Belarus',               currency: 'USD',           budgetKey: 'EUR_EAST' },
-            'georgia':                  { label: 'Georgia',               currency: 'USD',           budgetKey: 'EUR_EAST' },
-            'armenia':                  { label: 'Armenia',               currency: 'USD',           budgetKey: 'EUR_EAST' },
-            'azerbaijan':               { label: 'Azerbaijan',            currency: 'USD',           budgetKey: 'EUR_EAST' },
-            'russia':                   { label: 'Russia',                currency: 'USD',           budgetKey: 'EUR_EAST' },
-            'turkey':                   { label: 'Turkey',                currency: 'USD',           budgetKey: 'EUR_EAST' },
-            'europe-east':              { label: 'Eastern Europe',        currency: 'EUR',           budgetKey: 'EUR_EAST' },
-            // ── OCEANIA ─────────────────────────────────────────────
-            'australia':                { label: 'Australia',             currency: 'AUD',           budgetKey: 'AUD' },
-            'new-zealand':              { label: 'New Zealand',           currency: 'NZD',           budgetKey: 'NZD' },
-            // ── NORTH AMERICA ───────────────────────────────────────
-            'us-canada':                { label: 'US & Canada',           currency: 'USD',           budgetKey: 'USD_USCA' },
-            'united-states':            { label: 'United States',         currency: 'USD',           budgetKey: 'USD_USCA' },
-            'canada':                   { label: 'Canada',                currency: 'CAD',           budgetKey: 'CAD' },
-            // ── LATIN AMERICA ───────────────────────────────────────
-            'brazil':                   { label: 'Brazil',                currency: 'USD',           budgetKey: 'USD_LATAM' },
-            'mexico':                   { label: 'Mexico',                currency: 'USD',           budgetKey: 'USD_LATAM' },
-            'argentina':                { label: 'Argentina',             currency: 'USD',           budgetKey: 'USD_LATAM' },
-            'colombia':                 { label: 'Colombia',              currency: 'USD',           budgetKey: 'USD_LATAM' },
-            'chile':                    { label: 'Chile',                 currency: 'USD',           budgetKey: 'USD_LATAM' },
-            'peru':                     { label: 'Peru',                  currency: 'USD',           budgetKey: 'USD_LATAM' },
-            'ecuador':                  { label: 'Ecuador',               currency: 'USD',           budgetKey: 'USD_LATAM' },
-            'bolivia':                  { label: 'Bolivia',               currency: 'USD',           budgetKey: 'USD_LATAM' },
-            'uruguay':                  { label: 'Uruguay',               currency: 'USD',           budgetKey: 'USD_LATAM' },
-            'paraguay':                 { label: 'Paraguay',              currency: 'USD',           budgetKey: 'USD_LATAM' },
-            'venezuela':                { label: 'Venezuela',             currency: 'USD',           budgetKey: 'USD_LATAM' },
-            'guatemala':                { label: 'Guatemala',             currency: 'USD',           budgetKey: 'USD_LATAM' },
-            'honduras':                 { label: 'Honduras',              currency: 'USD',           budgetKey: 'USD_LATAM' },
-            'nicaragua':                { label: 'Nicaragua',             currency: 'USD',           budgetKey: 'USD_LATAM' },
-            'costa-rica':               { label: 'Costa Rica',            currency: 'USD',           budgetKey: 'USD_LATAM' },
-            'panama':                   { label: 'Panama',                currency: 'USD',           budgetKey: 'USD_LATAM' },
-            'jamaica':                  { label: 'Jamaica',               currency: 'USD',           budgetKey: 'USD_LATAM' },
-            'trinidad-tobago':          { label: 'Trinidad and Tobago',   currency: 'USD',           budgetKey: 'USD_LATAM' },
-            // ── ASIA — PREMIUM ──────────────────────────────────────
-            'singapore':                { label: 'Singapore',             currency: 'USD',           budgetKey: 'USD_ASIA_PREM' },
-            'japan':                    { label: 'Japan',                 currency: 'USD',           budgetKey: 'USD_ASIA_PREM' },
-            'south-korea':              { label: 'South Korea',           currency: 'USD',           budgetKey: 'USD_ASIA_PREM' },
-            'hong-kong':                { label: 'Hong Kong',             currency: 'USD',           budgetKey: 'USD_ASIA_PREM' },
-            'taiwan':                   { label: 'Taiwan',                currency: 'USD',           budgetKey: 'USD_ASIA_PREM' },
-            'asia-premium':             { label: 'Premium Asia',          currency: 'USD',           budgetKey: 'USD_ASIA_PREM' },
-            // ── ASIA — STANDARD ─────────────────────────────────────
-            'china':                    { label: 'China',                 currency: 'USD',           budgetKey: 'USD_ASIA_STD' },
-            'malaysia':                 { label: 'Malaysia',              currency: 'USD',           budgetKey: 'USD_ASIA_STD' },
-            'indonesia':                { label: 'Indonesia',             currency: 'USD',           budgetKey: 'USD_ASIA_STD' },
-            'thailand':                 { label: 'Thailand',              currency: 'USD',           budgetKey: 'USD_ASIA_STD' },
-            'philippines':              { label: 'Philippines',           currency: 'USD',           budgetKey: 'USD_ASIA_STD' },
-            'vietnam':                  { label: 'Vietnam',               currency: 'USD',           budgetKey: 'USD_ASIA_STD' },
-            'myanmar':                  { label: 'Myanmar',               currency: 'USD',           budgetKey: 'USD_ASIA_STD' },
-            'cambodia':                 { label: 'Cambodia',              currency: 'USD',           budgetKey: 'USD_ASIA_STD' },
-            'brunei':                   { label: 'Brunei',                currency: 'USD',           budgetKey: 'USD_ASIA_STD' },
-            'mongolia':                 { label: 'Mongolia',              currency: 'USD',           budgetKey: 'USD_ASIA_STD' },
-            'asia-standard':            { label: 'Southeast Asia',        currency: 'USD',           budgetKey: 'USD_ASIA_STD' },
-            // ── ASIA — AFFORDABLE ───────────────────────────────────
-            'india':                    { label: 'India',                 currency: 'USD',           budgetKey: 'USD_ASIA_AFD' },
-            'pakistan':                 { label: 'Pakistan',              currency: 'USD',           budgetKey: 'USD_ASIA_AFD' },
-            'bangladesh':               { label: 'Bangladesh',            currency: 'USD',           budgetKey: 'USD_ASIA_AFD' },
-            'sri-lanka':                { label: 'Sri Lanka',             currency: 'USD',           budgetKey: 'USD_ASIA_AFD' },
-            'nepal':                    { label: 'Nepal',                 currency: 'USD',           budgetKey: 'USD_ASIA_AFD' },
-            'afghanistan':              { label: 'Afghanistan',           currency: 'USD',           budgetKey: 'USD_ASIA_AFD' },
-            'kazakhstan':               { label: 'Kazakhstan',            currency: 'USD',           budgetKey: 'USD_ASIA_AFD' },
-            'uzbekistan':               { label: 'Uzbekistan',            currency: 'USD',           budgetKey: 'USD_ASIA_AFD' },
-            'asia-affordable':          { label: 'South Asia',            currency: 'USD',           budgetKey: 'USD_ASIA_AFD' },
-            // ── FALLBACK ────────────────────────────────────────────
-            'other-international':      { label: 'Other / International', currency: 'USD',           budgetKey: 'USD' }
+            // ---- AFRICA ------------------------------------------------------
+            'zambia':              { label: 'Zambia',                  currency: 'ZMW', budgetKey: 'ZMW' },
+            'south-africa':        { label: 'South Africa',            currency: 'ZAR', budgetKey: 'ZAR' },
+            'zimbabwe-usd':        { label: 'Zimbabwe',                currency: 'USD', budgetKey: 'USD_ZW' },
+            'botswana':            { label: 'Botswana',                currency: 'BWP', budgetKey: 'USD_ZW' },
+            'namibia':             { label: 'Namibia',                 currency: 'NAD', budgetKey: 'USD_ZW' },
+            'mozambique':          { label: 'Mozambique',              currency: 'MZN', budgetKey: 'USD_ZW' },
+            'southern-africa-usd': { label: 'Southern Africa',         currency: 'USD', budgetKey: 'USD_ZW' },
+            'nigeria':             { label: 'Nigeria',                 currency: 'NGN', budgetKey: 'USD_WE' },
+            'ghana':               { label: 'Ghana',                   currency: 'GHS', budgetKey: 'USD_WE' },
+            'kenya':               { label: 'Kenya',                   currency: 'KES', budgetKey: 'USD_WE' },
+            'uganda':              { label: 'Uganda',                  currency: 'UGX', budgetKey: 'USD_WE' },
+            'tanzania':            { label: 'Tanzania',                currency: 'TZS', budgetKey: 'USD_WE' },
+            'ethiopia':            { label: 'Ethiopia',                currency: 'ETB', budgetKey: 'USD_WE' },
+            'cameroon':            { label: 'Cameroon',                currency: 'XAF', budgetKey: 'USD_WE' },
+            'senegal':             { label: 'Senegal',                 currency: 'XOF', budgetKey: 'USD_WE' },
+            'west-east-africa':    { label: 'West and East Africa',    currency: 'USD', budgetKey: 'USD_WE' },
+            'egypt':               { label: 'Egypt',                   currency: 'EGP', budgetKey: 'USD_NAM' },
+            'morocco':             { label: 'Morocco',                 currency: 'MAD', budgetKey: 'USD_NAM' },
+            'algeria':             { label: 'Algeria',                 currency: 'DZD', budgetKey: 'USD_NAM' },
+            'tunisia':             { label: 'Tunisia',                 currency: 'TND', budgetKey: 'USD_NAM' },
+            'libya':               { label: 'Libya',                   currency: 'LYD', budgetKey: 'USD_NAM' },
+            'north-africa-me':     { label: 'North Africa',            currency: 'USD', budgetKey: 'USD_NAM' },
+
+            // ---- MIDDLE EAST -------------------------------------------------
+            'uae':                 { label: 'United Arab Emirates',    currency: 'AED', budgetKey: 'USD_GULF' },
+            'saudi-arabia':        { label: 'Saudi Arabia',            currency: 'SAR', budgetKey: 'USD_GULF' },
+            'kuwait':              { label: 'Kuwait',                  currency: 'KWD', budgetKey: 'USD_GULF' },
+            'qatar':               { label: 'Qatar',                   currency: 'QAR', budgetKey: 'USD_GULF' },
+            'bahrain':             { label: 'Bahrain',                 currency: 'BHD', budgetKey: 'USD_GULF' },
+            'oman':                { label: 'Oman',                    currency: 'OMR', budgetKey: 'USD_GULF' },
+            'israel':              { label: 'Israel',                  currency: 'ILS', budgetKey: 'USD_GULF' },
+            'jordan':              { label: 'Jordan',                  currency: 'JOD', budgetKey: 'USD_NAM' },
+            'lebanon':             { label: 'Lebanon',                 currency: 'USD', budgetKey: 'USD_NAM' },
+            'iraq':                { label: 'Iraq',                    currency: 'IQD', budgetKey: 'USD_NAM' },
+            'yemen':               { label: 'Yemen',                   currency: 'YER', budgetKey: 'USD_NAM' },
+
+            // ---- WESTERN EUROPE ----------------------------------------------
+            'uk':                  { label: 'United Kingdom',          currency: 'GBP', budgetKey: 'GBP' },
+            'switzerland':         { label: 'Switzerland',             currency: 'CHF', budgetKey: 'CHF' },
+            'germany':             { label: 'Germany',                 currency: 'EUR', budgetKey: 'EUR' },
+            'france':              { label: 'France',                  currency: 'EUR', budgetKey: 'EUR' },
+            'italy':               { label: 'Italy',                   currency: 'EUR', budgetKey: 'EUR' },
+            'spain':               { label: 'Spain',                   currency: 'EUR', budgetKey: 'EUR' },
+            'netherlands':         { label: 'Netherlands',             currency: 'EUR', budgetKey: 'EUR' },
+            'belgium':             { label: 'Belgium',                 currency: 'EUR', budgetKey: 'EUR' },
+            'austria':             { label: 'Austria',                 currency: 'EUR', budgetKey: 'EUR' },
+            'ireland':             { label: 'Ireland',                 currency: 'EUR', budgetKey: 'EUR' },
+            'portugal':            { label: 'Portugal',                currency: 'EUR', budgetKey: 'EUR' },
+            'finland':             { label: 'Finland',                 currency: 'EUR', budgetKey: 'EUR' },
+            'greece':              { label: 'Greece',                  currency: 'EUR', budgetKey: 'EUR' },
+            'luxembourg':          { label: 'Luxembourg',              currency: 'EUR', budgetKey: 'EUR' },
+            'cyprus':              { label: 'Cyprus',                  currency: 'EUR', budgetKey: 'EUR' },
+            'malta':               { label: 'Malta',                   currency: 'EUR', budgetKey: 'EUR' },
+            'iceland':             { label: 'Iceland',                 currency: 'ISK', budgetKey: 'EUR' },
+            'norway':              { label: 'Norway',                  currency: 'NOK', budgetKey: 'EUR' },
+            'sweden':              { label: 'Sweden',                  currency: 'SEK', budgetKey: 'EUR' },
+            'denmark':             { label: 'Denmark',                 currency: 'DKK', budgetKey: 'EUR' },
+            'europe':              { label: 'Europe',                  currency: 'EUR', budgetKey: 'EUR' },
+
+            // ---- CENTRAL AND EASTERN EUROPE ----------------------------------
+            'poland':              { label: 'Poland',                  currency: 'PLN', budgetKey: 'EUR_EAST' },
+            'czech-republic':      { label: 'Czech Republic',          currency: 'CZK', budgetKey: 'EUR_EAST' },
+            'romania':             { label: 'Romania',                 currency: 'RON', budgetKey: 'EUR_EAST' },
+            'hungary':             { label: 'Hungary',                 currency: 'HUF', budgetKey: 'EUR_EAST' },
+            'bulgaria':            { label: 'Bulgaria',                currency: 'BGN', budgetKey: 'EUR_EAST' },
+            'slovakia':            { label: 'Slovakia',                currency: 'EUR', budgetKey: 'EUR_EAST' },
+            'slovenia':            { label: 'Slovenia',                currency: 'EUR', budgetKey: 'EUR_EAST' },
+            'croatia':             { label: 'Croatia',                 currency: 'EUR', budgetKey: 'EUR_EAST' },
+            'estonia':             { label: 'Estonia',                 currency: 'EUR', budgetKey: 'EUR_EAST' },
+            'latvia':              { label: 'Latvia',                  currency: 'EUR', budgetKey: 'EUR_EAST' },
+            'lithuania':           { label: 'Lithuania',               currency: 'EUR', budgetKey: 'EUR_EAST' },
+            'serbia':              { label: 'Serbia',                  currency: 'RSD', budgetKey: 'EUR_EAST' },
+            'albania':             { label: 'Albania',                 currency: 'ALL', budgetKey: 'EUR_EAST' },
+            'bosnia':              { label: 'Bosnia and Herzegovina',  currency: 'BAM', budgetKey: 'EUR_EAST' },
+            'montenegro':          { label: 'Montenegro',              currency: 'EUR', budgetKey: 'EUR_EAST' },
+            'north-macedonia':     { label: 'North Macedonia',         currency: 'MKD', budgetKey: 'EUR_EAST' },
+            'moldova':             { label: 'Moldova',                 currency: 'MDL', budgetKey: 'EUR_EAST' },
+            'ukraine':             { label: 'Ukraine',                 currency: 'UAH', budgetKey: 'EUR_EAST' },
+            'belarus':             { label: 'Belarus',                 currency: 'BYN', budgetKey: 'EUR_EAST' },
+            'georgia':             { label: 'Georgia',                 currency: 'GEL', budgetKey: 'EUR_EAST' },
+            'armenia':             { label: 'Armenia',                 currency: 'AMD', budgetKey: 'EUR_EAST' },
+            'azerbaijan':          { label: 'Azerbaijan',              currency: 'AZN', budgetKey: 'EUR_EAST' },
+            'russia':              { label: 'Russia',                  currency: 'RUB', budgetKey: 'EUR_EAST' },
+            'turkey':              { label: 'Turkey',                  currency: 'TRY', budgetKey: 'EUR_EAST' },
+            'europe-east':         { label: 'Eastern Europe',          currency: 'EUR', budgetKey: 'EUR_EAST' },
+
+            // ---- OCEANIA -----------------------------------------------------
+            'australia':           { label: 'Australia',               currency: 'AUD', budgetKey: 'AUD' },
+            'new-zealand':         { label: 'New Zealand',             currency: 'NZD', budgetKey: 'NZD' },
+
+            // ---- NORTH AMERICA -----------------------------------------------
+            'us-canada':           { label: 'US and Canada',           currency: 'USD', budgetKey: 'USD_USCA' },
+            'united-states':       { label: 'United States',           currency: 'USD', budgetKey: 'USD_USCA' },
+            'canada':              { label: 'Canada',                  currency: 'CAD', budgetKey: 'CAD' },
+
+            // ---- LATIN AMERICA AND CARIBBEAN ---------------------------------
+            'brazil':              { label: 'Brazil',                  currency: 'BRL', budgetKey: 'USD_LATAM' },
+            'mexico':              { label: 'Mexico',                  currency: 'MXN', budgetKey: 'USD_LATAM' },
+            'argentina':           { label: 'Argentina',               currency: 'USD', budgetKey: 'USD_LATAM' },
+            'colombia':            { label: 'Colombia',                currency: 'COP', budgetKey: 'USD_LATAM' },
+            'chile':               { label: 'Chile',                   currency: 'CLP', budgetKey: 'USD_LATAM' },
+            'peru':                { label: 'Peru',                    currency: 'PEN', budgetKey: 'USD_LATAM' },
+            'ecuador':             { label: 'Ecuador',                 currency: 'USD', budgetKey: 'USD_LATAM' },
+            'bolivia':             { label: 'Bolivia',                 currency: 'BOB', budgetKey: 'USD_LATAM' },
+            'uruguay':             { label: 'Uruguay',                 currency: 'UYU', budgetKey: 'USD_LATAM' },
+            'paraguay':            { label: 'Paraguay',                currency: 'PYG', budgetKey: 'USD_LATAM' },
+            'venezuela':           { label: 'Venezuela',               currency: 'USD', budgetKey: 'USD_LATAM' },
+            'guatemala':           { label: 'Guatemala',               currency: 'GTQ', budgetKey: 'USD_LATAM' },
+            'honduras':            { label: 'Honduras',                currency: 'HNL', budgetKey: 'USD_LATAM' },
+            'nicaragua':           { label: 'Nicaragua',               currency: 'NIO', budgetKey: 'USD_LATAM' },
+            'costa-rica':          { label: 'Costa Rica',              currency: 'CRC', budgetKey: 'USD_LATAM' },
+            'panama':              { label: 'Panama',                  currency: 'USD', budgetKey: 'USD_LATAM' },
+            'jamaica':             { label: 'Jamaica',                 currency: 'JMD', budgetKey: 'USD_LATAM' },
+            'trinidad-tobago':     { label: 'Trinidad and Tobago',     currency: 'TTD', budgetKey: 'USD_LATAM' },
+
+            // ---- ASIA: PREMIUM -----------------------------------------------
+            'singapore':           { label: 'Singapore',               currency: 'SGD', budgetKey: 'USD_ASIA_PREM' },
+            'japan':               { label: 'Japan',                   currency: 'JPY', budgetKey: 'USD_ASIA_PREM' },
+            'south-korea':         { label: 'South Korea',             currency: 'KRW', budgetKey: 'USD_ASIA_PREM' },
+            'hong-kong':           { label: 'Hong Kong',               currency: 'HKD', budgetKey: 'USD_ASIA_PREM' },
+            'taiwan':              { label: 'Taiwan',                  currency: 'TWD', budgetKey: 'USD_ASIA_PREM' },
+            'asia-premium':        { label: 'Premium Asia',            currency: 'USD', budgetKey: 'USD_ASIA_PREM' },
+
+            // ---- ASIA: STANDARD ----------------------------------------------
+            'china':               { label: 'China',                   currency: 'CNY', budgetKey: 'USD_ASIA_STD' },
+            'malaysia':            { label: 'Malaysia',                currency: 'MYR', budgetKey: 'USD_ASIA_STD' },
+            'indonesia':           { label: 'Indonesia',               currency: 'IDR', budgetKey: 'USD_ASIA_STD' },
+            'thailand':            { label: 'Thailand',                currency: 'THB', budgetKey: 'USD_ASIA_STD' },
+            'philippines':         { label: 'Philippines',             currency: 'PHP', budgetKey: 'USD_ASIA_STD' },
+            'vietnam':             { label: 'Vietnam',                 currency: 'VND', budgetKey: 'USD_ASIA_STD' },
+            'myanmar':             { label: 'Myanmar',                 currency: 'MMK', budgetKey: 'USD_ASIA_STD' },
+            'cambodia':            { label: 'Cambodia',                currency: 'KHR', budgetKey: 'USD_ASIA_STD' },
+            'brunei':              { label: 'Brunei',                  currency: 'BND', budgetKey: 'USD_ASIA_STD' },
+            'mongolia':            { label: 'Mongolia',                currency: 'MNT', budgetKey: 'USD_ASIA_STD' },
+            'asia-standard':       { label: 'Southeast Asia',          currency: 'USD', budgetKey: 'USD_ASIA_STD' },
+
+            // ---- ASIA: AFFORDABLE --------------------------------------------
+            'india':               { label: 'India',                   currency: 'INR', budgetKey: 'USD_ASIA_AFD' },
+            'pakistan':            { label: 'Pakistan',                currency: 'PKR', budgetKey: 'USD_ASIA_AFD' },
+            'bangladesh':          { label: 'Bangladesh',              currency: 'BDT', budgetKey: 'USD_ASIA_AFD' },
+            'sri-lanka':           { label: 'Sri Lanka',               currency: 'LKR', budgetKey: 'USD_ASIA_AFD' },
+            'nepal':               { label: 'Nepal',                   currency: 'NPR', budgetKey: 'USD_ASIA_AFD' },
+            'afghanistan':         { label: 'Afghanistan',             currency: 'AFN', budgetKey: 'USD_ASIA_AFD' },
+            'kazakhstan':          { label: 'Kazakhstan',              currency: 'KZT', budgetKey: 'USD_ASIA_AFD' },
+            'uzbekistan':          { label: 'Uzbekistan',              currency: 'UZS', budgetKey: 'USD_ASIA_AFD' },
+            'asia-affordable':     { label: 'South Asia',              currency: 'USD', budgetKey: 'USD_ASIA_AFD' },
+
+            // ---- FALLBACK ----------------------------------------------------
+            'other-international': { label: 'Other / International',   currency: 'USD', budgetKey: 'USD' }
         };
         return map[regionCode] || map['other-international'];
     }
@@ -779,57 +687,6 @@
         return 'other-international';
     }
 
-    function detectCurrencyByRegion() {
-        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-        const locale = (navigator.language || '').toUpperCase();
-        const region = locale.includes('-') ? locale.split('-')[1] : '';
-
-        if (tz.indexOf('Africa/Lusaka') === 0 || region === 'ZM') return 'ZMW';
-        if (tz.indexOf('Africa/Johannesburg') === 0 || region === 'ZA') return 'ZAR';
-        if (tz.indexOf('Europe/London') === 0 || region === 'GB') return 'GBP';
-        if (tz.indexOf('Europe/') === 0 && region !== 'GB') return 'EUR';
-        if (region === 'US' || region === 'CA') return 'USD';
-        return 'USD';
-    }
-
-    // Get pricing tier display values for pricing page
-    // @param {string} currencyCode - Currency code (ZMW, USD, etc.)
-    // @param {boolean} isSystemProject - If true, returns system pricing; otherwise default pricing
-    // @returns {object} Pricing tiers keyed by tier name
-    function getPricingTierValues(currencyCode, isSystemProject = false) {
-        const dataMap = isSystemProject ? pricingDisplayDataSystems : pricingDisplayData;
-        if (!dataMap.starter[currencyCode]) {
-            currencyCode = 'USD';
-        }
-        return {
-            starter: dataMap.starter[currencyCode],
-            standard: dataMap.standard[currencyCode],
-            professional: dataMap.professional[currencyCode],
-            enterprise: dataMap.enterprise[currencyCode]
-        };
-    }
-
-    // Update pricing display on pricing.html page
-    // @param {string} currencyCode - Currency code (ZMW, USD, etc.)
-    // @param {boolean} isSystemProject - If true, uses system pricing; otherwise default pricing
-    function updatePricingDisplay(currencyCode, isSystemProject = false) {
-        const priceElements = document.querySelectorAll('.price-amount');
-        if (!priceElements.length) return;
-
-        const tierValues = getPricingTierValues(currencyCode, isSystemProject);
-
-        priceElements.forEach(function (el) {
-            const tier = el.closest('[data-tier]')?.getAttribute('data-tier');
-            if (tier && tierValues[tier]) {
-                const displayValue = tierValues[tier];
-                el.textContent = displayValue;
-                el.classList.remove('priceShuffleIn');
-                void el.offsetWidth; // trigger reflow
-                el.classList.add('priceShuffleIn');
-            }
-        });
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
         loadNavbar()
             .catch(() => {
@@ -839,17 +696,21 @@
                 ensureGamesNavLink();
                 normalizeNavbarPaths();
                 setActiveNavLink();
-                injectStructuredData();
                 promoteWhatsAppLinks();
                 initThemeToggle();
                 initMoonAnimation();
                 initScrollAnimations();
                 initMobileNav();
                 initSmartNavbar();
+                publishStickyOffset(document.getElementById('mainNav'));
+                initHeroRotator();
+                initHeroReveal();
+                initStickyTableShadow();
                 initScrollToTop();
                 initSmoothScrollLinks();
                 initHeroEntrance();
                 initWelcomeGuide();
+                initStarfieldPlanes();
                 initGlobalParallax();
                 initTeamDetails();
                 initMagneticButtons();
@@ -872,55 +733,6 @@
         return path.startsWith('/') ? path : '/' + path;
     }
 
-    function injectStructuredData() {
-        if (!document.head || document.head.querySelector('script[data-nextphases-schema]')) return;
-
-        const schemas = [
-            {
-                '@context': 'https://schema.org',
-                '@type': 'Organization',
-                name: 'NextPhases.dev',
-                url: 'https://nextphases.dev',
-                logo: 'https://nextphases.dev/Logo_transparent.png',
-                sameAs: [
-                    'https://www.youtube.com/@nextphases',
-                    'https://x.com/NextPhases',
-                    'https://www.tiktok.com/@nextphases.dev?lang=en',
-                    'https://www.instagram.com/nextphases.dev/',
-                    'https://www.linkedin.com/company/nextphases',
-                    'https://discord.gg/DkybgpuRwp'
-                ],
-                description: 'Software development company building websites, SaaS platforms, applications, and digital products for businesses globally.',
-                address: {
-                    '@type': 'PostalAddress',
-                    addressLocality: 'Lusaka',
-                    addressCountry: 'Zambia'
-                }
-            },
-            {
-                '@context': 'https://schema.org',
-                '@type': 'LocalBusiness',
-                name: 'NextPhases.dev',
-                image: 'https://nextphases.dev/Logo_transparent.png',
-                url: 'https://nextphases.dev',
-                telephone: '+260978131906',
-                address: {
-                    '@type': 'PostalAddress',
-                    addressLocality: 'Lusaka',
-                    addressCountry: 'ZM'
-                },
-                priceRange: '$$'
-            }
-        ];
-
-        schemas.forEach((schema, index) => {
-            const script = document.createElement('script');
-            script.type = 'application/ld+json';
-            script.dataset.nextphasesSchema = index === 0 ? 'organization' : 'localbusiness';
-            script.textContent = JSON.stringify(schema, null, 2);
-            document.head.appendChild(script);
-        });
-    }
 
     function promoteWhatsAppLinks() {
         const waUrl = 'https://wa.me/260978131906?text=Hi%20NextPhases%2C%20I%27d%20like%20to%20discuss%20a%20project.';
@@ -1260,6 +1072,81 @@
     // =============================================
     // SMART NAVBAR
     // =============================================
+    // Sticky elements (the pricing table header) sit below the nav. When the nav
+    // hides on scroll down they should rise with it, and drop back when it returns.
+    function publishStickyOffset(nav) {
+        if (!nav) return;
+        const hidden = nav.classList.contains('hidden');
+        const h = hidden ? 0 : nav.offsetHeight;
+        document.documentElement.style.setProperty('--sticky-offset', h + 'px');
+    }
+
+    // =============================================
+    // HERO HEADLINE ROTATOR
+    // =============================================
+    function initHeroRotator() {
+        const track = document.querySelector('.hero-rotator-track');
+        if (!track) return;
+        const words = Array.from(track.querySelectorAll('.hero-rotator-word'));
+        if (words.length < 2) return;
+
+        let index = 0;
+
+        // The track width follows the current word so the trailing text moves with it.
+        function measure() {
+            track.style.width = words[index].offsetWidth + 'px';
+        }
+
+        function show(i) {
+            index = i % words.length;
+            words.forEach(function (w) {
+                w.style.transform = 'translateY(' + (-index * 100) + '%)';
+            });
+            measure();
+        }
+
+        show(0);
+        window.addEventListener('resize', measure);
+        // Fonts change the measured width, so re-measure once they are ready.
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        let timer = setInterval(function () { show(index + 1); }, 2600);
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) { clearInterval(timer); }
+            else { clearInterval(timer); timer = setInterval(function () { show(index + 1); }, 2600); }
+        });
+    }
+
+    // Reveals the hero body copy line by line when it scrolls into view.
+    function initHeroReveal() {
+        const el = document.querySelector('.hero-reveal');
+        if (!el) return;
+        if (!window.IntersectionObserver) { el.classList.add('is-revealed'); return; }
+        const io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) { el.classList.add('is-revealed'); io.disconnect(); }
+            });
+        }, { threshold: 0.25 });
+        io.observe(el);
+    }
+
+    // Marks the comparison table as pinned so the header can cast a shadow.
+    function initStickyTableShadow() {
+        const table = document.querySelector('.cmp-table');
+        if (!table || !window.IntersectionObserver) return;
+        const sentinel = document.createElement('div');
+        sentinel.style.cssText = 'position:absolute;top:0;height:1px;width:1px;';
+        const wrap = table.closest('.cmp-wrap');
+        if (!wrap) return;
+        wrap.style.position = 'relative';
+        wrap.appendChild(sentinel);
+        new IntersectionObserver(function (entries) {
+            table.classList.toggle('is-pinned', !entries[0].isIntersecting);
+        }, { rootMargin: '-140px 0px 0px 0px', threshold: 0 }).observe(sentinel);
+    }
+
     function initSmartNavbar() {
         const nav = document.getElementById('mainNav');
         if (!nav) return;
@@ -1290,6 +1177,8 @@
                 } else if (currentScroll < lastScroll - 5) {
                     nav.classList.remove('hidden');
                 }
+
+                publishStickyOffset(nav);
 
                 lastScroll = currentScroll;
                 ticking = false;
@@ -1698,39 +1587,62 @@
             ctx.rotate(moon.rotation);
             ctx.translate(-moon.x, -moon.y);
 
+            // Lit face falling off into a shadow face, so the disc reads as a sphere
+            // catching light from the upper left rather than as a flat circle.
             const gradient = ctx.createRadialGradient(
-                moon.x - moon.size * 0.3,
-                moon.y - moon.size * 0.3,
-                0,
+                moon.x - moon.size * 0.38,
+                moon.y - moon.size * 0.38,
+                moon.size * 0.05,
                 moon.x,
                 moon.y,
-                moon.size
+                moon.size * 1.05
             );
             gradient.addColorStop(0, c.moon1);
-            gradient.addColorStop(1, c.moon2);
+            gradient.addColorStop(0.45, c.moon1);
+            gradient.addColorStop(0.78, c.moon2);
+            gradient.addColorStop(1, 'rgba(6, 13, 20, 0.92)');
 
             ctx.beginPath();
             ctx.arc(moon.x, moon.y, moon.size, 0, Math.PI * 2);
             ctx.fillStyle = gradient;
             ctx.fill();
 
+            // Surface texture: a scatter of soft craters keyed off the moon's own
+            // coordinates so the pattern stays stable frame to frame.
+            if (moon.size > 26) {
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(moon.x, moon.y, moon.size, 0, Math.PI * 2);
+                ctx.clip();
+                ctx.globalAlpha = moon.opacity * 0.16;
+                ctx.fillStyle = c.moon2;
+                for (let i = 0; i < 7; i++) {
+                    const a = (i * 2.399) + moon.size;
+                    const r = moon.size * (0.18 + ((i * 0.37) % 0.62));
+                    const cr = moon.size * (0.05 + ((i * 0.13) % 0.09));
+                    ctx.beginPath();
+                    ctx.arc(moon.x + Math.cos(a) * r, moon.y + Math.sin(a) * r, cr, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+
+            // Thin teal rim light tracing the shadow edge
+            ctx.save();
+            ctx.globalAlpha = moon.opacity * 0.5;
+            ctx.strokeStyle = c.accent;
+            ctx.lineWidth = Math.max(0.8, moon.size * 0.014);
+            ctx.beginPath();
+            ctx.arc(moon.x, moon.y, moon.size * 0.985, Math.PI * -0.35, Math.PI * 0.75);
+            ctx.stroke();
+            ctx.restore();
+
+            // Carve the phase terminator
             ctx.globalCompositeOperation = 'destination-out';
             const shadowOffset = (moon.phase - 0.5) * moon.size * 2;
             ctx.beginPath();
             ctx.ellipse(moon.x + shadowOffset, moon.y, moon.size, moon.size, 0, 0, Math.PI * 2);
             ctx.fill();
-
-            if (moon.size > 42) {
-                ctx.globalCompositeOperation = 'source-over';
-                ctx.globalAlpha = moon.opacity * 0.25;
-                ctx.fillStyle = c.moon2;
-                ctx.beginPath();
-                ctx.arc(moon.x + moon.size * 0.2, moon.y - moon.size * 0.3, moon.size * 0.12, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.arc(moon.x - moon.size * 0.3, moon.y + moon.size * 0.2, moon.size * 0.08, 0, Math.PI * 2);
-                ctx.fill();
-            }
 
             ctx.restore();
         }
@@ -2332,255 +2244,52 @@
         const budgetSelect = form.querySelector('#budget');
         const budgetHint = form.querySelector('#budgetHint');
 
-        // Default budget tiers for all project types except System Development
-        const budgetMapDefault = {
-            USD_ZW: [
-                { value: '', label: 'Select budget range' },
-                { value: 'usd-300-600', label: 'Starter: USD 300 - 600' },
-                { value: 'usd-600-1000', label: 'Standard: USD 600 - 1,000' },
-                { value: 'usd-1000-1800', label: 'Professional: USD 1,000 - 1,800' },
-                { value: 'usd-1800+', label: 'Enterprise: USD 1,800+' },
-                { value: 'flexible', label: 'Flexible' }
-            ],
-            USD_USCA: [
-                { value: '', label: 'Select budget range' },
-                { value: 'usd-700-1500', label: 'Starter: USD 700 - 1,500' },
-                { value: 'usd-1500-2500', label: 'Standard: USD 1,500 - 2,500' },
-                { value: 'usd-2500-4000', label: 'Professional: USD 2,500 - 4,000' },
-                { value: 'usd-4000+', label: 'Enterprise: USD 4,000+' },
-                { value: 'flexible', label: 'Flexible' }
-            ],
-            USD_WE: [
-                { value: '', label: 'Select budget range' },
-                { value: 'usd-500-900', label: 'Starter: USD 500 - 900' },
-                { value: 'usd-900-1500', label: 'Standard: USD 900 - 1,500' },
-                { value: 'usd-1500-2500', label: 'Professional: USD 1,500 - 2,500' },
-                { value: 'usd-2500+', label: 'Enterprise: USD 2,500+' }
-            ],
-            USD_NAM: [
-                { value: '', label: 'Select budget range' },
-                { value: 'usd-800-1500', label: 'Starter: USD 800 - 1,500' },
-                { value: 'usd-1500-2800', label: 'Standard: USD 1,500 - 2,800' },
-                { value: 'usd-2800-5000', label: 'Professional: USD 2,800 - 5,000' },
-                { value: 'usd-5000+', label: 'Enterprise: USD 5,000+' }
-            ],
-            USD: [
-                { value: '', label: 'Select budget range' },
-                { value: 'usd-300-700', label: 'Starter: USD 300 - 700' },
-                { value: 'usd-700-1500', label: 'Standard: USD 700 - 1,500' },
-                { value: 'usd-1500-3000', label: 'Professional: USD 1,500 - 3,000' },
-                { value: 'usd-3000+', label: 'Enterprise: USD 3,000+' },
-                { value: 'flexible', label: 'Flexible' }
-            ],
-            ZMW: [
-                { value: '', label: 'Select budget range' },
-                { value: 'zmw-2000-3500', label: 'Starter: ZMW 2,000 - 3,500' },
-                { value: 'zmw-3500-5500', label: 'Standard: ZMW 3,500 - 5,500' },
-                { value: 'zmw-5500-8000', label: 'Professional: ZMW 5,500 - 8,000' },
-                { value: 'zmw-8000+', label: 'Enterprise: ZMW 8,000+' },
-                { value: 'flexible', label: 'Flexible' }
-            ],
-            ZAR: [
-                { value: '', label: 'Select budget range' },
-                { value: 'zar-2500-4500', label: 'Starter: ZAR 2,500 - 4,500' },
-                { value: 'zar-4500-7000', label: 'Standard: ZAR 4,500 - 7,000' },
-                { value: 'zar-7000-10000', label: 'Professional: ZAR 7,000 - 10,000' },
-                { value: 'zar-10000+', label: 'Enterprise: ZAR 10,000+' },
-                { value: 'flexible', label: 'Flexible' }
-            ],
-            GBP: [
-                { value: '', label: 'Select budget range' },
-                { value: 'gbp-500-900', label: 'Starter: GBP 500 - 900' },
-                { value: 'gbp-900-1400', label: 'Standard: GBP 900 - 1,400' },
-                { value: 'gbp-1400-2000', label: 'Professional: GBP 1,400 - 2,000' },
-                { value: 'gbp-2000+', label: 'Enterprise: GBP 2,000+' },
-                { value: 'flexible', label: 'Flexible' }
-            ],
-            EUR: [
-                { value: '', label: 'Select budget range' },
-                { value: 'eur-550-1000', label: 'Starter: EUR 550 - 1,000' },
-                { value: 'eur-1000-1600', label: 'Standard: EUR 1,000 - 1,600' },
-                { value: 'eur-1600-2300', label: 'Professional: EUR 1,600 - 2,300' },
-                { value: 'eur-2300+', label: 'Enterprise: EUR 2,300+' },
-                { value: 'flexible', label: 'Flexible' }
-            ]
-        };
-
-        // Budget tiers specifically for System Development
-        const budgetMapSystems = {
-            USD_ZW: [
-                { value: '', label: 'Select budget range' },
-                { value: 'usd-700-1200', label: 'Starter: USD 700 - 1,200' },
-                { value: 'usd-1200-2000', label: 'Standard: USD 1,200 - 2,000' },
-                { value: 'usd-2000-3500', label: 'Professional: USD 2,000 - 3,500' },
-                { value: 'usd-3500+', label: 'Enterprise: USD 3,500+' },
-                { value: 'flexible', label: 'Flexible' }
-            ],
-            USD_USCA: [
-                { value: '', label: 'Select budget range' },
-                { value: 'usd-2000-3500', label: 'Starter: USD 2,000 - 3,500' },
-                { value: 'usd-3500-6000', label: 'Standard: USD 3,500 - 6,000' },
-                { value: 'usd-6000-10000', label: 'Professional: USD 6,000 - 10,000' },
-                { value: 'usd-10000+', label: 'Enterprise: USD 10,000+' },
-                { value: 'flexible', label: 'Flexible' }
-            ],
-            USD_WE: [
-                { value: '', label: 'Select budget range' },
-                { value: 'usd-1000-2000', label: 'Starter: USD 1,000 - 2,000' },
-                { value: 'usd-2000-3500', label: 'Standard: USD 2,000 - 3,500' },
-                { value: 'usd-3500-6000', label: 'Professional: USD 3,500 - 6,000' },
-                { value: 'usd-6000+', label: 'Enterprise: USD 6,000+' }
-            ],
-            USD_NAM: [
-                { value: '', label: 'Select budget range' },
-                { value: 'usd-2000-3500', label: 'Starter: USD 2,000 - 3,500' },
-                { value: 'usd-3500-6000', label: 'Standard: USD 3,500 - 6,000' },
-                { value: 'usd-6000-10000', label: 'Professional: USD 6,000 - 10,000' },
-                { value: 'usd-10000+', label: 'Enterprise: USD 10,000+' }
-            ],
-            USD: [
-                { value: '', label: 'Select budget range' },
-                { value: 'usd-700-1200', label: 'Starter: USD 700 - 1,200' },
-                { value: 'usd-1200-2000', label: 'Standard: USD 1,200 - 2,000' },
-                { value: 'usd-2000-3500', label: 'Professional: USD 2,000 - 3,500' },
-                { value: 'usd-3500+', label: 'Enterprise: USD 3,500+' },
-                { value: 'flexible', label: 'Flexible' }
-            ],
-            ZMW: [
-                { value: '', label: 'Select budget range' },
-                { value: 'zmw-5000-8000', label: 'Starter: ZMW 5,000 - 8,000' },
-                { value: 'zmw-8000-12000', label: 'Standard: ZMW 8,000 - 12,000' },
-                { value: 'zmw-12000-18000', label: 'Professional: ZMW 12,000 - 18,000' },
-                { value: 'zmw-18000+', label: 'Enterprise: ZMW 18,000+' },
-                { value: 'flexible', label: 'Flexible' }
-            ],
-            ZAR: [
-                { value: '', label: 'Select budget range' },
-                { value: 'zar-6500-10000', label: 'Starter: ZAR 6,500 - 10,000' },
-                { value: 'zar-10000-15000', label: 'Standard: ZAR 10,000 - 15,000' },
-                { value: 'zar-15000-22000', label: 'Professional: ZAR 15,000 - 22,000' },
-                { value: 'zar-22000+', label: 'Enterprise: ZAR 22,000+' },
-                { value: 'flexible', label: 'Flexible' }
-            ],
-            GBP: [
-                { value: '', label: 'Select budget range' },
-                { value: 'gbp-1200-2000', label: 'Starter: GBP 1,200 - 2,000' },
-                { value: 'gbp-2000-3200', label: 'Standard: GBP 2,000 - 3,200' },
-                { value: 'gbp-3200-5000', label: 'Professional: GBP 3,200 - 5,000' },
-                { value: 'gbp-5000+', label: 'Enterprise: GBP 5,000+' },
-                { value: 'flexible', label: 'Flexible' }
-            ],
-            EUR: [
-                { value: '', label: 'Select budget range' },
-                { value: 'eur-1400-2200', label: 'Starter: EUR 1,400 - 2,200' },
-                { value: 'eur-2200-3500', label: 'Standard: EUR 2,200 - 3,500' },
-                { value: 'eur-3500-5500', label: 'Professional: EUR 3,500 - 5,500' },
-                { value: 'eur-5500+', label: 'Enterprise: EUR 5,500+' },
-                { value: 'flexible', label: 'Flexible' }
-            ]
-        };
-
-        function getRegionConfig(regionCode) {
-            const map = {
-                'zambia': {
-                    label: 'Zambia', currency: 'ZMW', budgetKey: 'ZMW'
-                },
-                'zimbabwe-usd': {
-                    label: 'Zimbabwe', currency: 'USD', budgetKey: 'USD_ZW'
-                },
-                'southern-africa-usd': {
-                    label: 'Southern Africa', currency: 'USD', budgetKey: 'USD_ZW'
-                },
-                'west-east-africa': {
-                    label: 'West & East Africa', currency: 'USD', budgetKey: 'USD_WE'
-                },
-                'north-africa-me': {
-                    label: 'North Africa & Middle East', currency: 'USD', budgetKey: 'USD_NAM'
-                },
-                'south-africa': {
-                    label: 'South Africa', currency: 'ZAR', budgetKey: 'ZAR'
-                },
-                'uk': {
-                    label: 'UK', currency: 'GBP', budgetKey: 'GBP'
-                },
-                'europe': {
-                    label: 'Europe', currency: 'EUR', budgetKey: 'EUR'
-                },
-                'us-canada': {
-                    label: 'US & Canada', currency: 'USD', budgetKey: 'USD_USCA'
-                },
-                'other-international': {
-                    label: 'Other / International', currency: 'USD', budgetKey: 'USD'
-                }
-            };
-            return map[regionCode] || map['other-international'];
-        }
-
-        function detectRegionByLocale() {
-            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-            const locale = (navigator.language || '').toUpperCase();
-            const region = locale.includes('-') ? locale.split('-')[1] : '';
-
-            if (tz.indexOf('Africa/Lusaka') === 0 || region === 'ZM') return 'zambia';
-            if (region === 'ZW') return 'zimbabwe-usd';
-            if (tz.indexOf('Africa/Johannesburg') === 0 || region === 'ZA') return 'south-africa';
-            if (tz.indexOf('Europe/London') === 0 || region === 'GB') return 'uk';
-            if (tz.indexOf('Europe/') === 0 && region !== 'GB') return 'europe';
-            if (region === 'US' || region === 'CA') return 'us-canada';
-            if (tz.indexOf('Africa/') === 0) return 'zambia';
-            return 'other-international';
-        }
-
+        // Region config, locale detection, and the price bands all live at the top
+        // of this file as the single source of truth. Budget options are generated
+        // from the numeric bands and converted into the visitor's own currency.
         function detectCurrencyByRegion() {
-            if (regionSelect) return getRegionConfig(detectRegionByLocale()).currency;
+            return getRegionConfig(detectRegionByLocale()).currency;
+        }
 
-            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-            const locale = (navigator.language || '').toUpperCase();
-            const region = locale.includes('-') ? locale.split('-')[1] : '';
-
-            if (tz.indexOf('Africa/Lusaka') === 0 || region === 'ZM') return 'ZMW';
-            if (tz.indexOf('Africa/Johannesburg') === 0 || region === 'ZA') return 'ZAR';
-            if (tz.indexOf('Europe/London') === 0 || region === 'GB') return 'GBP';
-            if (tz.indexOf('Europe/') === 0 && region !== 'GB') return 'EUR';
-            if (region === 'US' || region === 'CA') return 'USD';
-            return 'USD';
+        function currentRegion() {
+            return getRegionConfig(regionSelect ? regionSelect.value : detectRegionByLocale());
         }
 
         function getBudgetKey() {
-            if (regionSelect) return getRegionConfig(regionSelect.value).budgetKey;
-            return currencySelect ? currencySelect.value : 'USD';
+            return currentRegion().budgetKey;
         }
 
-        function renderBudgetOptions(currencyCode) {
+        function renderBudgetOptions() {
             if (!budgetSelect) return;
 
-            const projectType = projectTypeSelect ? projectTypeSelect.value : '';
-            const isSystems = projectType === 'system';
-            const budgetMap = isSystems ? budgetMapSystems : budgetMapDefault;
+            const region = currentRegion();
+            const isSystems = projectTypeSelect ? projectTypeSelect.value === 'system' : false;
+            const options = buildBudgetOptions(region.budgetKey, region.currency, isSystems);
 
-            const options = budgetMap[currencyCode] || budgetMap.USD;
-            budgetSelect.innerHTML = options.map(option => '<option value="' + option.value + '">' + option.label + '</option>').join('');
+            budgetSelect.innerHTML = options
+                .map(function (o) { return '<option value="' + o.value + '">' + o.label + '</option>'; })
+                .join('');
 
             if (budgetHint) {
-                const tierType = isSystems ? ' (System Development pricing)' : '';
-                if (regionSelect) {
-                    const region = getRegionConfig(regionSelect.value);
-                    budgetHint.textContent = 'Budget adjusted for ' + region.label + ' (' + region.currency + ')' + tierType + '.';
-                } else {
-                    budgetHint.textContent = 'Budget adjusted for ' + currencyCode + tierType + '. You can change currency or project type manually.';
+                const kind = isSystems ? 'custom system' : 'website and app';
+                let hint = 'Showing ' + kind + ' pricing for ' + region.label + ' in ' + region.currency + '.';
+                if (isConverted(region.budgetKey, region.currency)) {
+                    hint += ' Converted at indicative rates (' + RATES_UPDATED + '); your written quote is issued in ' + region.currency + '.';
                 }
+                budgetHint.textContent = hint;
             }
-            
-            // Apply pre-selected plan from URL if available
-            if (form.dataset.preselectedPlan && budgetSelect) {
+
+            // Apply a plan preselected via the URL, matched on the tier name
+            // embedded in each option value (for example "zmw-standard-3500-5500").
+            if (form.dataset.preselectedPlan) {
                 const planKey = form.dataset.preselectedPlan;
-                const options = budgetSelect.querySelectorAll('option');
-                for (let option of options) {
-                    if (option.value.includes(planKey)) {
+                Array.prototype.some.call(budgetSelect.options, function (option) {
+                    if (option.value.indexOf('-' + planKey + '-') !== -1) {
                         budgetSelect.value = option.value;
-                        break;
+                        return true;
                     }
-                }
+                    return false;
+                });
             }
         }
 
@@ -2635,7 +2344,7 @@
                 });
             }
 
-            renderBudgetOptions(regionConfig.budgetKey);
+            renderBudgetOptions();
         }
 
         if (regionButtons.length > 0) {
@@ -2659,16 +2368,19 @@
         } else if (currencySelect) {
             const detectedCurrency = detectCurrencyByRegion();
             currencySelect.value = detectedCurrency;
-            renderBudgetOptions(detectedCurrency);
-            currencySelect.addEventListener('change', () => renderBudgetOptions(currencySelect.value));
+            renderBudgetOptions();
+            currencySelect.addEventListener('change', () => renderBudgetOptions());
         } else {
-            renderBudgetOptions('USD');
+            renderBudgetOptions();
         }
+
+        // Rates arrive asynchronously; repaint the budget bands once they settle.
+        loadRates().then(renderBudgetOptions);
 
         // Update budget options when project type changes
         if (projectTypeSelect) {
             projectTypeSelect.addEventListener('change', () => {
-                renderBudgetOptions(getBudgetKey());
+                renderBudgetOptions();
             });
         }
 
@@ -2750,7 +2462,7 @@
                         } else if (currencySelect) {
                             const detectedCurrency = detectCurrencyByRegion();
                             currencySelect.value = detectedCurrency;
-                            renderBudgetOptions(detectedCurrency);
+                            renderBudgetOptions();
                         }
 
                         formLoadTime = Date.now();
@@ -2767,7 +2479,7 @@
                     } else if (currencySelect) {
                         const detectedCurrency = detectCurrencyByRegion();
                         currencySelect.value = detectedCurrency;
-                        renderBudgetOptions(detectedCurrency);
+                        renderBudgetOptions();
                     }
 
                     formLoadTime = Date.now();
@@ -2852,8 +2564,12 @@
     window.scrollToContact = scrollToContact;
 
     function updateCopyrightYear() {
-        const yearSpan = document.getElementById('year');
-        if (yearSpan) yearSpan.textContent = String(new Date().getFullYear());
+        // #footerYear is the current footer.html marker, #year the legacy fallback one.
+        const year = String(new Date().getFullYear());
+        ['footerYear', 'year'].forEach(function (id) {
+            const el = document.getElementById(id);
+            if (el) el.textContent = year;
+        });
     }
 
     // =============================================
@@ -2974,12 +2690,27 @@
             if (!panel.classList.contains('is-visible')) hintButton();
         }, 42000);
     }
+
+    // Adds the nearest of the three star planes. The other two are the
+    // ::before (nebula) and ::after (far stars) of .background-animation.
+    function initStarfieldPlanes() {
+        // Homepage only for now. Other pages keep their original backdrop.
+        if (document.body.getAttribute('data-page') !== 'home') return;
+        var wrap = document.querySelector('.background-animation');
+        if (!wrap || wrap.querySelector('.np-starfield-near')) return;
+        var near = document.createElement('div');
+        near.className = 'np-starfield-near';
+        near.setAttribute('aria-hidden', 'true');
+        wrap.appendChild(near);
+    }
+
     function initGlobalParallax() {
         // Skip on touch devices and when user prefers reduced motion
         if ('ontouchstart' in window) return;
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         if (!window.matchMedia('(pointer: fine)').matches) return;
 
+        var bgWrap = document.querySelector('.background-animation');
         var moonCanvas = document.getElementById('moonCanvas');
         var parallaxEls = document.querySelectorAll('[data-parallax], .background-animation');
         if (!moonCanvas && parallaxEls.length === 0) return;
@@ -3012,8 +2743,19 @@
             py += (ty - py) * 0.055;
             var mx = (px - 0.5) * -18;
             var my = (py - 0.5) * -12;
+            if (bgWrap) {
+                // Normalised -0.5..0.5 pointer offset. Each star plane multiplies
+                // this by a different amount, which is what creates the depth.
+                bgWrap.style.setProperty('--par-x', (0.5 - px).toFixed(4));
+                bgWrap.style.setProperty('--par-y', (0.5 - py).toFixed(4));
+            }
             if (moonCanvas) {
-                moonCanvas.style.transform = 'translate(' + mx.toFixed(2) + 'px,' + my.toFixed(2) + 'px) scale(1.06)';
+                // Feed the CSS transform via custom properties so the depth layer
+                // (translateZ / scale) declared in style.css is preserved.
+                moonCanvas.style.setProperty('--moon-tx', mx.toFixed(2) + 'px');
+                moonCanvas.style.setProperty('--moon-ty', my.toFixed(2) + 'px');
+                moonCanvas.style.setProperty('--moon-ry', ((px - 0.5) * 2.4).toFixed(3) + 'deg');
+                moonCanvas.style.setProperty('--moon-rx', ((0.5 - py) * 1.6).toFixed(3) + 'deg');
             }
             var d = Math.abs(tx - px) + Math.abs(ty - py);
             if (d < 0.001) { active = false; cancelAnimationFrame(rafId); }
@@ -3105,61 +2847,100 @@
         
         if (!regionSelect) return;
 
-        // Map regions to pricing currency codes
-        const regionToCurrency = {
-            'detected': null,           // Will auto-detect
-            'zambia': 'ZMW',
-            'south-africa': 'ZAR',
-            'zimbabwe-usd': 'USD_ZW',
-            'west-east-africa': 'USD_WE',
-            'north-africa-me': 'USD_NAM',
-            'us-canada': 'USD_USCA',
-            'uk': 'GBP',
-            'europe': 'EUR',
-            'other-international': 'USD'
-        };
+        // The option labels were written by hand and had drifted: several said
+        // (USD) while the table rendered the real local currency. Relabel every
+        // option from getRegionConfig so the two can never disagree again.
+        Array.prototype.forEach.call(regionSelect.options, function (opt) {
+            if (!opt.value || opt.value === 'detected') return;
+            const cfg = getRegionConfig(opt.value);
+            // Strip any existing "(XXX)" suffixes, however many have accumulated.
+            const base = opt.textContent.replace(/(?:\s*\([A-Z]{3}\))+\s*$/, '').trim();
+            opt.textContent = base + ' (' + cfg.currency + ')';
+        });
 
-        function updatePrices() {
-            let selectedRegion = regionSelect.value;
-            let currencyCode = regionToCurrency[selectedRegion];
-            
-            // Auto-detect if "detected" selected
-            if (selectedRegion === 'detected' || !currencyCode) {
-                const userRegion = detectRegionByLocale();
-                const regionConfig = getRegionConfig(userRegion);
-                currencyCode = regionConfig.budgetKey;
-            }
-            
-            const isSystemProject = projectTypeToggle?.checked || false;
-            updatePricingDisplay(currencyCode, isSystemProject);
+        // Region to budget key resolution comes from the global getRegionConfig so the
+        // pricing page covers exactly the same regions the contact form does.
+        function regionFor(regionCode) {
+            const code = (!regionCode || regionCode === 'detected')
+                ? detectRegionByLocale()
+                : regionCode;
+            return getRegionConfig(code);
         }
 
-        regionSelect.addEventListener('change', updatePrices);
-        
+        function updatePrices() {
+            const isSystemProject = projectTypeToggle ? projectTypeToggle.checked : false;
+            const region = regionFor(regionSelect.value);
+            updatePricingDisplay(region.budgetKey, isSystemProject, region.currency);
+        }
+
+        regionSelect.addEventListener('change', function () {
+            sessionStorage.setItem('pricingRegionChoice', regionSelect.value);
+            updatePrices();
+        });
+
         if (projectTypeToggle) {
             projectTypeToggle.addEventListener('change', updatePrices);
         }
 
-        // Auto-detect on first visit
-        if (!sessionStorage.getItem('pricingRegionSet')) {
-            const userRegion = detectRegionByLocale();
-            const regionConfig = getRegionConfig(userRegion);
-            
-            // Find matching region value
-            let selectedRegionValue = 'other-international';
-            for (let [region, currency] of Object.entries(regionToCurrency)) {
-                if (currency === regionConfig.budgetKey) {
-                    selectedRegionValue = region;
-                    break;
-                }
-            }
-            
-            regionSelect.value = selectedRegionValue;
-            updatePrices();
-            sessionStorage.setItem('pricingRegionSet', 'true');
-        } else {
-            updatePrices();
+        function optionExists(value) {
+            return !!regionSelect.querySelector('option[value="' + value + '"]');
         }
+
+        const savedChoice = sessionStorage.getItem('pricingRegionChoice');
+        if (savedChoice && optionExists(savedChoice)) {
+            regionSelect.value = savedChoice;
+        } else {
+            // Preselect the visitor's own country when we offer it, otherwise leave
+            // the auto-detect option selected. Prices resolve the same either way.
+            const detected = detectRegionByLocale();
+            if (optionExists(detected)) regionSelect.value = detected;
+        }
+
+        updatePrices();
+        initComparisonTierSwitch();
+
+        // Rates arrive asynchronously. Repaint once they settle so a drifted
+        // market gets its re-pegged figure without blocking first render.
+        loadRates().then(updatePrices);
+    }
+
+    // =============================================
+    // PRICING COMPARISON TABLE -- MOBILE TIER SWITCH
+    // =============================================
+    // Below 480px the table shows one tier column at a time. The prev / next
+    // buttons pick which column stays visible; the CSS handles the hiding.
+    function initComparisonTierSwitch() {
+        const table = document.querySelector('.cmp-table');
+        const prev = document.getElementById('cmpPrev');
+        const next = document.getElementById('cmpNext');
+        const label = document.getElementById('cmpTierLabel');
+        if (!table || !prev || !next || !label) return;
+
+        const names = Array.from(table.querySelectorAll('thead .cmp-tier-name'))
+            .map(function (el) { return el.textContent.trim(); });
+        if (!names.length) return;
+
+        let index = 0;
+
+        function render() {
+            table.querySelectorAll('[data-col]').forEach(function (cell) {
+                const col = Number(cell.getAttribute('data-col'));
+                cell.classList.toggle('is-hidden-tier', col !== index);
+            });
+            label.textContent = names[index];
+            prev.disabled = index === 0;
+            next.disabled = index === names.length - 1;
+        }
+
+        prev.addEventListener('click', function () {
+            if (index > 0) { index--; render(); }
+        });
+
+        next.addEventListener('click', function () {
+            if (index < names.length - 1) { index++; render(); }
+        });
+
+        render();
     }
 
     // =============================================

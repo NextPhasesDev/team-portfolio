@@ -25,50 +25,49 @@
     <link rel="apple-touch-icon" sizes="192x192" href="/favicon-192.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-
-
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "NextPhases.dev",
-      "url": "https://nextphases.dev",
-      "logo": "https://nextphases.dev/Logo_transparent.png",
-      "sameAs": [
-        "https://www.youtube.com/@nextphases",
-        "https://x.com/NextPhases",
-        "https://www.tiktok.com/@nextphases.dev?lang=en",
-        "https://www.instagram.com/nextphases.dev/",
-        "https://www.linkedin.com/company/nextphases",
-        "https://discord.gg/DkybgpuRwp"
-      ],
-      "description": "Software development company building websites, SaaS platforms, applications, and digital products for businesses globally.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Lusaka",
-        "addressCountry": "Zambia"
-      }
+      "@type": "CollectionPage",
+      "@id": "https://nextphases.dev/portfolio.html#webpage",
+      "url": "https://nextphases.dev/portfolio.html",
+      "name": "Portfolio | NextPhases",
+      "description": "Client software delivered by NextPhases, alongside the internal products the company builds and runs.",
+      "isPartOf": {
+        "@id": "https://nextphases.dev/#website"
+      },
+      "about": {
+        "@id": "https://nextphases.dev/#organization"
+      },
+      "publisher": {
+        "@id": "https://nextphases.dev/#organization"
+      },
+      "inLanguage": "en"
     }
     </script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "NextPhases.dev",
-      "image": "https://nextphases.dev/Logo_transparent.png",
-      "url": "https://nextphases.dev",
-      "telephone": "+260978131906",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Lusaka",
-        "addressCountry": "ZM"
-      },
-      "priceRange": "$$"
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nextphases.dev"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Portfolio",
+          "item": "https://nextphases.dev/portfolio.html"
+        }
+      ]
     }
     </script>
 </head>
@@ -82,7 +81,7 @@
 
   gtag('config', 'G-5T40D6EZG4');
 </script>
-<body>
+<body data-page="portfolio">
 
 <nav class="main-nav" id="mainNav">
     <div class="nav-container">
@@ -108,10 +107,11 @@
             <li><a href="/index.html" class="nav-link">Home</a></li>
             <li><a href="/services.html" class="nav-link">Services</a></li>
             <li><a href="/portfolio.html" class="nav-link active">Portfolio</a></li>
+            <li><a href="/pricing.html" class="nav-link">Pricing</a></li>
             <li><a href="/blogs/" class="nav-link">Blog</a></li>
             <li><a href="/testimonials.html" class="nav-link">Testimonials</a></li>
             <li><a href="/about.html" class="nav-link">About</a></li>
-            <li><a href="" class="cta-button" target="_blank" rel="noopener">WhatsApp</a></li>
+            <li><a href="/contact.html" class="cta-button"><i class="fas fa-paper-plane" aria-hidden="true"></i> Contact</a></li>
         </ul>
         <div class="nav-actions">
             <div class="theme-toggle-group">
@@ -140,6 +140,140 @@
     <section class="page-hero portfolio-hero">
         <h1>Our Portfolio</h1>
         <p>Real projects, real impact. Here's what we're building.</p>
+    </section>
+
+    <!-- ===== NATURE'S CART + CLIENT WORK: HIDDEN UNTIL SIGN-OFF AND FINAL INVOICE =====
+         Nature's Cart is the only delivered client project, so the whole
+         "Built and Deployed" section is hidden with it rather than left empty.
+         Restore: delete this wrapper, then change every <!~~ back to an HTML comment open and every ~~> back to a comment close.
+
+    <!~~ ===== Client work ===== ~~>
+    <section class="portfolio-section-intro">
+        <span class="np-eyebrow">Client work</span>
+        <h2 class="section-accent-heading">Built and Deployed</h2>
+        <p>Software we have delivered for paying clients and that is live in daily use. We publish a client project here once it has shipped, not while it is a pitch.</p>
+    </section>
+
+    <!~~ Nature's Cart ~~>
+    <section class="project-showcase" id="natures-cart">
+        <div class="project-grid" data-aos="fade-up">
+            <div class="project-visual">
+                <div class="showcase-card phone large">
+                    <div class="phone-notch"></div>
+                    <div class="showcase-content">
+                        <div class="showcase-placeholder">
+                            <i class="fas fa-basket-shopping"></i>
+                            <h3>Nature's Cart</h3>
+                            <p>Cashless Tuckshop Platform</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-info">
+                <div class="project-status">
+                    <span class="status-badge status-badge--delivered">Delivered</span>
+                    <span class="project-owner">Client: Nature's Cart, Lusaka</span>
+                </div>
+                <h2>Nature's Cart</h2>
+                <p class="project-description">A cashless tuckshop management progressive web app built for Nature's Cart, a school tuckshop operator in Lusaka. Students buy without carrying cash, vendors process sales on any device, and administrators see exactly where the money went.</p>
+
+                <div class="project-features">
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Vendor point of sale</li>
+                        <li><i class="fas fa-check-circle"></i> Student account system</li>
+                        <li><i class="fas fa-check-circle"></i> Inventory management</li>
+                        <li><i class="fas fa-check-circle"></i> SMS notifications via Africa's Talking</li>
+                        <li><i class="fas fa-check-circle"></i> Admin oversight dashboard</li>
+                    </ul>
+                </div>
+
+                <div class="project-tech">
+                    <h4>Built With</h4>
+                    <div class="tech-tags">
+                        <span>PWA</span>
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>PostgreSQL</span>
+                        <span>Zambia</span>
+                    </div>
+                </div>
+
+                <a href="/contact.html" class="cta-button">
+                    <span>Discuss a similar project</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+        <!~~ ==========================================================
+             NATURE'S CART SHOWCASE  (HIDDEN UNTIL CLIENT SIGN-OFF)
+             ==========================================================
+             TO PUBLISH: delete the hidden attribute on the section below.
+             TO HIDE AGAIN: put it back. Nothing else needs changing.
+
+             Drop assets into /portfolio/natures-cart/ using exactly these
+             filenames. Any file that is missing simply hides its own tile,
+             so this can be published with a partial set.
+             ========================================================== ~~>
+        <section class="nc-showcase" id="nc-showcase" hidden aria-labelledby="nc-showcase-heading">
+            <div class="nc-showcase-inner">
+                <span class="np-eyebrow">Inside the build</span>
+                <h2 id="nc-showcase-heading" class="section-accent-heading">Nature's Cart in use</h2>
+                <p class="nc-showcase-note">
+                    Screens shown use demonstration data. No real student, vendor, or transaction
+                    information from Nature's Cart or the schools it serves appears anywhere in this gallery.
+                </p>
+
+                <div class="nc-gallery">
+                    <figure class="nc-shot nc-shot--wide">
+                        <img src="/portfolio/natures-cart/pos.png" alt="Nature's Cart vendor point of sale screen showing an in-progress sale" loading="lazy" onerror="this.closest('figure').hidden=true">
+                        <figcaption>Vendor point of sale. Built for speed on a shared counter tablet.</figcaption>
+                    </figure>
+                    <figure class="nc-shot">
+                        <img src="/portfolio/natures-cart/student-account.png" alt="Student account screen showing balance and recent purchases" loading="lazy" onerror="this.closest('figure').hidden=true">
+                        <figcaption>Student account with balance and purchase history.</figcaption>
+                    </figure>
+                    <figure class="nc-shot">
+                        <img src="/portfolio/natures-cart/inventory.png" alt="Inventory management screen listing stock levels" loading="lazy" onerror="this.closest('figure').hidden=true">
+                        <figcaption>Inventory and stock levels.</figcaption>
+                    </figure>
+                    <figure class="nc-shot nc-shot--wide">
+                        <img src="/portfolio/natures-cart/admin-dashboard.png" alt="Administrator dashboard showing daily sales and account totals" loading="lazy" onerror="this.closest('figure').hidden=true">
+                        <figcaption>Admin oversight dashboard. Daily takings, top sellers, low stock.</figcaption>
+                    </figure>
+                    <figure class="nc-shot">
+                        <img src="/portfolio/natures-cart/sms.png" alt="Example SMS notification sent to a parent after a purchase" loading="lazy" onerror="this.closest('figure').hidden=true">
+                        <figcaption>Parent SMS notifications via Africa's Talking.</figcaption>
+                    </figure>
+                    <figure class="nc-shot">
+                        <img src="/portfolio/natures-cart/mobile.png" alt="Nature's Cart running as an installed progressive web app on a phone" loading="lazy" onerror="this.closest('figure').hidden=true">
+                        <figcaption>Installs as a PWA. Works on low-end Android handsets.</figcaption>
+                    </figure>
+                </div>
+
+                <figure class="nc-video" id="ncVideo">
+                    <video controls muted playsinline preload="none"
+                           poster="/portfolio/natures-cart/demo-poster.jpg"
+                           onerror="this.closest('figure').hidden=true">
+                        <source src="/portfolio/natures-cart/demo.webm" type="video/webm">
+                        <source src="/portfolio/natures-cart/demo.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Ninety second walkthrough: a sale from scan to SMS receipt.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+
+    ===== END HIDDEN ===== -->
+
+    <!-- ===== Internal products ===== -->
+    <section class="portfolio-section-intro">
+        <span class="np-eyebrow">Our own software</span>
+        <h2 class="section-accent-heading">Internal Products</h2>
+        <p>Products NextPhases owns, funds, and runs. We build these to solve problems we saw ourselves, and they are how we prove what we can do before a client asks us to.</p>
     </section>
 
     <!-- ExamGuard -->

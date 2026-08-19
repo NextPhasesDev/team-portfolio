@@ -27,50 +27,49 @@
     <link rel="apple-touch-icon" sizes="192x192" href="/favicon-192.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-
-
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "NextPhases.dev",
-      "url": "https://nextphases.dev",
-      "logo": "https://nextphases.dev/Logo_transparent.png",
-      "sameAs": [
-        "https://www.youtube.com/@nextphases",
-        "https://x.com/NextPhases",
-        "https://www.tiktok.com/@nextphases.dev?lang=en",
-        "https://www.instagram.com/nextphases.dev/",
-        "https://www.linkedin.com/company/nextphases",
-        "https://discord.gg/DkybgpuRwp"
-      ],
-      "description": "Software development company building websites, SaaS platforms, applications, and digital products for businesses globally.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Lusaka",
-        "addressCountry": "Zambia"
-      }
+      "@type": "WebPage",
+      "@id": "https://nextphases.dev/services.html#webpage",
+      "url": "https://nextphases.dev/services.html",
+      "name": "Services | NextPhases",
+      "description": "Web development, app development, custom software systems, and technical consulting from NextPhases in Lusaka, Zambia.",
+      "isPartOf": {
+        "@id": "https://nextphases.dev/#website"
+      },
+      "about": {
+        "@id": "https://nextphases.dev/#organization"
+      },
+      "publisher": {
+        "@id": "https://nextphases.dev/#organization"
+      },
+      "inLanguage": "en"
     }
     </script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "NextPhases.dev",
-      "image": "https://nextphases.dev/Logo_transparent.png",
-      "url": "https://nextphases.dev",
-      "telephone": "+260978131906",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Lusaka",
-        "addressCountry": "ZM"
-      },
-      "priceRange": "$$"
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://nextphases.dev"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": "https://nextphases.dev/services.html"
+        }
+      ]
     }
     </script>
 </head>
@@ -84,7 +83,7 @@
 
   gtag('config', 'G-5T40D6EZG4');
 </script>
-<body>
+<body data-page="services">
 
 <nav class="main-nav" id="mainNav">
     <div class="nav-container">
@@ -110,10 +109,11 @@
             <li><a href="/index.html" class="nav-link">Home</a></li>
             <li><a href="/services.html" class="nav-link active">Services</a></li>
             <li><a href="/portfolio.html" class="nav-link">Portfolio</a></li>
+            <li><a href="/pricing.html" class="nav-link">Pricing</a></li>
             <li><a href="/blogs/" class="nav-link">Blog</a></li>
             <li><a href="/testimonials.html" class="nav-link">Testimonials</a></li>
             <li><a href="/about.html" class="nav-link">About</a></li>
-            <li><a href="" class="cta-button" target="_blank" rel="noopener">WhatsApp</a></li>
+            <li><a href="/contact.html" class="cta-button"><i class="fas fa-paper-plane" aria-hidden="true"></i> Contact</a></li>
         </ul>
         <div class="nav-actions">
             <div class="theme-toggle-group">
@@ -142,46 +142,9 @@
     <section class="page-hero services-hero">
         <h1>Our Services</h1>
         <p>Building solutions for startups, businesses, and organizations ready to grow.</p>
+        <p class="hero-inline-link"><a href="/pricing.html">View pricing by region</a> or <a href="/contact.html">tell us about your project</a>.</p>
     </section>
 
-    <section class="service-detail" id="how-we-work">
-        <div class="pricing-content" data-aos="fade-up" style="text-align: center;">
-            <h2>How We Work</h2>
-            <p class="section-intro">A consistent process that protects both sides and keeps projects on track.</p>
-        </div>
-        <div class="pricing-regions-grid" style="margin-top: 2rem;" data-aos="fade-up">
-            <div class="pricing-region-card">
-                <div class="region-icon"><i class="fas fa-comments"></i></div>
-                <h3>01. Discovery</h3>
-                <p class="region-note">We learn your goals, constraints, and context. You get honest answers about what's realistic and what it will cost.</p>
-            </div>
-            <div class="pricing-region-card">
-                <div class="region-icon"><i class="fas fa-file-signature"></i></div>
-                <h3>02. Agreement</h3>
-                <p class="region-note">Scope, timeline, and price are agreed in writing before any work starts. No surprises mid-project.</p>
-            </div>
-            <div class="pricing-region-card">
-                <div class="region-icon"><i class="fas fa-code"></i></div>
-                <h3>03. Build</h3>
-                <p class="region-note">We build in milestones with regular check-ins. You see progress before it's finished, not after.</p>
-            </div>
-            <div class="pricing-region-card">
-                <div class="region-icon"><i class="fas fa-vials"></i></div>
-                <h3>04. Review</h3>
-                <p class="region-note">You review the work, give feedback, and we refine. Up to two revision rounds are included as standard.</p>
-            </div>
-            <div class="pricing-region-card">
-                <div class="region-icon"><i class="fas fa-rocket"></i></div>
-                <h3>05. Launch</h3>
-                <p class="region-note">We deploy, hand over files, and collect final payment. You leave with something that works and documentation to match.</p>
-            </div>
-            <div class="pricing-region-card">
-                <div class="region-icon"><i class="fas fa-wrench"></i></div>
-                <h3>06. Support</h3>
-                <p class="region-note">Post-launch support window included. Ongoing maintenance available separately if you need it.</p>
-            </div>
-        </div>
-    </section>
 
     <section class="service-detail" id="web-dev">
         <div class="service-detail-grid">
@@ -190,8 +153,8 @@
                     <i class="fas fa-code"></i>
                 </div>
                 <h2>Web Development</h2>
-                <p>We design and build modern, responsive websites that work on every device and load fast from every connection. Whether you need a professional landing page to convert visitors, a full business website that represents your brand correctly, or a scalable web platform with complex functionality — we build it with the performance and architecture to grow with you.</p>
-                <p>Every website we deliver is built with SEO-friendly structure from the ground up, because a website that can't be found isn't doing its job. We've built sites for businesses in Zambia, South Africa, Zimbabwe, and internationally, and we understand how to design for real users in real markets — not just portfolio screenshots.</p>
+                <p>We design and build modern, responsive websites that work on every device and load fast from every connection. Whether you need a professional landing page to convert visitors, a full business website that represents your brand correctly, or a scalable web platform with complex functionality, we build it with the performance and architecture to grow with you.</p>
+                <p>Every website we deliver is built with SEO-friendly structure from the ground up, because a website that can't be found isn't doing its job. We've built sites for businesses in Zambia, South Africa, Zimbabwe, and internationally, and we understand how to design for real users in real markets, not just portfolio screenshots.</p>
                 <ul class="service-features">
                     <li><i class="fas fa-check"></i> Responsive design for all screen sizes</li>
                     <li><i class="fas fa-check"></i> SEO-optimised structure and content</li>
@@ -232,7 +195,7 @@
                 </div>
                 <h2>App Development</h2>
                 <p>Custom applications built to solve real problems, not to demonstrate technology for its own sake. We build web apps, cross-platform mobile applications, and internal tools that handle the specific workflows your business actually runs on.</p>
-                <p>Our internal product ExamGuard — a digital exam management and invigilation platform built for schools and universities — is a working example of how we approach app development: identify a real problem, design an appropriate solution, build it to be reliable and maintainable, then keep improving it based on how people actually use it. We apply the same thinking to every client project.</p>
+                <p>Our internal product ExamGuard, a digital exam management and invigilation platform built for schools and universities, is a working example of how we approach app development: identify a real problem, design an appropriate solution, build it to be reliable and maintainable, then keep improving it based on how people actually use it. We apply the same thinking to every client project.</p>
                 <ul class="service-features">
                     <li><i class="fas fa-check"></i> Cross-platform web applications</li>
                     <li><i class="fas fa-check"></i> Mobile-first design approach</li>
@@ -271,7 +234,7 @@
                     <i class="fas fa-lightbulb"></i>
                 </div>
                 <h2>Technical Consulting</h2>
-                <p>Most technology decisions feel harder than they need to be because there are too many options and too little context. We help businesses cut through that — whether you're starting from scratch, scaling something that's already working, or trying to understand why something isn't.</p>
+                <p>Most technology decisions feel harder than they need to be because there are too many options and too little context. We help businesses cut through that, whether you're starting from scratch, scaling something that's already working, or trying to understand why something isn't.</p>
                 <p>A consulting engagement with us might mean a single call to talk through your architecture options, a structured discovery process that results in a full technical roadmap, or ongoing advisory as you implement. We don't push complexity for its own sake. If the right answer is simple, we'll tell you.</p>
                 <ul class="service-features">
                     <li><i class="fas fa-check"></i> Technology stack recommendations</li>
@@ -308,6 +271,11 @@
             </div>
         </div>
     </section>
+
+    <!-- ===== REGIONAL PRICING MAP: HIDDEN =====
+         The map still shows the old nine-region set with hardcoded prices, and
+         we now cover 129 regions in local currencies. Hidden until we decide how
+         to present that. Restore: delete this wrapper, then change every <!~~ back to an HTML comment open and every ~~> back to a comment close.
 
     <section class="pricing-note">
         <div class="pricing-content" data-aos="fade-up">
@@ -436,6 +404,21 @@
             </a>
         </div>
     </section>
+    ===== END HIDDEN MAP ===== -->
+
+    <section class="pricing-note">
+        <div class="pricing-content" data-aos="fade-up">
+            <h2 class="section-accent-heading">Pricing by Region</h2>
+            <p>We price by local market, not by a single global rate, and quote in your own currency. Zambia, South Africa, the UK, Europe, North America, Asia, Latin America and the Gulf are all covered.</p>
+            <div class="cta">
+                <a href="/pricing.html" class="cta-button">
+                    <span>See pricing for your region</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
 
     </main>
 

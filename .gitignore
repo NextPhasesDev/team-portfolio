@@ -55,3 +55,13 @@ PROJECT_STATUS.md
 *.bak
 *.orig
 
+
+# --- More internal planning (not for public repo) ---
+ASSETS-AND-DECISIONS.md
+portfolio/natures-cart/README.md
+
+# --- Local dev tooling ---
+.claude/
+
+# --- Scratch prototypes ---
+np mascot prototype v0.html

@@ -1,39 +1,81 @@
-<footer>
+<footer class="site-footer">
+    <!-- Crescent glyph defined once, reused by the phase band below -->
+    <svg class="footer-defs" aria-hidden="true" focusable="false" width="0" height="0">
+        <symbol id="npCrescent" viewBox="0 0 397 395">
+            <path d="M122.089 321.085C126.922 321.418 138.689 322.085 147.089 322.085C147.589 322.585 152.589 320.085 149.589 317.085C147.255 316.918 141.189 316.085 135.589 314.085C131.422 312.585 121.689 308.685 116.089 305.085C112.422 302.918 103.689 297.285 98.0888 292.085C93.9221 288.251 84.3888 278.985 79.5888 272.585C76.5888 268.418 69.6888 258.185 66.0888 250.585C63.7554 245.251 58.6888 232.885 57.0888 226.085C55.5888 220.085 54.5888 214.085 54.0888 205.585C53.5862 197.041 52.5888 193.085 53.5888 187.085C53.5888 179.585 54.5888 174.085 55.5888 167.585C56.5888 161.085 57.0888 158.085 60.0888 150.085C62.0888 141.585 64.5888 136.085 68.0888 128.585C70.5888 124.085 76.3888 114.085 79.5888 110.085C81.0888 107.751 85.1888 102.085 89.5888 98.0845C91.2554 95.9179 95.4888 90.8845 99.0888 88.0845C101.089 86.0845 106.214 82.5845 109.589 79.5845C111.089 78.2512 114.689 75.2845 117.089 74.0845C119.255 72.4179 124.389 68.7845 127.589 67.5845C131.089 64.5845 136.089 63.0845 146.589 58.5845C150.589 57.0845 160.289 53.7845 167.089 52.5845C188.089 49.0845 174.589 51.0845 183.589 50.0845H198.589C200.755 49.9179 206.689 49.9845 213.089 51.5845C216.922 52.2512 226.189 54.1845 232.589 56.5845C238.589 58.5845 247.275 61.6776 253.089 64.5845C257.089 66.5845 262.089 70.0845 266.589 73.0845C271.089 76.0845 274.089 77.0845 278.589 81.5845C283.089 85.5845 286.589 89.0845 288.089 90.5845C289.364 91.8593 297.089 100.585 298.089 101.085C299.089 101.585 301.089 100.085 301.089 99.0845C301.089 98.0845 301.089 96.5845 298.089 92.5845C295.089 87.0845 294.589 86.0845 290.589 79.5845C286.589 73.0845 287.089 72.5845 282.089 66.5845C277.089 60.5845 276.089 59.5845 273.089 56.0845C268.589 51.5845 262.589 45.5845 258.089 41.5845C249.589 35.0845 244.089 30.5845 236.089 26.0845C226.344 20.6032 219.589 17.5845 206.089 13.5845C205.589 13.5845 187.089 8.58453 176.589 8.58453H156.589C156.089 8.58453 138.089 10.5845 133.589 11.5845C120.776 14.5413 116.706 16.041 107.496 19.4346L107.089 19.5845C93.0888 26.0845 84.5888 30.5845 82.5888 31.5845C80.5888 32.5845 63.5888 45.0845 61.5888 47.0845C59.5888 49.0845 53.0888 54.5845 50.0888 58.0845C47.0888 61.5845 39.0888 69.0845 36.0888 73.5845L26.0888 88.5845C24.0888 91.5845 18.5888 100.585 14.5888 109.585C14.0888 110.085 9.08878 122.585 6.58876 130.585C1.58876 149.585 1.58877 155.085 1.08876 158.085C0.924354 159.071 -0.411244 184.585 1.58876 195.585C3.58876 210.585 3.55029 210.085 5.08876 215.085C7.08876 221.585 9.08876 228.585 13.0888 237.085C14.5888 240.751 18.4888 249.285 22.0888 254.085C27.0888 261.085 27.0888 262.87 32.0888 268.585C35.5888 272.585 45.5888 283.585 54.0888 290.585C62.5888 296.585 66.5888 300.085 72.5888 303.085C77.5888 306.585 96.5888 314.085 98.5888 315.085C100.189 315.885 114.922 319.418 122.089 321.085Z" fill="currentColor"/>
+        </symbol>
+    </svg>
+
+    <!-- Curved horizon: the page falls away into the footer over a planet edge -->
+    <div class="footer-horizon" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="footer-horizon-fill" d="M0,0 C240,96 520,120 720,120 C920,120 1200,96 1440,0 L1440,120 L0,120 Z"/>
+            <path class="footer-horizon-line" d="M0,0 C240,96 520,120 720,120 C920,120 1200,96 1440,0" fill="none"/>
+        </svg>
+    </div>
+
+    <!-- Moon phases riding the curve of the horizon -->
+    <div class="footer-phases" aria-hidden="true">
+        <span class="footer-phase footer-phase--new"><svg><use href="#npCrescent"></use></svg></span>
+        <span class="footer-phase footer-phase--waxing"><svg><use href="#npCrescent"></use></svg></span>
+        <span class="footer-phase footer-phase--half"><svg><use href="#npCrescent"></use></svg></span>
+        <span class="footer-phase footer-phase--waning"><svg><use href="#npCrescent"></use></svg></span>
+        <span class="footer-phase footer-phase--full"><svg><use href="#npCrescent"></use></svg></span>
+    </div>
+
     <div class="footer-content">
+        <!-- Oversized closing statement -->
+        <div class="footer-callout">
+            <p class="footer-callout-eyebrow">Next phase starts here</p>
+            <h2 class="footer-callout-title">Let's build the<br><em>thing that works.</em></h2>
+            <a class="footer-cta footer-cta--lg" href="/contact.html">
+                Start a project
+                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </a>
+        </div>
+
         <div class="footer-grid">
             <div class="footer-brand">
                 <div class="footer-logo">
                     <img src="/footer-icon.svg" alt="NextPhases" class="footer-icon" />
                     <span>NextPhases</span>
                 </div>
-                <p class="footer-tagline">Engineering your next phase of success.</p>
+                <p class="footer-tagline">Engineering your next phase of success. Software built in Lusaka for clients worldwide.</p>
                 <div class="footer-socials">
                     <a href="https://www.youtube.com/@nextphases" class="social-link" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                     <a href="https://x.com/NextPhases" class="social-link" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                     <a href="https://www.tiktok.com/@nextphases.dev?lang=en" class="social-link" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                     <a href="https://www.instagram.com/nextphases.dev/" class="social-link" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/company/nextphases" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.linkedin.com/company/nextphases" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     <a href="https://wa.me/260978131906?text=Hi%20NextPhases%2C%20I%27d%20like%20to%20discuss%20a%20project." class="social-link" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     <a href="https://discord.gg/DkybgpuRwp" class="social-link" target="_blank" rel="noopener" aria-label="Discord"><i class="fab fa-discord"></i></a>
                 </div>
             </div>
+
             <div class="footer-column">
                 <h4>Services</h4>
                 <ul>
                     <li><a href="/services.html#web-dev">Web Development</a></li>
                     <li><a href="/services.html#app-dev">App Development</a></li>
-                    <li><a href="/services.html#consulting">Consulting</a></li>
+                    <li><a href="/services.html#consulting">Custom Systems</a></li>
+                    <li><a href="/services.html#consulting">Technical Consulting</a></li>
+                    <li><a href="/pricing.html">Pricing by Region</a></li>
                 </ul>
             </div>
+
             <div class="footer-column">
-                <h4>Projects</h4>
+                <h4>Products</h4>
                 <ul>
+                    <!-- Nature's Cart link hidden until client sign-off:
+                    <li><a href="/portfolio.html#natures-cart">Nature's Cart</a></li>
+                    -->
                     <li><a href="/portfolio.html#examguard">ExamGuard</a></li>
-                    <li><a href="/games/">Games Hub</a></li>
                     <li><a href="/games/nsolo">Nsolo</a></li>
-                    <li><a href="/portfolio.html">View All</a></li>
+                    <li><a href="/games/">Games Hub</a></li>
+                    <li><a href="/portfolio.html">All Work</a></li>
                 </ul>
             </div>
+
             <div class="footer-column">
                 <h4>Company</h4>
                 <ul>
@@ -42,21 +84,45 @@
                     <li><a href="/testimonials.html">Testimonials</a></li>
                     <li><a href="/contact.html">Contact</a></li>
                     <li><a href="/contact.html#faq-section" class="faq-link">FAQ</a></li>
-                    <li><a href="/privacy.html">Privacy Policy</a></li>
-                    <li><a href="/terms.html">Terms of Service</a></li>
                 </ul>
             </div>
-            <div class="footer-column">
-                <h4>Get in Touch</h4>
+
+            <div class="footer-column footer-column--contact">
+                <h4>Reach the right desk</h4>
+                <ul class="footer-desks">
+                    <li>
+                        <a href="mailto:info@nextphases.dev">
+                            <span class="desk-name">New project enquiries</span>
+                            <span class="desk-mail">info@nextphases.dev</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:team@nextphases.dev">
+                            <span class="desk-name">Partnerships &amp; suppliers</span>
+                            <span class="desk-mail">team@nextphases.dev</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:media@nextphases.dev">
+                            <span class="desk-name">Media &amp; press</span>
+                            <span class="desk-mail">media@nextphases.dev</span>
+                        </a>
+                    </li>
+                </ul>
                 <ul class="footer-contact-list">
-                    <li><i class="fab fa-whatsapp"></i><a href="https://wa.me/260978131906?text=Hi%20NextPhases%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener">WhatsApp: +260 97 813 1906</a></li>
-                    <li><i class="fas fa-envelope"></i><a href="mailto:info@nextphases.dev">info@nextphases.dev</a></li>
-                    <li><i class="fas fa-map-marker-alt"></i><span>Lusaka, Zambia</span></li>
+                    <li><i class="fab fa-whatsapp" aria-hidden="true"></i><a href="https://wa.me/260978131906?text=Hi%20NextPhases%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener">+260 97 813 1906</a></li>
+                    <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span>Lusaka, Zambia (UTC+2)</span></li>
                 </ul>
             </div>
         </div>
+
         <div class="footer-bottom">
-            <p>&copy; <span id="year"></span> NextPhases. All Rights Reserved.</p>
+            <p>&copy; <span id="footerYear"></span> NextPhases. All Rights Reserved.</p>
+            <div class="footer-legal">
+                <a href="/privacy.html">Privacy</a>
+                <a href="/terms.html">Terms</a>
+                <a href="/sitemap.xml">Sitemap</a>
+            </div>
         </div>
     </div>
 </footer>

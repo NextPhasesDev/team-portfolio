@@ -1,54 +1,62 @@
 # NextPhases
 
-> Software development company based in Lusaka, Zambia. We build websites, mobile apps, custom software systems, and technical consulting for businesses in Zambia, Africa, the UK, and internationally.
+> Professional software development company based in Lusaka, Zambia. We build websites, web and mobile applications, custom software systems, and digital products for businesses in Zambia, across Africa, the UK, and internationally. Not a startup and not a student project.
 
-## Company
+## At a glance
+- Founded: December 2025
+- Headquarters: Lusaka, Zambia (UTC+2)
+- Works with: clients worldwide, fully remote delivery
+- Website: https://nextphases.dev
+- Quotes issued in the client's own local currency
 
-NextPhases is founded and led by a team of four co-founders:
+## Team
+- Thuma Hamukang'andu: Co-Founder, CTO and CMO. Sets technical direction and architecture, and leads brand and marketing. LinkedIn: https://www.linkedin.com/in/thuma-hamukang-andu-3a78583b4/ GitHub: https://github.com/Thuma-H Contact: media@nextphases.dev
+- Christian Chadambuka: Co-Founder, CEO and Chief Commercial Officer. Leads company direction, client relationships, and commercial strategy. Contact: info@nextphases.dev
+- Simon Muleya: Co-Founder, COO. Leads delivery, operations, and project management from kickoff to launch. Contact: team@nextphases.dev
+- Shaun Nkomo: Co-Founder, VP Engineering. Owns engineering quality and implementation standards.
 
-- **Thuma** – Co-Founder, CTO & CMO
-- **Simon** – Co-Founder, COO
-- **Christian** – Co-Founder, CEO & Chief Commercial Officer
-- **Shaun** – Co-Founder, VP Engineering
-
-Our team combines expertise in architecture, operations, leadership, and engineering to deliver high-quality, scalable solutions. We also have contributors like **Lans**, a developer supporting active development across NextPhases projects.
-
-## Team Roles
-
-- **Thuma (CTO & CMO)** – Sets technical direction and brand strategy. Leads architecture, development strategy, and company communications. Expert in modern web technologies (React, Node.js, Python) and system design.
-
-- **Simon (COO)** – Manages operations, project delivery, and client communication. Ensures projects move from kickoff to launch without losing momentum.
-
-- **Christian (CEO & CCO)** – Leads company vision, manages client relationships, and drives commercial growth. Handles company voice and strategic partnerships.
-
-- **Shaun (VP Engineering)** – Guides engineering quality and implementation standards. Ensures every shipped feature feels dependable and polished.
-
-- **Lans (Developer Contributor)** – Supports development work across NextPhases projects while building hands-on experience with real clients.
+Only Thuma currently has a public LinkedIn profile. The other founders do not have profiles listed yet, so none are published for them.
 
 ## Services
+- Web Development: business websites, landing pages, web applications, e-commerce, performance-optimised architecture. SEO and responsive design are included as standard, not charged as extras.
+- App Development: Android, iOS, cross-platform mobile apps, web apps, internal business tools.
+- Custom Systems: dashboards, management tools, inventory systems, booking platforms, reporting, workflow automation.
+- Technical Consulting: tech stack selection, digital transformation, architecture planning, performance and SEO audits.
 
-- Web Development: business websites, landing pages, web applications, e-commerce, performance optimization
-- App Development: Android, iOS, cross-platform mobile apps, web apps, internal tools
-- Technical Consulting: tech stack selection, digital transformation, architecture planning, security
-- Custom Software: dashboards, automation systems, business management tools, SaaS products
+## Technologies
+HTML, CSS, JavaScript, React, Node.js, Python, Java, PostgreSQL, MySQL, REST APIs. Deployment on Netlify, Render, Railway, and major cloud platforms. Stack is chosen per project rather than forced.
 
-## Products
+## Internal products
+- Nsolo: digital adaptation of a traditional Zambian mancala-style board game. Playable at https://nextphases.dev/games/nsolo
+- ExamGuard: exam management and digital invigilation platform for schools and universities. In development.
+- Campus Connect: student platform for Zambian universities covering navigation, schedules, resources, and announcements. In development.
 
-- Nsolo: a digital adaptation of a traditional Zambian mancala-style board game
-- ExamGuard: exam management and invigilation platform for schools and universities
+## Process
+Five stages: Discover, Design, Build, Review, Deploy. Milestone based. A written scope is agreed before work starts and the price does not move without a signed scope change. Typical timelines: 2 to 3 weeks for simple sites, 4 to 6 weeks standard, 8 to 12 weeks for full applications.
+
+## Commercial terms
+- 30 percent deposit, due only after the client approves a working prototype
+- 70 percent on final delivery
+- Client owns all source code, domains, hosting and third-party accounts on delivery
+- Post-launch support included: 30 days Starter, 60 days Standard, 90 days Professional, ongoing on Enterprise
 
 ## Pricing
-
-Regional pricing model. ZMW for Zambia. ZAR for South Africa. GBP/EUR for UK/Europe. USD for US, Canada, and international. Contact for a quote.
+Regional pricing, quoted in the client's local currency. Indicative starter website ranges: Zambia from ZMW 2,000; South Africa from ZAR 2,500; United Kingdom from GBP 500; Eurozone from EUR 550; United States from USD 700; Canada from CAD 900; Australia from AUD 1,200; India from INR 30,000; Nigeria from NGN 800,000; Kenya from KES 65,000. Custom systems are priced higher than websites. Full comparison at https://nextphases.dev/pricing.html
 
 ## Contact
+- New project enquiries: info@nextphases.dev
+- Partnerships and suppliers: team@nextphases.dev
+- Media and press: media@nextphases.dev
+- WhatsApp: +260978131906
+- Contact form: https://nextphases.dev/contact.html
+- Response time: within 48 hours
 
-Email: info@nextphases.dev
-Website: https://nextphases.dev
-Location: Lusaka, Zambia
-
-## Resources
-
-[services.html](https://nextphases.dev/services.html): Full services listing with pricing regions
-[portfolio.html](https://nextphases.dev/portfolio.html): Our products and past work
-[contact.html](https://nextphases.dev/contact.html): Get a quote or book a discovery call
+## Pages
+[Home](https://nextphases.dev): Overview, process, and use cases
+[Services](https://nextphases.dev/services.html): Full service descriptions, process, and FAQ
+[Pricing](https://nextphases.dev/pricing.html): Regional pricing by tier, in local currency
+[Portfolio](https://nextphases.dev/portfolio.html): Delivered client work and internal products
+[About](https://nextphases.dev/about.html): The team
+[Contact](https://nextphases.dev/contact.html): Get a quote or book a discovery call
+[Blog](https://nextphases.dev/blogs/): Writing on building software from Zambia
+[Nsolo](https://nextphases.dev/games/nsolo): Play Nsolo online
