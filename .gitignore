@@ -52,6 +52,13 @@ logs/
 # --- NextPhases Internal Planning (Not for public repo) ---
 CHANGELOG.md
 PROJECT_STATUS.md
+REFACTOR_BEFORE_AFTER.md
+nextphases_publish_cleanup_master_patch.md
+NextPhases_Master_Plan_v1.docx
+NextPhases_Master_Plan_v1.pdf
+_snapshot_script_66f2fa6.js
+_snapshot_style_66f2fa6.css
+747224.json
 *.bak
 *.orig
 
